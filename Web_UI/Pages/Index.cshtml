@@ -1,767 +1,905 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+	ViewData["Title"] = "Home page";
 }
 
 <!DOCTYPE html>
 
 <html class="light" lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              "colors": {
-                      "on-primary": "#ffffff",
-                      "on-tertiary-container": "#5b574c",
-                      "primary-fixed": "#ffdad9",
-                      "tertiary": "#635e53",
-                      "surface-tint": "#7b5455",
-                      "on-error-container": "#93000a",
-                      "tertiary-container": "#d4cdbf",
-                      "inverse-surface": "#34302b",
-                      "on-primary-container": "#734e4e",
-                      "surface-bright": "#fff8f4",
-                      "secondary-fixed": "#c1ecda",
-                      "on-error": "#ffffff",
-                      "surface-container-highest": "#eae1da",
-                      "on-surface": "#1f1b17",
-                      "on-primary-fixed-variant": "#613d3e",
-                      "on-background": "#1f1b17",
-                      "inverse-primary": "#ecbaba",
-                      "primary-container": "#f4c2c2",
-                      "on-secondary": "#ffffff",
-                      "surface-dim": "#e2d8d2",
-                      "on-primary-fixed": "#2f1314",
-                      "background": "#fff8f4",
-                      "surface-container-low": "#fcf2eb",
-                      "surface-container": "#f6ece5",
-                      "secondary-container": "#c1ecda",
-                      "on-secondary-fixed-variant": "#274e41",
-                      "error-container": "#ffdad6",
-                      "on-surface-variant": "#504444",
-                      "on-tertiary-fixed-variant": "#4b463c",
-                      "on-secondary-fixed": "#002118",
-                      "tertiary-fixed": "#e9e2d3",
-                      "surface": "#fff8f4",
-                      "outline-variant": "#d4c2c2",
-                      "secondary-fixed-dim": "#a6cfbf",
-                      "error": "#ba1a1a",
-                      "surface-container-high": "#f0e6e0",
-                      "on-secondary-container": "#456c5e",
-                      "tertiary-fixed-dim": "#cdc6b8",
-                      "inverse-on-surface": "#f9efe8",
-                      "primary-fixed-dim": "#ecbaba",
-                      "on-tertiary": "#ffffff",
-                      "outline": "#827473",
-                      "on-tertiary-fixed": "#1e1b13",
-                      "primary": "#7b5455",
-                      "surface-container-lowest": "#ffffff",
-                      "surface-variant": "#eae1da",
-                      "secondary": "#3f6658"
-              },
-              "borderRadius": {
-                      "DEFAULT": "1rem",
-                      "lg": "2rem",
-                      "xl": "3rem",
-                      "full": "9999px"
-              },
-              "spacing": {
-                      "unit": "8px",
-                      "gutter": "24px",
-                      "container-padding": "32px",
-                      "section-gap": "64px"
-              },
-              "fontFamily": {
-                      "headline-sm": ["Plus Jakarta Sans"],
-                      "headline-md": ["Plus Jakarta Sans"],
-                      "body-lg": ["Be Vietnam Pro"],
-                      "body-md": ["Be Vietnam Pro"],
-                      "label-sm": ["Be Vietnam Pro"],
-                      "label-md": ["Be Vietnam Pro"],
-                      "headline-lg": ["Plus Jakarta Sans"]
-              },
-              "fontSize": {
-                      "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
-                      "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
-                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
-                      "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                      "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
-              }
-            },
-          },
-        }
-    </script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .mesh-gradient {
-            background-color: #fff8f4;
-            background-image:
-                radial-gradient(at 0% 0%, rgba(244, 194, 194, 0.3) 0px, transparent 50%),
-                radial-gradient(at 100% 0%, rgba(193, 236, 218, 0.2) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(244, 194, 194, 0.2) 0px, transparent 50%),
-                radial-gradient(at 0% 100%, rgba(193, 236, 218, 0.3) 0px, transparent 50%);
-        }
-        .cloud-shadow {
-            box-shadow: 0 20px 50px -12px rgba(123, 84, 85, 0.08);
-        }
-    </style>
+	<meta charset="utf-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+	<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+	<script id="tailwind-config">
+		tailwind.config = {
+		  darkMode: "class",
+		  theme: {
+			extend: {
+			  "colors": {
+					  "on-primary": "#ffffff",
+					  "on-tertiary-container": "#5b574c",
+					  "primary-fixed": "#ffdad9",
+					  "tertiary": "#635e53",
+					  "surface-tint": "#7b5455",
+					  "on-error-container": "#93000a",
+					  "tertiary-container": "#d4cdbf",
+					  "inverse-surface": "#34302b",
+					  "on-primary-container": "#734e4e",
+					  "surface-bright": "#fff8f4",
+					  "secondary-fixed": "#c1ecda",
+					  "on-error": "#ffffff",
+					  "surface-container-highest": "#eae1da",
+					  "on-surface": "#1f1b17",
+					  "on-primary-fixed-variant": "#613d3e",
+					  "on-background": "#1f1b17",
+					  "inverse-primary": "#ecbaba",
+					  "primary-container": "#f4c2c2",
+					  "on-secondary": "#ffffff",
+					  "surface-dim": "#e2d8d2",
+					  "on-primary-fixed": "#2f1314",
+					  "background": "#fff8f4",
+					  "surface-container-low": "#fcf2eb",
+					  "surface-container": "#f6ece5",
+					  "secondary-container": "#c1ecda",
+					  "on-secondary-fixed-variant": "#274e41",
+					  "error-container": "#ffdad6",
+					  "on-surface-variant": "#504444",
+					  "on-tertiary-fixed-variant": "#4b463c",
+					  "on-secondary-fixed": "#002118",
+					  "tertiary-fixed": "#e9e2d3",
+					  "surface": "#fff8f4",
+					  "outline-variant": "#d4c2c2",
+					  "secondary-fixed-dim": "#a6cfbf",
+					  "error": "#ba1a1a",
+					  "surface-container-high": "#f0e6e0",
+					  "on-secondary-container": "#456c5e",
+					  "tertiary-fixed-dim": "#cdc6b8",
+					  "inverse-on-surface": "#f9efe8",
+					  "primary-fixed-dim": "#ecbaba",
+					  "on-tertiary": "#ffffff",
+					  "outline": "#827473",
+					  "on-tertiary-fixed": "#1e1b13",
+					  "primary": "#7b5455",
+					  "surface-container-lowest": "#ffffff",
+					  "surface-variant": "#eae1da",
+					  "secondary": "#3f6658"
+			  },
+			  "borderRadius": {
+					  "DEFAULT": "1rem",
+					  "lg": "2rem",
+					  "xl": "3rem",
+					  "full": "9999px"
+			  },
+			  "spacing": {
+					  "unit": "8px",
+					  "gutter": "24px",
+					  "container-padding": "32px",
+					  "section-gap": "64px"
+			  },
+			  "fontFamily": {
+					  "headline-sm": ["Plus Jakarta Sans"],
+					  "headline-md": ["Plus Jakarta Sans"],
+					  "body-lg": ["Be Vietnam Pro"],
+					  "body-md": ["Be Vietnam Pro"],
+					  "label-sm": ["Be Vietnam Pro"],
+					  "label-md": ["Be Vietnam Pro"],
+					  "headline-lg": ["Plus Jakarta Sans"]
+			  },
+			  "fontSize": {
+					  "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+					  "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+					  "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+					  "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+					  "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+					  "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+					  "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+			  }
+			},
+		  },
+		}
+	</script>
+	<style>
+		.material-symbols-outlined {
+			font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+		}
+
+		.mesh-gradient {
+			background-color: #fff8f4;
+			background-image: radial-gradient(at 0% 0%, rgba(244, 194, 194, 0.3) 0px, transparent 50%), radial-gradient(at 100% 0%, rgba(193, 236, 218, 0.2) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(244, 194, 194, 0.2) 0px, transparent 50%), radial-gradient(at 0% 100%, rgba(193, 236, 218, 0.3) 0px, transparent 50%);
+		}
+
+		.cloud-shadow {
+			box-shadow: 0 20px 50px -12px rgba(123, 84, 85, 0.08);
+		}
+	</style>
 </head>
 <body class="bg-background font-body-md text-on-background mesh-gradient min-h-screen" data-loggedin="@Model.IsLoggedIn.ToString().ToLower()">
-    <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-rose-100/20 font-['Plus_Jakarta_Sans'] antialiased shadow-[0_8px_30px_rgb(244,194,194,0.08)]">
-        <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
-            <div class="flex items-center gap-8">
-                <span class="text-xl font-bold tracking-tight text-zinc-900">LuxeStay</span>
-                <div class="hidden md:flex items-center gap-6">
-                    <a class="text-rose-400 font-semibold text-label-md" href="#">Explore</a>
-                    <a class="text-zinc-500 hover:bg-rose-50/50 transition-colors px-3 py-1 rounded-full text-label-md" href="#">Saved</a>
-                    <a class="text-zinc-500 hover:bg-rose-50/50 transition-colors px-3 py-1 rounded-full text-label-md" href="#">Bookings</a>
-                </div>
-            </div>
-            <div class="flex items-center gap-2">
-                <button class="p-2 text-zinc-500 hover:bg-rose-50/50 rounded-full transition-colors">
-                    <span class="material-symbols-outlined">notifications</span>
-                </button>
-                <button class="flex items-center gap-2 p-1.5 pr-3 bg-white border border-rose-100/30 rounded-full hover:shadow-sm transition-all">
-                    <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
-                        <span class="material-symbols-outlined text-on-primary-container text-[20px]">person</span>
-                    </div>
-                    <span class="text-label-md text-on-surface">Profile</span>
-                </button>
-            </div>
-        </div>
-    </nav>
-    <main class="pt-24 pb-20 px-container-padding max-w-screen-2xl mx-auto">
-        <!-- Hero Search Section -->
-        <form method="get">
-            <section class="mt-8 mb-section-gap">
-                <div class="bg-white/60 backdrop-blur-xl rounded-xl p-8 cloud-shadow relative overflow-hidden">
-                    <!-- Decorative organic shape -->
-                    <div class="absolute -top-24 -right-24 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl"></div>
-                    <div class="relative z-10">
-                        <h1 class="font-headline-lg text-headline-lg text-on-surface mb-8">Find your next <span class="text-primary italic">serene</span> escape</h1>
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-surface-container-lowest p-3 rounded-full border border-rose-100/20 shadow-inner">
-                            <div class="px-6 py-2 border-r border-rose-100/50 last:border-0">
-                                <label class="block text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Location</label>
-                                <input class="w-full bg-transparent border-0 p-0 text-body-md font-semibold focus:ring-0 placeholder:text-zinc-300" placeholder="Where to?" name="Keyword" type="text" value="@Model.Keyword" />
-                            </div>
-                            <div class="px-6 py-2 border-r border-rose-100/50 last:border-0">
-                                <label class="block text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Check In</label>
-                                <input class="w-full bg-transparent border-0 p-0 text-body-md font-semibold focus:ring-0" placeholder="Add date" name="CheckIn" type="date" value="@Model.CheckIn?.ToString("yyyy-MM-dd")" />
-                            </div>
-                            <div class="px-6 py-2 border-r border-rose-100/50 last:border-0">
-                                <label class="block text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Check Out</label>
-                                <input class="w-full bg-transparent border-0 p-0 text-body-md font-semibold focus:ring-0" placeholder="Add date" name="CheckOut" type="date" value="@Model.CheckOut?.ToString("yyyy-MM-dd")" />
-                            </div>
-                            <div class="px-2 flex items-center justify-between">
-                                <div class="px-4">
-                                    <label class="block text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Guests</label>
-                                    <input class="w-full bg-transparent border-0 p-0 text-body-md font-semibold focus:ring-0" placeholder="Add guests" name="GuestCount" type="number" value="@Model.GuestCount" />
-                                </div>
-                                <button type="submit" class="bg-primary hover:bg-primary/90 text-on-primary w-14 h-14 rounded-full flex items-center justify-center transition-transform active:scale-95 shadow-lg shadow-primary/20">
-                                    <span class="material-symbols-outlined">search</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </form>
-        
-        <!-- Results Header -->
-        <section class="flex flex-col md:flex-row md:items-end justify-between mb-gutter gap-4">
-            <div>
-                <h2 class="font-headline-md text-headline-md text-on-surface">
-                    @(Model.Listings.Count == 0
-                                        ? "No serene stays found"
-                                        : $"Over {Model.Listings.Count} serene stays found")
-                </h2>
-                <p class="text-on-surface-variant mt-1">Discover high-end minimalist retreats in Seoul</p>
-            </div>
-            <div class="flex items-center gap-3">
-                <span class="text-label-md text-on-surface-variant">Sort by:</span>
-                <div class="relative">
-                    <select class="appearance-none bg-surface-container-low border-0 rounded-full px-6 py-2.5 pr-10 text-label-md font-semibold focus:ring-2 focus:ring-secondary/20 cursor-pointer">
-                        <option>Recommended</option>
-                        <option>Price: Low to High</option>
-                        <option>Highest Rated</option>
-                    </select>
-                    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[18px]">keyboard_arrow_down</span>
-                </div>
-            </div>
-        </section>
-        <!-- Property Grid -->
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            @foreach(var item in Model.Listings)
-            {
-                <!-- Card 1 -->
-                <div class="group cursor-pointer" onclick="handleBookingClick(
-                            @item.ItemId,
-                            '@item.Title',
-                            '@item.ThumbnailUrl',
-                            '@item.ApproximateAddress',
-                            '@item.PricePerNight'
-                         )">
-                    <div class="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 cloud-shadow">
-                        <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                             src="@item.ThumbnailUrl"
-                             onerror="this.src='/images/unnamed.png'" />
-                        <button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white hover:text-rose-400 transition-all">
-                            <span class="material-symbols-outlined" data-weight="fill">favorite</span>
-                        </button>
-                        <div class="absolute bottom-4 left-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full">
-                            <span class="text-label-sm font-bold text-on-surface flex items-center gap-1">
-                                <span class="material-symbols-outlined text-amber-400 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
-                                4.98
-                            </span>
-                        </div>
-                    </div>
-                    <div class="px-1">
-                        <div class="flex justify-between items-start mb-1">
-                            <h3 class="font-headline-sm text-headline-sm text-on-surface">@item.Title</h3>
-                            <p class="text-headline-sm font-bold text-primary">$@item.PricePerNight<span class="text-label-sm text-on-surface-variant font-normal"> / night</span></p>
-                        </div>
-                        <p class="text-on-surface-variant flex items-center gap-1 mb-3">
-                            <span class="material-symbols-outlined text-[18px]">location_on</span>
-                            @item.ApproximateAddress
-                        </p>
-                        <div class="flex gap-2">
-                            <span class="bg-secondary-container/30 text-secondary px-3 py-1 rounded-full text-label-sm font-semibold">@item.Capacity Guest</span>
-                            <span class="bg-secondary-container/30 text-secondary px-3 py-1 rounded-full text-label-sm font-semibold">@item.Rating</span>
-                        </div>
-                    </div>
-                </div>
-            }
-            
-        </section>
-        <!-- Pagination (Implicit) -->
-        <div class="mt-section-gap flex justify-center">
-            <button class="bg-surface-container hover:bg-surface-container-highest text-on-surface px-8 py-3 rounded-full font-semibold transition-colors flex items-center gap-2">
-                Show more serene stays
-                <span class="material-symbols-outlined">expand_more</span>
-            </button>
-        </div>
-    </main>
-    <!-- Footer -->
-    <footer class="bg-white/40 backdrop-blur-md mt-section-gap border-t border-rose-100/20">
-        <div class="max-w-screen-2xl mx-auto px-container-padding py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-                <div class="col-span-1 md:col-span-1">
-                    <span class="text-xl font-bold tracking-tight text-zinc-900 block mb-6">LuxeStay</span>
-                    <p class="text-on-surface-variant text-body-md leading-relaxed">
-                        Curating the world's most serene and minimalist retreats for the conscious traveler.
-                    </p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-on-surface mb-6">Explore</h4>
-                    <ul class="space-y-4 text-on-surface-variant text-label-md">
-                        <li><a class="hover:text-primary transition-colors" href="#">Seoul Collection</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Kyoto Serenity</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Nordic Cabins</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Wellness Stays</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-on-surface mb-6">Support</h4>
-                    <ul class="space-y-4 text-on-surface-variant text-label-md">
-                        <li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Cancellation Options</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Safety Information</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Report a Concern</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-on-surface mb-6">Connect</h4>
-                    <div class="flex gap-4">
-                        <a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary-container transition-colors" href="#">
-                            <span class="material-symbols-outlined text-[20px]">public</span>
-                        </a>
-                        <a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary-container transition-colors" href="#">
-                            <span class="material-symbols-outlined text-[20px]">camera</span>
-                        </a>
-                        <a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary-container transition-colors" href="#">
-                            <span class="material-symbols-outlined text-[20px]">mail</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12 pt-8 border-t border-rose-100/10 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-label-sm text-on-surface-variant">© 2024 LuxeStay. All rights reserved.</p>
-                <div class="flex gap-6 text-label-sm text-on-surface-variant">
-                    <a class="hover:underline" href="#">Privacy Policy</a>
-                    <a class="hover:underline" href="#">Terms of Service</a>
-                    <a class="hover:underline" href="#">Cookie Policy</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- booking modal -->
-    <div id="bookingModal"
-         class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 overflow-y-auto">
-
-        <main class="w-full max-w-6xl z-10">
-
-            <div class="bg-surface-container-lowest rounded-xl shadow-[0_12px_48px_rgba(123,84,85,0.06)] flex flex-col md:flex-row overflow-hidden border border-surface-container-low/50 relative">
-
-                <!-- CLOSE BUTTON -->
-                <button type="button"
-                        onclick="closeBookingModal()"
-                        class="absolute top-6 right-6 z-50 bg-white w-12 h-12 rounded-full shadow flex items-center justify-center">
-                    ✕
-                </button>
-
-                <!-- LEFT IMAGE -->
-                <div class="w-full md:w-5/12 relative min-h-[400px]">
-
-                    <img id="bookingImage"
-                         class="absolute inset-0 w-full h-full object-cover"
-                         src="" />
-
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-
-                    <div class="absolute bottom-10 left-10 right-10 text-white">
-
-                        <h2 id="bookingTitle"
-                            class="text-4xl font-bold mb-2">
-                        </h2>
-
-                        <p class="flex items-center gap-2 opacity-90">
-                            <span class="material-symbols-outlined">
-                                location_on
-                            </span>
-
-                            <span id="bookingAddressText"></span>
-                        </p>
-                    </div>
-                </div>
-
-                <!-- RIGHT FORM -->
-                <div class="w-full md:w-7/12 p-10">
-
-                    <form method="post"
-                          asp-page-handler="CreateBooking">
-
-                        <input type="hidden"
-                               id="bookingItemId"
-                               name="BookingItemId" />
-
-                        <div class="flex justify-between items-start mb-8">
-
-                            <div>
-                                <h1 class="text-5xl font-bold mb-2">
-                                    Confirm Booking
-                                </h1>
-
-                                <p class="text-zinc-500">
-                                    Review your stay details.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- DATES -->
-
-                        <div class="grid grid-cols-2 gap-4 mb-6">
-
-                            <div class="bg-surface p-4 rounded-2xl">
-
-                                <label class="block text-sm mb-2 uppercase text-zinc-500">
-                                    Check In
-                                </label>
-
-                                <input type="date"
-                                       name="BookingCheckIn"
-                                       class="w-full border-0 bg-transparent p-0 text-lg font-semibold focus:ring-0" />
-                            </div>
-
-                            <div class="bg-surface p-4 rounded-2xl">
-
-                                <label class="block text-sm mb-2 uppercase text-zinc-500">
-                                    Check Out
-                                </label>
-
-                                <input type="date"
-                                       name="BookingCheckOut"
-                                       class="w-full border-0 bg-transparent p-0 text-lg font-semibold focus:ring-0" />
-                            </div>
-                        </div>
-
-                        <!-- GUESTS -->
-
-                        <div class="bg-surface p-4 rounded-2xl mb-6">
-
-                            <label class="block text-sm mb-2 uppercase text-zinc-500">
-                                Guests
-                            </label>
-
-                            <input type="number"
-                                   name="BookingGuests"
-                                   value="1"
-                                   min="1"
-                                   class="w-full border-0 bg-transparent p-0 text-lg font-semibold focus:ring-0" />
-                        </div>
-
-                        <!-- COUPON -->
-
-                        <div class="flex gap-3 mb-8">
-
-                            <input type="text"
-                                   name="CouponCode"
-                                   placeholder="Promo code"
-                                   class="flex-1 rounded-full border-0 bg-surface px-6 py-4" />
-
-                            <button type="button"
-                                    class="bg-secondary-container px-8 rounded-full font-semibold">
-                                Apply
-                            </button>
-                        </div>
-
-                        <!-- PRICE -->
-
-                        <div class="bg-surface-container rounded-3xl p-8 mb-8">
-
-                            <h3 class="text-2xl font-bold mb-6">
-                                Price Details
-                            </h3>
-
-                            <div class="space-y-4">
-
-                                <div class="flex justify-between">
-
-                                    <span id="bookingNightCalculation">
-                                    </span>
-
-                                    <span id="bookingSubtotal">
-                                    </span>
-                                </div>
-
-                                <div class="flex justify-between">
-
-                                    <span>
-                                        Cleaning fee
-                                    </span>
-
-                                    <span id="bookingCleaningFee">
-                                        $60
-                                    </span>
-                                </div>
-
-                                <div class="flex justify-between">
-
-                                    <span>
-                                        Service fee
-                                    </span>
-
-                                    <span id="bookingServiceFee">
-                                        $85
-                                    </span>
-                                </div>
-
-                                <hr class="my-6">
-
-                                <div class="flex justify-between text-3xl font-bold">
-
-                                    <span>
-                                        Total
-                                    </span>
-
-                                    <span id="bookingPrice">
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- SUBMIT -->
-
-                        <button type="submit"
-                                class="w-full h-16 rounded-full bg-primary-container hover:bg-primary-fixed-dim transition text-xl font-bold">
-
-                            Confirm Booking
-
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- login modal -->
-    <!-- Login Modal -->
-    <div id="loginModal"
-         class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-
-        <div class="w-full max-w-md animate-fadeIn">
-            <form method="post" asp-page-handler="Login"
-                  class="bg-white rounded-3xl shadow-2xl p-8 space-y-6 relative">
-
-                <!-- Close Button -->
-                <button type="button"
-                        onclick="closeLoginModal()"
-                        class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition text-2xl">
-                    &times;
-                </button>
-
-                <!-- Title -->
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold text-gray-800">Welcome Back 👋</h2>
-                    <p class="text-gray-500 mt-2">Đăng nhập để tiếp tục</p>
-                </div>
-
-                <!-- Username -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Username
-                    </label>
-                    <input type="text"
-                           name="Username"
-                           placeholder="Nhập username..."
-                           class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
-                </div>
-
-                <!-- Password -->
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                        Password
-                    </label>
-
-                    <div class="relative">
-                        <input type="password"
-                               id="passwordInput"
-                               name="Password"
-                               placeholder="Nhập mật khẩu..."
-                               class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition pr-12">
-
-                        <!-- Eye Button -->
-                        <button type="button"
-                                onclick="togglePassword()"
-                                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-500">
-                            👁️
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Remember + Forgot -->
-                <div class="flex items-center justify-between text-sm">
-                    <label class="flex items-center gap-2 text-gray-600">
-                        <input type="checkbox" class="rounded">
-                        Remember me
-                    </label>
-
-                    <a href="#"
-                       class="text-blue-500 hover:text-blue-700 font-medium">
-                        Quên mật khẩu?
-                    </a>
-                </div>
-
-                <!-- Login Button -->
-                <button type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition duration-300 shadow-lg hover:shadow-blue-300">
-                    Đăng nhập
-                </button>
-
-                <!-- Divider -->
-                <div class="flex items-center gap-4">
-                    <div class="flex-1 h-px bg-gray-200"></div>
-                    <span class="text-gray-400 text-sm">OR</span>
-                    <div class="flex-1 h-px bg-gray-200"></div>
-                </div>
-
-                <!-- Social Login -->
-                <div class="grid grid-cols-2 gap-3">
-                    <button type="button"
-                            class="border border-gray-300 rounded-xl py-3 hover:bg-gray-50 transition">
-                        Google
-                    </button>
-
-                    <button type="button"
-                            class="border border-gray-300 rounded-xl py-3 hover:bg-gray-50 transition">
-                        Facebook
-                    </button>
-                </div>
-
-                <!-- Register -->
-                <p class="text-center text-sm text-gray-500">
-                    Chưa có tài khoản?
-                    <a href="#" class="text-blue-600 font-semibold hover:underline">
-                        Đăng ký ngay
-                    </a>
-                </p>
-            </form>
-        </div>
-    </div>
-    <script>
-
-        function handleBookingClick(
-            itemId,
-            title,
-            image,
-            address,
-            price)
-        {
-            const isLoggedIn =
-                document.body.dataset.loggedin === "true";
-
-            if (isLoggedIn)
-            {
-                openBookingModal(
-                    itemId,
-                    title,
-                    image,
-                    address,
-                    price);
-            }
-            else
-            {
-                openLoginModal();
-            }
-        }
-
-                function openBookingModal(
-            itemId,
-            title,
-            image,
-            address,
-            price)
-        {
-            document
-                .getElementById('bookingModal')
-                .classList.remove('hidden');
-
-            document
-                .getElementById('bookingTitle')
-                .innerText = title;
-
-            document
-                .getElementById('bookingAddressText')
-                .innerText = address;
-
-            document
-                .getElementById('bookingImage')
-                .src = image;
-
-            document
-                .getElementById('bookingItemId')
-                .value = itemId;
-
-            // DEFAULT VALUES
-
-            const guests = 1;
-
-            const nights = 1;
-
-            const cleaningFee = 60;
-
-            const serviceFee = 85;
-
-            const subtotal =
-                price * nights;
-
-            const total =
-                subtotal +
-                cleaningFee +
-                serviceFee;
-
-            // DATE
-
-            const today =
-                new Date();
-
-            const tomorrow =
-                new Date();
-
-            tomorrow.setDate(
-                today.getDate() + 1);
-
-            document
-                .getElementById('bookingCheckInText')
-                .innerText =
-                today.toLocaleDateString();
-
-            document
-                .getElementById('bookingCheckOutText')
-                .innerText =
-                tomorrow.toLocaleDateString();
-
-            // GUESTS
-
-            document
-                .getElementById('bookingGuestsText')
-                .innerText =
-                guests + ' Guest';
-
-            // PRICE DETAIL
-
-            document
-                .getElementById('bookingNightCalculation')
-                .innerText =
-                '$' + price + ' x ' +
-                nights + ' nights';
-
-            document
-                .getElementById('bookingSubtotal')
-                .innerText =
-                '$' + subtotal;
-
-            document
-                .getElementById('bookingCleaningFee')
-                .innerText =
-                '$' + cleaningFee;
-
-            document
-                .getElementById('bookingServiceFee')
-                .innerText =
-                '$' + serviceFee;
-
-            document
-                .getElementById('bookingPrice')
-                .innerText =
-                '$' + total;
-        }
-
-        function closeBookingModal()
-        {
-            document
-                .getElementById('bookingModal')
-                .classList.add('hidden');
-        }
-
-        function openLoginModal()
-        {
-            document
-                .getElementById('loginModal')
-                .classList.remove('hidden');
-        }
-
-        function closeLoginModal()
-        {
-            document
-                .getElementById('loginModal')
-                .classList.add('hidden');
-        }
-
-        function togglePassword()
-        {
-            const input =
-                document.getElementById('passwordInput');
-
-            input.type =
-                input.type === 'password'
-                    ? 'text'
-                    : 'password';
-        }
-
-    </script>
+	<!-- TopNavBar -->
+	@* <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-rose-100/20 font-['Plus_Jakarta_Sans'] antialiased shadow-[0_8px_30px_rgb(244,194,194,0.08)]">
+		<div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+			<div class="flex items-center gap-8">
+				<span class="text-xl font-bold tracking-tight text-zinc-900">LuxeStay</span>
+				<div class="hidden md:flex items-center gap-6">
+					<a class="text-rose-400 font-semibold text-label-md" href="#">Explore</a>
+					<a class="text-zinc-500 hover:bg-rose-50/50 transition-colors px-3 py-1 rounded-full text-label-md" href="#">Saved</a>
+					<a class="text-zinc-500 hover:bg-rose-50/50 transition-colors px-3 py-1 rounded-full text-label-md" asp-page="/MyBooking">Bookings</a>
+				</div>
+			</div>
+			<div class="flex items-center gap-2">
+				<button class="p-2 text-zinc-500 hover:bg-rose-50/50 rounded-full transition-colors">
+					<span class="material-symbols-outlined">notifications</span>
+				</button>
+				<button class="flex items-center gap-2 p-1.5 pr-3 bg-white border border-rose-100/30 rounded-full hover:shadow-sm transition-all">
+					<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+						<span class="material-symbols-outlined text-on-primary-container text-[20px]">person</span>
+					</div>
+					<span class="text-label-md text-on-surface">Profile</span>
+				</button>
+			</div>
+		</div>
+	</nav> *@
+	<main class="pt-24 pb-20 px-container-padding max-w-screen-2xl mx-auto">
+		<!-- Hero Search Section -->
+		<form method="get">
+			<section class="mt-8 mb-section-gap">
+				<div class="bg-white/60 backdrop-blur-xl rounded-xl p-8 cloud-shadow relative overflow-hidden">
+					<!-- Decorative organic shape -->
+					<div class="absolute -top-24 -right-24 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl"></div>
+					<div class="relative z-10">
+						<h1 class="font-headline-lg text-headline-lg text-on-surface mb-8">Find your next <span class="text-primary italic">serene</span> escape</h1>
+						<div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-surface-container-lowest p-3 rounded-full border border-rose-100/20 shadow-inner">
+							<div class="px-6 py-2 border-r border-rose-100/50 last:border-0">
+								<label class="block text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Location</label>
+								<input class="w-full bg-transparent border-0 p-0 text-body-md font-semibold focus:ring-0 placeholder:text-zinc-300" placeholder="Where to?" name="Keyword" type="text" value="@Model.Keyword" />
+							</div>
+							<div class="px-6 py-2 border-r border-rose-100/50 last:border-0">
+								<label class="block text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Check In</label>
+								<input class="w-full bg-transparent border-0 p-0 text-body-md font-semibold focus:ring-0" placeholder="Add date" name="CheckIn" type="date" value="@Model.CheckIn?.ToString("yyyy-MM-dd")" />
+							</div>
+							<div class="px-6 py-2 border-r border-rose-100/50 last:border-0">
+								<label class="block text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Check Out</label>
+								<input class="w-full bg-transparent border-0 p-0 text-body-md font-semibold focus:ring-0" placeholder="Add date" name="CheckOut" type="date" value="@Model.CheckOut?.ToString("yyyy-MM-dd")" />
+							</div>
+							<div class="px-2 flex items-center justify-between">
+								<div class="px-4">
+									<label class="block text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Guests</label>
+									<input class="w-full bg-transparent border-0 p-0 text-body-md font-semibold focus:ring-0" placeholder="Add guests" name="GuestCount" type="number" value="@Model.GuestCount" />
+								</div>
+								<button type="submit" class="bg-primary hover:bg-primary/90 text-on-primary w-14 h-14 rounded-full flex items-center justify-center transition-transform active:scale-95 shadow-lg shadow-primary/20">
+									<span class="material-symbols-outlined">search</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</form>
+
+		<!-- Results Header -->
+		<section class="flex flex-col md:flex-row md:items-end justify-between mb-gutter gap-4">
+			<div>
+				<h2 class="font-headline-md text-headline-md text-on-surface">
+					@(Model.Listings.Count == 0
+										? "No serene stays found"
+										: $"Over {Model.Listings.Count} serene stays found")
+				</h2>
+				<p class="text-on-surface-variant mt-1">Discover high-end minimalist retreats in Seoul</p>
+			</div>
+			<div class="flex items-center gap-3">
+				<span class="text-label-md text-on-surface-variant">Sort by:</span>
+				<div class="relative">
+					<select class="appearance-none bg-surface-container-low border-0 rounded-full px-6 py-2.5 pr-10 text-label-md font-semibold focus:ring-2 focus:ring-secondary/20 cursor-pointer">
+						<option>Recommended</option>
+						<option>Price: Low to High</option>
+						<option>Highest Rated</option>
+					</select>
+					<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-[18px]">keyboard_arrow_down</span>
+				</div>
+			</div>
+		</section>
+		<!-- Property Grid -->
+		<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+			@foreach (var item in Model.Listings)
+			{
+				<!-- Card 1 -->
+				<div class="group cursor-pointer" onclick="handleBookingClick(
+	                            @item.ItemId,
+	                            '@item.Title',
+	                            '@item.ThumbnailUrl',
+	                            '@item.ApproximateAddress',
+	                            '@item.PricePerNight',
+								@item.Capacity
+	                         )">
+					<div class="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 cloud-shadow">
+						<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+							 src="@item.ThumbnailUrl"
+							 onerror="this.src='/images/homestays/unnamed.png'" />
+						<button class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white hover:bg-white hover:text-rose-400 transition-all">
+							<span class="material-symbols-outlined" data-weight="fill">favorite</span>
+						</button>
+						<div class="absolute bottom-4 left-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full">
+							<span class="text-label-sm font-bold text-on-surface flex items-center gap-1">
+								<span class="material-symbols-outlined text-amber-400 text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+								4.98
+							</span>
+						</div>
+					</div>
+					<div class="px-1">
+						<div class="flex justify-between items-start mb-1">
+							<h3 class="font-headline-sm text-headline-sm text-on-surface">@item.Title</h3>
+							<p class="text-headline-sm font-bold text-primary">$@item.PricePerNight<span class="text-label-sm text-on-surface-variant font-normal"> / night</span></p>
+						</div>
+						<p class="text-on-surface-variant flex items-center gap-1 mb-3">
+							<span class="material-symbols-outlined text-[18px]">location_on</span>
+							@item.ApproximateAddress
+						</p>
+						<div class="flex gap-2">
+							<span class="bg-secondary-container/30 text-secondary px-3 py-1 rounded-full text-label-sm font-semibold">@item.Capacity Guest</span>
+							<span class="bg-secondary-container/30 text-secondary px-3 py-1 rounded-full text-label-sm font-semibold">@item.Rating</span>
+						</div>
+					</div>
+				</div>
+			}
+
+		</section>
+		<!-- Pagination (Implicit) -->
+		<div class="mt-section-gap flex justify-center">
+			<button class="bg-surface-container hover:bg-surface-container-highest text-on-surface px-8 py-3 rounded-full font-semibold transition-colors flex items-center gap-2">
+				Show more serene stays
+				<span class="material-symbols-outlined">expand_more</span>
+			</button>
+		</div>
+	</main>
+	<!-- Footer -->
+	<footer class="bg-white/40 backdrop-blur-md mt-section-gap border-t border-rose-100/20">
+		<div class="max-w-screen-2xl mx-auto px-container-padding py-12">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+				<div class="col-span-1 md:col-span-1">
+					<span class="text-xl font-bold tracking-tight text-zinc-900 block mb-6">LuxeStay</span>
+					<p class="text-on-surface-variant text-body-md leading-relaxed">
+						Curating the world's most serene and minimalist retreats for the conscious traveler.
+					</p>
+				</div>
+				<div>
+					<h4 class="font-bold text-on-surface mb-6">Explore</h4>
+					<ul class="space-y-4 text-on-surface-variant text-label-md">
+						<li><a class="hover:text-primary transition-colors" href="#">Seoul Collection</a></li>
+						<li><a class="hover:text-primary transition-colors" href="#">Kyoto Serenity</a></li>
+						<li><a class="hover:text-primary transition-colors" href="#">Nordic Cabins</a></li>
+						<li><a class="hover:text-primary transition-colors" href="#">Wellness Stays</a></li>
+					</ul>
+				</div>
+				<div>
+					<h4 class="font-bold text-on-surface mb-6">Support</h4>
+					<ul class="space-y-4 text-on-surface-variant text-label-md">
+						<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+						<li><a class="hover:text-primary transition-colors" href="#">Cancellation Options</a></li>
+						<li><a class="hover:text-primary transition-colors" href="#">Safety Information</a></li>
+						<li><a class="hover:text-primary transition-colors" href="#">Report a Concern</a></li>
+					</ul>
+				</div>
+				<div>
+					<h4 class="font-bold text-on-surface mb-6">Connect</h4>
+					<div class="flex gap-4">
+						<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary-container transition-colors" href="#">
+							<span class="material-symbols-outlined text-[20px]">public</span>
+						</a>
+						<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary-container transition-colors" href="#">
+							<span class="material-symbols-outlined text-[20px]">camera</span>
+						</a>
+						<a class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center hover:bg-primary-container transition-colors" href="#">
+							<span class="material-symbols-outlined text-[20px]">mail</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="mt-12 pt-8 border-t border-rose-100/10 flex flex-col md:flex-row justify-between items-center gap-4">
+				<p class="text-label-sm text-on-surface-variant">© 2024 LuxeStay. All rights reserved.</p>
+				<div class="flex gap-6 text-label-sm text-on-surface-variant">
+					<a class="hover:underline" href="#">Privacy Policy</a>
+					<a class="hover:underline" href="#">Terms of Service</a>
+					<a class="hover:underline" href="#">Cookie Policy</a>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- booking modal -->
+	<div id="bookingModal"
+		 class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 overflow-y-auto">
+
+		<main class="w-[95vw] md:w-[80vw] max-w-5xl h-[90vh] md:h-[85vh] z-10">
+
+			<div class="bg-surface-container-lowest rounded-xl shadow-[0_12px_48px_rgba(123,84,85,0.06)] flex flex-col md:flex-row overflow-hidden border border-surface-container-low/50 relative h-full">
+
+				<!-- CLOSE BUTTON -->
+				<button type="button"
+						onclick="closeBookingModal()"
+						class="absolute top-6 right-6 z-50 bg-white w-12 h-12 rounded-full shadow flex items-center justify-center">
+					✕
+				</button>
+
+				<!-- LEFT IMAGE -->
+				<div class="w-full md:w-5/12 relative min-h-[400px]">
+
+					<img id="bookingImage"
+						 class="absolute inset-0 w-full h-full object-cover"
+						 src="" />
+
+					<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+
+					<div class="absolute bottom-10 left-10 right-10 text-white">
+
+						<h2 id="bookingTitle"
+							class="text-4xl font-bold mb-2">
+						</h2>
+
+						<p class="flex items-center gap-2 opacity-90">
+							<span class="material-symbols-outlined">
+								location_on
+							</span>
+
+							<span id="bookingAddressText"></span>
+						</p>
+					</div>
+				</div>
+
+				<!-- RIGHT FORM -->
+				<div class="w-full md:w-7/12 p-10 overflow-y-auto">
+
+					<form method="post"
+						  asp-page-handler="CreateBooking">
+
+						<input type="hidden"
+							   id="bookingItemId"
+							   name="BookingItemId" />
+
+						<div class="flex justify-between items-start mb-8">
+
+							<div>
+								<h1 class="text-5xl font-bold mb-2">
+									Confirm Booking
+								</h1>
+
+								<p class="text-zinc-500">
+									Review your stay details.
+								</p>
+							</div>
+						</div>
+
+						<!-- DATES -->
+
+						<div class="grid grid-cols-2 gap-4 mb-6">
+
+							<div class="bg-surface p-4 rounded-2xl">
+
+								<label class="block text-sm mb-2 uppercase text-zinc-500">
+									Check In
+								</label>
+
+								<input type="date"
+									   id="bookingCheckIn"
+									   name="BookingCheckIn"
+									   class="w-full border-0 bg-transparent p-0 text-lg font-semibold focus:ring-0" />
+							</div>
+
+							<div class="bg-surface p-4 rounded-2xl">
+
+								<label class="block text-sm mb-2 uppercase text-zinc-500">
+									Check Out
+								</label>
+
+								<input type="date"
+									   id="bookingCheckOut"
+									   name="BookingCheckOut"
+									   class="w-full border-0 bg-transparent p-0 text-lg font-semibold focus:ring-0" />
+							</div>
+						</div>
+
+						<!-- GUESTS -->
+
+						<div class="bg-surface p-4 rounded-2xl mb-6">
+
+							<label class="block text-sm mb-2 uppercase text-zinc-500">
+								Guests
+							</label>
+
+							<input type="number"
+								   id="bookingGuestsInput"
+								   name="BookingGuests"
+								   value="1"
+								   min="1"
+								   class="w-full border-0 bg-transparent p-0 text-lg font-semibold focus:ring-0" />
+						</div>
+
+						<!-- COUPON -->
+
+						<div class="flex gap-3 mb-8">
+
+							<input type="text"
+								   id="couponCode"
+								   name="CouponCode"
+								   placeholder="Promo code"
+								   class="flex-1 rounded-full border-0 bg-surface px-6 py-4" />
+
+							<button type="button"
+									class="bg-secondary-container px-8 rounded-full font-semibold">
+								Apply
+							</button>
+						</div>
+
+						<!-- PRICE -->
+
+						<div class="bg-surface-container rounded-3xl p-8 mb-8">
+
+							<h3 class="text-2xl font-bold mb-6">
+								Price Details
+							</h3>
+
+							<div class="space-y-4">
+
+								<div class="flex justify-between">
+
+									<span id="bookingNightCalculation">
+									</span>
+
+									<span id="bookingSubtotal">
+									</span>
+								</div>
+
+								<div class="flex justify-between">
+
+									<span>
+										Cleaning fee
+									</span>
+
+									<span id="bookingCleaningFee">
+										$60
+									</span>
+								</div>
+
+								<div class="flex justify-between">
+
+									<span>
+										Service fee
+									</span>
+
+									<span id="bookingServiceFee">
+										$85
+									</span>
+								</div>
+
+								<div class="flex justify-between text-green-600">
+
+									<span>
+										Discount
+									</span>
+
+									<span id="bookingDiscount">
+										-$0
+									</span>
+								</div>
+
+								<hr class="my-6">
+
+								<div class="flex justify-between text-3xl font-bold">
+
+									<span>
+										Total
+									</span>
+
+									<span id="bookingFinalPrice">
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<!-- SUBMIT -->
+
+						<button type="submit"
+								class="w-full h-16 rounded-full bg-primary-container hover:bg-primary-fixed-dim transition text-xl font-bold">
+
+							Confirm Booking
+
+						</button>
+					</form>
+				</div>
+			</div>
+		</main>
+	</div>
+
+	<!-- login modal -->
+	<!-- Login Modal -->
+	<div id="loginModal"
+		 class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+
+		<div class="w-full max-w-md animate-fadeIn">
+			<form method="post" asp-page-handler="Login"
+				  class="bg-white rounded-3xl shadow-2xl p-8 space-y-6 relative">
+
+				<!-- Close Button -->
+				<button type="button"
+						onclick="closeLoginModal()"
+						class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition text-2xl">
+					&times;
+				</button>
+
+				<!-- Title -->
+				<div class="text-center">
+					<h2 class="text-3xl font-bold text-gray-800">Welcome Back 👋</h2>
+					<p class="text-gray-500 mt-2">Đăng nhập để tiếp tục</p>
+				</div>
+
+				<!-- Username -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">
+						Username
+					</label>
+					<input type="text"
+						   name="Username"
+						   placeholder="Nhập username..."
+						   class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition">
+				</div>
+
+				<!-- Password -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">
+						Password
+					</label>
+
+					<div class="relative">
+						<input type="password"
+							   id="passwordInput"
+							   name="Password"
+							   placeholder="Nhập mật khẩu..."
+							   class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none transition pr-12">
+
+						<!-- Eye Button -->
+						<button type="button"
+								onclick="togglePassword()"
+								class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-500">
+							👁️
+						</button>
+					</div>
+				</div>
+
+				<!-- Remember + Forgot -->
+				<div class="flex items-center justify-between text-sm">
+					<label class="flex items-center gap-2 text-gray-600">
+						<input type="checkbox" class="rounded">
+						Remember me
+					</label>
+
+					<a href="#"
+					   class="text-blue-500 hover:text-blue-700 font-medium">
+						Quên mật khẩu?
+					</a>
+				</div>
+
+				<!-- Login Button -->
+				<button type="submit"
+						class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl transition duration-300 shadow-lg hover:shadow-blue-300">
+					Đăng nhập
+				</button>
+
+				<!-- Divider -->
+				<div class="flex items-center gap-4">
+					<div class="flex-1 h-px bg-gray-200"></div>
+					<span class="text-gray-400 text-sm">OR</span>
+					<div class="flex-1 h-px bg-gray-200"></div>
+				</div>
+
+				<!-- Social Login -->
+				<div class="grid grid-cols-2 gap-3">
+					<button type="button"
+							class="border border-gray-300 rounded-xl py-3 hover:bg-gray-50 transition">
+						Google
+					</button>
+
+					<button type="button"
+							class="border border-gray-300 rounded-xl py-3 hover:bg-gray-50 transition">
+						Facebook
+					</button>
+				</div>
+
+				<!-- Register -->
+				<p class="text-center text-sm text-gray-500">
+					Chưa có tài khoản?
+					<a href="#" class="text-blue-600 font-semibold hover:underline">
+						Đăng ký ngay
+					</a>
+				</p>
+			</form>
+		</div>
+	</div>
+	<script>
+
+		function handleBookingClick(
+			itemId,
+			title,
+			image,
+			address,
+			price,
+			capacity)
+		{
+			const isLoggedIn =
+				document.body.dataset.loggedin === "true";
+
+			if (isLoggedIn)
+			{
+				openBookingModal(
+					itemId,
+					title,
+					image,
+					address,
+					price,
+					capacity);
+			}
+			else
+			{
+				openLoginModal();
+			}
+		}
+
+		let currentPricePerNight = 0;
+
+		const cleaningFee = 60;
+
+		const serviceFee = 85;
+
+
+
+		function openBookingModal(
+			itemId,
+			title,
+			image,
+			address,
+			price,
+			capacity)
+		{
+			currentPricePerNight = Number(price);
+
+			document
+				.getElementById('bookingModal')
+				.classList.remove('hidden');
+
+			document
+				.getElementById('bookingTitle')
+				.innerText = title;
+
+			document
+				.getElementById('bookingAddressText')
+				.innerText = address;
+
+			document
+				.getElementById('bookingImage')
+				.src = image;
+
+			document
+				.getElementById('bookingItemId')
+				.value = itemId;
+
+			// DEFAULT DATE
+
+			const today = new Date();
+
+			const tomorrow = new Date();
+
+			tomorrow.setDate(today.getDate() + 1);
+
+			const todayISO =
+				today.toISOString().split('T')[0];
+
+			const tomorrowISO =
+				tomorrow.toISOString().split('T')[0];
+
+			document
+				.getElementById('bookingCheckIn')
+				.value = todayISO;
+
+			document
+				.getElementById('bookingCheckOut')
+				.value = tomorrowISO;
+
+			document
+				.getElementById('bookingGuestsInput')
+				.value = 1;
+
+			document
+				.getElementById('bookingGuestsInput')
+				.max = capacity;
+
+			recalculateBookingPrice();
+		}
+				function recalculateBookingPrice()
+		{
+			const checkIn =
+				new Date(
+					document.getElementById('bookingCheckIn').value);
+
+			const checkOut =
+				new Date(
+					document.getElementById('bookingCheckOut').value);
+
+			const coupon =
+				document
+					.getElementById('couponCode')
+					.value
+					.trim()
+					.toUpperCase();
+
+			// INVALID DATE
+
+			if (checkOut <= checkIn)
+			{
+				return;
+			}
+
+			// NIGHT CALCULATION
+
+			const diffTime =
+				checkOut - checkIn;
+
+			const nights =
+				Math.ceil(
+					diffTime / (1000 * 60 * 60 * 24));
+
+			// SUBTOTAL
+
+			const subtotal =
+				currentPricePerNight * nights;
+
+			// TOTAL BEFORE DISCOUNT
+
+			const total =
+				subtotal +
+				cleaningFee +
+				serviceFee;
+
+			// DISCOUNT
+
+			let discount = 0;
+
+			// FAKE COUPONS
+
+			if (coupon === 'SALE10')
+			{
+				discount = 10;
+			}
+			else if (coupon === 'SALE50')
+			{
+				discount = 50;
+			}
+			else if (coupon === 'VIP100')
+			{
+				discount = 100;
+			}
+
+			// FINAL PRICE
+
+			let finalPrice =
+				total - discount;
+
+			if (finalPrice < 0)
+			{
+				finalPrice = 0;
+			}
+
+			// UPDATE UI
+
+			document
+				.getElementById('bookingNightCalculation')
+				.innerText =
+				'$' +
+				currentPricePerNight +
+				' x ' +
+				nights +
+				' nights';
+
+			document
+				.getElementById('bookingSubtotal')
+				.innerText =
+				'$' + subtotal;
+
+			document
+				.getElementById('bookingCleaningFee')
+				.innerText =
+				'$' + cleaningFee;
+
+			document
+				.getElementById('bookingServiceFee')
+				.innerText =
+				'$' + serviceFee;
+
+			document
+				.getElementById('bookingDiscount')
+				.innerText =
+				'-$' + discount;
+
+			document
+				.getElementById('bookingFinalPrice')
+				.innerText =
+				'$' + finalPrice;
+		}
+				document
+			.getElementById('bookingCheckIn')
+			.addEventListener(
+				'change',
+				recalculateBookingPrice);
+
+		document
+			.getElementById('bookingCheckOut')
+			.addEventListener(
+				'change',
+				recalculateBookingPrice);
+
+		document
+			.getElementById('couponCode')
+			.addEventListener(
+				'input',
+				recalculateBookingPrice);
+
+		document
+			.getElementById('bookingGuestsInput')
+			.addEventListener('input', function ()
+		{
+			const max =
+				Number(this.max);
+
+			let value =
+				Number(this.value);
+
+			if (value > max)
+			{
+				this.value = max;
+
+				alert(
+					'Maximum capacity is ' +
+					max +
+					' guests');
+			}
+
+			if (value <= 0)
+			{
+				this.value = 1;
+			}
+		});
+
+		function closeBookingModal()
+		{
+			document
+				.getElementById('bookingModal')
+				.classList.add('hidden');
+		}
+
+		function openLoginModal()
+		{
+			document
+				.getElementById('loginModal')
+				.classList.remove('hidden');
+		}
+
+		function closeLoginModal()
+		{
+			document
+				.getElementById('loginModal')
+				.classList.add('hidden');
+		}
+
+		function togglePassword()
+		{
+			const input =
+				document.getElementById('passwordInput');
+
+			input.type =
+				input.type === 'password'
+					? 'text'
+					: 'password';
+		}
+
+	</script>
 </body>
 </html>

@@ -84,6 +84,18 @@
     <Compile Include="UC_LiveSearch.Designer.cs">
       <DependentUpon>UC_LiveSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="UC_MyBookings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_MyBookings.Designer.cs">
+      <DependentUpon>UC_MyBookings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_MyReviews.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_MyReviews.Designer.cs">
+      <DependentUpon>UC_MyReviews.cs</DependentUpon>
+    </Compile>
     <Compile Include="UC_ServicesManagement.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -222,6 +234,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_LiveSearch.resx">
       <DependentUpon>UC_LiveSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_MyBookings.resx">
+      <DependentUpon>UC_MyBookings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_MyReviews.resx">
+      <DependentUpon>UC_MyReviews.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_ServicesManagement.resx">
       <DependentUpon>UC_ServicesManagement.cs</DependentUpon>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mesh-gradient {
+            background-color: #fff8f4;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(244, 194, 194, 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(193, 236, 218, 0.3) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(244, 194, 194, 0.2) 0px, transparent 50%),
+                radial-gradient(at 0% 100%, rgba(205, 198, 184, 0.2) 0px, transparent 50%);
+        }
+        .cloud-shadow {
+            box-shadow: 0 20px 40px -15px rgba(123, 84, 85, 0.08);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#613d3e",
+                      "secondary-fixed": "#c1ecda",
+                      "on-surface": "#1f1b17",
+                      "surface": "#fff8f4",
+                      "tertiary-container": "#d4cdbf",
+                      "on-error-container": "#93000a",
+                      "surface-bright": "#fff8f4",
+                      "on-error": "#ffffff",
+                      "surface-container": "#f6ece5",
+                      "on-secondary-fixed": "#002118",
+                      "surface-variant": "#eae1da",
+                      "on-surface-variant": "#504444",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-container": "#f4c2c2",
+                      "surface-tint": "#7b5455",
+                      "inverse-primary": "#ecbaba",
+                      "surface-container-low": "#fcf2eb",
+                      "primary-fixed-dim": "#ecbaba",
+                      "secondary-fixed-dim": "#a6cfbf",
+                      "on-secondary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "tertiary-fixed-dim": "#cdc6b8",
+                      "primary": "#7b5455",
+                      "inverse-surface": "#34302b",
+                      "background": "#fff8f4",
+                      "outline-variant": "#d4c2c2",
+                      "surface-container-highest": "#eae1da",
+                      "secondary-container": "#c1ecda",
+                      "on-secondary-container": "#456c5e",
+                      "on-background": "#1f1b17",
+                      "tertiary": "#635e53",
+                      "surface-container-high": "#f0e6e0",
+                      "inverse-on-surface": "#f9efe8",
+                      "on-secondary-fixed-variant": "#274e41",
+                      "outline": "#827473",
+                      "primary-fixed": "#ffdad9",
+                      "on-primary-container": "#734e4e",
+                      "on-tertiary-fixed": "#1e1b13",
+                      "on-primary-fixed": "#2f1314",
+                      "tertiary-fixed": "#e9e2d3",
+                      "on-tertiary-fixed-variant": "#4b463c",
+                      "secondary": "#3f6658",
+                      "on-tertiary-container": "#5b574c",
+                      "surface-dim": "#e2d8d2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "container-padding": "32px",
+                      "section-gap": "64px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Plus Jakarta Sans"],
+                      "body-md": ["Be Vietnam Pro"],
+                      "label-md": ["Be Vietnam Pro"],
+                      "headline-md": ["Plus Jakarta Sans"],
+                      "body-lg": ["Be Vietnam Pro"],
+                      "label-sm": ["Be Vietnam Pro"],
+                      "headline-sm": ["Plus Jakarta Sans"]
+              },
+              "fontSize": {
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                      "headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen mesh-gradient">
+<!-- TopAppBar Shell -->
+<header class="bg-white/70 dark:bg-zinc-900/70 backdrop-blur-md fixed top-0 w-full z-50 border-b border-rose-50/50 dark:border-rose-900/20 shadow-sm shadow-rose-100/20">
+<div class="flex justify-between items-center px-6 py-4 max-w-7xl mx-auto">
+<div class="text-xl font-bold text-rose-400 dark:text-rose-300 tracking-tight font-headline-lg">NordicStay</div>
+<nav class="hidden md:flex items-center gap-8 font-label-md">
+<a class="text-zinc-500 hover:text-rose-300 transition-colors" href="#">Explore</a>
+<a class="text-zinc-500 hover:text-rose-300 transition-colors" href="#">Bookings</a>
+<a class="text-zinc-500 hover:text-rose-300 transition-colors" href="#">Finance</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-rose-50/50 dark:hover:bg-rose-900/20 rounded-full transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 hover:bg-rose-50/50 dark:hover:bg-rose-900/20 rounded-full transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-rose-100">
+<img alt="User profile avatar" data-alt="Close-up portrait of a smiling woman with a soft natural background, warm golden hour lighting, cinematic soft focus" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6jdzLnRtlQ2UJ8PSkQXO3H1YUCI6f6-G0dv8Riwo6a_o36Lm7ZVcbMaWWEYm8qWs-C3q-hpmuaGrWohwG7WSLyoEvSUNe1zG_Wx92rSEOVNADbJDlGZUN5CmRwoXkANPikpFEkE_Q7qUB5vKTcny-hqNUeP1JcAkgZjCyzFk1d96iProXYbXw7RC-fUS_V_Qj65YFTC9TjKfhA9R4LRCkFNKCHIVkepNZO62c7DT6Z1DRBXM2egu_VuJWd3PF9LsbRxd599a0rQ"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 pt-32 pb-32">
+<div class="flex flex-col lg:flex-row gap-gutter">
+<!-- Left Column: Overview -->
+<aside class="w-full lg:w-1/3 flex flex-col gap-8">
+<section class="bg-white rounded-xl p-8 cloud-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 p-6 opacity-10">
+<span class="material-symbols-outlined text-9xl">rate_review</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">Your Reviews</h1>
+<p class="text-on-surface-variant font-body-md mb-8">Reflect on your Nordic journeys and share your experiences.</p>
+<div class="flex items-baseline gap-2 mb-2">
+<span class="text-6xl font-headline-lg text-on-surface">4.8</span>
+<span class="text-on-surface-variant font-body-lg">/ 5.0</span>
+</div>
+<div class="flex gap-1 mb-6">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 0.8;">star_half</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between font-label-md text-on-surface-variant">
+<span>Completed stays</span>
+<span class="text-on-surface">12</span>
+</div>
+<div class="flex items-center justify-between font-label-md text-on-surface-variant">
+<span>Reviews written</span>
+<span class="text-on-surface">10</span>
+</div>
+<div class="flex items-center justify-between font-label-md text-on-surface-variant">
+<span>Pending feedback</span>
+<span class="text-secondary font-bold">2</span>
+</div>
+</div>
+<button class="w-full mt-10 py-4 px-6 bg-primary-container text-on-primary-container rounded-full font-label-md flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined">edit_square</span>
+                        Write a Review
+                    </button>
+</section>
+<section class="bg-secondary-container/30 rounded-xl p-8 border border-secondary-fixed">
+<h3 class="font-headline-sm text-headline-sm text-on-secondary-container mb-4">Pending Requests</h3>
+<div class="space-y-4">
+<div class="bg-white/60 p-4 rounded-lg flex gap-4 items-center">
+<div class="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0">
+<img class="w-full h-auto" data-alt="Minimalist modern cabin in a snowy forest, large glass windows, soft dusk lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRPUlOta2sEY6ndAmf33c1M6WmtrjTZyzHdRkCbldf0FPMC3keTBardPqEpSnY7o-YOAv2933SjtaDkojkQS9toOEnTwzkbWWZsnRx_vAUOb27iVuzvK8tnKlUYxuS1HpSXcjwPUXZnuSgDEvh_vGqnadX2mRf7GAmL1slS-jEpNXYN93pHnoidaTkOFZClsruj307A99sRr7gfZ7TS33wm81R6GZdT5x4eW7-qn7XICVm_IDXiQynI6uJrgZITakBKJNDvVaXbg"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Oslo Pine Cabin</p>
+<p class="text-xs text-on-surface-variant">Stayed: Oct 12-15</p>
+<button class="mt-2 text-primary font-label-sm hover:underline">Review stay</button>
+</div>
+</div>
+<div class="bg-white/60 p-4 rounded-lg flex gap-4 items-center">
+<div class="w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0">
+<img class="w-full h-auto" data-alt="Cozy interior of a Scandinavian apartment, light wood textures, plants, soft sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMNbPM_mNKEgfyhrEHX6Jia-HJiur_xBAKJw_RqfGfQY7afwGo831kxfXAJ4DuNQReMi-NOWmKIhtH9FBDGYmLU4YUemqWrM-t-pRbRer1S-dEcuGet7DRFPGxiRDQDLBvzDvzMY4-m5vDSo-1_Tq2oZlcLTby_OICM-psj4W4xC9w9D4rvhnonOzwXxuhzWwVZBQu2geEfvjHKGr2iaQMHe1zkmZ1fhBDetB-akApOqTAlaGzEdTHyP0mg0s4UBeB6F7CwDnbiw"/>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Stockholm Studio</p>
+<p class="text-xs text-on-surface-variant">Stayed: Sep 28-30</p>
+<button class="mt-2 text-primary font-label-sm hover:underline">Review stay</button>
+</div>
+</div>
+</div>
+</section>
+</aside>
+<!-- Right Column: Review List -->
+<div class="w-full lg:w-2/3">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline-md text-headline-md text-on-surface">Past Reviews</h2>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-white rounded-full font-label-sm border border-rose-100 text-on-surface-variant">Latest</button>
+<button class="px-4 py-2 bg-white/40 rounded-full font-label-sm border border-transparent text-on-surface-variant hover:bg-white/60">Highest Rated</button>
+</div>
+</div>
+<div class="space-y-6">
+<!-- Review Card 1 -->
+<article class="bg-white rounded-xl p-8 cloud-shadow border border-rose-50/30">
+<div class="flex flex-col md:flex-row gap-8">
+<div class="md:w-1/3 flex flex-col gap-4">
+<div class="relative group cursor-pointer overflow-hidden rounded-2xl">
+<img class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Modern geometric lakeside villa at sunset, calm water reflection, soft orange and purple sky" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMn-ckwzZd5nsWoPXKHJOXSdCDcD8M_2ePnlOa4iv_Up2-LPoOmlleutAJM8oCYEsZAreawiFmoLXPHgK9NhZXIq1-l8gjajASJCJLLHlxvv3may0BfUXGMJ3ki7z9kTB2HKBadQsHeuORR7vPjUyBlgNrzxMjSb8p4GYFa7d0zyQ5-NQ0AfqCgI9hIar-TIlLrJZEHhnLgVgi-TXb045MA7r28Xyjhdc8um6RYIdKrtuzF6cqC40nPAWBeUssschW71mzBqS3ZQ"/>
+<div class="absolute inset-0 bg-black/10"></div>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm">Lakeside Retreat</h4>
+<p class="text-on-surface-variant text-sm">Helsinki, Finland</p>
+</div>
+</div>
+<div class="md:w-2/3">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="text-on-surface-variant font-label-sm">November 2023</span>
+</div>
+<h5 class="font-headline-sm text-on-surface mb-3">Breathtaking views and total silence.</h5>
+<p class="text-on-surface-variant font-body-md leading-relaxed mb-6 italic">
+                                    "The architecture is seamless with nature. We spent our mornings watching the mist over the lake from the floor-to-ceiling windows. The sauna was perfectly prepared. A truly hygge experience that restored our energy."
+                                </p>
+<div class="flex items-center gap-4 py-4 border-t border-rose-50">
+<span class="text-secondary font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+                                        Host replied
+                                    </span>
+<button class="ml-auto text-on-surface-variant font-label-sm flex items-center gap-1 hover:text-primary">
+<span class="material-symbols-outlined text-lg">share</span>
+                                        Share
+                                    </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Review Card 2 -->
+<article class="bg-white rounded-xl p-8 cloud-shadow border border-rose-50/30">
+<div class="flex flex-col md:flex-row gap-8">
+<div class="md:w-1/3 flex flex-col gap-4">
+<div class="relative group cursor-pointer overflow-hidden rounded-2xl">
+<img class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Small red wooden Scandinavian cottage in a field of flowers, bright blue sky, soft airy feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgCpiLrtQnZXgX_mnQnwgkagJtqgGxpQraCZy7h4ksIlQiXOftW4dBLGB5wB15Aa-2izt7fHAcGwHdmLlUABEx1AFy57kqCo3myU6Byx9-sCzjWuTtjwXQ3pvEr-ynj4UUSmaF-VoBGi9_EzIK_H57EPRgGgMdzB-P_tR-uZoLqM5Y5YOmog_tU7Ct7v1krPELB0qu84ZD54K9SQDAfpWjR9mMez5ltcCuPcnEI7l7gvyDxxAF3asHEGIx4ScoV0wDnJMOZoULqQ"/>
+<div class="absolute inset-0 bg-black/10"></div>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm">Bloom Cottage</h4>
+<p class="text-on-surface-variant text-sm">Copenhagen, Denmark</p>
+</div>
+</div>
+<div class="md:w-2/3">
+<div class="flex justify-between items-start mb-4">
+<div class="flex gap-1 text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">star</span>
+</div>
+<span class="text-on-surface-variant font-label-sm">August 2023</span>
+</div>
+<h5 class="font-headline-sm text-on-surface mb-3">Charming, but a bit far from center.</h5>
+<p class="text-on-surface-variant font-body-md leading-relaxed mb-6 italic">
+                                    "The garden was spectacular and the interiors were exactly as pictured—warm and inviting. It's a bit of a trek to the city center, but if you're looking for a quiet retreat with locally sourced breakfast, this is it."
+                                </p>
+<div class="flex items-center gap-4 py-4 border-t border-rose-50">
+<span class="text-on-surface-variant font-label-sm">12 people found this helpful</span>
+<button class="ml-auto text-on-surface-variant font-label-sm flex items-center gap-1 hover:text-primary">
+<span class="material-symbols-outlined text-lg">thumb_up</span>
+                                        Helpful
+                                    </button>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class="mt-12 text-center">
+<button class="px-8 py-3 rounded-full border border-rose-200 text-primary font-label-md hover:bg-primary hover:text-white transition-colors">
+                        Load More Reviews
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Shell (Mobile Responsive Overlay) -->
+<footer class="md:hidden fixed bottom-0 w-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl rounded-t-xl z-50 border-t border-rose-100/30 shadow-[0_-8px_30px_rgb(244,194,194,0.15)]">
+<div class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3">
+<button class="flex flex-col items-center justify-center text-zinc-400 hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-[11px] font-semibold font-['Plus_Jakarta_SANS']">Services</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-rose-100/50 text-rose-500 rounded-full px-5 py-2">
+<span class="material-symbols-outlined">rate_review</span>
+<span class="text-[11px] font-semibold font-['Plus_Jakarta_SANS']">Reviews</span>
+</button>
+<button class="flex flex-col items-center justify-center text-zinc-400 hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-[11px] font-semibold font-['Plus_Jakarta_SANS']">Wallet</span>
+</button>
+<button class="flex flex-col items-center justify-center text-zinc-400 hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[11px] font-semibold font-['Plus_Jakarta_SANS']">Profile</span>
+</button>
+</div>
+</footer>
+</body></html>

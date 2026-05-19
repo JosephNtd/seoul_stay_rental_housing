@@ -270,14 +270,15 @@ namespace Web_UI.Pages
                 NumberOfGuests = BookingGuests,
                 TotalPrice = total,
                 BookingStatus = "Confirmed",
-                FinalPrice = pricePerNight * (checkOut.DayNumber - checkIn.DayNumber)
+                FinalPrice = pricePerNight * (checkOut.DayNumber - checkIn.DayNumber),
+                CancellationPolicyId = 1
             };
 
             _context.Bookings.Add(booking);
 
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("/MyBookings/Index");
+            return RedirectToPage("/MyBooking");
         }
 
 

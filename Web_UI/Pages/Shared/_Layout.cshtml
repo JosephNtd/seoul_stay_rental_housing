@@ -10,25 +10,26 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Web_UI</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">My Booking</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-rose-100/20 font-['Plus_Jakarta_Sans'] antialiased shadow-[0_8px_30px_rgb(244,194,194,0.08)]">
+            <div class="flex justify-between items-center px-6 py-4 max-w-screen-2xl mx-auto">
+                <div class="flex items-center gap-8">
+                    <span class="text-xl font-bold tracking-tight text-zinc-900">LuxeStay</span>
+                    <div class="hidden md:flex items-center gap-6">
+                        <a class="text-rose-400 font-semibold text-label-md" asp-page="/Index">Explore</a>
+                        <a class="text-zinc-500 hover:bg-rose-50/50 transition-colors px-3 py-1 rounded-full text-label-md" href="#">Saved</a>
+                        <a class="text-zinc-500 hover:bg-rose-50/50 transition-colors px-3 py-1 rounded-full text-label-md" asp-page="/MyBooking">Bookings</a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button class="p-2 text-zinc-500 hover:bg-rose-50/50 rounded-full transition-colors">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                    <button class="flex items-center gap-2 p-1.5 pr-3 bg-white border border-rose-100/30 rounded-full hover:shadow-sm transition-all">
+                        <div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+                            <span class="material-symbols-outlined text-on-primary-container text-[20px]">person</span>
+                        </div>
+                        <span class="text-label-md text-on-surface">Profile</span>
+                    </button>
                 </div>
             </div>
         </nav>

@@ -1,0 +1,493 @@
+﻿@page
+@model Web_UI.Pages.MyBookingModel
+@using System.IO
+@if (TempData["Success"] != null)
+{
+    <div class="mb-6 p-4 rounded-2xl bg-green-100 text-green-700">
+        @TempData["Success"]
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="mb-6 p-4 rounded-2xl bg-red-100 text-red-700">
+        @TempData["Error"]
+    </div>
+}
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<title>Hearth | My Bookings</title>
+	<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+	<script id="tailwind-config">
+		tailwind.config = {
+			darkMode: "class",
+			theme: {
+				extend: {
+					"colors": {
+						"surface-container-highest": "#eae1da",
+						"on-tertiary-fixed": "#1e1b13",
+						"outline-variant": "#d4c2c2",
+						"on-tertiary": "#ffffff",
+						"tertiary-fixed-dim": "#cdc6b8",
+						"primary-fixed-dim": "#ecbaba",
+						"on-primary": "#ffffff",
+						"on-tertiary-container": "#5b574c",
+						"surface-dim": "#e2d8d2",
+						"outline": "#827473",
+						"secondary-container": "#c1ecda",
+						"on-secondary-container": "#456c5e",
+						"on-primary-fixed": "#2f1314",
+						"inverse-primary": "#ecbaba",
+						"tertiary-container": "#d4cdbf",
+						"surface-container-lowest": "#ffffff",
+						"tertiary-fixed": "#e9e2d3",
+						"primary-container": "#f4c2c2",
+						"surface-container": "#f6ece5",
+						"secondary-fixed-dim": "#a6cfbf",
+						"surface-tint": "#7b5455",
+						"surface-container-low": "#fcf2eb",
+						"secondary-fixed": "#c1ecda",
+						"error-container": "#ffdad6",
+						"secondary": "#3f6658",
+						"inverse-surface": "#34302b",
+						"on-surface-variant": "#504444",
+						"on-background": "#1f1b17",
+						"primary-fixed": "#ffdad9",
+						"background": "#fff8f4",
+						"tertiary": "#635e53",
+						"on-error-container": "#93000a",
+						"surface-bright": "#fff8f4",
+						"surface-container-high": "#f0e6e0",
+						"on-secondary-fixed": "#002118",
+						"inverse-on-surface": "#f9efe8",
+						"on-primary-container": "#734e4e",
+						"surface-variant": "#eae1da",
+						"error": "#ba1a1a",
+						"surface": "#fff8f4",
+						"on-secondary": "#ffffff",
+						"on-primary-fixed-variant": "#613d3e",
+						"on-tertiary-fixed-variant": "#4b463c",
+						"on-error": "#ffffff",
+						"primary": "#7b5455",
+						"on-surface": "#1f1b17",
+						"on-secondary-fixed-variant": "#274e41"
+					},
+					"borderRadius": {
+						"DEFAULT": "1rem",
+						"lg": "2rem",
+						"xl": "3rem",
+						"full": "9999px"
+					},
+					"spacing": {
+						"unit": "8px",
+						"container-padding": "32px",
+						"section-gap": "64px",
+						"gutter": "24px"
+					},
+					"fontFamily": {
+						"label-sm": ["Be Vietnam Pro"],
+						"headline-lg": ["Plus Jakarta Sans"],
+						"label-md": ["Be Vietnam Pro"],
+						"body-md": ["Be Vietnam Pro"],
+						"headline-sm": ["Plus Jakarta Sans"],
+						"body-lg": ["Be Vietnam Pro"],
+						"headline-md": ["Plus Jakarta Sans"]
+					},
+					"fontSize": {
+						"label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+						"headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+						"label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.01em", "fontWeight": "600"}],
+						"body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+						"headline-sm": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+						"body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+						"headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}]
+					}
+				},
+			},
+		}
+	</script>
+	<style>
+		body {
+			background: radial-gradient(at 0% 0%, rgba(244, 194, 194, 0.15) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(193, 236, 218, 0.1) 0px, transparent 50%), #fff8f4;
+			min-height: 100vh;
+		}
+
+		.material-symbols-outlined {
+			font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+		}
+
+		.tonal-shift {
+			background-color: rgba(250, 247, 242, 0.7);
+		}
+	</style>
+</head>
+<body class="font-body-md text-on-surface">
+	<!-- Main Canvas -->
+	<main class="md:ml-80 pt-32 px-12 pb-24 max-w-[1440px]">
+		<!-- Header & Filters Section -->
+		<section class="mb-12">
+			<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+				<div>
+					<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Your Stays</h1>
+					<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg">Keep track of your upcoming adventures and revisit the places you've called home.</p>
+				</div>
+				<!-- Status Filters -->
+				<div class="flex p-1.5 bg-surface-container-low rounded-full w-fit">
+					<button class="px-6 py-2 rounded-full bg-white text-on-surface font-label-md text-label-md shadow-sm transition-all">All</button>
+					<button class="px-6 py-2 rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-white/50 transition-all">Upcoming</button>
+					<button class="px-6 py-2 rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-white/50 transition-all">Completed</button>
+					<button class="px-6 py-2 rounded-full text-on-surface-variant font-label-md text-label-md hover:bg-white/50 transition-all">Cancelled</button>
+				</div>
+			</div>
+			<!-- Search & Quick Sort -->
+			<div class="flex items-center gap-4">
+				<div class="relative flex-1 max-w-md">
+					<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">search</span>
+					<input class="w-full pl-12 pr-6 py-4 bg-white border-none rounded-2xl shadow-sm focus:ring-2 focus:ring-primary-container transition-all text-body-md" placeholder="Search by destination or property name" type="text" />
+				</div>
+				<button class="flex items-center gap-2 px-6 py-4 bg-white rounded-2xl shadow-sm text-on-surface hover:bg-surface-container-low transition-all">
+					<span class="material-symbols-outlined" data-icon="tune">tune</span>
+					<span class="font-label-md text-label-md">Filter</span>
+				</button>
+			</div>
+		</section>
+		<!-- Bookings Grid (Bento Style) -->
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+			<!-- Booking Card 1: Upcoming -->
+			<!-- EMPTY STATE -->
+			@if (!Model.Bookings.Any())
+			{
+				<div class="bg-white rounded-[40px] p-20 text-center">
+
+					<h2 class="text-4xl font-bold mb-4">
+						No bookings yet
+					</h2>
+
+					<p class="text-zinc-500 mb-10">
+						Your next serene stay is waiting.
+					</p>
+
+					<a href="/"
+					   class="inline-flex px-10 py-5 rounded-full bg-primary-container hover:bg-primary-fixed-dim transition font-semibold">
+
+						Start Exploring
+
+					</a>
+				</div>
+			}
+
+			@foreach (var booking in Model.Bookings)
+			{
+				var firstPicture = booking.Item?.ItemPictures?.FirstOrDefault();
+
+				string imageUrl =
+				firstPicture != null &&
+				!string.IsNullOrWhiteSpace(firstPicture.PictureFileName)
+				? "/images/homestays/" +
+				System.IO.Path.GetFileName(firstPicture.PictureFileName)
+				: "/images/homestays/unnamed.png";
+
+				var totalNights =
+				(booking.CheckOutDate.DayNumber - booking.CheckInDate.DayNumber);
+
+				<!-- Booking Card -->
+				<div class="group bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(244,194,194,0.15)] transition-all duration-500 flex flex-col md:flex-row">
+
+					<!-- IMAGE -->
+					<div class="relative w-full md:w-48 h-64 md:h-auto overflow-hidden">
+
+						<img src="@imageUrl"
+							 alt="@booking.Item?.Title"
+							 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+							 onerror="this.src='/images/no-image.jpg'" />
+
+						<div class="absolute top-4 left-4">
+
+							<span class="px-3 py-1 rounded-full shadow-sm
+	                        @(booking.BookingStatus == "Confirmed"
+											? "bg-green-100 text-green-700"
+											: booking.BookingStatus == "Cancelled"
+												? "bg-red-100 text-red-700"
+												: "bg-zinc-100 text-zinc-700")">
+
+							@booking.BookingStatus
+
+							</span>
+						</div>
+					</div>
+
+					<!-- CONTENT -->
+					<div class="flex-1 p-8 flex flex-col">
+
+						<!-- TOP -->
+						<div class="flex justify-between items-start mb-4">
+
+							<div>
+								<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">
+									@booking.Item?.Title
+								</h3>
+
+								<p class="text-on-surface-variant font-label-md text-label-md">
+									@booking.Item?.Area?.Name
+								</p>
+							</div>
+
+							<div class="text-right">
+								<span class="block font-headline-sm text-primary">
+									$@booking.FinalPrice
+								</span>
+
+								<span class="text-label-sm text-on-surface-variant">
+									@totalNights nights
+								</span>
+							</div>
+						</div>
+
+						<!-- INFO -->
+						<div class="space-y-3 mb-8">
+
+							<div class="flex items-center gap-3 text-on-surface-variant">
+
+								<span class="material-symbols-outlined text-primary-fixed-dim">
+									calendar_today
+								</span>
+
+								<span class="text-body-md">
+									@booking.CheckInDate.ToString("MMM dd, yyyy")
+									-
+									@booking.CheckOutDate.ToString("MMM dd, yyyy")
+								</span>
+							</div>
+
+							<div class="flex items-center gap-3 text-on-surface-variant">
+
+								<span class="material-symbols-outlined text-primary-fixed-dim">
+									group
+								</span>
+
+								<span class="text-body-md">
+									@booking.NumberOfGuests Guests
+								</span>
+							</div>
+
+							<div class="flex items-center gap-3 text-on-surface-variant">
+
+								<span class="material-symbols-outlined text-primary-fixed-dim">
+									location_on
+								</span>
+
+								<span class="text-body-md">
+									@booking.Item?.ApproximateAddress
+								</span>
+							</div>
+						</div>
+
+						<!-- ACTION -->
+						<div class="mt-auto flex items-center gap-3">
+
+							<!-- REVIEW BUTTON -->
+							@if (booking.BookingStatus != "Cancelled"
+													&& booking.CheckOutDate <= DateOnly.FromDateTime(DateTime.Now)
+													&& !booking.Reviews.Any())
+								{
+									<button type="button"
+											onclick="document.getElementById('review-modal-@booking.Id').classList.remove('hidden')"
+											class="flex-1 py-3 text-center bg-primary-container text-on-primary-container rounded-full font-label-md text-label-md hover:brightness-95 transition-all">
+
+										Review
+
+									</button>
+							}
+
+							@if (booking.BookingStatus != "Cancelled" && booking.CheckInDate > DateOnly.FromDateTime(DateTime.Now))
+							{
+								<form method="post"
+									  asp-page-handler="CancelBooking">
+
+									<input type="hidden"
+										   name="bookingId"
+										   value="@booking.Id" />
+
+									<button type="submit"
+											class="px-6 py-3 border border-outline-variant text-on-surface-variant rounded-full font-label-md text-label-md hover:bg-surface-container-low transition-all">
+
+										Cancel
+
+									</button>
+								</form>
+							}
+						</div>
+
+						<!-- REVIEW MODAL -->
+						<div id="review-modal-@booking.Id"
+							 class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-6">
+
+							<div class="bg-surface-container-lowest rounded-[40px] shadow-[0_20px_60px_rgba(123,84,85,0.08)] max-w-5xl w-full flex flex-col md:flex-row overflow-hidden relative">
+
+								<!-- LEFT IMAGE -->
+								<div class="md:w-2/5 hidden md:block relative">
+
+									<img src="@imageUrl"
+										 class="w-full h-full object-cover"
+										 onerror="this.src='/images/no-image.jpg'" />
+
+									<div class="absolute inset-0 bg-gradient-to-r from-transparent to-surface-container-lowest/80"></div>
+
+									<div class="absolute bottom-8 left-8 right-8 text-white">
+
+										<p class="font-label-sm uppercase tracking-widest mb-2">
+											@booking.Item?.Area?.Name
+										</p>
+
+										<p class="italic text-body-md">
+											"@booking.Item?.Title"
+										</p>
+									</div>
+								</div>
+
+								<!-- RIGHT CONTENT -->
+								<div class="md:w-3/5 p-8 md:p-12 flex flex-col">
+
+									<!-- HEADER -->
+									<div class="mb-8">
+
+										<button type="button"
+												onclick="document.getElementById('review-modal-@booking.Id').classList.add('hidden')"
+												class="mb-6 w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-variant transition-colors text-on-surface">
+
+											<span class="material-symbols-outlined">
+												close
+											</span>
+										</button>
+
+										<h1 class="font-headline-md text-headline-md text-on-surface mb-2">
+
+											Rate your stay at
+											@booking.Item?.Title
+
+										</h1>
+
+										<p class="text-on-surface-variant">
+											Your feedback helps future guests.
+										</p>
+									</div>
+
+									<!-- REVIEW FORM -->
+									<form method="post"
+										  asp-page-handler="SubmitReview"
+										  class="flex flex-col gap-8">
+
+										<input type="hidden"
+											   name="bookingId"
+											   value="@booking.Id" />
+
+										<!-- STARS -->
+										<div>
+
+											<label class="block font-label-md mb-4">
+												Your Rating
+											</label>
+
+											<div class="flex gap-2 text-3xl">
+
+												@for (int i = 1; i <= 5; i++)
+												{
+													<label class="cursor-pointer">
+
+														<input type="radio"
+															   name="rating"
+															   value="@i"
+															   required
+															   class="hidden peer" />
+
+														<span class="material-symbols-outlined text-outline-variant peer-checked:text-primary filled transition-all">
+
+															star
+
+														</span>
+													</label>
+												}
+											</div>
+										</div>
+
+										<!-- REVIEW TEXT -->
+										<div>
+
+											<label class="block font-label-md mb-3">
+												Your Review
+											</label>
+
+											<textarea name="comment"
+												  rows="5"
+												  maxlength="500"
+												  placeholder="Share your experience with other guests..."
+												  class="w-full bg-surface-container-low border-0 outline-none focus:ring-2 focus:ring-secondary-fixed rounded-3xl p-5 resize-none text-on-surface placeholder:text-outline-variant transition-all"></textarea>
+										</div>
+
+										<!-- ACTIONS -->
+										<div class="flex justify-end gap-4 pt-6 border-t border-surface-variant/50">
+
+											<button type="button"
+													onclick="document.getElementById('review-modal-@booking.Id').classList.add('hidden')"
+													class="px-8 py-4 rounded-full text-on-surface-variant hover:bg-surface-container transition-colors">
+
+												Cancel
+
+											</button>
+
+											<button type="submit"
+													class="px-8 py-4 rounded-full bg-primary-container text-on-primary-container hover:bg-primary-fixed transition-colors font-semibold">
+
+												Submit Review
+
+											</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+
+			<!-- Pagination/Load More (Subtle) -->
+			<div class="mt-16 flex flex-col items-center gap-4">
+				<button class="px-8 py-4 bg-white border border-outline-variant text-on-surface-variant font-label-md text-label-md rounded-full hover:bg-surface-container-low transition-all">Load More Bookings</button>
+				<p class="text-label-sm text-on-surface-variant">Showing 4 of 12 stays</p>
+			</div>
+	</main>
+	<!-- Footer -->
+	<footer class="w-full py-12 px-12 mt-24 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#FAF7F2] font-['Plus_Jakarta_Sans'] text-xs text-zinc-400 border-t border-zinc-100">
+		<div class="flex items-center gap-2">
+			<span class="text-primary font-bold text-lg tracking-tighter">Hearth</span>
+			<span>© 2024 Hearth Travel Inc. Designed for comfort.</span>
+		</div>
+		<div class="flex gap-8">
+			<a class="hover:underline underline-offset-4 hover:text-zinc-600 transition-colors" href="#">Privacy</a>
+			<a class="hover:underline underline-offset-4 hover:text-zinc-600 transition-colors" href="#">Terms</a>
+			<a class="hover:underline underline-offset-4 hover:text-zinc-600 transition-colors" href="#">Sitemap</a>
+			<a class="hover:underline underline-offset-4 hover:text-zinc-600 transition-colors" href="#">Cookie Preferences</a>
+		</div>
+		<div class="flex gap-4">
+			<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm text-zinc-400 hover:text-primary transition-all">
+				<span class="material-symbols-outlined text-[18px]" data-icon="language">language</span>
+			</button>
+			<button class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm text-zinc-400 hover:text-primary transition-all">
+				<span class="material-symbols-outlined text-[18px]" data-icon="currency_exchange">currency_exchange</span>
+			</button>
+		</div>
+	</footer>
+	<!-- FAB for quick search (Contextual) -->
+	<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+		<span class="material-symbols-outlined" data-icon="add" style="font-variation-settings: 'FILL' 1;">add</span>
+	</button>
+</body>
+</html>

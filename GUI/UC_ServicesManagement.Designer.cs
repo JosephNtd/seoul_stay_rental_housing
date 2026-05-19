@@ -151,9 +151,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDescription.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescription.Appearance.Options.UseFont = true;
-            this.lblDescription.Location = new System.Drawing.Point(25, 237);
+            this.lblDescription.Location = new System.Drawing.Point(38, 365);
+            this.lblDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(85, 19);
+            this.lblDescription.Size = new System.Drawing.Size(125, 29);
             this.lblDescription.TabIndex = 8;
             this.lblDescription.Text = "Description:";
             // 
@@ -164,9 +165,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDetailTitle.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDetailTitle.Appearance.Options.UseFont = true;
-            this.lblDetailTitle.Location = new System.Drawing.Point(84, 29);
+            this.lblDetailTitle.Location = new System.Drawing.Point(126, 45);
+            this.lblDetailTitle.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblDetailTitle.Name = "lblDetailTitle";
-            this.lblDetailTitle.Size = new System.Drawing.Size(43, 23);
+            this.lblDetailTitle.Size = new System.Drawing.Size(65, 35);
             this.lblDetailTitle.TabIndex = 7;
             this.lblDetailTitle.Text = "Title";
             // 
@@ -174,9 +176,10 @@
             // 
             this.txtName1.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName1.Appearance.Options.UseFont = true;
-            this.txtName1.Location = new System.Drawing.Point(23, 33);
+            this.txtName1.Location = new System.Drawing.Point(34, 51);
+            this.txtName1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtName1.Name = "txtName1";
-            this.txtName1.Size = new System.Drawing.Size(47, 19);
+            this.txtName1.Size = new System.Drawing.Size(70, 29);
             this.txtName1.TabIndex = 7;
             this.txtName1.Text = "Name:";
             this.txtName1.Click += new System.EventHandler(this.txtName1_Click);
@@ -187,9 +190,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblServiceTypes.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblServiceTypes.Appearance.Options.UseFont = true;
-            this.lblServiceTypes.Location = new System.Drawing.Point(25, 87);
+            this.lblServiceTypes.Location = new System.Drawing.Point(38, 134);
+            this.lblServiceTypes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblServiceTypes.Name = "lblServiceTypes";
-            this.lblServiceTypes.Size = new System.Drawing.Size(110, 19);
+            this.lblServiceTypes.Size = new System.Drawing.Size(166, 29);
             this.lblServiceTypes.TabIndex = 7;
             this.lblServiceTypes.Text = "Services Types:";
             // 
@@ -200,9 +204,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.Location = new System.Drawing.Point(136, 48);
+            this.btnCancel.Location = new System.Drawing.Point(204, 74);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(247, 26);
+            this.btnCancel.Size = new System.Drawing.Size(371, 40);
             this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -213,9 +218,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Appearance.Options.UseFont = true;
-            this.btnClose.Location = new System.Drawing.Point(410, 48);
+            this.btnClose.Location = new System.Drawing.Point(616, 74);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(102, 26);
+            this.btnClose.Size = new System.Drawing.Size(153, 40);
             this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Close";
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -226,9 +232,10 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSave.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Location = new System.Drawing.Point(7, 48);
+            this.btnSave.Location = new System.Drawing.Point(10, 74);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(102, 26);
+            this.btnSave.Size = new System.Drawing.Size(153, 40);
             this.btnSave.TabIndex = 5;
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -239,14 +246,16 @@
             this.UC_AttractionDetail.Appearance.Options.UseBackColor = true;
             this.UC_AttractionDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.UC_AttractionDetail.Location = new System.Drawing.Point(0, 0);
+            this.UC_AttractionDetail.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.UC_AttractionDetail.Name = "UC_AttractionDetail";
-            this.UC_AttractionDetail.Size = new System.Drawing.Size(521, 665);
+            this.UC_AttractionDetail.Size = new System.Drawing.Size(782, 1023);
             this.UC_AttractionDetail.TabIndex = 0;
             // 
             // splitContainerControl1
             // 
             this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 149);
+            this.splitContainerControl1.Location = new System.Drawing.Point(0, 229);
+            this.splitContainerControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.splitContainerControl1.Name = "splitContainerControl1";
             // 
             // splitContainerControl1.Panel1
@@ -261,23 +270,21 @@
             this.splitContainerControl1.Panel2.Controls.Add(this.panelControl1);
             this.splitContainerControl1.Panel2.Controls.Add(this.UC_AttractionDetail);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1100, 665);
-            this.splitContainerControl1.SplitterPosition = 569;
+            this.splitContainerControl1.Size = new System.Drawing.Size(1650, 1023);
+            this.splitContainerControl1.SplitterPosition = 853;
             this.splitContainerControl1.TabIndex = 24;
             // 
             // gcServices
             // 
             this.gcServices.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gcServices.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gcServices.Location = new System.Drawing.Point(0, 0);
             this.gcServices.MainView = this.gvServices;
-            this.gcServices.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gcServices.Name = "gcServices";
             this.gcServices.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemComboBox1,
             this.repoBtnActions,
             this.repoItemPicture});
-            this.gcServices.Size = new System.Drawing.Size(569, 665);
+            this.gcServices.Size = new System.Drawing.Size(853, 1023);
             this.gcServices.TabIndex = 11;
             this.gcServices.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvServices});
@@ -317,12 +324,12 @@
             this.Description,
             this.Capacity,
             this.Actions});
-            this.gvServices.DetailHeight = 227;
+            this.gvServices.DetailHeight = 349;
             this.gvServices.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFullFocus;
             this.gvServices.GridControl = this.gcServices;
             this.gvServices.Name = "gvServices";
             this.gvServices.OptionsBehavior.ReadOnly = true;
-            this.gvServices.OptionsEditForm.PopupEditFormWidth = 533;
+            this.gvServices.OptionsEditForm.PopupEditFormWidth = 799;
             this.gvServices.OptionsPrint.EnableAppearanceOddRow = true;
             this.gvServices.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gvServices.OptionsView.EnableAppearanceOddRow = true;
@@ -331,47 +338,53 @@
             this.gvServices.OptionsView.ShowGroupPanel = false;
             this.gvServices.OptionsView.ShowHorizontalLines = DevExpress.Utils.DefaultBoolean.False;
             this.gvServices.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
-            this.gvServices.RowHeight = 42;
+            this.gvServices.RowHeight = 65;
             // 
             // ID
             // 
             this.ID.Caption = "ID";
             this.ID.FieldName = "ID";
+            this.ID.MinWidth = 30;
             this.ID.Name = "ID";
+            this.ID.Width = 112;
             // 
             // ServiceName
             // 
             this.ServiceName.Caption = "Service Name";
             this.ServiceName.FieldName = "Name";
-            this.ServiceName.MinWidth = 13;
+            this.ServiceName.MinWidth = 19;
             this.ServiceName.Name = "ServiceName";
             this.ServiceName.Visible = true;
             this.ServiceName.VisibleIndex = 0;
-            this.ServiceName.Width = 61;
+            this.ServiceName.Width = 91;
             // 
             // ServiceTypeID
             // 
             this.ServiceTypeID.Caption = "ServiceTypeID";
             this.ServiceTypeID.FieldName = "ServiceTypeID";
+            this.ServiceTypeID.MinWidth = 30;
             this.ServiceTypeID.Name = "ServiceTypeID";
+            this.ServiceTypeID.Width = 112;
             // 
             // ServiceTypeName
             // 
             this.ServiceTypeName.Caption = "Type";
             this.ServiceTypeName.FieldName = "ServiceTypeName";
+            this.ServiceTypeName.MinWidth = 30;
             this.ServiceTypeName.Name = "ServiceTypeName";
             this.ServiceTypeName.Visible = true;
             this.ServiceTypeName.VisibleIndex = 1;
-            this.ServiceTypeName.Width = 91;
+            this.ServiceTypeName.Width = 136;
             // 
             // Price
             // 
             this.Price.Caption = "Price";
             this.Price.FieldName = "Price";
+            this.Price.MinWidth = 30;
             this.Price.Name = "Price";
             this.Price.Visible = true;
             this.Price.VisibleIndex = 2;
-            this.Price.Width = 35;
+            this.Price.Width = 52;
             // 
             // Duration
             // 
@@ -379,19 +392,21 @@
             this.Duration.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.Duration.Caption = "Duration";
             this.Duration.FieldName = "Duration";
+            this.Duration.MinWidth = 30;
             this.Duration.Name = "Duration";
             this.Duration.Visible = true;
             this.Duration.VisibleIndex = 3;
-            this.Duration.Width = 28;
+            this.Duration.Width = 42;
             // 
             // Description
             // 
             this.Description.Caption = "Description";
             this.Description.FieldName = "Description";
+            this.Description.MinWidth = 30;
             this.Description.Name = "Description";
             this.Description.Visible = true;
             this.Description.VisibleIndex = 4;
-            this.Description.Width = 150;
+            this.Description.Width = 225;
             // 
             // Capacity
             // 
@@ -399,21 +414,22 @@
             this.Capacity.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.Capacity.Caption = "Capacity / Cap";
             this.Capacity.FieldName = "Capacity";
+            this.Capacity.MinWidth = 30;
             this.Capacity.Name = "Capacity";
             this.Capacity.Visible = true;
             this.Capacity.VisibleIndex = 5;
-            this.Capacity.Width = 86;
+            this.Capacity.Width = 129;
             // 
             // Actions
             // 
             this.Actions.Caption = "Actions";
             this.Actions.ColumnEdit = this.repoBtnActions;
             this.Actions.FieldName = "Actions";
-            this.Actions.MinWidth = 13;
+            this.Actions.MinWidth = 19;
             this.Actions.Name = "Actions";
             this.Actions.Visible = true;
             this.Actions.VisibleIndex = 6;
-            this.Actions.Width = 95;
+            this.Actions.Width = 142;
             // 
             // repositoryItemComboBox1
             // 
@@ -438,8 +454,9 @@
             this.panelControl3.Controls.Add(this.lblDetailTitle);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelControl3.Location = new System.Drawing.Point(0, 0);
+            this.panelControl3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(521, 75);
+            this.panelControl3.Size = new System.Drawing.Size(782, 115);
             this.panelControl3.TabIndex = 14;
             // 
             // panelControl2
@@ -451,9 +468,10 @@
             this.panelControl2.Controls.Add(this.btnSave);
             this.panelControl2.Controls.Add(this.btnCancel);
             this.panelControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelControl2.Location = new System.Drawing.Point(0, 562);
+            this.panelControl2.Location = new System.Drawing.Point(0, 865);
+            this.panelControl2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(521, 103);
+            this.panelControl2.Size = new System.Drawing.Size(782, 158);
             this.panelControl2.TabIndex = 14;
             // 
             // panelControl1
@@ -481,45 +499,49 @@
             this.panelControl1.Controls.Add(this.lblDaysOfWeek);
             this.panelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl1.Location = new System.Drawing.Point(0, 0);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(521, 665);
+            this.panelControl1.Size = new System.Drawing.Size(782, 1023);
             this.panelControl1.TabIndex = 13;
             // 
             // chkDaysOfMonth
             // 
             this.chkDaysOfMonth.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkDaysOfMonth.Location = new System.Drawing.Point(155, 389);
+            this.chkDaysOfMonth.Location = new System.Drawing.Point(232, 598);
+            this.chkDaysOfMonth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chkDaysOfMonth.Name = "chkDaysOfMonth";
             this.chkDaysOfMonth.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDaysOfMonth.Properties.Appearance.Options.UseFont = true;
             this.chkDaysOfMonth.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.chkDaysOfMonth.Size = new System.Drawing.Size(293, 26);
+            this.chkDaysOfMonth.Size = new System.Drawing.Size(440, 36);
             this.chkDaysOfMonth.TabIndex = 12;
             // 
             // chkDaysOfWeek
             // 
             this.chkDaysOfWeek.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkDaysOfWeek.Location = new System.Drawing.Point(155, 337);
+            this.chkDaysOfWeek.Location = new System.Drawing.Point(232, 518);
+            this.chkDaysOfWeek.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.chkDaysOfWeek.Name = "chkDaysOfWeek";
             this.chkDaysOfWeek.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDaysOfWeek.Properties.Appearance.Options.UseFont = true;
             this.chkDaysOfWeek.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.chkDaysOfWeek.Size = new System.Drawing.Size(293, 26);
+            this.chkDaysOfWeek.Size = new System.Drawing.Size(440, 36);
             this.chkDaysOfWeek.TabIndex = 12;
             // 
             // txtDescription
             // 
             this.txtDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDescription.Location = new System.Drawing.Point(155, 242);
+            this.txtDescription.Location = new System.Drawing.Point(232, 372);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescription.Properties.Appearance.Options.UseFont = true;
-            this.txtDescription.Size = new System.Drawing.Size(293, 71);
+            this.txtDescription.Size = new System.Drawing.Size(440, 109);
             this.txtDescription.TabIndex = 9;
             // 
             // numBookingCapacity
@@ -531,23 +553,25 @@
             0,
             0,
             0});
-            this.numBookingCapacity.Location = new System.Drawing.Point(155, 482);
+            this.numBookingCapacity.Location = new System.Drawing.Point(232, 742);
+            this.numBookingCapacity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.numBookingCapacity.Name = "numBookingCapacity";
             this.numBookingCapacity.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numBookingCapacity.Properties.Appearance.Options.UseFont = true;
             this.numBookingCapacity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.numBookingCapacity.Size = new System.Drawing.Size(221, 26);
+            this.numBookingCapacity.Size = new System.Drawing.Size(332, 36);
             this.numBookingCapacity.TabIndex = 11;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(155, 33);
+            this.txtName.Location = new System.Drawing.Point(232, 51);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtName.Name = "txtName";
             this.txtName.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtName.Properties.Appearance.Options.UseFont = true;
             this.txtName.Properties.AutoHeight = false;
-            this.txtName.Size = new System.Drawing.Size(221, 26);
+            this.txtName.Size = new System.Drawing.Size(332, 40);
             this.txtName.TabIndex = 1;
             // 
             // numDuration
@@ -559,13 +583,14 @@
             0,
             0,
             0});
-            this.numDuration.Location = new System.Drawing.Point(155, 191);
+            this.numDuration.Location = new System.Drawing.Point(232, 294);
+            this.numDuration.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.numDuration.Name = "numDuration";
             this.numDuration.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numDuration.Properties.Appearance.Options.UseFont = true;
             this.numDuration.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.numDuration.Size = new System.Drawing.Size(293, 26);
+            this.numDuration.Size = new System.Drawing.Size(440, 36);
             this.numDuration.TabIndex = 11;
             // 
             // numDailyCapacity
@@ -577,13 +602,14 @@
             0,
             0,
             0});
-            this.numDailyCapacity.Location = new System.Drawing.Point(155, 432);
+            this.numDailyCapacity.Location = new System.Drawing.Point(232, 665);
+            this.numDailyCapacity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.numDailyCapacity.Name = "numDailyCapacity";
             this.numDailyCapacity.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numDailyCapacity.Properties.Appearance.Options.UseFont = true;
             this.numDailyCapacity.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.numDailyCapacity.Size = new System.Drawing.Size(293, 26);
+            this.numDailyCapacity.Size = new System.Drawing.Size(440, 36);
             this.numDailyCapacity.TabIndex = 11;
             // 
             // lblPrice
@@ -592,9 +618,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPrice.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrice.Appearance.Options.UseFont = true;
-            this.lblPrice.Location = new System.Drawing.Point(25, 146);
+            this.lblPrice.Location = new System.Drawing.Point(38, 225);
+            this.lblPrice.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(40, 19);
+            this.lblPrice.Size = new System.Drawing.Size(59, 29);
             this.lblPrice.TabIndex = 7;
             this.lblPrice.Text = "Price:";
             // 
@@ -607,13 +634,14 @@
             0,
             0,
             0});
-            this.numPrice.Location = new System.Drawing.Point(155, 141);
+            this.numPrice.Location = new System.Drawing.Point(232, 217);
+            this.numPrice.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.numPrice.Name = "numPrice";
             this.numPrice.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numPrice.Properties.Appearance.Options.UseFont = true;
             this.numPrice.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.numPrice.Size = new System.Drawing.Size(293, 26);
+            this.numPrice.Size = new System.Drawing.Size(440, 36);
             this.numPrice.TabIndex = 11;
             // 
             // lblDuration
@@ -622,9 +650,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDuration.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDuration.Appearance.Options.UseFont = true;
-            this.lblDuration.Location = new System.Drawing.Point(25, 192);
+            this.lblDuration.Location = new System.Drawing.Point(38, 295);
+            this.lblDuration.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblDuration.Name = "lblDuration";
-            this.lblDuration.Size = new System.Drawing.Size(67, 19);
+            this.lblDuration.Size = new System.Drawing.Size(98, 29);
             this.lblDuration.TabIndex = 7;
             this.lblDuration.Text = "Duration:";
             // 
@@ -632,13 +661,14 @@
             // 
             this.cboServiceTypes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboServiceTypes.Location = new System.Drawing.Point(155, 86);
+            this.cboServiceTypes.Location = new System.Drawing.Point(232, 132);
+            this.cboServiceTypes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cboServiceTypes.Name = "cboServiceTypes";
             this.cboServiceTypes.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboServiceTypes.Properties.Appearance.Options.UseFont = true;
             this.cboServiceTypes.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cboServiceTypes.Size = new System.Drawing.Size(293, 26);
+            this.cboServiceTypes.Size = new System.Drawing.Size(440, 36);
             this.cboServiceTypes.TabIndex = 10;
             // 
             // txtDailyCapacity
@@ -647,9 +677,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDailyCapacity.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDailyCapacity.Appearance.Options.UseFont = true;
-            this.txtDailyCapacity.Location = new System.Drawing.Point(25, 437);
+            this.txtDailyCapacity.Location = new System.Drawing.Point(38, 672);
+            this.txtDailyCapacity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDailyCapacity.Name = "txtDailyCapacity";
-            this.txtDailyCapacity.Size = new System.Drawing.Size(105, 19);
+            this.txtDailyCapacity.Size = new System.Drawing.Size(156, 29);
             this.txtDailyCapacity.TabIndex = 7;
             this.txtDailyCapacity.Text = "Daily Capacity:";
             // 
@@ -659,9 +690,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDaysOfMonth.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDaysOfMonth.Appearance.Options.UseFont = true;
-            this.lblDaysOfMonth.Location = new System.Drawing.Point(25, 390);
+            this.lblDaysOfMonth.Location = new System.Drawing.Point(38, 600);
+            this.lblDaysOfMonth.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblDaysOfMonth.Name = "lblDaysOfMonth";
-            this.lblDaysOfMonth.Size = new System.Drawing.Size(111, 19);
+            this.lblDaysOfMonth.Size = new System.Drawing.Size(167, 29);
             this.lblDaysOfMonth.TabIndex = 8;
             this.lblDaysOfMonth.Text = "Days Of Month:";
             // 
@@ -671,9 +703,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBookingCapacity.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBookingCapacity.Appearance.Options.UseFont = true;
-            this.lblBookingCapacity.Location = new System.Drawing.Point(25, 483);
+            this.lblBookingCapacity.Location = new System.Drawing.Point(38, 743);
+            this.lblBookingCapacity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblBookingCapacity.Name = "lblBookingCapacity";
-            this.lblBookingCapacity.Size = new System.Drawing.Size(67, 19);
+            this.lblBookingCapacity.Size = new System.Drawing.Size(98, 29);
             this.lblBookingCapacity.TabIndex = 7;
             this.lblBookingCapacity.Text = "Duration:";
             // 
@@ -683,9 +716,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDaysOfWeek.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDaysOfWeek.Appearance.Options.UseFont = true;
-            this.lblDaysOfWeek.Location = new System.Drawing.Point(25, 333);
+            this.lblDaysOfWeek.Location = new System.Drawing.Point(38, 512);
+            this.lblDaysOfWeek.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lblDaysOfWeek.Name = "lblDaysOfWeek";
-            this.lblDaysOfWeek.Size = new System.Drawing.Size(105, 19);
+            this.lblDaysOfWeek.Size = new System.Drawing.Size(161, 29);
             this.lblDaysOfWeek.TabIndex = 8;
             this.lblDaysOfWeek.Text = "Days Of Week:";
             // 
@@ -693,10 +727,9 @@
             // 
             this.pnlCardStats.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pnlCardStats.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlCardStats.Location = new System.Drawing.Point(0, 814);
-            this.pnlCardStats.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlCardStats.Location = new System.Drawing.Point(0, 1252);
             this.pnlCardStats.Name = "pnlCardStats";
-            this.pnlCardStats.Size = new System.Drawing.Size(1100, 72);
+            this.pnlCardStats.Size = new System.Drawing.Size(1650, 111);
             this.pnlCardStats.TabIndex = 23;
             // 
             // btnReset
@@ -705,10 +738,9 @@
             this.btnReset.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReset.Appearance.Options.UseBackColor = true;
             this.btnReset.Appearance.Options.UseFont = true;
-            this.btnReset.Location = new System.Drawing.Point(710, 12);
-            this.btnReset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReset.Location = new System.Drawing.Point(1065, 18);
             this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(115, 26);
+            this.btnReset.Size = new System.Drawing.Size(172, 40);
             this.btnReset.TabIndex = 3;
             this.btnReset.Text = "Reset";
             // 
@@ -722,17 +754,15 @@
             this.pnlFilter.Controls.Add(this.txtSearch);
             this.pnlFilter.Controls.Add(this.cboServiceTypeSort);
             this.pnlFilter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilter.Location = new System.Drawing.Point(0, 97);
-            this.pnlFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlFilter.Location = new System.Drawing.Point(0, 149);
             this.pnlFilter.Name = "pnlFilter";
-            this.pnlFilter.Size = new System.Drawing.Size(1100, 52);
+            this.pnlFilter.Size = new System.Drawing.Size(1650, 80);
             this.pnlFilter.TabIndex = 22;
             // 
             // cboSort
             // 
             this.cboSort.EditValue = "---Sort By---";
-            this.cboSort.Location = new System.Drawing.Point(349, 12);
-            this.cboSort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cboSort.Location = new System.Drawing.Point(524, 18);
             this.cboSort.Name = "cboSort";
             this.cboSort.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboSort.Properties.Appearance.Options.UseFont = true;
@@ -742,13 +772,12 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboSort.Properties.NullText = "---Select Role---";
             this.cboSort.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
-            this.cboSort.Size = new System.Drawing.Size(145, 26);
+            this.cboSort.Size = new System.Drawing.Size(218, 40);
             this.cboSort.TabIndex = 1;
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(15, 12);
-            this.txtSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtSearch.Location = new System.Drawing.Point(22, 18);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSearch.Properties.Appearance.Options.UseFont = true;
@@ -757,12 +786,13 @@
             this.txtSearch.Properties.ContextImageOptions.Image = global::DangNhap_Form.Properties.Resources.search;
             this.txtSearch.Properties.NullText = "Search by name, email or role...";
             this.txtSearch.Properties.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.txtSearch.Size = new System.Drawing.Size(302, 26);
+            this.txtSearch.Size = new System.Drawing.Size(453, 40);
             this.txtSearch.TabIndex = 0;
             // 
             // cboServiceTypeSort
             // 
-            this.cboServiceTypeSort.Location = new System.Drawing.Point(528, 12);
+            this.cboServiceTypeSort.Location = new System.Drawing.Point(792, 18);
+            this.cboServiceTypeSort.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cboServiceTypeSort.Name = "cboServiceTypeSort";
             this.cboServiceTypeSort.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboServiceTypeSort.Properties.Appearance.Options.UseFont = true;
@@ -770,7 +800,7 @@
             this.cboServiceTypeSort.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.cboServiceTypeSort.Properties.PopupSizeable = true;
-            this.cboServiceTypeSort.Size = new System.Drawing.Size(145, 26);
+            this.cboServiceTypeSort.Size = new System.Drawing.Size(218, 40);
             this.cboServiceTypeSort.TabIndex = 4;
             // 
             // lblSubtitle
@@ -779,10 +809,9 @@
             this.lblSubtitle.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(99)))), ((int)(((byte)(94)))), ((int)(((byte)(83)))));
             this.lblSubtitle.Appearance.Options.UseFont = true;
             this.lblSubtitle.Appearance.Options.UseForeColor = true;
-            this.lblSubtitle.Location = new System.Drawing.Point(31, 61);
-            this.lblSubtitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lblSubtitle.Location = new System.Drawing.Point(46, 94);
             this.lblSubtitle.Name = "lblSubtitle";
-            this.lblSubtitle.Size = new System.Drawing.Size(512, 18);
+            this.lblSubtitle.Size = new System.Drawing.Size(795, 28);
             this.lblSubtitle.TabIndex = 2;
             this.lblSubtitle.Text = "Manage and configure your active experiences, durations, and daily capacities.";
             // 
@@ -792,10 +821,9 @@
             this.lblTitle.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(84)))), ((int)(((byte)(85)))));
             this.lblTitle.Appearance.Options.UseFont = true;
             this.lblTitle.Appearance.Options.UseForeColor = true;
-            this.lblTitle.Location = new System.Drawing.Point(31, 12);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lblTitle.Location = new System.Drawing.Point(46, 18);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(407, 45);
+            this.lblTitle.Size = new System.Drawing.Size(616, 68);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Services Management";
             // 
@@ -808,10 +836,10 @@
             this.pnlHeader.Controls.Add(this.btnExport);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlHeader.Location = new System.Drawing.Point(0, 0);
-            this.pnlHeader.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlHeader.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pnlHeader.Name = "pnlHeader";
-            this.pnlHeader.Padding = new System.Windows.Forms.Padding(16, 16, 16, 16);
-            this.pnlHeader.Size = new System.Drawing.Size(1100, 97);
+            this.pnlHeader.Padding = new System.Windows.Forms.Padding(24, 25, 24, 25);
+            this.pnlHeader.Size = new System.Drawing.Size(1650, 149);
             this.pnlHeader.TabIndex = 21;
             // 
             // btnInvite
@@ -824,10 +852,10 @@
             this.btnInvite.Appearance.Options.UseFont = true;
             this.btnInvite.Appearance.Options.UseForeColor = true;
             this.btnInvite.ImageOptions.Image = global::DangNhap_Form.Properties.Resources._267_plus;
-            this.btnInvite.Location = new System.Drawing.Point(846, 25);
-            this.btnInvite.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnInvite.Location = new System.Drawing.Point(1269, 38);
+            this.btnInvite.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnInvite.Name = "btnInvite";
-            this.btnInvite.Size = new System.Drawing.Size(146, 33);
+            this.btnInvite.Size = new System.Drawing.Size(219, 51);
             this.btnInvite.TabIndex = 1;
             this.btnInvite.Text = "Add New Service";
             // 
@@ -841,23 +869,24 @@
             this.btnExport.Appearance.Options.UseFont = true;
             this.btnExport.Appearance.Options.UseForeColor = true;
             this.btnExport.ImageOptions.Image = global::DangNhap_Form.Properties.Resources.downloads;
-            this.btnExport.Location = new System.Drawing.Point(737, 25);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExport.Location = new System.Drawing.Point(1106, 38);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(96, 33);
+            this.btnExport.Size = new System.Drawing.Size(144, 51);
             this.btnExport.TabIndex = 0;
             this.btnExport.Text = "Export CSV";
             // 
             // UC_ServicesManagement
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainerControl1);
             this.Controls.Add(this.pnlCardStats);
             this.Controls.Add(this.pnlFilter);
             this.Controls.Add(this.pnlHeader);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "UC_ServicesManagement";
-            this.Size = new System.Drawing.Size(1100, 886);
+            this.Size = new System.Drawing.Size(1650, 1363);
             this.Load += new System.EventHandler(this.UC_ServicesManagement_Load);
             ((System.ComponentModel.ISupportInitialize)(this.repoBtnActions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();

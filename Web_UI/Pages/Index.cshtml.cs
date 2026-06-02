@@ -97,8 +97,8 @@ namespace Web_UI.Pages
             // Availability filter
             if (CheckIn.HasValue && CheckOut.HasValue)
             {
-                var checkInDateOnly = DateOnly.FromDateTime(CheckIn.Value);
-                var checkOutDateOnly = DateOnly.FromDateTime(CheckOut.Value);
+                var checkInDateOnly = CheckIn.Value;
+                var checkOutDateOnly = CheckOut.Value;
 
                 data = data.Where(item =>
                 {
@@ -187,11 +187,9 @@ namespace Web_UI.Pages
             }
 
             long guestId = long.Parse(guestIdString);
-            var checkIn =
-                DateOnly.FromDateTime(BookingCheckIn);
+            var checkIn = BookingCheckIn;
 
-            var checkOut =
-                DateOnly.FromDateTime(BookingCheckOut);
+            var checkOut = BookingCheckOut;
             // DATE VALIDATION
             if (BookingCheckOut <= BookingCheckIn)
             {
@@ -261,6 +259,8 @@ namespace Web_UI.Pages
                     total -= coupon.MaximumDiscountAmount;
                 }
             }
+            TimeSpan duration = checkOut - checkIn;
+            int days = duration.Days;
             var booking = new Booking
             {
                 GuestUserId = guestId,
@@ -270,7 +270,7 @@ namespace Web_UI.Pages
                 NumberOfGuests = BookingGuests,
                 TotalPrice = total,
                 BookingStatus = "Confirmed",
-                FinalPrice = pricePerNight * (checkOut.DayNumber - checkIn.DayNumber),
+                FinalPrice = pricePerNight * days,
                 CancellationPolicyId = 1
             };
 

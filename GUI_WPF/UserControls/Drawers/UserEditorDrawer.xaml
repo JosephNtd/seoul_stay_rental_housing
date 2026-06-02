@@ -1,0 +1,576 @@
+﻿<UserControl x:Class="GUI_WPF.UserControls.Drawers.UserEditorDrawer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="900"
+             d:DesignWidth="520">
+
+    
+    <!-- ROOT -->
+    
+
+    <Grid>
+
+        
+        <!-- RIGHT DRAWER -->
+        
+
+        <Border Width="520"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Stretch"
+                Background="#FFF8F4">
+
+            <Border.Effect>
+
+                <DropShadowEffect BlurRadius="35"
+                                  ShadowDepth="-4"
+                                  Opacity="0.12"/>
+
+            </Border.Effect>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="33*"/>
+                    <ColumnDefinition Width="487*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                
+                <!-- HEADER -->
+                
+
+                <Border Background="#AAFFFFFF"
+                        Padding="28"
+                        BorderBrush="#F1E5E5"
+                        BorderThickness="0,0,0,1"
+                        Grid.ColumnSpan="2">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- TITLE -->
+                        <StackPanel>
+
+                            <TextBlock x:Name="txtDrawerTitle"
+                                       Text="Edit User"
+                                       FontSize="28"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBlock Text="Manage account, role, permissions and trust"
+                                       Margin="0,6,0,0"
+                                       FontSize="13"
+                                       Foreground="#9B8C8C"/>
+
+                        </StackPanel>
+
+                        <!-- CLOSE -->
+                        <Button x:Name="btnCloseDrawer"
+                                Grid.Column="1"
+                                Width="46"
+                                Height="46"
+                                Content="✕"
+                                Click="btnCloseDrawer_Click"
+                                Style="{StaticResource OutlineButtonStyle}"/>
+
+                    </Grid>
+
+                </Border>
+
+                
+                <!-- CONTENT -->
+                
+
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2">
+
+                    <StackPanel Margin="28">
+
+                        <!-- ================================= -->
+                        <!-- PROFILE -->
+                        <!-- ================================= -->
+
+                        <Border Background="#AAFFFFFF"
+                                CornerRadius="28"
+                                Padding="24"
+                                Margin="0,0,0,24">
+
+                            <Border.Effect>
+
+                                <DropShadowEffect BlurRadius="18"
+                                                  ShadowDepth="0"
+                                                  Opacity="0.04"/>
+
+                            </Border.Effect>
+
+                            <StackPanel>
+
+                                <TextBlock Text="Profile"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <!-- AVATAR -->
+                                <Grid Margin="0,24,0,0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- IMAGE -->
+                                    <Border Width="92"
+                                            Height="92"
+                                            Background="#FCEEEE"
+                                            CornerRadius="46">
+
+                                        <Image x:Name="imgAvatar"
+                                               Stretch="UniformToFill"/>
+
+                                    </Border>
+
+                                    <!-- ACTION -->
+                                    <StackPanel Grid.Column="1"
+                                                Margin="20,0,0,0"
+                                                VerticalAlignment="Center">
+
+                                        <Button x:Name="btnUploadAvatar"
+                                                Content="Upload Avatar"
+                                                Width="150"
+                                                Height="42"
+                                                HorizontalAlignment="Left"
+                                                Click="btnUploadAvatar_Click"
+                                                Style="{StaticResource OutlineButtonStyle}"/>
+
+                                        <TextBlock Text="PNG, JPG up to 5MB"
+                                                   Margin="0,10,0,0"
+                                                   FontSize="12"
+                                                   Foreground="#A39595"/>
+
+                                    </StackPanel>
+
+                                </Grid>
+
+                                <!-- FULL NAME -->
+                                <StackPanel Margin="0,28,0,0">
+
+                                    <TextBlock Text="Full Name"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <TextBox x:Name="txtUserFullName"
+                                             Height="52"
+                                             Margin="0,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- USERNAME -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Username"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <TextBox x:Name="txtUsername"
+                                             Height="52"
+                                             Margin="0,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- EMAIL -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Email Address"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <TextBox x:Name="txtUserEmail"
+                                             Height="52"
+                                             Margin="0,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- PHONE -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Phone Number"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <TextBox x:Name="txtUserPhone"
+                                             Height="52"
+                                             Margin="0,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- COUNTRY -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Country"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <TextBox x:Name="txtUserCountry"
+                                             Height="52"
+                                             Margin="0,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- BIRTHDATE -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Birth Date"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <DatePicker x:Name="dpBirthDate"
+                                                Style="{StaticResource SoftDatePickerStyle}"
+                                                Height="52"
+                                                Margin="0,10,0,0"/>
+
+                                </StackPanel>
+
+                                <!-- GENDER -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Gender"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <ComboBox x:Name="cbGender"
+                                              Height="52"
+                                              Margin="0,10,0,0">
+
+                                        <ComboBoxItem Content="Unknown"/>
+                                        <ComboBoxItem Content="Male"/>
+                                        <ComboBoxItem Content="Female"/>
+                                        <ComboBoxItem Content="Other"/>
+
+                                    </ComboBox>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- ================================= -->
+                        <!-- ACCOUNT -->
+                        <!-- ================================= -->
+
+                        <Border Background="#AAFFFFFF"
+                                CornerRadius="28"
+                                Padding="24"
+                                Margin="0,0,0,24">
+
+                            <Border.Effect>
+
+                                <DropShadowEffect BlurRadius="18"
+                                                  ShadowDepth="0"
+                                                  Opacity="0.04"/>
+
+                            </Border.Effect>
+
+                            <StackPanel>
+
+                                <TextBlock Text="Account &amp; Security"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <!-- ROLE -->
+                                <StackPanel Margin="0,24,0,0">
+
+                                    <TextBlock Text="Role"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <ComboBox x:Name="cbUserRole"
+                                              Height="52"
+                                              Margin="0,10,0,0">
+
+                                        <ComboBoxItem Content="Guest"/>
+                                        <ComboBoxItem Content="Host"/>
+                                        <ComboBoxItem Content="Administrator"/>
+
+                                    </ComboBox>
+
+                                </StackPanel>
+
+                                <!-- STATUS -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Account Status"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <ComboBox x:Name="cbUserStatus"
+                                              Height="52"
+                                              Margin="0,10,0,0">
+
+                                        <ComboBoxItem Content="Active"/>
+                                        <ComboBoxItem Content="Locked"/>
+
+                                    </ComboBox>
+
+                                </StackPanel>
+
+                                <!-- PASSWORD -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Temporary Password"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <PasswordBox x:Name="txtTempPassword"
+                                                 Height="52"
+                                                 Margin="0,10,0,0"
+                                                 Style="{StaticResource SoftPasswordBoxStyle}"/>
+
+                                    <TextBlock Text="Only used when creating or resetting password"
+                                               Margin="0,10,0,0"
+                                               FontSize="12"
+                                               Foreground="#A39595"/>
+
+                                </StackPanel>
+
+                                <!-- FLAGS -->
+                                <WrapPanel Margin="0,24,0,0">
+
+                                    <CheckBox x:Name="chkEmailVerified"
+                                              Content="Email Verified"
+                                              Margin="0,0,24,0"/>
+
+                                    <CheckBox x:Name="chkPhoneVerified"
+                                              Content="Phone Verified"
+                                              Margin="0,0,24,0"/>
+
+                                    <CheckBox x:Name="chkTwoFactor"
+                                              Content="Two Factor Enabled"/>
+
+                                </WrapPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- ================================= -->
+                        <!-- HOST INFO -->
+                        <!-- ================================= -->
+
+                        <Border x:Name="HostSection"
+                                Background="#AAFFFFFF"
+                                CornerRadius="28"
+                                Padding="24"
+                                Margin="0,0,0,24">
+
+                            <Border.Effect>
+
+                                <DropShadowEffect BlurRadius="18"
+                                                  ShadowDepth="0"
+                                                  Opacity="0.04"/>
+
+                            </Border.Effect>
+
+                            <StackPanel>
+
+                                <TextBlock Text="Host Information"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <!-- LICENSE -->
+                                <StackPanel Margin="0,24,0,0">
+
+                                    <TextBlock Text="Business License"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <TextBox x:Name="txtBusinessLicense"
+                                             Height="52"
+                                             Margin="0,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- TAX -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Tax Code"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <TextBox x:Name="txtTaxCode"
+                                             Height="52"
+                                             Margin="0,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- VERIFIED -->
+                                <CheckBox x:Name="chkHostVerified"
+                                          Content="Verified Host"
+                                          Margin="0,24,0,0"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- ================================= -->
+                        <!-- GUEST INFO -->
+                        <!-- ================================= -->
+
+                        <Border x:Name="GuestSection"
+                                Background="#AAFFFFFF"
+                                CornerRadius="28"
+                                Padding="24"
+                                Margin="0,0,0,24">
+
+                            <Border.Effect>
+
+                                <DropShadowEffect BlurRadius="18"
+                                                  ShadowDepth="0"
+                                                  Opacity="0.04"/>
+
+                            </Border.Effect>
+
+                            <StackPanel>
+
+                                <TextBlock Text="Guest Information"
+                                           FontSize="22"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <!-- LOYALTY -->
+                                <StackPanel Margin="0,24,0,0">
+
+                                    <TextBlock Text="Loyalty Points"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <TextBox x:Name="txtLoyaltyPoints"
+                                             Height="52"
+                                             Margin="0,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- LANGUAGE -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="Preferred Language"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <ComboBox x:Name="cbLanguage"
+                                              Height="52"
+                                              Margin="0,10,0,0">
+
+                                        <ComboBoxItem Content="English"/>
+                                        <ComboBoxItem Content="Korean"/>
+                                        <ComboBoxItem Content="Japanese"/>
+                                        <ComboBoxItem Content="Vietnamese"/>
+                                        <ComboBoxItem Content="Chinese"/>
+
+                                    </ComboBox>
+
+                                </StackPanel>
+
+                                <!-- NATIONAL ID -->
+                                <StackPanel Margin="0,20,0,0">
+
+                                    <TextBlock Text="National ID"
+                                               FontWeight="SemiBold"
+                                               Foreground="#5C4F4F"/>
+
+                                    <TextBox x:Name="txtNationalID"
+                                             Height="52"
+                                             Margin="0,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- VERIFIED -->
+                                <CheckBox x:Name="chkNationalVerified"
+                                          Content="National ID Verified"
+                                          Margin="0,24,0,0"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </StackPanel>
+
+                </ScrollViewer>
+
+                
+                <!-- FOOTER -->
+                
+
+                <Border Grid.Row="2"
+                        Background="#FFFFFF"
+                        Padding="24"
+                        BorderBrush="#EFE2E2"
+                        BorderThickness="0,1,0,0" Grid.ColumnSpan="2">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- LEFT -->
+                        <TextBlock Text="Changes will affect live user data"
+                                   VerticalAlignment="Center"
+                                   Foreground="#9B8C8C"
+                                   FontSize="12"/>
+
+                        <!-- CANCEL -->
+                        <Button x:Name="btnCancel"
+                                Grid.Column="1"
+                                Content="Cancel"
+                                Width="120"
+                                Height="50"
+                                Margin="0,0,14,0"
+                                Click="btnCancel_Click"
+                                Style="{StaticResource OutlineButtonStyle}"/>
+
+                        <!-- SAVE -->
+                        <Button x:Name="btnSaveUser"
+                                Grid.Column="2"
+                                Content="Save Changes"
+                                Width="160"
+                                Height="50"
+                                Click="btnSaveUser_Click"
+                                Style="{StaticResource PrimaryButtonStyle}" VerticalAlignment="Top"/>
+
+                    </Grid>
+
+                </Border>
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
+</UserControl>  

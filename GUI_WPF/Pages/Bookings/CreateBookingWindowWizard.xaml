@@ -1,0 +1,757 @@
+﻿<Window x:Class="GUI_WPF.Pages.Bookings.CreateBookingWindowWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:GUI_WPF.UserControls.Common"
+        Title="Tạo Đặt Phòng (Manual Booking)"
+        Width="900"
+        Height="900"
+        Background="#F8F6F4"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Background="#FFFDFC" BorderBrush="#EADFD8" BorderThickness="1" CornerRadius="16" Padding="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Color="#D9C8C1" Opacity="0.1"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Margin="0,0,0,16">
+                    <TextBlock Text="Tạo Đặt Phòng Trực Tiếp" FontSize="22" FontWeight="Bold" Foreground="#4E413D"/>
+                    <TextBlock Text="Quy trình đặt phòng 5 bước dành cho nhân viên hệ thống." FontSize="13" Foreground="#8A7D77" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel x:Name="IndicatorStep1" Grid.Column="0">
+                        <Border Width="30" Height="30" CornerRadius="15" Background="#7B5455" HorizontalAlignment="Center">
+                            <TextBlock Text="1" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Khách hàng" FontSize="11" FontWeight="SemiBold" Foreground="#7B5455" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Line Grid.Column="1" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="8,0"/>
+
+                    <StackPanel x:Name="IndicatorStep2" Grid.Column="2" Opacity="0.5">
+                        <Border Width="30" Height="30" CornerRadius="15" Background="#8A7D77" HorizontalAlignment="Center">
+                            <TextBlock Text="2" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Chọn phòng" FontSize="11" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Line Grid.Column="3" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="8,0"/>
+
+                    <StackPanel x:Name="IndicatorStep3" Grid.Column="4" Opacity="0.5">
+                        <Border Width="30" Height="30" CornerRadius="15" Background="#8A7D77" HorizontalAlignment="Center">
+                            <TextBlock Text="3" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Lịch lưu trú" FontSize="11" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Line Grid.Column="5" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="8,0"/>
+
+                    <StackPanel x:Name="IndicatorStep4" Grid.Column="6" Opacity="0.5">
+                        <Border Width="30" Height="30" CornerRadius="15" Background="#8A7D77" HorizontalAlignment="Center">
+                            <TextBlock Text="4" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Chi phí" FontSize="11" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Line Grid.Column="7" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="8,0"/>
+
+                    <StackPanel x:Name="IndicatorStep5" Grid.Column="8" Opacity="0.5">
+                        <Border Width="30" Height="30" CornerRadius="15" Background="#8A7D77" HorizontalAlignment="Center">
+                            <TextBlock Text="5" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Thanh toán" FontSize="11" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="1" Background="#FFFDFC" BorderBrush="#EADFD8" BorderThickness="1" CornerRadius="16" Margin="0,16" Padding="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Color="#D9C8C1" Opacity="0.1"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid x:Name="GridStep1">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.2*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="1.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT -->
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <local:SearchBox
+                x:Name="sbGuest"
+                Width="320"
+                Placeholder="Search guest..."
+                TextChanged="sbGuest_TextChanged"/>
+
+                            <Button Grid.Column="1"
+                    Width="140"
+                    Height="40"
+                    Margin="12,0,0,0"
+                    Content="+ New Guest"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Click="btnNewGuest_Click"/>
+
+                        </Grid>
+
+                        <DataGrid x:Name="dgGuests"
+                                  Style="{StaticResource ModernDataGridStyle}"
+                  Grid.Row="2"
+                  AutoGenerateColumns="False"
+                  SelectionMode="Single"
+                  SelectionChanged="dgGuests_SelectionChanged">
+
+                            <DataGrid.Columns>
+
+                                <DataGridTextColumn Header="Name"
+                                    Binding="{Binding FullName}"
+                                    Width="2*"/>
+
+                                <DataGridTextColumn Header="Email"
+                                    Binding="{Binding Email}"
+                                    Width="2*"/>
+
+                                <DataGridTextColumn Header="Phone"
+                                    Binding="{Binding PhoneNumber}"
+                                    Width="*"/>
+
+                                <DataGridTextColumn Header="Country"
+                                    Binding="{Binding Country}"
+                                    Width="*"/>
+
+                            </DataGrid.Columns>
+
+                        </DataGrid>
+
+                    </Grid>
+
+                    <!-- RIGHT -->
+
+                    <Border Grid.Column="2"
+                            Style="{StaticResource SectionCardStyle}"
+                            Padding="20">
+
+                        <Grid>
+
+                            <local:EmptyState
+                                    x:Name="GuestEmptyState"
+                                    Icon="👤"
+                                    Title="No Guest Selected"
+                                    Description="Select a guest to continue."/>
+
+                            <StackPanel x:Name="SelectedGuestPanel"
+                                        Visibility="Collapsed">
+
+                                <TextBlock Text="Selected Guest"
+                                           FontWeight="Bold"
+                                           FontSize="18"/>
+
+                                <Border Margin="0,16,0,0"
+                                        Padding="16"
+                                        Background="White"
+                                        CornerRadius="10">
+
+                                    <StackPanel>
+
+                                        <TextBlock x:Name="txtGuestName"
+                                                   FontSize="18"
+                                                   FontWeight="Bold"/>
+
+                                        <TextBlock x:Name="txtGuestEmail"
+                                                    Margin="0,8,0,0"/>
+
+                                        <TextBlock x:Name="txtGuestPhone"
+                                                    Margin="0,4,0,0"/>
+
+                                        <TextBlock x:Name="txtGuestCountry"
+                                                    Margin="0,4,0,0"/>
+
+                                    </StackPanel>
+
+                                </Border>
+
+                            </StackPanel>
+
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+
+                <Grid x:Name="GridStep2"
+                        Visibility="Collapsed">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2.4*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="1.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT SIDE -->
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- SEARCH -->
+
+                        <local:SearchBox x:Name="sbListing"
+                         Width="350"
+                         HorizontalAlignment="Left"
+                         Placeholder="Search listing..."
+                         TextChanged="sbListing_TextChanged"/>
+
+                        <!-- FILTERS -->
+
+                        <StackPanel Grid.Row="2"
+                                    Orientation="Horizontal">
+
+                            <ComboBox x:Name="cbArea"
+                                      Style="{StaticResource ModernComboBoxStyle}"
+                                      Width="220"
+                                      Height="40"
+                                      SelectionChanged="cbArea_SelectionChanged"/>
+
+                            <ComboBox x:Name="cbCapacity"
+                                      Style="{StaticResource ModernComboBoxStyle}"
+                                      Width="140"
+                                      Height="40"
+                                      Margin="12,0,0,0"
+                                      SelectionChanged="cbCapacity_SelectionChanged">
+
+                                <ComboBoxItem Content="All"/>
+                                <ComboBoxItem Content="1+"/>
+                                <ComboBoxItem Content="2+"/>
+                                <ComboBoxItem Content="4+"/>
+                                <ComboBoxItem Content="6+"/>
+                                <ComboBoxItem Content="8+"/>
+
+                            </ComboBox>
+
+                        </StackPanel>
+
+                        <!-- LISTINGS -->
+
+                        <Border Grid.Row="4"
+                                Style="{StaticResource SectionCardStyle}"
+                                Padding="12">
+
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                                <WrapPanel x:Name="wpListings"/>
+
+                            </ScrollViewer>
+
+                        </Border>
+
+                    </Grid>
+
+                    <!-- RIGHT SIDE -->
+
+                    <Border Grid.Column="2"
+            Style="{StaticResource SectionCardStyle}"
+            Padding="20">
+
+                        <Grid>
+
+                            <local:EmptyState x:Name="ListingEmptyState"
+                              Icon="🏠"
+                              Title="No Listing Selected"
+                              Description="Choose a listing to continue."/>
+
+                            <StackPanel x:Name="SelectedListingPanel"
+                        Visibility="Collapsed">
+
+                                <TextBlock Text="Selected Listing"
+                           FontWeight="Bold"
+                           FontSize="18"/>
+
+                                <Border Margin="0,16,0,0"
+                        Background="White"
+                        Padding="16"
+                        CornerRadius="10">
+
+                                    <StackPanel>
+
+                                        <TextBlock x:Name="txtListingTitle"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"/>
+
+                                        <TextBlock x:Name="txtListingArea"
+                                   Margin="0,10,0,0"/>
+
+                                        <TextBlock x:Name="txtListingType"
+                                   Margin="0,4,0,0"/>
+
+                                        <TextBlock x:Name="txtListingCapacity"
+                                   Margin="0,4,0,0"/>
+
+                                        <TextBlock x:Name="txtListingPrice"
+                                   Margin="0,12,0,0"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="#2AA876"/>
+
+                                        <TextBlock x:Name="txtListingStatus"
+                                   Margin="0,8,0,0"
+                                   FontWeight="SemiBold"/>
+
+                                    </StackPanel>
+
+                                </Border>
+
+                            </StackPanel>
+
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+
+                <Grid x:Name="GridStep3"
+      Visibility="Collapsed">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="1.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT -->
+
+                    <StackPanel>
+
+                        <TextBlock Text="Stay Information"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Margin="0,0,0,16"/>
+
+                        <TextBlock Text="Check In"/>
+                        <DatePicker x:Name="dpCheckIn"
+                                    Style="{StaticResource SoftDatePickerStyle}"
+                                    Margin="0,4,0,12"/>
+
+                        <TextBlock Text="Check Out"/>
+                        <DatePicker x:Name="dpCheckOut"
+                                    Style="{StaticResource SoftDatePickerStyle}"
+                                    Margin="0,4,0,12"/>
+
+                        <TextBlock Text="Guests"/>
+                        <TextBox x:Name="txtGuests"
+                                Style="{StaticResource SoftTextBoxStyle}"
+                                 Margin="0,4,0,12"/>
+
+                        <TextBlock Text="Cancellation Policy"/>
+                        <ComboBox x:Name="cbPolicy"
+                                  Style="{StaticResource ModernComboBoxStyle}"
+                                Margin="0,4,0,12"/>
+
+                        <TextBlock Text="Special Requests"/>
+                        <TextBox x:Name="txtRequests"
+                                 Style="{StaticResource SoftTextAreaStyle}"
+                                 Height="90"
+                                 AcceptsReturn="True"/>
+
+                        <Button Content="Check Availability &amp; Continue"
+                                Margin="0,20,0,0"
+                                Height="42"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Click="btnCheckStay_Click"/>
+
+                    </StackPanel>
+
+                    <!-- RIGHT -->
+
+                    <Border Grid.Column="2"
+                            Style="{StaticResource SectionCardStyle}"
+                            Padding="20">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Summary"
+                       FontWeight="Bold"
+                       FontSize="18"/>
+
+                            <TextBlock x:Name="txtSummaryStatus"
+                       Margin="0,12,0,0"
+                       Text="Waiting for validation..."/>
+
+                            <TextBlock x:Name="txtSummaryNights"
+                       Margin="0,8,0,0"/>
+
+                            <TextBlock x:Name="txtSummaryPrice"
+                       Margin="0,8,0,0"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </Grid>
+
+                <Grid x:Name="GridStep4"
+      Visibility="Collapsed">
+
+                    <Grid.ColumnDefinitions>
+
+                        <ColumnDefinition Width="2*"/>
+
+                        <ColumnDefinition Width="16"/>
+
+                        <ColumnDefinition Width="1*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <!-- NIGHTS -->
+
+                    <Border Style="{StaticResource SectionCardStyle}"
+            Padding="16">
+
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+
+                                <RowDefinition Height="Auto"/>
+
+                                <RowDefinition Height="12"/>
+
+                                <RowDefinition Height="*"/>
+
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Night Breakdown"
+                       FontSize="22"
+                       FontWeight="Bold"/>
+
+                            <ScrollViewer Grid.Row="2">
+
+                                <WrapPanel x:Name="wpNightCards"/>
+
+                            </ScrollViewer>
+
+                        </Grid>
+
+                    </Border>
+
+                    <!-- SUMMARY -->
+
+                    <Border Grid.Column="2"
+            Style="{StaticResource SectionCardStyle}"
+            Padding="20">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Pricing Summary"
+                       FontSize="20"
+                       FontWeight="Bold"/>
+
+                            <Grid Margin="0,20,0,0">
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition/>
+
+                                    <ColumnDefinition Width="Auto"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Base Amount"/>
+
+                                <TextBlock Grid.Column="1"
+                           x:Name="txtBaseAmount"/>
+
+                            </Grid>
+
+                            <Grid Margin="0,10,0,0">
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition/>
+
+                                    <ColumnDefinition Width="Auto"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Discount"/>
+
+                                <TextBlock Grid.Column="1"
+                           x:Name="txtDiscountAmount"/>
+
+                            </Grid>
+
+                            <Grid Margin="0,10,0,0">
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition/>
+
+                                    <ColumnDefinition Width="Auto"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Service Fee"/>
+
+                                <TextBlock Grid.Column="1"
+                           x:Name="txtServiceFee"/>
+
+                            </Grid>
+
+                            <Grid Margin="0,10,0,0">
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition/>
+
+                                    <ColumnDefinition Width="Auto"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="Tax"/>
+
+                                <TextBlock Grid.Column="1"
+                           x:Name="txtTaxAmount"/>
+
+                            </Grid>
+
+                            <Separator Margin="0,16"/>
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition/>
+
+                                    <ColumnDefinition Width="Auto"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Text="TOTAL"
+                           FontWeight="Bold"
+                           FontSize="18"/>
+
+                                <TextBlock Grid.Column="1"
+                           x:Name="txtFinalAmount"
+                           FontWeight="Bold"
+                           FontSize="18"
+                           Foreground="#2AA876"/>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </Grid>
+
+                <Grid x:Name="GridStep5"
+      Visibility="Collapsed">
+
+                    <Grid.ColumnDefinitions>
+
+                        <ColumnDefinition Width="2*"/>
+
+                        <ColumnDefinition Width="16"/>
+
+                        <ColumnDefinition Width="1*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT -->
+
+                    <StackPanel>
+
+                        <!-- GUEST -->
+
+                        <Border Style="{StaticResource SectionCardStyle}"
+                Padding="16"
+                Margin="0,0,0,12">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Guest"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+
+                                <TextBlock x:Name="txtReviewGuestName"
+                           Margin="0,12,0,0"/>
+
+                                <TextBlock x:Name="txtReviewGuestEmail"
+                           Margin="0,4,0,0"/>
+
+                                <TextBlock x:Name="txtReviewGuestPhone"
+                           Margin="0,4,0,0"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- LISTING -->
+
+                        <Border Style="{StaticResource SectionCardStyle}"
+                Padding="16"
+                Margin="0,0,0,12">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Listing"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+
+                                <TextBlock x:Name="txtReviewListingTitle"
+                           Margin="0,12,0,0"/>
+
+                                <TextBlock x:Name="txtReviewListingArea"
+                           Margin="0,4,0,0"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- STAY -->
+
+                        <Border Style="{StaticResource SectionCardStyle}"
+                Padding="16">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Stay"
+                           FontSize="18"
+                           FontWeight="Bold"/>
+
+                                <TextBlock x:Name="txtReviewDates"
+                           Margin="0,12,0,0"/>
+
+                                <TextBlock x:Name="txtReviewGuests"
+                           Margin="0,4,0,0"/>
+
+                                <TextBlock x:Name="txtReviewPolicy"
+                           Margin="0,4,0,0"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </StackPanel>
+
+                    <!-- RIGHT -->
+
+                    <Border Grid.Column="2"
+            Style="{StaticResource SectionCardStyle}"
+            Padding="20">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Payment"
+                       FontSize="20"
+                       FontWeight="Bold"/>
+
+                            <TextBlock Text="Payment Status"
+                       Margin="0,20,0,4"/>
+
+                            <ComboBox x:Name="cbPaymentStatus"
+                                      Style="{StaticResource ModernComboBoxStyle}">
+                                    
+                                <ComboBoxItem Content="Pending"/>
+
+                                <ComboBoxItem Content="Paid"/>
+
+                                <ComboBoxItem Content="Deposit"/>
+
+                            </ComboBox>
+
+                            <TextBlock Text="Deposit Amount"
+                                       Style="{StaticResource CaptionStyle}"
+                                        Margin="0,16,0,4"/>
+
+                            <TextBox x:Name="txtDepositAmount"
+                                    Style="{StaticResource SoftTextBoxStyle}"
+                                     Text="0"/>
+
+                            <Separator Margin="0,20"/>
+
+                            <TextBlock Text="Final Amount"
+                       FontWeight="Bold"/>
+
+                            <TextBlock x:Name="txtReviewFinalAmount"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="#2AA876"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnCancel" Content="Cancel" Width="100" Height="40" HorizontalAlignment="Left" Background="Transparent" BorderBrush="#D9C8C1" Foreground="#8A7D77" Click="btnCancel_Click"/>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button x:Name="btnBack" Content="Quay lại" Width="110" Height="40" Margin="0,0,12,0" Visibility="Collapsed" Background="#FAF4F1" BorderBrush="#D9C8C1" Foreground="#4E413D" Click="btnBack_Click"/>
+
+                <Button x:Name="btnNext" Content="Tiếp theo" Width="160" Height="40" Background="#7B5455" BorderBrush="Transparent" Foreground="White" FontWeight="Bold" Click="btnNext_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

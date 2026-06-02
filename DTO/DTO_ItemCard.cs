@@ -15,7 +15,9 @@ namespace DTO
         public string ApproximateAddress { get; set; }
         public string Type { get; set; }
         public int Capacity { get; set; }
+        public string AreaName { get; set; }
         public int NumberOfBeds { get; set; }
+        public int NumberOfBedrooms { get; set; }
         public int NumberOfBathrooms { get; set; }
         public decimal? MinPrice { get; set; }
         public string ThumbnailPath { get; set; }
@@ -23,7 +25,7 @@ namespace DTO
         public string HostName { get; set; } // tùy chọn
         public string FullThumbnailPath => string.IsNullOrEmpty(ThumbnailPath)
         ? null
-        : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", ThumbnailPath);
+        : Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "Listings", ThumbnailPath);
 
         private Image _imageDisplay;
         // ET_ItemPictures.cs

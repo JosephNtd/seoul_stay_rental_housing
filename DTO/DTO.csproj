@@ -44,18 +44,46 @@
   <ItemGroup>
     <Compile Include="DTO_Amenities.cs" />
     <Compile Include="DTO_AreaDisplay.cs" />
+    <Compile Include="DTO_AreaItems.cs" />
     <Compile Include="DTO_AreaOverview.cs" />
+    <Compile Include="DTO_AreaRevenueReport.cs" />
     <Compile Include="DTO_AttractionDisplay.cs" />
     <Compile Include="DTO_Attraction_Distance.cs" />
+    <Compile Include="DTO_BookingCalendar.cs" />
+    <Compile Include="DTO_BookingCard.cs" />
+    <Compile Include="DTO_BookingDetails.cs" />
+    <Compile Include="DTO_BookingNight.cs" />
+    <Compile Include="DTO_BookingStats.cs" />
+    <Compile Include="DTO_BookingStatusReport.cs" />
+    <Compile Include="DTO_BookingTimeline.cs" />
+    <Compile Include="DTO_CreateBooking.cs" />
+    <Compile Include="DTO_CreateBookingNight.cs" />
+    <Compile Include="DTO_GuestLookup.cs" />
     <Compile Include="DTO_ItemCard.cs" />
     <Compile Include="DTO_ItemsView.cs" />
     <Compile Include="DTO_ItemSearch.cs" />
+    <Compile Include="DTO_KpiCard.cs" />
+    <Compile Include="DTO_OccupancyReport.cs" />
     <Compile Include="DTO_RecentStay.cs" />
+    <Compile Include="DTO_ReportDashboard.cs" />
+    <Compile Include="DTO_RevenueTrend.cs" />
     <Compile Include="DTO_SearchFilter.cs" />
     <Compile Include="DTO_SuggestionItem.cs" />
+    <Compile Include="DTO_TopListingReport.cs" />
+    <Compile Include="DTO_UserBookingSummary.cs" />
     <Compile Include="DTO_UserDisplay.cs" />
+    <Compile Include="DTO_UserWorkspace.cs" />
     <Compile Include="DTO_Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ET\ET.csproj">
+      <Project>{10bb812d-c235-4a9b-ac77-43f75ded240c}</Project>
+      <Name>ET</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

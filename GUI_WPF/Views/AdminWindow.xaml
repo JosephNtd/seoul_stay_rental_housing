@@ -1,0 +1,101 @@
+﻿    <Window x:Class="GUI_WPF.Views.AdminWindow"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:local="clr-namespace:GUI_WPF.Views"
+            xmlns:sidebar="clr-namespace:GUI_WPF.UserControls.Sidebar"
+            mc:Ignorable="d"
+            Title="Seoul Stay Admin" Height="900" Width="1440" WindowStartupLocation="CenterScreen" Background="#FFF8F4" WindowState="Maximized">
+        <Window.Resources>
+            <!-- COLORS -->
+            <SolidColorBrush x:Key="PrimaryBrush" Color="#D89C9D"/>
+            <SolidColorBrush x:Key="MintBrush" Color="#C1ECDA"/>
+            <SolidColorBrush x:Key="TextBrush" Color="#3A3131"/>
+            <SolidColorBrush x:Key="SoftBrush" Color="#FAF7F2"/>
+            <SolidColorBrush x:Key="BorderBrush" Color="#F0DEDE"/>
+            <!-- SIDEBAR BUTTON -->
+            <Style x:Key="SidebarButtonStyle" TargetType="Button">
+                <Setter Property="Foreground" Value="#6B5D5D"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Height" Value="52"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="Padding" Value="20,0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="bd" Background="{TemplateBinding Background}" CornerRadius="18">
+                                <ContentPresenter VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="bd" Property="Background" Value="#FFF0F0"/>
+                                    <Setter Property="Foreground" Value="#D89C9D"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Window.Resources>
+        <Grid>
+            <!-- BACKGROUND -->
+            <Grid>
+                <Ellipse Width="500" Height="500" Fill="#F7CFCF" Opacity="0.25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-120,-120,0,0"/>
+                <Ellipse Width="450" Height="450" Fill="#C1ECDA" Opacity="0.18" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-120,-120"/>
+            </Grid>
+            <!-- MAIN LAYOUT -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!-- SIDEBAR -->
+                <sidebar:SidebarControl x:Name="Sidebar"
+                                        Grid.Column="0"/>
+                <!-- RIGHT CONTENT -->
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!-- TOPBAR -->
+                    <Border Background="#88FFFFFF" Margin="20,20,20,0" CornerRadius="24">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Opacity="0.04"/>
+                        </Border.Effect>
+                        <Grid Margin="28,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- LEFT -->
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Admin Dashboard" FontSize="28" FontWeight="Bold" Foreground="#3A3131"/>
+                                <TextBlock Text="Manage your smart accommodation ecosystem" Margin="0,4,0,0" Foreground="#8B7D7D"/>
+                            </StackPanel>
+                            <!-- RIGHT -->
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                <Border Width="42" Height="42" Background="#FFF0F0" CornerRadius="21" Margin="0,0,12,0">
+                                    <TextBlock Text="🔔" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border Width="42" Height="42" Background="#EEF8F3" CornerRadius="21">
+                                    <TextBlock Text="⚙" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <!-- PAGE CONTENT -->
+                    <Frame x:Name="MainFrame"
+                           Grid.Row="1"
+                           NavigationUIVisibility="Hidden">
+                    
+                    </Frame>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Window>

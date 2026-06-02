@@ -26,9 +26,9 @@ public partial class Coupon
     [Column(TypeName = "decimal(10, 2)")]
     public decimal MaximumDiscountAmount { get; set; }
 
-    public DateOnly StartDate { get; set; }
+    public DateTime StartDate { get; set; }
 
-    public DateOnly? ExpirationDate { get; set; }
+    public DateTime? ExpirationDate { get; set; }
 
     public int? MaxUsageCount { get; set; }
 

@@ -20,7 +20,7 @@ public partial class ItemPrice
     [Column("ItemID")]
     public long ItemId { get; set; }
 
-    public DateOnly Date { get; set; }
+    public DateTime Date { get; set; }
 
     [Column(TypeName = "decimal(10, 2)")]
     public decimal Price { get; set; }

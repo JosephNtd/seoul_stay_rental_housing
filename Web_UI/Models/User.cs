@@ -39,7 +39,7 @@ public partial class User
 
     public byte Gender { get; set; }
 
-    public DateOnly? BirthDate { get; set; }
+    public DateTime? BirthDate { get; set; }
 
     [StringLength(50)]
     public string? Country { get; set; }

@@ -1,0 +1,658 @@
+﻿<Page x:Class="GUI_WPF.Pages.Catalog.ServicesWorkspacePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:common="clr-namespace:GUI_WPF.UserControls.Common"
+      mc:Ignorable="d"
+      Background="#FFF8F4">
+
+    <Grid Margin="24">
+
+        <!-- ===================================================== -->
+        <!-- ROOT -->
+        <!-- ===================================================== -->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ===================================================== -->
+        <!-- HEADER -->
+        <!-- ===================================================== -->
+
+        <Grid Margin="0,0,0,24">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT -->
+            <StackPanel>
+
+                <TextBlock Text="Services Workspace"
+                           FontSize="34"
+                           FontWeight="Bold"
+                           Foreground="#3A3131"/>
+
+                <TextBlock Text="Manage service types, schedules, pricing and recurring services"
+                           Margin="0,8,0,0"
+                           FontSize="14"
+                           Foreground="#8B7D7D"/>
+
+            </StackPanel>
+
+            <!-- ACTIONS -->
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center">
+
+                <Button x:Name="btnCreateType"
+                        Content="+ Service Type"
+                        Width="150"
+                        Height="48"
+                        Margin="0,0,12,0"
+                        Click="btnCreateType_Click"
+                        Style="{StaticResource PrimaryButtonStyle}"/>
+
+                <Button x:Name="btnCreateService"
+                        Content="+ Service"
+                        Width="130"
+                        Height="48"
+                        Click="btnCreateService_Click"
+                        Style="{StaticResource OutlineButtonStyle}"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <!-- ===================================================== -->
+        <!-- WORKSPACE -->
+        <!-- ===================================================== -->
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+
+                <!-- LEFT -->
+                <ColumnDefinition Width="300"/>
+
+                <!-- CENTER -->
+                <ColumnDefinition Width="*"/>
+
+                <!-- RIGHT -->
+                <ColumnDefinition Width="420"/>
+
+            </Grid.ColumnDefinitions>
+
+            <!-- ================================================= -->
+            <!-- LEFT PANEL -->
+            <!-- ================================================= -->
+
+            <Border Grid.Column="0"
+                    Style="{StaticResource GlassCardStyle}"
+                    Margin="0,0,18,0"
+                    Padding="22">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- HEADER -->
+                    <TextBlock Text="Service Types"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#3A3131"/>
+
+                    <!-- SEARCH -->
+                    <common:SearchBox x:Name="txtSearchType"
+                                      Grid.Row="1"
+                                      Margin="0,18,0,20"
+                                      Placeholder="Search service type..."
+                                      TextChanged="txtSearchType_TextChanged"/>
+
+                    <!-- LIST -->
+                    <ListBox x:Name="lstServiceTypes"
+                             Grid.Row="2"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             SelectionChanged="lstServiceTypes_SelectionChanged">
+
+                        <ListBox.ItemTemplate>
+
+                            <DataTemplate>
+
+                                <Border Background="#66FFFFFF"
+                                        CornerRadius="22"
+                                        Padding="18"
+                                        Margin="0,0,0,14">
+
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="58"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- ICON -->
+                                        <Border Width="46"
+                                                Height="46"
+                                                Background="#FFF0F0"
+                                                CornerRadius="23">
+
+                                            <TextBlock Text="✈"
+                                                       FontSize="22"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+
+                                        </Border>
+
+                                        <!-- INFO -->
+                                        <StackPanel Grid.Column="1"
+                                                    Margin="14,0,0,0">
+
+                                            <TextBlock Text="{Binding Name}"
+                                                       FontSize="15"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#3A3131"/>
+
+                                            <TextBlock Text="{Binding Description}"
+                                                       Margin="0,6,0,0"
+                                                       FontSize="12"
+                                                       Foreground="#8B7D7D"
+                                                       TextTrimming="CharacterEllipsis"/>
+
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                </Border>
+
+                            </DataTemplate>
+
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                </Grid>
+
+            </Border>
+
+            <!-- ================================================= -->
+            <!-- CENTER PANEL -->
+            <!-- ================================================= -->
+
+            <Border Grid.Column="1"
+                    Style="{StaticResource GlassCardStyle}"
+                    Margin="0,0,18,0"
+                    Padding="24">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- HEADER -->
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+
+                            <TextBlock Text="Services"
+                                       FontSize="22"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBlock x:Name="txtSelectedType"
+                                       Text="Airport Transfer"
+                                       Margin="0,6,0,0"
+                                       FontSize="13"
+                                       Foreground="#8B7D7D"/>
+
+                        </StackPanel>
+
+                        <!-- COUNT -->
+                        <Border Grid.Column="1"
+                                Background="#FFF0F0"
+                                CornerRadius="16"
+                                Padding="16,8">
+
+                            <TextBlock x:Name="txtServiceCount"
+                                       Text="12 Services"
+                                       FontWeight="SemiBold"
+                                       Foreground="#C97D7D"/>
+
+                        </Border>
+
+                    </Grid>
+
+                    <!-- TOOLBAR -->
+                    <Grid Grid.Row="1"
+                          Margin="0,24,0,24">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- SEARCH -->
+                        <common:SearchBox x:Name="txtSearchService"
+                                          Placeholder="Search service..."
+                                          TextChanged="txtSearchService_TextChanged"/>
+
+                        <!-- SORT -->
+                        <ComboBox x:Name="cboSortService"
+                                  Grid.Column="1"
+                                  Margin="16,0,0,0"
+                                  SelectionChanged="cboSortService_SelectionChanged"
+                                  Style="{StaticResource ModernComboBoxStyle}">
+
+                            <ComboBoxItem Content="Newest"/>
+                            <ComboBoxItem Content="A-Z"/>
+                            <ComboBoxItem Content="Price High"/>
+                            <ComboBoxItem Content="Price Low"/>
+                            <ComboBoxItem Content="Capacity"/>
+
+                        </ComboBox>
+
+                        <!-- FILTER -->
+                        <ComboBox x:Name="cboFilterService"
+                                  Grid.Column="2"
+                                  Margin="16,0,0,0"
+                                  SelectionChanged="cboFilterService_SelectionChanged"
+                                  Style="{StaticResource ModernComboBoxStyle}">
+
+                            <ComboBoxItem Content="All"/>
+                            <ComboBoxItem Content="Recurring"/>
+                            <ComboBoxItem Content="Limited"/>
+                            <ComboBoxItem Content="High Capacity"/>
+
+                        </ComboBox>
+
+                    </Grid>
+
+                    <!-- SERVICES -->
+                    <ListBox x:Name="lstServices"
+                             Grid.Row="2"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             SelectionChanged="lstServices_SelectionChanged">
+
+                        <ListBox.ItemTemplate>
+
+                            <DataTemplate>
+
+                                <Border Background="#66FFFFFF"
+                                        CornerRadius="24"
+                                        Padding="22"
+                                        Margin="0,0,0,18">
+
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- ICON -->
+                                        <Border Width="54"
+                                                Height="54"
+                                                Background="#FFF0F0"
+                                                CornerRadius="27">
+
+                                            <TextBlock Text="🛎"
+                                                       FontSize="24"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+
+                                        </Border>
+
+                                        <!-- INFO -->
+                                        <StackPanel Grid.Column="1"
+                                                    Margin="14,0,0,0">
+
+                                            <TextBlock Text="{Binding Name}"
+                                                       FontSize="16"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#3A3131"/>
+
+                                            <TextBlock Margin="0,6,0,0"
+                                                       FontSize="13"
+                                                       Foreground="#8B7D7D">
+
+                                                <Run Text="$"/>
+                                                <Run Text="{Binding Price}"/>
+
+                                            </TextBlock>
+
+                                            <TextBlock Text="{Binding Capacity}"
+                                                       Margin="0,6,0,0"
+                                                       FontSize="12"
+                                                       Foreground="#B78A8A"/>
+
+                                        </StackPanel>
+
+                                        <!-- TAG -->
+                                        <Border Grid.Column="2"
+                                                Background="#FFF0F0"
+                                                CornerRadius="14"
+                                                Padding="14,6"
+                                                VerticalAlignment="Top">
+
+                                            <TextBlock Text="Recurring"
+                                                       FontSize="11"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#C97D7D"/>
+
+                                        </Border>
+
+                                    </Grid>
+
+                                </Border>
+
+                            </DataTemplate>
+
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                </Grid>
+
+            </Border>
+
+            <!-- ================================================= -->
+            <!-- RIGHT PANEL -->
+            <!-- ================================================= -->
+
+            <Border Grid.Column="2"
+                    Style="{StaticResource GlassCardStyle}"
+                    Padding="26">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                    <Grid>
+
+                        <!-- ================================================= -->
+                        <!-- TYPE INSPECTOR -->
+                        <!-- ================================================= -->
+
+                        <StackPanel x:Name="pnlTypeInspector">
+
+                            <!-- HEADER -->
+                            <TextBlock x:Name="txtTypeInspectorTitle"
+                                       Text="Service Type"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBlock Text="Service category details"
+                                       Margin="0,6,0,28"
+                                       FontSize="13"
+                                       Foreground="#8B7D7D"/>
+
+                            <!-- ICON -->
+                            <Border Width="90"
+                                    Height="90"
+                                    Background="#FFF0F0"
+                                    CornerRadius="45"
+                                    HorizontalAlignment="Center">
+
+                                <TextBlock Text="✈"
+                                           FontSize="38"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+
+                            </Border>
+
+                            <!-- CHOOSE -->
+                            <Button x:Name="btnChooseIcon"
+                                    Content="Choose Icon"
+                                    Width="140"
+                                    Height="42"
+                                    Margin="0,18,0,30"
+                                    HorizontalAlignment="Center"
+                                    Click="btnChooseIcon_Click"
+                                    Style="{StaticResource OutlineButtonStyle}"/>
+
+                            <!-- NAME -->
+                            <TextBlock Text="Type Name"
+                                       FontWeight="SemiBold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBox x:Name="txtTypeName"
+                                     Margin="0,10,0,24"
+                                     Style="{StaticResource SoftTextBoxStyle}"/>
+
+                            <!-- DESCRIPTION -->
+                            <TextBlock Text="Description"
+                                       FontWeight="SemiBold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBox x:Name="txtTypeDescription"
+                                     Height="120"
+                                     Margin="0,10,0,28"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                     VerticalScrollBarVisibility="Auto"
+                                     Style="{StaticResource SoftTextAreaStyle}"/>
+
+                            <!-- ACTIONS -->
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button x:Name="btnDeleteType"
+                                        Content="Delete"
+                                        Margin="0,0,10,0"
+                                        Height="50"
+                                        Click="btnDeleteType_Click"
+                                        Style="{StaticResource OutlineButtonStyle}"/>
+
+                                <Button x:Name="btnSaveType"
+                                        Grid.Column="1"
+                                        Content="Save Changes"
+                                        Margin="10,0,0,0"
+                                        Height="50"
+                                        Click="btnSaveType_Click"
+                                        Style="{StaticResource PrimaryButtonStyle}"/>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                        <!-- ================================================= -->
+                        <!-- SERVICE INSPECTOR -->
+                        <!-- ================================================= -->
+
+                        <StackPanel x:Name="pnlServiceInspector"
+                                    Visibility="Collapsed">
+
+                            <!-- HEADER -->
+                            <TextBlock x:Name="txtServiceInspectorTitle"
+                                       Text="Service Details"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBlock Text="Pricing, scheduling and service configuration"
+                                       Margin="0,6,0,28"
+                                       FontSize="13"
+                                       Foreground="#8B7D7D"/>
+
+                            <!-- NAME -->
+                            <TextBlock Text="Service Name"
+                                       FontWeight="SemiBold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBox x:Name="txtServiceName"
+                                     Margin="0,10,0,22"
+                                     Style="{StaticResource SoftTextBoxStyle}"/>
+
+                            <!-- TYPE -->
+                            <TextBlock Text="Service Type"
+                                       FontWeight="SemiBold"
+                                       Foreground="#3A3131"/>
+
+                            <ComboBox x:Name="cboServiceType"
+                                      Margin="0,10,0,22"
+                                      Style="{StaticResource ModernComboBoxStyle}"
+                                      SelectionChanged="cboServiceType_SelectionChanged"/>
+
+                            <!-- PRICE + DURATION -->
+                            <Grid Margin="0,0,0,22">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- PRICE -->
+                                <StackPanel>
+
+                                    <TextBlock Text="Price"
+                                               FontWeight="SemiBold"
+                                               Foreground="#3A3131"/>
+
+                                    <TextBox x:Name="txtPrice"
+                                             Margin="0,10,12,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- DURATION -->
+                                <StackPanel Grid.Column="1">
+
+                                    <TextBlock Text="Duration"
+                                               FontWeight="SemiBold"
+                                               Foreground="#3A3131"/>
+
+                                    <TextBox x:Name="txtDuration"
+                                             Margin="12,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- RECURRING -->
+                            <TextBlock Text="Day Of Week"
+                                       FontWeight="SemiBold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBox x:Name="txtDayOfWeek"
+                                     Margin="0,10,0,22"
+                                     Style="{StaticResource SoftTextBoxStyle}"/>
+
+                            <TextBlock Text="Day Of Month"
+                                       FontWeight="SemiBold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBox x:Name="txtDayOfMonth"
+                                     Margin="0,10,0,22"
+                                     Style="{StaticResource SoftTextBoxStyle}"/>
+
+                            <!-- CAPS -->
+                            <Grid Margin="0,0,0,22">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- DAILY -->
+                                <StackPanel>
+
+                                    <TextBlock Text="Daily Cap"
+                                               FontWeight="SemiBold"
+                                               Foreground="#3A3131"/>
+
+                                    <TextBox x:Name="txtDailyCap"
+                                             Margin="0,10,12,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                                <!-- BOOKING -->
+                                <StackPanel Grid.Column="1">
+
+                                    <TextBlock Text="Booking Cap"
+                                               FontWeight="SemiBold"
+                                               Foreground="#3A3131"/>
+
+                                    <TextBox x:Name="txtBookingCap"
+                                             Margin="12,10,0,0"
+                                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                            <!-- DESCRIPTION -->
+                            <TextBlock Text="Description"
+                                       FontWeight="SemiBold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBox x:Name="txtServiceDescription"
+                                     Height="140"
+                                     Margin="0,10,0,28"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                     VerticalScrollBarVisibility="Auto"
+                                     Style="{StaticResource SoftTextAreaStyle}"/>
+
+                            <!-- ACTIONS -->
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button x:Name="btnDeleteService"
+                                        Content="Delete"
+                                        Margin="0,0,10,0"
+                                        Height="50"
+                                        Click="btnDeleteService_Click"
+                                        Style="{StaticResource OutlineButtonStyle}"/>
+
+                                <Button x:Name="btnSaveService"
+                                        Grid.Column="1"
+                                        Content="Save Changes"
+                                        Margin="10,0,0,0"
+                                        Height="50"
+                                        Click="btnSaveService_Click"
+                                        Style="{StaticResource PrimaryButtonStyle}"/>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </ScrollViewer>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</Page>

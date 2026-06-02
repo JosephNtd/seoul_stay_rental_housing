@@ -18,7 +18,7 @@ namespace BUS
         }
         public List<ET_Attractions> GetAllData()
         {
-            return _dal.GetAllData();
+            return _dal.GetData();
         }
         public List<DTO_AttractionDisplay> GetAllWithAreaName()
         {
@@ -40,6 +40,24 @@ namespace BUS
         public bool Delete(long id)
         {
             return _dal.Delete(id);
+        }
+        // =========================================
+        // GET BY AREA
+        // =========================================
+        public List<DTO_AttractionDisplay> GetByArea(long areaId)
+        {
+            return _dal.GetAllWithAreaName()
+                       .Where(x => x.AreaID == areaId)
+                       .ToList();
+        }
+
+        // =========================================
+        // GET BY ID
+        // =========================================
+        public ET_Attractions GetByID(long id)
+        {
+            return _dal.GetData()
+                       .FirstOrDefault(x => x.ID == id);
         }
     }
 }

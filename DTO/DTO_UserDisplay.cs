@@ -16,5 +16,8 @@ namespace DTO
         public string Role { get; set; } // "Administrator", "Host", "Guest"
         public string Status { get; set; }
         public string LastActive { get; set; } // Chuỗi hiển thị như "2 mins ago", "Yesterday"...
+        public string Country { get; set; }
+
+        public int TotalBookings { get; set; }
     }
 }

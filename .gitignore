@@ -1,6 +1,7 @@
 # Build
 bin/
 obj/
+git/
 
 # Visual Studio
 .vs/

@@ -25,7 +25,7 @@ public partial class Transaction
     [Column(TypeName = "decimal(18, 2)")]
     public decimal Amount { get; set; }
 
-    public DateOnly TransactionDate { get; set; }
+    public DateTime TransactionDate { get; set; }
 
     [Column("GatewayReturnID")]
     [StringLength(100)]

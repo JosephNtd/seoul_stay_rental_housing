@@ -132,8 +132,7 @@ namespace Web_UI.Pages
 
             // ONLY AFTER CHECKOUT
 
-            if (booking.CheckOutDate >
-                DateOnly.FromDateTime(DateTime.Now))
+            if (booking.CheckOutDate > DateTime.Now)
             {
                 TempData["Error"] =
                     "You can review after checkout only.";

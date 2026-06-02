@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,21 +46,27 @@
     <Compile Include="DAL_Amenity.cs" />
     <Compile Include="DAL_Area.cs" />
     <Compile Include="DAL_Attraction.cs" />
+    <Compile Include="DAL_Booking.cs" />
     <Compile Include="DAL_CancellationPolicy.cs" />
     <Compile Include="DAL_Coupon.cs" />
     <Compile Include="DAL_Guest.cs" />
     <Compile Include="DAL_Host.cs" />
     <Compile Include="DAL_HostBankAccount.cs" />
+    <Compile Include="DAL_ItemAvailability.cs" />
     <Compile Include="DAL_ItemPictures.cs" />
     <Compile Include="DAL_Items.cs" />
     <Compile Include="DAL_ItemPrices.cs" />
     <Compile Include="DAL_ItemType.cs" />
     <Compile Include="DAL_LiveSearch.cs" />
+    <Compile Include="DAL_Report.cs" />
     <Compile Include="DAL_Services.cs" />
     <Compile Include="DAL_ServiceType.cs" />
+    <Compile Include="DAL_Settings.cs" />
     <Compile Include="DAL_Transaction.cs" />
     <Compile Include="DAL_TransactionType.cs" />
     <Compile Include="DAL_User.cs" />
+    <Compile Include="DAL_UserBooking.cs" />
+    <Compile Include="DAL_UserWorkspace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

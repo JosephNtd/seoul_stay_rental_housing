@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="GUI_WPF.UserControls.Common.StatusChip"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="40"
+             d:DesignWidth="120">
+
+    <!-- ROOT -->
+    <Border x:Name="ChipBorder"
+            Padding="14,6"
+            CornerRadius="999"
+            Background="#FFF0F0"
+            BorderThickness="1"
+            BorderBrush="#FFE0E0"
+            HorizontalAlignment="Left">
+
+        <Border.Effect>
+
+            <DropShadowEffect BlurRadius="10"
+                              ShadowDepth="0"
+                              Opacity="0.04"
+                              Color="#D89C9D"/>
+
+        </Border.Effect>
+
+        <!-- CONTENT -->
+        <StackPanel Orientation="Horizontal">
+
+            <!-- DOT -->
+            <Ellipse x:Name="StatusDot"
+                     Width="8"
+                     Height="8"
+                     Fill="#D89C9D"
+                     VerticalAlignment="Center"/>
+
+            <!-- TEXT -->
+            <TextBlock Text="{Binding Text,
+                                      RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       Margin="8,0,0,0"
+                       Style="{StaticResource ChipTextStyle}"
+                       Foreground="{Binding ForegroundColor,
+                                            RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       VerticalAlignment="Center"/>
+
+        </StackPanel>
+
+    </Border>
+
+</UserControl>

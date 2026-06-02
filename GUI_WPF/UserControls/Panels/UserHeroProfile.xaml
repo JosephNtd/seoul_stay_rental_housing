@@ -1,0 +1,347 @@
+﻿<UserControl x:Class="GUI_WPF.UserControls.Panels.UserHeroProfile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="474" Width="689">
+
+    <!-- ===================================================== -->
+    <!-- ROOT -->
+    <!-- ===================================================== -->
+
+    <Border Background="#AAFFFFFF"
+            CornerRadius="36"
+            Padding="34">
+
+        <Border.Effect>
+
+            <DropShadowEffect BlurRadius="24"
+                              ShadowDepth="0"
+                              Opacity="0.08"/>
+
+        </Border.Effect>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- ================================================= -->
+            <!-- TOP -->
+            <!-- ================================================= -->
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- AVATAR -->
+                <Border Width="108"
+                        Height="108"
+                        Background="#FFF0F0"
+                        CornerRadius="54">
+
+                    <Grid>
+
+                        <Image x:Name="imgAvatar"
+                               Stretch="UniformToFill"/>
+
+                        <TextBlock x:Name="txtInitials"
+                                   Text="SK"
+                                   FontSize="34"
+                                   FontWeight="Bold"
+                                   Foreground="#C97D7D"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+
+                    </Grid>
+
+                </Border>
+
+                <!-- PROFILE -->
+                <StackPanel Grid.Column="1"
+                            Margin="12,0,0,0">
+
+                    <!-- NAME -->
+                    <TextBlock x:Name="txtFullName"
+                               Text="Sophia Kim"
+                               FontSize="32"
+                               FontWeight="Bold"
+                               Foreground="#3A3131"/>
+
+                    <!-- USERNAME -->
+                    <TextBlock x:Name="txtUsername"
+                               Text="@sophiakim"
+                               Margin="0,8,0,0"
+                               FontSize="14"
+                               Foreground="#B0A4A4"/>
+
+                    <!-- META -->
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,18,0,0">
+
+                        <!-- ROLE -->
+                        <Border x:Name="RoleChip"
+                                Background="#FCECEC"
+                                CornerRadius="14"
+                                Padding="12,5"
+                                Margin="0,0,10,0">
+
+                            <TextBlock x:Name="txtRole"
+                                       Text="Host"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Foreground="#C97D7D"/>
+
+                        </Border>
+
+                        <!-- VERIFIED -->
+                        <Border x:Name="VerifiedChip"
+                                Background="#E8F8F0"
+                                CornerRadius="14"
+                                Padding="12,5"
+                                Margin="0,0,10,0">
+
+                            <TextBlock x:Name="txtVerified"
+                                       Text="Verified"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Foreground="#47A87B"/>
+
+                        </Border>
+
+                        <!-- STATUS -->
+                        <Border x:Name="StatusChip"
+                                Background="#EEF3FF"
+                                CornerRadius="14"
+                                Padding="12,5">
+
+                            <TextBlock x:Name="txtStatus"
+                                       Text="Active"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"
+                                       Foreground="#6484D6"/>
+
+                        </Border>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!-- ACTIONS -->
+                <StackPanel Grid.Column="2"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Top">
+
+                    <!-- EDIT -->
+                    <Button x:Name="btnEdit"
+                            Content="Edit Profile"
+                            Width="130"
+                            Height="48"
+                            Margin="0,0,12,0"
+                            Click="btnEdit_Click"
+                            Style="{StaticResource OutlineButtonStyle}"/>
+
+                    <!-- LOCK -->
+                    <Button x:Name="btnLock"
+                            Content="Lock"
+                            Width="100"
+                            Height="48"
+                            Click="btnLock_Click"
+                            Style="{StaticResource DangerButtonStyle}"/>
+
+                </StackPanel>
+
+            </Grid>
+
+            <!-- ================================================= -->
+            <!-- CONTACT -->
+            <!-- ================================================= -->
+
+            <Grid Grid.Row="1"
+                  Margin="0,34,0,0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- EMAIL -->
+                <Border Background="#FFF8F4"
+                        CornerRadius="24"
+                        Padding="20"
+                        Margin="0,0,16,0">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Email"
+                                   FontSize="12"
+                                   Foreground="#B0A4A4"/>
+
+                        <TextBlock x:Name="txtEmail"
+                                   Text="sophia@seoulstay.com"
+                                   Margin="0,10,0,0"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Foreground="#3A3131"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- PHONE -->
+                <Border Grid.Column="1"
+                        Background="#FFF8F4"
+                        CornerRadius="24"
+                        Padding="20"
+                        Margin="0,0,16,0">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Phone"
+                                   FontSize="12"
+                                   Foreground="#B0A4A4"/>
+
+                        <TextBlock x:Name="txtPhone"
+                                   Text="+82 010 9921 1212"
+                                   Margin="0,10,0,0"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Foreground="#3A3131"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- COUNTRY -->
+                <Border Grid.Column="2"
+                        Background="#FFF8F4"
+                        CornerRadius="24"
+                        Padding="20"
+                        Margin="0,0,16,0">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Country"
+                                   FontSize="12"
+                                   Foreground="#B0A4A4"/>
+
+                        <TextBlock x:Name="txtCountry"
+                                   Text="South Korea"
+                                   Margin="0,10,0,0"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Foreground="#3A3131"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- JOINED -->
+                <Border Grid.Column="3"
+                        Background="#FFF8F4"
+                        CornerRadius="24"
+                        Padding="20">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Joined"
+                                   FontSize="12"
+                                   Foreground="#B0A4A4"/>
+
+                        <TextBlock x:Name="txtJoined"
+                                   Text="14 Feb 2025"
+                                   Margin="0,10,0,0"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Foreground="#3A3131"/>
+
+                    </StackPanel>
+
+                </Border>
+
+            </Grid>
+
+            <!-- ================================================= -->
+            <!-- EXTRA -->
+            <!-- ================================================= -->
+
+            <Grid Grid.Row="2"
+                  Margin="0,34,0,0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- LEFT -->
+                <Border Background="#FFF8F4"
+                        CornerRadius="28"
+                        Padding="24"
+                        Margin="0,0,16,0">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Host Information"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="#3A3131"/>
+
+                        <TextBlock x:Name="txtHostInfo"
+                                   Text="Verified Host • 4.8 ★ • 214 Reviews"
+                                   Margin="0,14,0,0"
+                                   FontSize="14"
+                                   Foreground="#8B7D7D"/>
+
+                        <TextBlock x:Name="txtBusiness"
+                                   Text="Tax Code: KR-229-11"
+                                   Margin="0,10,0,0"
+                                   FontSize="13"
+                                   Foreground="#8B7D7D"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- RIGHT -->
+                <Border Grid.Column="1"
+                        Background="#FFF8F4"
+                        CornerRadius="28"
+                        Padding="24">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Guest Information"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="#3A3131"/>
+
+                        <TextBlock x:Name="txtGuestInfo"
+                                   Text="Loyalty: 1200 pts"
+                                   Margin="0,14,0,0"
+                                   FontSize="14"
+                                   Foreground="#8B7D7D"/>
+
+                        <TextBlock x:Name="txtLanguage"
+                                   Text="Preferred Language: English"
+                                   Margin="0,10,0,0"
+                                   FontSize="13"
+                                   Foreground="#8B7D7D"/>
+
+                    </StackPanel>
+
+                </Border>
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+
+</UserControl>

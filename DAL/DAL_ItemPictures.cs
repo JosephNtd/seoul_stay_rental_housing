@@ -22,7 +22,7 @@ namespace DAL
                              ID = p.ID,
                              FileName = p.PictureFileName,
                              DisplayOrder = p.DisplayOrder,
-                             FullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", p.PictureFileName)
+                             FullPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images", "Listings", p.PictureFileName)
                          })
                          .ToList();
             }

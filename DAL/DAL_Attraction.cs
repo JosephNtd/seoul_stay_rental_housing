@@ -10,7 +10,7 @@ namespace DAL
 {
     public class DAL_Attraction
     {
-        Seoul_StayDataContext db = new Seoul_StayDataContext();
+        private readonly Seoul_StayDataContext db = new Seoul_StayDataContext();
         public List<DTO_Attraction_Distance> GetData(long? itemId = null)
         {
             var itemAttractions = itemId.HasValue
@@ -31,7 +31,7 @@ namespace DAL
                         ByCar = i == null ? (long?)null : i.DurationByCar,
                     }).ToList();
         }
-        public List<ET_Attractions> GetAllData()
+        public List<ET_Attractions> GetData()
         {
             using (var db = new Seoul_StayDataContext())
             {
@@ -81,7 +81,7 @@ namespace DAL
                     return true;
                 }
             }
-            catch (Exception ex)
+            catch
             {
                 
                 return false;

@@ -10,96 +10,154 @@ namespace DAL
 {
     public class DAL_User
     {
-        Seoul_StayDataContext db = new Seoul_StayDataContext();
-
         public User Login(string username, string password)
         {
-            return db.Users.FirstOrDefault(x => x.Username == username && x.Password == password);
+            using (Seoul_StayDataContext db = new Seoul_StayDataContext())
+            {
+                return db.Users.FirstOrDefault(x =>
+                x.Username == username &&
+                x.Password == password &&
+                x.IsActive
+                );
+            }
         }
 
         public bool CheckUsername(string username)
         {
-            return db.Users.Any(x => x.Username == username);
+            using (Seoul_StayDataContext db = new Seoul_StayDataContext())
+                return db.Users.Any(x => x.Username == username);
+        }
+        public bool CheckEmail(string email)
+        {
+            using (Seoul_StayDataContext db = new Seoul_StayDataContext())
+                return db.Users.Any(x => x.Email == email);
         }
 
         public bool Register(User newUser)
         {
-            try
+            using (Seoul_StayDataContext db = new Seoul_StayDataContext())
             {
-                newUser.GUID = Guid.NewGuid();
-                newUser.IsAdmin = false;
-                newUser.CreatedDate = DateTime.Now;
-                newUser.IsActive = true;
+                try
+                {
+                    newUser.GUID = Guid.NewGuid();
+                    newUser.IsAdmin = false;
+                    newUser.CreatedDate = DateTime.Now;
+                    newUser.IsActive = true;
 
-                db.Users.InsertOnSubmit(newUser);
-                db.SubmitChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
+                    db.Users.InsertOnSubmit(newUser);
+                    db.SubmitChanges();
+                    Guest guest = new Guest
+                    {
+                        UserID = newUser.ID,
+                        LoyaltyPoints = 0,
+                        PreferredLanguage = "en",
+                        NationalIDVerified = false
+                    };
+
+                    db.Guests.InsertOnSubmit(guest);
+                    db.SubmitChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
             }
         }
 
         public User GetById(long id)
         {
-            return db.Users.FirstOrDefault(u => u.ID == id);
+            using (Seoul_StayDataContext db = new Seoul_StayDataContext())
+                return db.Users.FirstOrDefault(u => u.ID == id);
         }
 
-        public List<DTO_UserDisplay> GetAllUsersDisplay()
-        {
-            using (var context = new Seoul_StayDataContext())
-            {
-                var data = (from u in context.Users
-                            join h in context.Hosts on u.ID equals h.UserID into hostJoin
-                            from h in hostJoin.DefaultIfEmpty()
-                            select new
-                            {
-                                u.ID,
-                                u.FullName,
-                                u.Email,
-                                u.Username,
-                                u.Password,
-                                u.IsActive,
-                                u.IsAdmin,
-                                u.CreatedDate,
-                                Host = h
-                            }).ToList();
+		public List<DTO_UserDisplay> GetAllUsersDisplay()
+		{
+			using (Seoul_StayDataContext db = new Seoul_StayDataContext())
+			{
+				var data =
+					(from u in db.Users
 
-                return data.Select(u => new DTO_UserDisplay
-                {
-                    UserID = u.ID,
-                    FullName = u.FullName,
-                    Email = u.Email,
-                    Username = u.Username,
-                    Password = u.Password,
-                    Status = u.IsActive ? "Active" : "Locked",
-                    Role = u.IsAdmin
-                            ? "Administrator"
-                            : u.Host != null
-                                ? "Host"
-                                : "Guest",
-                    LastActive = u.CreatedDate.ToString("MMMM dd, yyyy")
-                }).ToList();
-            }
-        }
+					 join h in db.Hosts
+						on u.ID equals h.UserID
+						into hostJoin
 
-        public bool ToggleLock(long userId)
+					 from h in hostJoin.DefaultIfEmpty()
+
+					 select new
+					 {
+						 u.ID,
+						 u.FullName,
+						 u.Email,
+						 u.Username,
+						 u.Country,
+						 u.IsActive,
+						 u.IsAdmin,
+						 u.CreatedDate,
+						 Host = h,
+
+						 // COUNT BOOKINGS
+						 TotalBookings =
+							db.Bookings.Count(b =>
+								b.GuestUserID == u.ID)
+					 })
+					 .ToList();
+
+				return data.Select(u =>
+					new DTO_UserDisplay
+					{
+						UserID = u.ID,
+
+						FullName = u.FullName,
+
+						Email = u.Email,
+
+						Username = u.Username,
+
+						Country = u.Country,
+
+						Status =
+							u.IsActive
+							? "Active"
+							: "Locked",
+
+						Role =
+							u.IsAdmin
+							? "Administrator"
+							: u.Host != null
+								? "Host"
+								: "Guest",
+
+						LastActive =
+							u.CreatedDate
+							.ToString("MMMM dd, yyyy"),
+
+						// FIX
+						TotalBookings =
+							u.TotalBookings
+					})
+					.ToList();
+			}
+		}
+
+		public bool ToggleLock(long userId)
         {
             try
             {
-                using (var context = new Seoul_StayDataContext())
+                using (Seoul_StayDataContext db = new Seoul_StayDataContext())
                 {
-                    var user = context.Users.FirstOrDefault(x => x.ID == userId);
+                    var user = db.Users.FirstOrDefault(x => x.ID == userId);
                     if (user == null) return false;
 
                     user.IsActive = !user.IsActive;
-                    context.SubmitChanges();
+                    db.SubmitChanges();
                     return true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -108,30 +166,29 @@ namespace DAL
         {
             try
             {
-                using (var context = new Seoul_StayDataContext())
+                using (Seoul_StayDataContext db = new Seoul_StayDataContext())
                 {
-                    var user = context.Users.FirstOrDefault(x => x.ID == userId);
+                    var user = db.Users.FirstOrDefault(x => x.ID == userId);
                     if (user == null) return false;
 
                     user.IsActive = false; // Soft Delete
-                    context.SubmitChanges();
+                    db.SubmitChanges();
                     return true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
 
-        // ============================================================
         // THÊM MỚI VÀ CẬP NHẬT ĐỒNG BỘ THEO CONFIG CỦA DB
-        // ============================================================
         public bool InsertUser(User user, string role)
         {
             try
             {
-                using (var context = new Seoul_StayDataContext())
+                using (Seoul_StayDataContext db = new Seoul_StayDataContext())
                 {
                     // 1. Tạo các thông tin mặc định bắt buộc trong DB cho bảng Users
                     user.GUID = Guid.NewGuid();
@@ -141,29 +198,33 @@ namespace DAL
 
                     // Tạm thời lấy Email làm Username
                     if (string.IsNullOrEmpty(user.Username)) user.Username = user.Email;
-                    if (string.IsNullOrEmpty(user.Password)) user.Password = "123456"; // Password mặc định
+                    if (string.IsNullOrEmpty(user.Password))
+                        user.Password = Helper_Security.Hash("123456");
+                    else
+                        user.Password = Helper_Security.Hash(user.Password); // Password mặc định
 
-                    context.Users.InsertOnSubmit(user);
-                    context.SubmitChanges(); // Lưu trước để sinh ra user.ID tự động (Identity)
+                    db.Users.InsertOnSubmit(user);
+                    db.SubmitChanges(); // Lưu trước để sinh ra user.ID tự động (Identity)
 
                     // 2. Chèn dữ liệu vào bảng phân quyền tương ứng dựa vào Foreign Key [UserID]
                     if (role == "Host")
                     {
                         Host host = new Host { UserID = user.ID, IsVerified = false, TotalReviews = 0 };
-                        context.Hosts.InsertOnSubmit(host);
+                        db.Hosts.InsertOnSubmit(host);
                     }
                     else if (role == "Guest")
                     {
                         Guest guest = new Guest { UserID = user.ID, LoyaltyPoints = 0 };
-                        context.Guests.InsertOnSubmit(guest);
+                        db.Guests.InsertOnSubmit(guest);
                     }
 
-                    context.SubmitChanges();
+                    db.SubmitChanges();
                     return true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -182,7 +243,7 @@ namespace DAL
                     user.Email = updatedUser.Email;
                     user.IsAdmin = (role == "Administrator");
                     user.Username = updatedUser.Username;
-                    user.Password = updatedUser.Password;
+                    user.Password = Helper_Security.Hash(updatedUser.Password);
 
                     // Xử lý chuyển đổi vai trò (Nếu đổi từ Guest sang Host hoặc ngược lại)
                     var currentHost = context.Hosts.FirstOrDefault(h => h.UserID == user.ID);
@@ -209,8 +270,9 @@ namespace DAL
                     return true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }

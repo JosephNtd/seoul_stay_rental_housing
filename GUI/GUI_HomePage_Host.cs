@@ -79,5 +79,11 @@ namespace DangNhap_Form
             };
             ShowUC(uc);
         }
+
+        private void acc_MyBookings_Click(object sender, EventArgs e)
+        {
+            UC_MyBookings myBookings = new UC_MyBookings();
+            ShowUC(myBookings);
+        }
     }
 }

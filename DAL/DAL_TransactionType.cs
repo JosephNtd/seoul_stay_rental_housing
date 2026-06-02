@@ -90,10 +90,8 @@ namespace DAL
                 using (var db = new Seoul_StayDataContext())
                 {
                     // KIỂM TRA KHÓA NGOẠI: Có Item nào đang dùng loại này không?
-                    if (db.TransactionTypes.Any(i => i.ID == id))
-                    {
-                        return false; // Trả về false để báo lỗi bên GUI
-                    }
+                    if (db.Transactions.Any(t => t.TransactionTypeID == id))
+                        return false;
 
                     var itemType = db.TransactionTypes.FirstOrDefault(x => x.ID == id);
                     if (itemType != null)

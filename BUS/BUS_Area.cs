@@ -17,8 +17,47 @@ namespace BUS
         public List<ET_Areas> GetAreasName() => dal.GetAreaName();
         public List<DTO_AreaDisplay> GetData() => dal.GetData();
         public DTO_AreaOverview GetAreaOverview(long areaId) => dal.GetAreaOverview(areaId);
-        public object GetItemsByArea(long areaId) => dal.GetItemsByArea(areaId);
+        public List<DTO_AreaItems> GetItemsByArea(long areaId) => dal.GetItemsByArea(areaId);
         public object GetAttractionsByArea(long areaId) => dal.GetAttractionsByArea(areaId);
+        // =========================================
+        // GET BY ID
+        // =========================================
+        public ET_Areas GetByID(long id)
+        {
+            return dal.GetByID(id);
+        }
+
+        // =========================================
+        // INSERT
+        // =========================================
+        public bool Insert(ET_Areas area)
+        {
+            return dal.Insert(area);
+        }
+
+        // =========================================
+        // UPDATE
+        // =========================================
+        public bool Update(ET_Areas area)
+        {
+            return dal.Update(area);
+        }
+
+        // =========================================
+        // DELETE
+        // =========================================
+        public bool Delete(long id)
+        {
+            return dal.Delete(id);
+        }
+
+        // =========================================
+        // VALIDATION
+        // =========================================
+        public bool IsNameExists(string name, long idToIgnore = 0)
+        {
+            return dal.IsNameExists(name, idToIgnore);
+        }
 
     }
 }

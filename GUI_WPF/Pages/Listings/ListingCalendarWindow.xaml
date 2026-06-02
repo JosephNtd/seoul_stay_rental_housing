@@ -1,0 +1,503 @@
+﻿<Window x:Class="GUI_WPF.Pages.Listings.ListingCalendarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cards="clr-namespace:GUI_WPF.UserControls.Cards"
+        mc:Ignorable="d"
+        Title="Listing Calendar"
+        Height="900"
+        Width="1480"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        ResizeMode="NoResize"
+        Background="#F8F5F3">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ================================================= -->
+        <!-- HEADER -->
+        <!-- ================================================= -->
+
+        <Border Margin="24"
+                Padding="28"
+                Background="White"
+                CornerRadius="32">
+
+            <Border.Effect>
+
+                <DropShadowEffect BlurRadius="24"
+                                  ShadowDepth="0"
+                                  Color="#D6C3BA"
+                                  Opacity="0.16"/>
+
+            </Border.Effect>
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- LEFT -->
+
+                <StackPanel>
+
+                    <TextBlock x:Name="txtListingTitle"
+                               Text="Luxury Han River Apartment"
+                               FontSize="34"
+                               FontWeight="Bold"
+                               Foreground="#2E2623"/>
+
+                    <TextBlock x:Name="txtListingAddress"
+                               Margin="0,10,0,0"
+                               Text="Gangnam-gu, Seoul"
+                               FontSize="15"
+                               Foreground="#8D807B"/>
+
+                    <!-- STATS -->
+
+                    <StackPanel Margin="0,22,0,0"
+                                Orientation="Horizontal">
+
+                        <Border Background="#EEF8F1"
+                                CornerRadius="16"
+                                Padding="18,10"
+                                Margin="0,0,12,0">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="●"
+                                           Foreground="#22C55E"
+                                           FontSize="16"/>
+
+                                <TextBlock x:Name="txtAvailableDays"
+                                           Margin="10,0,0,0"
+                                           Text="26 Available"
+                                           FontWeight="SemiBold"
+                                           Foreground="#166534"/>
+                            </StackPanel>
+
+                        </Border>
+
+                        <Border Background="#FFF3F0"
+                                CornerRadius="16"
+                                Padding="18,10">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="●"
+                                           Foreground="#EF4444"
+                                           FontSize="16"/>
+
+                                <TextBlock x:Name="txtBlockedDays"
+                                           Margin="10,0,0,0"
+                                           Text="5 Blocked"
+                                           FontWeight="SemiBold"
+                                           Foreground="#B91C1C"/>
+                            </StackPanel>
+
+                        </Border>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+                <!-- RIGHT -->
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Top">
+
+                    <Button x:Name="btnBulkAvailable"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Width="170"
+                            Height="54"
+                            Margin="0,0,14,0"
+                            Content="Set Available"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Click="btnBulkAvailable_Click">
+
+                        <Button.Background>
+
+                            <LinearGradientBrush StartPoint="0,0"
+                                                 EndPoint="1,1">
+
+                                <GradientStop Color="#28B463"
+                                              Offset="0"/>
+
+                                <GradientStop Color="#1D8348"
+                                              Offset="1"/>
+
+                            </LinearGradientBrush>
+
+                        </Button.Background>
+
+                    </Button>
+
+                    <Button x:Name="btnBulkBlocked"
+                            Style="{StaticResource DangerButtonStyle}"
+                            Width="170"
+                            Height="54"
+                            Margin="0,0,14,0"
+                            Content="Block Dates"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Cursor="Hand"
+                            Click="btnBulkBlocked_Click">
+
+                        <Button.Background>
+
+                            <LinearGradientBrush StartPoint="0,0"
+                                                 EndPoint="1,1">
+
+                                <GradientStop Color="#E74C3C"
+                                              Offset="0"/>
+
+                                <GradientStop Color="#C0392B"
+                                              Offset="1"/>
+
+                            </LinearGradientBrush>
+
+                        </Button.Background>
+
+                    </Button>
+
+                    <Button x:Name="btnClose"
+                            Style="{StaticResource OutlineButtonStyle}"
+                            Width="120"
+                            Height="54"
+                            Content="Close"
+                            Cursor="Hand"
+                            Background="#F4ECE8"
+                            BorderThickness="0"
+                            Click="btnClose_Click"/>
+
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+
+        <!-- ================================================= -->
+        <!-- CONTENT -->
+        <!-- ================================================= -->
+
+        <Grid Grid.Row="1"
+              Margin="24,0,24,24">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ============================================= -->
+            <!-- LEFT SIDEBAR -->
+            <!-- ============================================= -->
+
+            <Border Background="White"
+                    CornerRadius="30"
+                    Padding="26">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- MONTH NAV -->
+
+                    <StackPanel>
+
+                        <TextBlock Text="Calendar Navigation"
+                                   FontSize="22"
+                                   FontWeight="Bold"
+                                   Foreground="#312724"/>
+
+                        <TextBlock Margin="0,8,0,0"
+                                   Text="Navigate and manage listing availability."
+                                   FontSize="13"
+                                   Foreground="#8B7E79"/>
+
+                    </StackPanel>
+
+                    <!-- MONTH CONTROL -->
+
+                    <Border Grid.Row="1"
+                            Margin="0,26,0,0"
+                            Background="#F8F2EE"
+                            CornerRadius="24"
+                            Padding="18">
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="btnPrevMonth"
+                                    Style="{StaticResource OutlineButtonStyle}"
+                                    Width="42"
+                                    Height="42"
+                                    Content="←"
+                                    FontSize="18"
+                                    Click="btnPrevMonth_Click"/>
+
+                            <TextBlock x:Name="txtCurrentMonth"
+                                       Grid.Column="1"
+                                       Text="September 2025"
+                                       FontSize="20"
+                                       FontWeight="Bold"
+                                       Foreground="#2E2623"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+
+                            <Button x:Name="btnNextMonth"
+                                    Style="{StaticResource OutlineButtonStyle}"
+                                    Grid.Column="2"
+                                    Width="42"
+                                    Height="42"
+                                    Content="→"
+                                    FontSize="18"
+                                    Click="btnNextMonth_Click"/>
+
+                        </Grid>
+
+                    </Border>
+
+                    <!-- LEGEND -->
+
+                    <Border Grid.Row="2"
+                            Margin="0,26,0,0"
+                            Background="#FAF7F5"
+                            CornerRadius="24"
+                            Padding="20">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Legend"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="#352C29"/>
+
+                            <StackPanel Margin="0,18,0,0">
+
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0,0,0,14">
+
+                                    <Border Width="18"
+                                            Height="18"
+                                            Background="#DDF7E6"
+                                            CornerRadius="6"/>
+
+                                    <TextBlock Text="Available"
+                                               Margin="12,0,0,0"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Margin="0,0,0,14">
+
+                                    <Border Width="18"
+                                            Height="18"
+                                            Background="#FFE4E4"
+                                            CornerRadius="6"/>
+
+                                    <TextBlock Text="Blocked"
+                                               Margin="12,0,0,0"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <Border Width="18"
+                                            Height="18"
+                                            Background="#EFE9FF"
+                                            CornerRadius="6"/>
+
+                                    <TextBlock Text="Custom Price"
+                                               Margin="12,0,0,0"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </Border>
+
+                    <!-- SELECTED DATE -->
+
+                    <Border Grid.Row="3"
+                            Margin="0,26,0,0"
+                            Background="#FFFDFC"
+                            BorderBrush="#EFE4DD"
+                            BorderThickness="1"
+                            CornerRadius="24"
+                            Padding="20">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Selected Date"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Foreground="#352C29"/>
+
+                            <TextBlock x:Name="txtSelectedDate"
+                                       Margin="0,18,0,0"
+                                       Text="No date selected"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="#7B5A58"/>
+
+                            <TextBlock x:Name="txtSelectedStatus"
+                                       Margin="0,12,0,0"
+                                       Text="Availability: —"
+                                       FontSize="14"
+                                       Foreground="#8D807B"/>
+
+                            <TextBlock x:Name="txtSelectedPrice"
+                                       Margin="0,8,0,0"
+                                       Text="Price: —"
+                                       FontSize="14"
+                                       Foreground="#8D807B"/>
+
+                            <Button x:Name="btnEditPrice"
+                                    Style="{StaticResource OutlineButtonStyle}"
+                                    Margin="0,24,0,0"
+                                    Height="52"
+                                    Content="Edit Price"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    Click="btnEditPrice_Click">
+
+                                <Button.Background>
+
+                                    <LinearGradientBrush StartPoint="0,0"
+                                                         EndPoint="1,1">
+
+                                        <GradientStop Color="#7B5A58"
+                                                      Offset="0"/>
+
+                                        <GradientStop Color="#9C7370"
+                                                      Offset="1"/>
+
+                                    </LinearGradientBrush>
+
+                                </Button.Background>
+
+                            </Button>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </Grid>
+
+            </Border>
+
+            <!-- ============================================= -->
+            <!-- CALENDAR -->
+            <!-- ============================================= -->
+
+            <Border Grid.Column="1"
+                    Margin="28,0,0,0"
+                    Background="White"
+                    CornerRadius="32"
+                    Padding="28">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- WEEK HEADER -->
+
+                    <UniformGrid Columns="7">
+
+                        <Border Padding="0,0,0,18">
+                            <TextBlock Text="Sunday"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Foreground="#7E726D"/>
+                        </Border>
+
+                        <Border Padding="0,0,0,18">
+                            <TextBlock Text="Monday"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Foreground="#7E726D"/>
+                        </Border>
+
+                        <Border Padding="0,0,0,18">
+                            <TextBlock Text="Tuesday"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Foreground="#7E726D"/>
+                        </Border>
+
+                        <Border Padding="0,0,0,18">
+                            <TextBlock Text="Wednesday"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Foreground="#7E726D"/>
+                        </Border>
+
+                        <Border Padding="0,0,0,18">
+                            <TextBlock Text="Thursday"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Foreground="#7E726D"/>
+                        </Border>
+
+                        <Border Padding="0,0,0,18">
+                            <TextBlock Text="Friday"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Foreground="#7E726D"/>
+                        </Border>
+
+                        <Border Padding="0,0,0,18">
+                            <TextBlock Text="Saturday"
+                                       HorizontalAlignment="Center"
+                                       FontWeight="Bold"
+                                       Foreground="#7E726D"/>
+                        </Border>
+
+                    </UniformGrid>
+
+                    <!-- CALENDAR GRID -->
+
+                    <ScrollViewer Grid.Row="1"
+                                  VerticalScrollBarVisibility="Auto">
+
+                        <UniformGrid x:Name="CalendarGrid"
+                                     Columns="7"/>
+
+                    </ScrollViewer>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</Window>

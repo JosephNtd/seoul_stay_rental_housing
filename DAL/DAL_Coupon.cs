@@ -8,7 +8,7 @@ namespace DAL
     public class DAL_Coupon
     {
         // 1. LẤY DỮ LIỆU
-        public List<ET_Coupons> GetAll()
+        public List<ET_Coupons> GetData()
         {
             using (var db = new Seoul_StayDataContext())
             {

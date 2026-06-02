@@ -10,7 +10,7 @@ namespace BUS
 {
     public class BUS_ServiceType
     {
-        private DAL_ServiceType _dal = new DAL_ServiceType();
+        private readonly DAL_ServiceType _dal = new DAL_ServiceType();
 
         public List<ET_ServiceType> GetData() => _dal.GetData();
         public bool IsNameExists(string name, long idToIgnore = 0) => _dal.IsNameExists(name, idToIgnore);
@@ -20,5 +20,6 @@ namespace BUS
         public bool Update(ET_ServiceType et, string iconFileName) => _dal.Update(et, iconFileName);
 
         public bool Delete(long id) => _dal.Delete(id);
+        public ET_ServiceType GetByID(long id) => _dal.GetByID(id);
     }
 }

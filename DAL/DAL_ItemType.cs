@@ -46,7 +46,7 @@ namespace DAL
         {
             using (var db = new Seoul_StayDataContext())
             {
-                return db.ItemTypes.Any(x => x.Name.ToLower() == name.ToLower() && x.ID != idToIgnore);
+                return db.ItemTypes.Any(x => (x.Name ?? "").ToLower() == (name ?? "").ToLower() && x.ID != idToIgnore);
             }
         }
 
@@ -124,6 +124,62 @@ namespace DAL
                 }
             }
             catch { return false; }
+        }
+        public ET_ItemTypes GetByID(long id)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                var t = db.ItemTypes
+                    .FirstOrDefault(x => x.ID == id);
+
+                if (t == null)
+                    return null;
+
+                return new ET_ItemTypes
+                {
+                    ID = t.ID,
+                    GUID = t.GUID,
+                    Name = t.Name,
+                    Description = t.Description,
+
+                    IconPath = !string.IsNullOrEmpty(t.Icon)
+                        ? Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            "Images",
+                            t.Icon)
+                        : null
+                };
+            }
+        }
+        public List<ET_Items> GetItemByType(long itemTypeID)
+        {
+            using(var db = new Seoul_StayDataContext())
+            {
+                return db.Items
+                        .Where(x => x.ItemTypeID == itemTypeID)
+                        .Select(x => new ET_Items
+                        {
+                            ID = x.ID,
+                            GUID = x.GUID,
+                            HostUserID = x.HostUserID,
+                            ItemTypeID = x.ItemTypeID,
+                            AreaID = x.AreaID,
+                            Title = x.Title,
+                            Capacity = x.Capacity,
+                            NumberOfBeds = x.NumberOfBeds,
+                            NumberOfBedrooms = x.NumberOfBedrooms,
+                            NumberOfBathrooms = x.NumberOfBathrooms,
+                            ExactAddress = x.ExactAddress,
+                            ApproximateAddress = x.ApproximateAddress,
+                            Description = x.Description,
+                            HostRules = x.HostRules,
+                            MinimumNights = x.MinimumNights,
+                            MaximumNights = x.MaximumNights,
+                            IsCreated = x.CreatedDate,
+                            IsActive = x.IsActive ? (byte)1 : (byte)0
+                        })
+                        .ToList();
+            }
         }
     }
 }

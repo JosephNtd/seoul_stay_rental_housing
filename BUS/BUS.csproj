@@ -44,19 +44,24 @@
     <Compile Include="BUS_Amenity.cs" />
     <Compile Include="BUS_Area.cs" />
     <Compile Include="BUS_Attraction.cs" />
+    <Compile Include="BUS_Booking.cs" />
     <Compile Include="BUS_CancellationPolicy.cs" />
     <Compile Include="BUS_Coupon.cs" />
     <Compile Include="BUS_Guest.cs" />
     <Compile Include="BUS_Host.cs" />
+    <Compile Include="BUS_ItemAvailability.cs" />
     <Compile Include="BUS_ItemPictures.cs" />
     <Compile Include="BUS_ItemPrices.cs" />
     <Compile Include="BUS_Items.cs" />
     <Compile Include="BUS_ItemType.cs" />
+    <Compile Include="BUS_Report.cs" />
     <Compile Include="BUS_Services.cs" />
     <Compile Include="BUS_ServiceType.cs" />
     <Compile Include="BUS_Transaction.cs" />
     <Compile Include="BUS_TransactionType.cs" />
     <Compile Include="BUS_User.cs" />
+    <Compile Include="BUS_UserBooking.cs" />
+    <Compile Include="BUS_UserWorkspace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +76,10 @@
     <ProjectReference Include="..\ET\ET.csproj">
       <Project>{10bb812d-c235-4a9b-ac77-43f75ded240c}</Project>
       <Name>ET</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Helper\Helper.csproj">
+      <Project>{e625178c-4b67-4181-a44d-0a732527532a}</Project>
+      <Name>Helper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,0 +1,247 @@
+﻿ <Window x:Class="GUI_WPF.Views.LoginWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    Title="Seoul Stay"
+    Height="760"
+    Width="1200"
+    MinHeight="760"
+    MinWidth="1200"
+    WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize"
+    Background="{StaticResource BackgroundBrush}">
+
+    <!-- ROOT -->
+    <Grid>
+
+        <!-- BACKGROUND SHAPES -->
+        <Grid>
+
+            <Ellipse Width="500"
+                     Height="500"
+                     Fill="#F7CFCF"
+                     Opacity="0.35"
+                     HorizontalAlignment="Left"
+                     VerticalAlignment="Top"
+                     Margin="-120,-120,0,0"/>
+
+            <Ellipse Width="450"
+                     Height="450"
+                     Fill="#C1ECDA"
+                     Opacity="0.25"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom"
+                     Margin="0,0,-100,-100"/>
+
+            <Ellipse Width="350"
+                     Height="350"
+                     Fill="#FFE6E6"
+                     Opacity="0.35"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Top"
+                     Margin="0,-80,120,0"/>
+
+        </Grid>
+
+        <!-- MAIN CONTENT -->
+        <Grid Margin="60">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT -->
+            <Grid Margin="40">
+
+                <StackPanel VerticalAlignment="Center">
+
+                    <!-- HERO -->
+                    <TextBlock Text="SEOUL STAY"
+                               Style="{StaticResource DisplayTitleStyle}"/>
+
+                    <TextBlock Text="Smart City Accommodation Platform"
+                               Style="{StaticResource BodyTextStyle}"
+                               FontSize="18"
+                               Margin="0,15,0,40"
+                               Foreground="#7B6D6D"/>
+
+                    <!-- LINE -->
+                    <Border Width="90"
+                            Height="5"
+                            CornerRadius="10"
+                            Background="{StaticResource PrimaryBrush}"
+                            HorizontalAlignment="Left"
+                            Margin="0,0,0,45"/>
+
+                    <!-- FEATURES -->
+                    <StackPanel>
+
+                        <TextBlock Text="✦ Discover Seoul beautifully"
+                                   Style="{StaticResource BodyTextStyle}"
+                                   FontSize="18"
+                                   Margin="0,14"/>
+
+                        <TextBlock Text="✦ Smart Booking Experience"
+                                   Style="{StaticResource BodyTextStyle}"
+                                   FontSize="18"
+                                   Margin="0,14"/>
+
+                        <TextBlock Text="✦ Local Services Experiences"
+                                   Style="{StaticResource BodyTextStyle}"
+                                   FontSize="18"
+                                   Margin="0,14"/>
+
+                        <TextBlock Text="✦ Luxury stays with local warmth"
+                                   Style="{StaticResource BodyTextStyle}"
+                                   FontSize="18"
+                                   Margin="0,14"/>
+
+                    </StackPanel>
+
+                </StackPanel>
+
+            </Grid>
+
+            <!-- RIGHT -->
+            <Border Grid.Column="1"
+                    Style="{StaticResource GlassCardStyle}"
+                    Padding="20"
+                    Margin="20,20,10,0">
+
+                <StackPanel VerticalAlignment="Center">
+
+                    <!-- TITLE -->
+                    <TextBlock Text="Welcome Back"
+                               Style="{StaticResource DisplayTitleStyle}"
+                               FontSize="42"/>
+
+                    <TextBlock Text="Login to continue your journey"
+                               Style="{StaticResource BodyTextStyle}"
+                               Margin="0,12,0,30"
+                               FontSize="16"/>
+
+                    <!-- USERNAME -->
+                    <TextBlock Text="Username"
+                               Style="{StaticResource LabelStyle}"/>
+
+                    <TextBox x:Name="txtUsername"
+                             Style="{StaticResource SoftTextBoxStyle}"
+                             Margin="0,10,0,26"/>
+
+                    <!-- PASSWORD -->
+                    <TextBlock Text="Password"
+                               Style="{StaticResource LabelStyle}"/>
+
+                    <!-- PASSWORD AREA -->
+                    <Grid Margin="0,10,0,16">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- PASSWORD -->
+                        <PasswordBox x:Name="txtPassword"
+                                     Grid.Column="0"
+                                     Style="{StaticResource SoftPasswordBoxStyle}"/>
+
+                        <!-- SHOW PASSWORD -->
+                        <TextBox x:Name="txtShowPassword"
+                                 Grid.Column="0"
+                                 Style="{StaticResource SoftTextBoxStyle}"
+                                 Visibility="Collapsed"/>
+
+                        <!-- SHOW BUTTON -->
+                        <Button x:Name="btnShowPassword"
+                                Grid.Column="1"
+                                Margin="10,0,0,0"
+                                Content="👁"
+                                FontSize="18"
+                                Style="{StaticResource OutlineButtonStyle}"
+                                Click="btnShowPassword_Click"/>
+
+                    </Grid>
+
+                    <!-- OPTIONS -->
+                    <Grid Margin="0,0,0,30">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- KEEP LOGIN -->
+                        <CheckBox x:Name="chkKeepLogin"
+                                  Content="Keep me signed in"
+                                  Foreground="#6B5D5D"
+                                  VerticalAlignment="Center"/>
+
+                        <!-- FORGOT -->
+                        <TextBlock Grid.Column="1"
+                                   Text="Forgot password?"
+                                   Foreground="{StaticResource PrimaryBrush}"
+                                   Cursor="Hand"
+                                   VerticalAlignment="Center"/>
+
+                    </Grid>
+
+                    <!-- LOGIN -->
+                    <Button x:Name="btnLogin"
+                            Content="LOGIN"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Click="btnLogin_Click"/>
+
+                    <!-- MESSAGE -->
+                    <TextBlock x:Name="txtMessage"
+                               Style="{StaticResource ValidationTextStyle}"
+                               TextAlignment="Center"
+                               Margin="0,12,0,0"/>
+
+                    <!-- DIVIDER -->
+                    <Grid Margin="0,10,0,10">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Height="1"
+                                Background="#EFE3E3"
+                                VerticalAlignment="Center"/>
+
+                        <TextBlock Grid.Column="1"
+                                   Text="OR"
+                                   Margin="18,0"
+                                   Foreground="#B9A9A9"/>
+
+                        <Border Grid.Column="2"
+                                Height="1"
+                                Background="#EFE3E3"
+                                VerticalAlignment="Center"/>
+
+                    </Grid>
+
+                    <!-- REGISTER -->
+                    <Button x:Name="btnRegister"
+                            Content="CREATE ACCOUNT"
+                            Style="{StaticResource OutlineButtonStyle}"
+                            Height="52"
+                            Click="btnRegister_Click"/>
+                    
+                    <Button Content="⚙ Database"
+                            Style="{StaticResource SuccessButtonStyle}"
+                            Margin="5, 5, 5, 5"
+                            Click="btnDatabase_Click"/>
+                </StackPanel>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</Window>

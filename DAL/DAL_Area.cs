@@ -10,10 +10,10 @@ namespace DAL
 {
     public class DAL_Area
     {
-        
+
         public List<object> GetHotelCountByArea()
         {
-            using(Seoul_StayDataContext db = new Seoul_StayDataContext())
+            using (Seoul_StayDataContext db = new Seoul_StayDataContext())
             {
                 var result = from a in db.Areas
                              join i in db.Items on a.ID equals i.AreaID into g
@@ -45,7 +45,7 @@ namespace DAL
 
         public List<DTO_AreaDisplay> GetData()
         {
-            using(var db = new Seoul_StayDataContext())
+            using (var db = new Seoul_StayDataContext())
             {
                 var data = (from a in db.Areas
                             join i in db.Items on a.ID equals i.AreaID into g
@@ -64,7 +64,7 @@ namespace DAL
                             }).ToList();
                 return data;
             }
-            
+
         }
 
         public DTO_AreaOverview GetAreaOverview(long areaId)
@@ -87,17 +87,18 @@ namespace DAL
             }
         }
 
-        public object GetItemsByArea(long areaId)
+        public List<DTO_AreaItems> GetItemsByArea(long areaId)
         {
             using (var db = new Seoul_StayDataContext())
             {
                 var items = db.Items.Where(i => i.AreaID == areaId)
-                                    .Select(i => new {
-                                        i.ID,
-                                        TênChỗNghỉ = i.Title,
-                                        SứcChứa = i.Capacity,
-                                        Loại = i.ItemType.Name,
-                                        Địa_Chỉ = i.ApproximateAddress
+                                    .Select(i => new DTO_AreaItems
+                                    {
+                                        ID = i.ID,
+                                        Name = i.Title,
+                                        Capacity = i.Capacity,
+                                        TypeName = i.ItemType.Name,
+                                        ApproximateAddress = i.ApproximateAddress
                                     }).ToList();
                 return items;
             }
@@ -108,12 +109,135 @@ namespace DAL
             using (var db = new Seoul_StayDataContext())
             {
                 var attractions = db.Attractions.Where(a => a.AreaID == areaId)
-                                                .Select(a => new {
+                                                .Select(a => new
+                                                {
                                                     a.ID,
                                                     TênĐịaDanh = a.Name,
                                                     Địa_Chỉ = a.Address
                                                 }).ToList();
                 return attractions;
+            }
+        }
+        // =========================================
+        // GET BY ID
+        // =========================================
+        public ET_Areas GetByID(long id)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                var a = db.Areas.FirstOrDefault(x => x.ID == id);
+
+                if (a == null)
+                    return null;
+
+                return new ET_Areas
+                {
+                    ID = a.ID,
+                    GUID = a.GUID,
+                    Name = a.Name
+                };
+            }
+                
+        }
+
+        // =========================================
+        // INSERT
+        // =========================================
+        public bool Insert(ET_Areas et)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                try
+                {
+                    Area a = new Area
+                    {
+                        GUID = Guid.NewGuid(),
+                        Name = et.Name
+                    };
+
+                    db.Areas.InsertOnSubmit(a);
+
+                    db.SubmitChanges();
+
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            } 
+        }
+
+        // =========================================
+        // UPDATE
+        // =========================================
+        public bool Update(ET_Areas et)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                try
+                {
+                    var a = db.Areas.FirstOrDefault(x => x.ID == et.ID);
+
+                    if (a == null)
+                        return false;
+
+                    a.Name = et.Name;
+
+                    db.SubmitChanges();
+
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        // =========================================
+        // DELETE
+        // =========================================
+        public bool Delete(long id)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                try
+                {
+                    var area = db.Areas.FirstOrDefault(x => x.ID == id);
+
+                    if (area == null)
+                        return false;
+
+                    bool hasItems =
+                        db.Items.Any(i => i.AreaID == id);
+
+                    if (hasItems)
+                        return false;
+
+                    db.Areas.DeleteOnSubmit(area);
+
+                    db.SubmitChanges();
+
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
+
+        // =========================================
+        // CHECK NAME
+        // =========================================
+        public bool IsNameExists(string name, long idToIgnore = 0)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                return db.Areas.Any(x =>
+               x.Name.ToLower() == name.ToLower()
+               && x.ID != idToIgnore);
             }
         }
     }

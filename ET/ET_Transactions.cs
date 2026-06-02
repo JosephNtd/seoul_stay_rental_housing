@@ -15,6 +15,11 @@ namespace ET
         public decimal Amount { get; set; }
         public DateTime TransactionDate { get; set; }
         public string GatewayReturnID { get; set; }
+        public string TransactionTypeName { get; set; }
+
+        public string StatusName { get; set; }
+
+        public string Description { get; set; }
 
         public ET_Transactions() { }
 

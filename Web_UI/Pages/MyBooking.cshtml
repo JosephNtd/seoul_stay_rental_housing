@@ -194,8 +194,7 @@
 				System.IO.Path.GetFileName(firstPicture.PictureFileName)
 				: "/images/homestays/unnamed.png";
 
-				var totalNights =
-				(booking.CheckOutDate.DayNumber - booking.CheckInDate.DayNumber);
+				var totalNights = (booking.CheckOutDate - booking.CheckInDate);
 
 				<!-- Booking Card -->
 				<div class="group bg-white rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(244,194,194,0.15)] transition-all duration-500 flex flex-col md:flex-row">
@@ -294,7 +293,7 @@
 
 							<!-- REVIEW BUTTON -->
 							@if (booking.BookingStatus != "Cancelled"
-													&& booking.CheckOutDate <= DateOnly.FromDateTime(DateTime.Now)
+													&& booking.CheckOutDate <= DateTime.Now
 													&& !booking.Reviews.Any())
 								{
 									<button type="button"
@@ -306,7 +305,7 @@
 									</button>
 							}
 
-							@if (booking.BookingStatus != "Cancelled" && booking.CheckInDate > DateOnly.FromDateTime(DateTime.Now))
+							@if (booking.BookingStatus != "Cancelled" && booking.CheckInDate > DateTime.Now)
 							{
 								<form method="post"
 									  asp-page-handler="CancelBooking">

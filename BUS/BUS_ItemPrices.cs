@@ -22,7 +22,7 @@ namespace BUS
 
         public bool DeletePrice(long itemId, DateTime date) => _dal.DeletePrice(itemId, date);
 
-        public List<CancellationPolicy> GetPolicies() => _dal.GetPolicies();
+        public List<ET_CancellationPolicies> GetPolicies() => _dal.GetPolicies();
 
         public bool ToggleAvailability(long itemId, DateTime date, bool isAvailable)
         {
@@ -37,7 +37,15 @@ namespace BUS
 
         public bool SetAvailability(long itemId, DateTime date, bool isAvailable)
             => _dal.SetAvailability(itemId, date, isAvailable);
-
+        public List<ET_ItemPrices> GetPricesInRange(long itemId, DateTime checkIn, DateTime checkOut)
+        {
+            return GetPrices(itemId)
+                .Where(x =>
+                    x.Date >= checkIn.Date &&
+                    x.Date < checkOut.Date)
+                .OrderBy(x => x.Date)
+                .ToList();
+        }
         public bool ValidatePriceUpdate(long itemId, List<DateTime> dates, decimal? price, long policyId, out string errorMessage)
         {
             errorMessage = string.Empty;

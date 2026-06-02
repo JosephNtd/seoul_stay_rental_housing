@@ -30,7 +30,7 @@ namespace DAL
         }
         public bool SetPrice(long itemId, DateTime date, decimal price, long policyId)
         {
-            using(var db = new Seoul_StayDataContext())
+            using (var db = new Seoul_StayDataContext())
             {
 
                 var exist = db.ItemPrices.FirstOrDefault(p => p.ItemID == itemId && p.Date == date);
@@ -81,10 +81,20 @@ namespace DAL
         }
 
         // Lấy danh sách cancellation policies để điền combobox
-        public List<CancellationPolicy> GetPolicies()
+        public List<ET_CancellationPolicies> GetPolicies()
         {
-            using(var db = new Seoul_StayDataContext())
-                return db.CancellationPolicies.ToList();
+            using (var db = new Seoul_StayDataContext())
+            {
+                return db.CancellationPolicies
+                         .Select(x => new ET_CancellationPolicies
+                         {
+                             ID = x.ID,
+                             GUID = x.GUID,
+                             Name = x.Name,
+                             PlatformCommissionRate = x.PlatformCommissionRate
+                         })
+                         .ToList();
+            }
         }
 
         // Availability

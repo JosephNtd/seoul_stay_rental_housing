@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="GUI_WPF.UserControls.Cards.BookingTimelineItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="Auto"
+             Height="Auto">
+
+    <Grid Margin="0,0,0,14">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- TIMELINE COLUMN -->
+
+        <Grid>
+
+            <Ellipse x:Name="StatusDot"
+                     Width="16"
+                     Height="16"
+                     Fill="{StaticResource PrimaryBrush}"
+                     VerticalAlignment="Top"
+                     HorizontalAlignment="Center"/>
+
+            <Border x:Name="LineBelow"
+                    Width="2"
+                    Margin="0,18,0,0"
+                    Background="#E6E6E6"
+                    HorizontalAlignment="Center"/>
+        </Grid>
+
+        <!-- CONTENT -->
+
+        <Border Grid.Column="1"
+                Style="{StaticResource SoftPanelStyle}"
+                Padding="14">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- STATUS -->
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock x:Name="txtStatus"
+                               Style="{StaticResource CardTitleStyle}"
+                               Text="Confirmed"/>
+
+                    <Border x:Name="TypeBadge"
+                            Margin="10,0,0,0"
+                            Padding="10,4"
+                            CornerRadius="10"
+                            VerticalAlignment="Center">
+
+                        <TextBlock x:Name="txtType"
+                                   Style="{StaticResource ChipTextStyle}"
+                                   Text="Status Change"/>
+                    </Border>
+
+                </StackPanel>
+
+                <!-- DATE -->
+
+                <TextBlock x:Name="txtDate"
+                           Grid.Row="1"
+                           Margin="0,6,0,0"
+                           Style="{StaticResource CaptionStyle}"
+                           Text="18 Sep 2026 09:45"/>
+
+                <!-- NOTE -->
+
+                <TextBlock x:Name="txtNote"
+                           Grid.Row="2"
+                           Margin="0,10,0,0"
+                           Style="{StaticResource BodyTextStyle}"
+                           TextWrapping="Wrap"
+                           Text="Booking confirmed by administrator."/>
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
+</UserControl>

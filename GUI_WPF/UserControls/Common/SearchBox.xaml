@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="GUI_WPF.UserControls.Common.SearchBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="52"
+             d:DesignWidth="320">
+
+    <!-- ROOT -->
+    <Grid>
+
+        <!-- SEARCH CONTAINER -->
+        <Border x:Name="SearchBorder"
+                Background="White"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="1.5"
+                CornerRadius="18"
+                Height="52">
+
+            <Border.Effect>
+
+                <DropShadowEffect BlurRadius="18"
+                                  ShadowDepth="0"
+                                  Opacity="0.04"
+                                  Color="#D89C9D"/>
+
+            </Border.Effect>
+
+        </Border>
+
+        <!-- CONTENT -->
+        <Grid Margin="18,0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- SEARCH ICON -->
+            <TextBlock Grid.Column="0"
+                       Text="🔍"
+                       FontSize="15"
+                       VerticalAlignment="Center"
+                       Foreground="#B9A9A9"/>
+
+            <!-- TEXTBOX -->
+            <TextBox x:Name="txtSearch"
+
+                     Grid.Column="1"
+                     Margin="14,0,0,0"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     FontSize="14"
+                     Foreground="{StaticResource TextBrush}"
+                     VerticalContentAlignment="Center"
+                     Text="{Binding SearchText,
+                                    RelativeSource={RelativeSource AncestorType=UserControl},
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}"/>
+
+            <!-- PLACEHOLDER -->
+            <TextBlock x:Name="txtPlaceholder"
+                       Grid.Column="1"
+                       Margin="14,0,0,0"
+                       Text="{Binding Placeholder,
+                                      RelativeSource={RelativeSource AncestorType=UserControl}}"
+                       Foreground="#B9A9A9"
+                       FontSize="14"
+                       VerticalAlignment="Center"
+                       IsHitTestVisible="False"
+                       Visibility="Collapsed"/>
+
+            <!-- CLEAR BUTTON -->
+            <Button x:Name="btnClear"
+                    Grid.Column="2"
+                    Width="28"
+                    Height="28"
+                    Margin="10,0,0,0"
+                    Content="✕"
+                    FontSize="11"
+                    FontWeight="Bold"
+                    Background="#FFF0F0"
+                    Foreground="#D89C9D"
+                    BorderThickness="0"
+                    Cursor="Hand"
+                    Visibility="Collapsed"
+                    Click="btnClear_Click">
+
+                <Button.Template>
+
+                    <ControlTemplate TargetType="Button">
+
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="14">
+
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+
+                        </Border>
+
+                    </ControlTemplate>
+
+                </Button.Template>
+
+            </Button>
+
+        </Grid>
+
+    </Grid>
+
+</UserControl>

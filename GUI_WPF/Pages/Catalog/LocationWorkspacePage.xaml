@@ -1,0 +1,533 @@
+﻿<Page x:Class="GUI_WPF.Pages.Catalog.LocationWorkspacePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GUI_WPF.Pages.Catalog"
+      xmlns:common="clr-namespace:GUI_WPF.UserControls.Common"
+      mc:Ignorable="d" 
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="LocationWorkspacePage"
+      Background="{StaticResource BackgroundBrush}">
+
+    <Grid Margin="24">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ========================================= -->
+        <!-- HEADER -->
+        <!-- ========================================= -->
+
+        <Grid Margin="0,0,0,24">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- LEFT -->
+            <StackPanel>
+
+                <TextBlock Text="Location Catalog"
+                           Style="{StaticResource DisplayTitleStyle}"
+                           FontSize="36"/>
+
+                <TextBlock Text="Manage areas and nearby attractions across Seoul"
+                           Style="{StaticResource BodyTextStyle}"
+                           Margin="0,8,0,0"/>
+
+            </StackPanel>
+
+            <!-- ACTION -->
+            <Button 
+                    Click="btnCreateArea_Click"
+                    Grid.Column="1"
+                    Content="+ Create Area"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Width="170"
+                    Height="52"
+                    VerticalAlignment="Center"/>
+
+        </Grid>
+
+        <!-- ========================================= -->
+        <!-- WORKSPACE -->
+        <!-- ========================================= -->
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+
+                <!-- LEFT -->
+                <ColumnDefinition Width="300"/>
+
+                <!-- CENTER -->
+                <ColumnDefinition Width="*"/>
+
+                <!-- RIGHT -->
+                <ColumnDefinition Width="380"/>
+
+            </Grid.ColumnDefinitions>
+
+            <!-- ========================================= -->
+            <!-- LEFT PANEL -->
+            <!-- ========================================= -->
+
+            <Border Grid.Column="0"
+                    Style="{StaticResource GlassCardStyle}"
+                    Margin="0,0,18,0"
+                    Padding="20">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- TITLE -->
+                    <TextBlock Text="Areas"
+                               Style="{StaticResource SectionTitleStyle}"/>
+
+                    <!-- SEARCH -->
+                    <common:SearchBox
+                        x:Name="txtSearchArea"
+                        Grid.Row="1"
+                        Margin="0,18,0,20"
+                        Placeholder="Search area..."
+                        TextChanged="txtSearchArea_TextChanged"/>
+
+                    <!-- AREA LIST -->
+                    <ListBox x:Name="lstAreas"
+                             Grid.Row="2"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             SelectionChanged="lstAreas_SelectionChanged">
+
+                        <ListBox.ItemTemplate>
+
+                            <DataTemplate>
+
+                                <Border Background="#55FFFFFF"
+                                        CornerRadius="22"
+                                        Padding="18"
+                                        Margin="0,0,0,14">
+
+                                    <StackPanel>
+
+                                        <TextBlock Text="{Binding AreaName}"
+                                                   Style="{StaticResource LabelStyle}"
+                                                   FontSize="15"/>
+
+                                        <TextBlock Text="{Binding StayCount,
+                                                                  StringFormat={}{0} Listings}"
+                                                   Style="{StaticResource CaptionStyle}"
+                                                   Margin="0,6,0,0"/>
+
+                                    </StackPanel>
+
+                                </Border>
+
+                            </DataTemplate>
+
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                </Grid>
+
+            </Border>
+
+            <!-- ========================================= -->
+            <!-- CENTER PANEL -->
+            <!-- ========================================= -->
+
+            <Border Grid.Column="1"
+                    Style="{StaticResource GlassCardStyle}"
+                    Margin="0,0,18,0"
+                    Padding="24">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- HEADER -->
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+
+                            <TextBlock Text="Attractions"
+                                       Style="{StaticResource SectionTitleStyle}"/>
+
+                            <TextBlock Text="Gangnam District"
+                                       Style="{StaticResource CaptionStyle}"
+                                       Margin="0,4,0,0"/>
+
+                        </StackPanel>
+
+                        <!-- BUTTON -->
+                        <Button 
+                            Click="btnCreateAttraction_Click"
+                            Grid.Column="1"
+                                Content="+ Add Attraction"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Width="180"
+                                Height="48"
+                                VerticalAlignment="Center"/>
+
+                    </Grid>
+
+                    <!-- TOOLBAR -->
+                    <Grid Grid.Row="1"
+                          Margin="0,24,0,24">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="320"/>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="180"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- SEARCH -->
+                        <common:SearchBox
+                            x:Name="txtSearchAttraction"
+                            Placeholder="Search attraction..."
+                            TextChanged="txtSearchAttraction_TextChanged"/>
+
+                        <Border Grid.Column="1"
+                                Margin="16,0,0,0"
+                                Background="White"
+                                BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="14"
+                                Height="48">
+
+                            <Grid Margin="14,0">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- ICON -->
+                                <TextBlock Text="⇅"
+                                           FontSize="15"
+                                           Foreground="#8B7D7D"
+                                           VerticalAlignment="Center"/>
+
+                                <!-- COMBO -->
+                                <ComboBox x:Name="cboSortAttraction"
+                                          Style="{StaticResource ModernComboBoxStyle}"
+                                          Grid.Column="1"
+                                          Margin="12,0,0,0"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          FontSize="14"
+                                          Foreground="{StaticResource TextBrush}"
+                                          VerticalContentAlignment="Center"
+                                          SelectedIndex="0"
+                                          SelectionChanged="cboSortAttraction_SelectionChanged">
+
+                                    <ComboBoxItem Content="Newest"/>
+                                    <ComboBoxItem Content="A-Z"/>
+                                    <ComboBoxItem Content="Z-A"/>
+                                    <ComboBoxItem Content="Most Listings"/>
+
+                                </ComboBox>
+
+                            </Grid>
+
+                        </Border>
+                    </Grid>
+
+                    <!-- CONTENT -->
+                    <ListBox x:Name="lstAttractions"
+                             Grid.Row="2"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             SelectionChanged="lstAttractions_SelectionChanged">
+
+                        <ListBox.ItemTemplate>
+
+                            <DataTemplate>
+
+                                <Border Background="#66FFFFFF"
+                                        CornerRadius="24"
+                                        Padding="22"
+                                        Margin="0,0,0,18">
+
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- ICON -->
+                                        <Border Width="54"
+                                                Height="54"
+                                                Background="#FFF0F0"
+                                                CornerRadius="27">
+
+                                            <TextBlock Text="📍"
+                                                       FontSize="24"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+
+                                        </Border>
+
+                                        <!-- INFO -->
+                                        <StackPanel Grid.Column="1"
+                                                    Margin="12,0,0,0">
+
+                                            <TextBlock Text="{Binding AttractionName}"
+                                                       Style="{StaticResource LabelStyle}"
+                                                       FontSize="15"/>
+
+                                            <TextBlock Text="{Binding Address}"
+                                                       Style="{StaticResource CaptionStyle}"
+                                                       Margin="0,6,0,0"/>
+
+                                            <TextBlock Text="{Binding AreaName}"
+                                                       Style="{StaticResource CaptionStyle}"
+                                                       Margin="0,6,0,0"/>
+
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                </Border>
+
+                            </DataTemplate>
+
+                        </ListBox.ItemTemplate>
+
+                    </ListBox>
+
+                </Grid>
+
+            </Border>
+
+            <!-- ========================================= -->
+            <!-- RIGHT PANEL -->
+            <!-- ========================================= -->
+
+            <Border Grid.Column="2"
+                    Style="{StaticResource GlassCardStyle}"
+                    Padding="24">
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                    <Grid>
+
+                        <!-- ========================================= -->
+                        <!-- AREA INSPECTOR -->
+                        <!-- ========================================= -->
+
+                        <StackPanel x:Name="pnlAreaInspector">
+
+                            <!-- HEADER -->
+                            <TextBlock x:Name="txtInspectorTitle"
+                                       Text="Inspector"
+                                       Style="{StaticResource SectionTitleStyle}"/>
+
+                            <TextBlock x:Name="txtInspectorType"
+                                       Text="Area Details"
+                                       Style="{StaticResource CaptionStyle}"
+                                       Margin="0,6,0,30"/>
+
+                            <!-- IMAGE -->
+                            <Border Height="180"
+                                    Background="#FFF0F0"
+                                    CornerRadius="28">
+
+                                <TextBlock Text="🗺"
+                                           FontSize="54"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+
+                            </Border>
+
+                            <!-- GENERAL -->
+                            <TextBlock Text="General Information"
+                                       Style="{StaticResource LabelStyle}"
+                                       FontSize="15"
+                                       Margin="0,28,0,16"/>
+
+                            <!-- AREA NAME -->
+                            <TextBlock Text="Area Name"
+                                       Style="{StaticResource LabelStyle}"/>
+
+                            <TextBox x:Name="txtAreaName"
+                                     Style="{StaticResource SoftTextBoxStyle}"
+                                     Margin="0,8,0,20"/>
+
+                            <!-- METADATA -->
+                            <TextBlock Text="Statistics"
+                                       Style="{StaticResource LabelStyle}"
+                                       FontSize="15"
+                                       Margin="0,10,0,16"/>
+
+                            <Border Background="#FFF8F4"
+                                    CornerRadius="20"
+                                    Padding="18">
+
+                                <StackPanel>
+
+                                    <Grid Margin="0,0,0,10">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Listings"
+                                                   Style="{StaticResource CaptionStyle}"/>
+
+                                        <TextBlock x:Name="txtAreaListings"
+                                                   Grid.Column="1"
+                                                   Text="0"
+                                                   Style="{StaticResource CaptionStyle}"/>
+
+                                    </Grid>
+
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="Attractions"
+                                                   Style="{StaticResource CaptionStyle}"/>
+
+                                        <TextBlock x:Name="txtAreaAttractions"
+                                                   Grid.Column="1"
+                                                   Text="0"
+                                                   Style="{StaticResource CaptionStyle}"/>
+
+                                    </Grid>
+
+                                </StackPanel>
+
+                            </Border>
+
+                            <!-- ACTIONS -->
+                            <Grid Margin="0,32,0,0">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0"
+                                        Content="Delete"
+                                        Style="{StaticResource OutlineButtonStyle}"
+                                        Margin="0,0,8,0"
+                                        Height="50"
+                                        Click="btnDeleteArea_Click"/>
+
+                                <Button Grid.Column="1"
+                                        Content="Save Changes"
+                                        Style="{StaticResource PrimaryButtonStyle}"
+                                        Margin="8,0,0,0"
+                                        Height="50"
+                                        Click="btnSaveArea_Click"/>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                        <!-- ========================================= -->
+                        <!-- ATTRACTION INSPECTOR -->
+                        <!-- ========================================= -->
+
+                        <StackPanel x:Name="pnlAttractionInspector"
+                                    Visibility="Collapsed">
+
+                            <TextBlock Text="Inspector"
+                                       Style="{StaticResource SectionTitleStyle}"/>
+
+                            <TextBlock Text="Attraction Details"
+                                       Style="{StaticResource CaptionStyle}"
+                                       Margin="0,6,0,30"/>
+
+                            <Border Height="180"
+                                    Background="#FFF0F0"
+                                    CornerRadius="28">
+
+                                <TextBlock Text="📍"
+                                           FontSize="54"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+
+                            </Border>
+
+                            <TextBlock Text="General Information"
+                                       Style="{StaticResource LabelStyle}"
+                                       FontSize="15"
+                                       Margin="0,28,0,16"/>
+
+                            <TextBlock Text="Attraction Name"
+                                       Style="{StaticResource LabelStyle}"/>
+
+                            <TextBox x:Name="txtAttractionName"
+                                     Style="{StaticResource SoftTextBoxStyle}"
+                                     Margin="0,8,0,20"/>
+
+                            <TextBlock Text="Address"
+                                       Style="{StaticResource LabelStyle}"/>
+
+                            <TextBox x:Name="txtAttractionAddress"
+                                     Style="{StaticResource SoftTextAreaStyle}"
+                                     Margin="0,8,0,20"/>
+
+                            <Grid Margin="0,32,0,0">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0"
+                                        Content="Delete"
+                                        Style="{StaticResource OutlineButtonStyle}"
+                                        Margin="0,0,8,0"
+                                        Height="50"
+                                        Click="btnDeleteAttraction_Click"/>
+
+                                <Button Grid.Column="1"
+                                        Content="Save Changes"
+                                        Style="{StaticResource PrimaryButtonStyle}"
+                                        Margin="8,0,0,0"
+                                        Height="50"
+                                        Click="btnSaveAttraction_Click"/>
+
+                            </Grid>
+
+                        </StackPanel>
+
+                    </Grid>
+
+                </ScrollViewer>
+
+            </Border>
+
+        </Grid>
+
+    </Grid>
+
+</Page>

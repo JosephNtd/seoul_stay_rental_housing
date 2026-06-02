@@ -1,0 +1,110 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- GLASS CARD -->
+    <Style x:Key="GlassCardStyle"
+       TargetType="Border">
+
+        <Setter Property="Background"
+            Value="#AAFFFFFF"/>
+
+        <Setter Property="CornerRadius"
+            Value="28"/>
+
+        <Setter Property="Padding"
+            Value="28"/>
+
+        <Setter Property="Margin"
+            Value="10"/>
+
+        <Setter Property="BorderBrush"
+            Value="#22FFFFFF"/>
+
+        <Setter Property="BorderThickness"
+            Value="1"/>
+
+        <Setter Property="Effect">
+
+            <Setter.Value>
+
+                <DropShadowEffect BlurRadius="30"
+                              ShadowDepth="0"
+                              Opacity="0.08"
+                              Color="#D89C9D"/>
+
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+
+    <!-- STAT CARD -->
+    <Style x:Key="StatCardStyle"
+       TargetType="Border"
+       BasedOn="{StaticResource GlassCardStyle}">
+
+        <Setter Property="MinHeight"
+            Value="160"/>
+
+    </Style>
+
+    <!-- SECTION CARD -->
+    <Style x:Key="SectionCardStyle"
+       TargetType="Border">
+
+        <Setter Property="Background"
+            Value="#FDF9F7"/>
+
+        <Setter Property="CornerRadius"
+            Value="24"/>
+
+        <Setter Property="Padding"
+            Value="24"/>
+
+        <Setter Property="Margin"
+            Value="8"/>
+
+    </Style>
+
+    <!-- HOVER CARD -->
+    <Style x:Key="HoverCardStyle"
+       TargetType="Border"
+       BasedOn="{StaticResource GlassCardStyle}">
+
+        <Style.Triggers>
+
+            <Trigger Property="IsMouseOver"
+                 Value="True">
+
+                <Setter Property="RenderTransform">
+
+                    <Setter.Value>
+
+                        <ScaleTransform ScaleX="1.02"
+                                    ScaleY="1.02"/>
+
+                    </Setter.Value>
+
+                </Setter>
+
+            </Trigger>
+
+        </Style.Triggers>
+
+    </Style>
+
+    <!-- SOFT PANEL -->
+    <Style x:Key="SoftPanelStyle"
+       TargetType="Border">
+
+        <Setter Property="Background"
+            Value="#FAF7F2"/>
+
+        <Setter Property="CornerRadius"
+            Value="22"/>
+
+        <Setter Property="Padding"
+            Value="20"/>
+
+    </Style>
+
+</ResourceDictionary>

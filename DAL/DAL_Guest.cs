@@ -58,13 +58,10 @@ namespace DAL
                 // Không cho sửa Username, Password
 
                 g.PreferredLanguage = guest.PreferredLanguage;
+                string oldNationalID = g.NationalID;
                 g.NationalID = guest.NationalID;
-                // Nếu thay đổi NationalID -> reset Verified
-                if (g.NationalID != guest.NationalID)
-                {
+                if (oldNationalID != guest.NationalID)
                     g.NationalIDVerified = false;
-                    g.NationalID = guest.NationalID;
-                }
 
                 db.SubmitChanges();
                 return true;
@@ -113,6 +110,26 @@ namespace DAL
                 });
 
                 return data;
+            }
+        }
+        public List<DTO_GuestLookup> GetLookupData()
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                return
+                    (from g in db.Guests
+                     join u in db.Users
+                         on g.UserID equals u.ID
+                     orderby u.FullName
+                     select new DTO_GuestLookup
+                     {
+                         UserID = u.ID,
+                         FullName = u.FullName,
+                         Email = u.Email,
+                         PhoneNumber = u.PhoneNumber,
+                         Country = u.Country
+                     })
+                    .ToList();
             }
         }
     }

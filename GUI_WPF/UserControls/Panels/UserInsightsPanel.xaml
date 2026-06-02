@@ -1,0 +1,354 @@
+﻿<UserControl x:Class="GUI_WPF.UserControls.Panels.UserInsightsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Height="1069"
+             Width="363">
+
+    <!-- ROOT -->
+    <Border Background="#AAFFFFFF"
+            CornerRadius="34"
+            Padding="28">
+
+        <Border.Effect>
+
+            <DropShadowEffect BlurRadius="24"
+                              ShadowDepth="0"
+                              Opacity="0.06"/>
+
+        </Border.Effect>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+              HorizontalScrollBarVisibility="Disabled">
+
+            <StackPanel>
+
+                <!-- ========================================= -->
+                <!-- HEADER -->
+                <!-- ========================================= -->
+
+                <StackPanel>
+
+                    <TextBlock Text="User Insights"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               Foreground="#3A3131"/>
+
+                    <TextBlock Text="Behavioral &amp; financial intelligence"
+                               Margin="0,8,0,0"
+                               FontSize="13"
+                               Foreground="#A29595"/>
+
+                </StackPanel>
+
+                <!-- ========================================= -->
+                <!-- TRUST SCORE -->
+                <!-- ========================================= -->
+
+                <Border Background="#FFF8F4"
+                        CornerRadius="28"
+                        Padding="24"
+                        Margin="0,28,0,0">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Trust Score"
+                                   FontSize="13"
+                                   Foreground="#A29595"/>
+
+                        <Grid Margin="0,18,0,0">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- SCORE -->
+                            <StackPanel>
+
+                                <TextBlock x:Name="txtTrustScore"
+                                           Text="92"
+                                           FontSize="42"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <TextBlock x:Name="txtTrustLabel"
+                                           Text="Excellent"
+                                           Margin="0,6,0,0"
+                                           FontSize="13"
+                                           FontWeight="SemiBold"
+                                           Foreground="#47A87B"/>
+
+                            </StackPanel>
+
+                            <!-- CIRCLE -->
+                            <Border Width="78"
+                                    Height="78"
+                                    Background="#E8F8F0"
+                                    CornerRadius="39"
+                                    HorizontalAlignment="Right">
+
+                                <TextBlock Text="🛡"
+                                           FontSize="32"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+
+                            </Border>
+
+                        </Grid>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- ========================================= -->
+                <!-- KPI GRID -->
+                <!-- ========================================= -->
+
+                <UniformGrid Columns="2"
+                             Margin="0,22,0,0">
+
+                    <!-- AVG RATING -->
+                    <Border Background="#FFF8F4"
+                            CornerRadius="24"
+                            Padding="20"
+                            Margin="0,0,12,12">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Avg Rating"
+                                       FontSize="12"
+                                       Foreground="#A29595"/>
+
+                            <TextBlock x:Name="txtRating"
+                                       Text="4.8 ★"
+                                       Margin="0,10,0,0"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                    <!-- LOYALTY -->
+                    <Border Background="#FFF8F4"
+                            CornerRadius="24"
+                            Padding="20"
+                            Margin="0,0,0,12">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Loyalty"
+                                       FontSize="12"
+                                       Foreground="#A29595"/>
+
+                            <TextBlock x:Name="txtLoyalty"
+                                       Text="1240 pts"
+                                       Margin="0,10,0,0"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                    <!-- TOTAL NIGHTS -->
+                    <Border Background="#FFF8F4"
+                            CornerRadius="24"
+                            Padding="20"
+                            Margin="0,0,12,0">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Total Nights"
+                                       FontSize="12"
+                                       Foreground="#A29595"/>
+
+                            <TextBlock x:Name="txtNights"
+                                       Text="182"
+                                       Margin="0,10,0,0"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                    <!-- CANCEL RATE -->
+                    <Border Background="#FFF8F4"
+                            CornerRadius="24"
+                            Padding="20">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Cancellation"
+                                       FontSize="12"
+                                       Foreground="#A29595"/>
+
+                            <TextBlock x:Name="txtCancellation"
+                                       Text="2.1%"
+                                       Margin="0,10,0,0"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </UniformGrid>
+
+                <!-- ========================================= -->
+                <!-- BEHAVIOR -->
+                <!-- ========================================= -->
+
+                <Border Background="#FFF8F4"
+                        CornerRadius="28"
+                        Padding="24"
+                        Margin="0,24,0,0">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Behavior Summary"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="#3A3131"/>
+
+                        <TextBlock x:Name="txtBehavior"
+                                   Text="This user consistently completes stays, maintains high host ratings, and rarely cancels reservations."
+                                   Margin="0,18,0,0"
+                                   FontSize="13"
+                                   TextWrapping="Wrap"
+                                   LineHeight="24"
+                                   Foreground="#8B7D7D"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- ========================================= -->
+                <!-- SMART TAGS -->
+                <!-- ========================================= -->
+
+                <Border Background="#FFF8F4"
+                        CornerRadius="28"
+                        Padding="24"
+                        Margin="0,24,0,0">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Smart Tags"
+                                   FontSize="18"
+                                   FontWeight="Bold"
+                                   Foreground="#3A3131"/>
+
+                        <WrapPanel Margin="0,18,0,0">
+
+                            <!-- TAG -->
+                            <Border Background="#FCECEC"
+                                    CornerRadius="16"
+                                    Padding="14,7"
+                                    Margin="0,0,10,10">
+
+                                <TextBlock x:Name="txtTag1"
+                                           Text="High Value"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Foreground="#C97D7D"/>
+
+                            </Border>
+
+                            <!-- TAG -->
+                            <Border Background="#EEF3FF"
+                                    CornerRadius="16"
+                                    Padding="14,7"
+                                    Margin="0,0,10,10">
+
+                                <TextBlock x:Name="txtTag2"
+                                           Text="Frequent Traveler"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Foreground="#6484D6"/>
+
+                            </Border>
+
+                            <!-- TAG -->
+                            <Border Background="#E8F8F0"
+                                    CornerRadius="16"
+                                    Padding="14,7"
+                                    Margin="0,0,10,10">
+
+                                <TextBlock x:Name="txtTag3"
+                                           Text="Trusted"
+                                           FontSize="12"
+                                           FontWeight="SemiBold"
+                                           Foreground="#47A87B"/>
+
+                            </Border>
+
+                        </WrapPanel>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- ========================================= -->
+                <!-- RISK -->
+                <!-- ========================================= -->
+
+                <Border Background="#FFF8F4"
+                        CornerRadius="28"
+                        Padding="24"
+                        Margin="0,24,0,0">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+
+                            <TextBlock Text="Risk Assessment"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBlock x:Name="txtRisk"
+                                       Text="Low Risk"
+                                       Margin="0,12,0,0"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Foreground="#47A87B"/>
+
+                        </StackPanel>
+
+                        <Border Grid.Column="1"
+                                Width="62"
+                                Height="62"
+                                Background="#E8F8F0"
+                                CornerRadius="31">
+
+                            <TextBlock x:Name="txtRiskIcon"
+                                       Text="✔"
+                                       FontSize="26"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="#47A87B"/>
+
+                        </Border>
+
+                    </Grid>
+
+                </Border>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Border>
+
+</UserControl>

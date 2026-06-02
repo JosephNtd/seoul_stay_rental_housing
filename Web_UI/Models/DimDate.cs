@@ -13,7 +13,7 @@ public partial class DimDate
     [Column("ID")]
     public long Id { get; set; }
 
-    public DateOnly Date { get; set; }
+    public DateTime Date { get; set; }
 
     public int Year { get; set; }
 

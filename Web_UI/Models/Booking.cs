@@ -22,9 +22,9 @@ public partial class Booking
     [Column("ItemID")]
     public long ItemId { get; set; }
 
-    public DateOnly CheckInDate { get; set; }
+    public DateTime CheckInDate { get; set; }
 
-    public DateOnly CheckOutDate { get; set; }
+    public DateTime CheckOutDate { get; set; }
 
     public int NumberOfGuests { get; set; }
 

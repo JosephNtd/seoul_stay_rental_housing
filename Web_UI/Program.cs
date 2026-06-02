@@ -11,9 +11,7 @@ namespace Web_UI
 
             // Add services to the container.
             builder.Services.AddRazorPages();
-            builder.Services.AddDbContext<SeoulStayContext>(options =>
-            options.UseSqlServer(
-            builder.Configuration.GetConnectionString("DefaultConnection"),
+            builder.Services.AddDbContext<SeoulStayContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
             sqlOptions =>
             {
                 sqlOptions.EnableRetryOnFailure();
@@ -29,13 +27,14 @@ namespace Web_UI
             builder.Services.AddSession();
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            //if (!app.Environment.IsDevelopment())
-            //{
-            //    app.UseExceptionHandler("/Error");
-            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //    app.UseHsts();
-            //}
+            //Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
+            Console.WriteLine(builder.Environment.EnvironmentName);
 
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
@@ -46,7 +45,6 @@ namespace Web_UI
             app.UseAuthorization();
 
             app.MapRazorPages();
-
             app.Run();
         }
     }

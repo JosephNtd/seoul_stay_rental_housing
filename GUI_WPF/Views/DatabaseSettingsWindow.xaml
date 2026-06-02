@@ -1,0 +1,186 @@
+﻿<Window x:Class="GUI_WPF.Views.DatabaseSettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Database Settings"
+        Height="650"
+        Width="700"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#F8F6F4">
+
+    <Grid Margin="24">
+
+        <Grid.RowDefinitions>
+
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="*"/>
+
+            <RowDefinition Height="Auto"/>
+
+        </Grid.RowDefinitions>
+
+        <!-- HEADER -->
+
+        <StackPanel Margin="0,0,0,24">
+
+            <TextBlock Text="Database Settings"
+                       FontSize="28"
+                       FontWeight="Bold"/>
+
+            <TextBlock Text="Configure SQL Server connection for Seoul Stay."
+                       Margin="0,6,0,0"
+                       Foreground="#666"/>
+
+        </StackPanel>
+
+        <!-- CONTENT -->
+
+        <Border Grid.Row="1"
+                Background="White"
+                CornerRadius="12"
+                Padding="24">
+
+            <ScrollViewer>
+
+                <StackPanel>
+
+                    <!-- SERVER -->
+
+                    <TextBlock Text="Server Name"
+                               FontWeight="SemiBold"/>
+                    <ComboBox x:Name="cbServer"
+                              Foreground="Black"
+                              Height="40"
+                              SelectionChanged="cbServer_SelectionChanged"
+                              IsEditable="True"/>
+
+                    <!-- DATABASE -->
+
+                    <TextBlock Text="Database Name"
+                               FontWeight="SemiBold"/>
+
+                    <ComboBox x:Name="cbDatabase"
+                              Height="40"
+                              IsEditable="True"
+                              Foreground="Black"
+                              SelectionChanged="ConnectionInput_Changed"/>
+                    <!-- AUTH -->
+
+                    <TextBlock Text="Authentication"
+                               FontWeight="SemiBold"/>
+
+                    <StackPanel Orientation="Horizontal"
+                                Margin="0,8,0,18">
+
+                        <RadioButton x:Name="rbWindowsAuth"
+                                     Content="Windows Authentication"
+                                     IsChecked="True"/>
+
+                        <RadioButton x:Name="rbSqlAuth"
+                                     Content="SQL Server Authentication"
+                                     Margin="30,0,0,0"/>
+
+                    </StackPanel>
+
+                    <!-- USERNAME -->
+
+                    <TextBlock Text="Username"
+                               FontWeight="SemiBold"/>
+
+                    <TextBox x:Name="txtUsername"
+                             TextChanged="ConnectionInput_Changed"
+                             Style="{StaticResource SoftTextBoxStyle}"
+                             Height="40"
+                             Margin="0,8,0,18"
+                             IsEnabled="False"/>
+
+                    <!-- PASSWORD -->
+
+                    <TextBlock Text="Password"
+                               FontWeight="SemiBold"/>
+
+                    <PasswordBox x:Name="txtPassword"
+                                 PasswordChanged="ConnectionInput_Changed"
+                                 Style="{StaticResource SoftPasswordBoxStyle}"
+                                 Height="40"
+                                 Margin="0,8,0,18"
+                                 IsEnabled="False"/>
+
+                    <!-- CONNECTION STRING -->
+
+                    <TextBlock Text="Generated Connection String"
+                               FontWeight="SemiBold"/>
+
+                    <TextBox x:Name="txtConnectionString"
+                             Style="{StaticResource SoftTextAreaStyle}"
+                             Margin="0,8,0,0"
+                             Height="100"
+                             TextWrapping="Wrap"
+                             IsReadOnly="True"
+                             VerticalScrollBarVisibility="Auto"/>
+
+                </StackPanel>
+
+            </ScrollViewer>
+
+        </Border>
+
+        <!-- BUTTONS -->
+
+        <Grid Grid.Row="2"
+              Margin="0,24,0,0">
+
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition Width="*"/>
+
+                <ColumnDefinition Width="Auto"/>
+
+                <ColumnDefinition Width="Auto"/>
+
+                <ColumnDefinition Width="Auto"/>
+
+            </Grid.ColumnDefinitions>
+
+            <!-- STATUS -->
+
+            <TextBlock x:Name="txtStatus"
+                       VerticalAlignment="Center"
+                       Foreground="#2AA876"
+                       FontWeight="SemiBold"/>
+
+            <!-- TEST -->
+
+            <Button Grid.Column="1"
+                    Style="{StaticResource IconButtonStyle}"
+                    Content="Test Connection"
+                    Width="140"
+                    Height="42"
+                    Margin="10,0"
+                    Click="btnTestConnection_Click"/>
+
+            <!-- SAVE -->
+
+            <Button Grid.Column="2"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Content="Save"
+                    Width="100"
+                    Height="42"
+                    Margin="10,0"
+                    Click="btnSave_Click"/>
+
+            <!-- CLOSE -->
+
+            <Button Grid.Column="3"
+                    Style="{StaticResource OutlineButtonStyle}"
+                    Content="Close"
+                    Width="100"
+                    Height="42"
+                    Click="btnClose_Click"/>
+
+        </Grid>
+
+    </Grid>
+
+</Window>

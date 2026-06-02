@@ -1,0 +1,746 @@
+﻿<UserControl x:Class="GUI_WPF.UserControls.Drawers.ListingEditorDrawer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cards="clr-namespace:GUI_WPF.UserControls.Cards"
+             mc:Ignorable="d"
+             Width="1180"
+             Background="Transparent">
+
+    <Grid>
+
+        <!-- ================================================= -->
+        <!-- OVERLAY -->
+        <!-- ================================================= -->
+
+        <Border Background="#66000000"/>
+
+        <!-- ================================================= -->
+        <!-- DRAWER -->
+        <!-- ================================================= -->
+
+        <Border Width="1120"
+                HorizontalAlignment="Right"
+                Background="#FFFDFC"
+                CornerRadius="36,0,0,36">
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                
+                <!-- LEFT NAV -->
+
+
+                <!-- LEFT NAV -->
+                <Border Background="#FAF4F1"
+        CornerRadius="36,0,0,36">
+
+                    <Grid Margin="24">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- HEADER -->
+                        <StackPanel>
+                            <TextBlock Text="Listing Editor"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="#322825"/>
+                            <TextBlock x:Name="txtDrawerMode"
+                       Margin="0,10,0,0"
+                       Text="Create New Listing"
+                       FontSize="14"
+                       Foreground="#8D817C"/>
+                        </StackPanel>
+
+                        <!-- NAV TABS -->
+                        <StackPanel Grid.Row="1"
+                    Margin="0,42,0,0"
+                    x:Name="TabNavPanel">
+
+                            <!-- Details -->
+                            <Button x:Name="btnTabDetails"
+                    Height="58"
+                    Margin="0,0,0,14"
+                    Click="btnTabDetails_Click"
+                    Tag="Details">
+
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border x:Name="bd"
+                                            Background="#7B5455"
+                                            CornerRadius="20"
+                                            Padding="22,0">
+                                                        <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center">
+                                                            <TextBlock Text="🏠" FontSize="16"/>
+                                                            <TextBlock Text="Details"
+                                                       Margin="14,0,0,0"
+                                                       FontSize="15"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="White"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <!-- Amenities -->
+                            <Button x:Name="btnTabAmenities"
+                    Height="58"
+                    Margin="0,0,0,14"
+                    Click="btnTabAmenities_Click"
+                    Tag="Amenities">
+
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border x:Name="bd"
+                                            Background="#FFFFFF"
+                                            BorderBrush="#EADFD8"
+                                            BorderThickness="1"
+                                            CornerRadius="20"
+                                            Padding="22,0">
+                                                        <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center">
+                                                            <TextBlock Text="✨" FontSize="16"/>
+                                                            <TextBlock Text="Amenities"
+                                                       Margin="14,0,0,0"
+                                                       FontSize="15"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#4E413D"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <!-- Attractions -->
+                            <Button x:Name="btnTabAttractions"
+                    Height="58"
+                    Margin="0,0,0,14"
+                    Click="btnTabAttractions_Click"
+                    Tag="Attractions">
+
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border x:Name="bd"
+                                            Background="#FFFFFF"
+                                            BorderBrush="#EADFD8"
+                                            BorderThickness="1"
+                                            CornerRadius="20"
+                                            Padding="22,0">
+                                                        <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center">
+                                                            <TextBlock Text="📍" FontSize="16"/>
+                                                            <TextBlock Text="Attractions"
+                                                       Margin="14,0,0,0"
+                                                       FontSize="15"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#4E413D"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <!-- Pictures -->
+                            <Button x:Name="btnTabPictures"
+                                    Height="58"
+                                    Click="btnTabPictures_Click"
+                                    Tag="Pictures">
+
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border x:Name="bd"
+                                            Background="#FFFFFF"
+                                            BorderBrush="#EADFD8"
+                                            BorderThickness="1"
+                                            CornerRadius="20"
+                                            Padding="22,0">
+                                                        <StackPanel Orientation="Horizontal"
+                                                    VerticalAlignment="Center">
+                                                            <TextBlock Text="🖼" FontSize="16"/>
+                                                            <TextBlock Text="Pictures"
+                                                       Margin="14,0,0,0"
+                                                       FontSize="15"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="#4E413D"/>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                        </StackPanel>
+
+                        <!-- FOOTER -->
+                        <StackPanel Grid.Row="2">
+                            <Button x:Name="btnSaveListing"
+                    Height="54"
+                    Content="Save Listing"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Click="btnSaveListing_Click"/>
+
+                            <Button x:Name="btnDeleteListing"
+                    Height="54"
+                    Margin="0,14,0,0"
+                    Content="Delete Listing"
+                    Foreground="#C24141"
+                    Background="#FFF2F2"
+                    BorderBrush="#F2D2D2"
+                    BorderThickness="1"
+                    Click="btnDeleteListing_Click"/>
+
+                            <Button x:Name="btnClose"
+                    Margin="0,14,0,0"
+                    Height="54"
+                    Content="Close"
+                    Background="#F3ECE8"
+                    BorderThickness="0"
+                    Click="btnClose_Click"/>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+
+                <!-- CONTENT -->
+                
+
+                <Grid Grid.Column="1"
+                      Margin="34">
+
+                    
+                    <!-- DETAILS PAGE -->
+                    
+
+                    <ScrollViewer x:Name="DetailsPanel"
+                                  VerticalScrollBarVisibility="Auto">
+
+                        <StackPanel>
+
+                            <!-- HERO -->
+
+                            <Border Background="#F8F2EE"
+                                    CornerRadius="30"
+                                    Padding="28">
+
+                                <Grid>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="280"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- LEFT -->
+
+                                    <StackPanel>
+
+                                        <TextBlock Text="Listing Information"
+                                                   FontSize="28"
+                                                   FontWeight="Bold"
+                                                   Foreground="#2F2622"/>
+
+                                        <TextBlock Margin="0,10,0,0"
+                                                   Text="Create premium stays with rich details and policies."
+                                                   FontSize="14"
+                                                   Foreground="#8B7F79"/>
+
+                                    </StackPanel>
+
+                                    <!-- THUMBNAIL -->
+
+                                    <Border Grid.Column="1"
+                                            Width="240"
+                                            Height="150"
+                                            CornerRadius="24"
+                                            Background="#EEE4DE"
+                                            HorizontalAlignment="Right">
+
+                                        <Image x:Name="imgPreview"
+                                               Stretch="UniformToFill"/>
+                                    </Border>
+
+                                </Grid>
+
+                            </Border>
+
+                            <!-- BASIC -->
+
+                            <Border Margin="0,28,0,0"
+                                    Background="White"
+                                    BorderBrush="#EFE3DD"
+                                    BorderThickness="1"
+                                    CornerRadius="28"
+                                    Padding="30">
+
+                                <StackPanel>
+
+                                    <TextBlock Text="Basic Information"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Foreground="#322825"/>
+
+                                    <!-- TITLE -->
+
+                                    <TextBlock Margin="0,24,0,8"
+                                               Text="Listing Title"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"/>
+
+                                    <TextBox x:Name="txtTitle"
+                                             Height="56"
+                                             FontSize="15"/>
+
+                                    <!-- TYPE -->
+
+                                    <Grid Margin="0,22,0,0">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel>
+
+                                            <TextBlock Text="Property Type"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"/>
+
+                                            <ComboBox x:Name="cbPropertyTypes"
+                                                      Margin="0,8,0,0"
+                                                      Height="56"
+                                                      DisplayMemberPath="Name"
+                                                      SelectedValuePath="ID"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="2">
+
+                                            <TextBlock Text="Area"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"/>
+
+                                            <ComboBox x:Name="cbAreas"
+                                                      Margin="0,8,0,0"
+                                                      Height="56"
+                                                      DisplayMemberPath="Name"
+                                                      SelectedValuePath="ID"/>
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                    <!-- ADDRESS -->
+
+                                    <TextBlock Margin="0,22,0,8"
+                                               Text="Approximate Address"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"/>
+
+                                    <TextBox x:Name="txtApproximateAddress"
+                                             Height="56"
+                                             FontSize="15"/>
+
+                                    <TextBlock Margin="0,22,0,8"
+                                               Text="Exact Address"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"/>
+
+                                    <TextBox x:Name="txtExactAddress"
+                                             Height="56"
+                                             FontSize="15"/>
+
+                                    <!-- DESCRIPTION -->
+
+                                    <TextBlock Margin="0,22,0,8"
+                                               Text="Description"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"/>
+
+                                    <TextBox x:Name="txtDescription"
+                                             Height="160"
+                                             AcceptsReturn="True"
+                                             TextWrapping="Wrap"
+                                             VerticalScrollBarVisibility="Auto"
+                                             FontSize="14"/>
+
+                                </StackPanel>
+
+                            </Border>
+
+                            <!-- PROPERTY CONFIG -->
+
+                            <Border Margin="0,28,0,0"
+                                    Background="White"
+                                    BorderBrush="#EFE3DD"
+                                    BorderThickness="1"
+                                    CornerRadius="28"
+                                    Padding="30">
+
+                                <StackPanel>
+
+                                    <TextBlock Text="Property Configuration"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Foreground="#322825"/>
+
+                                    <UniformGrid Margin="0,24,0,0"
+                                                 Columns="4">
+
+                                        <StackPanel Margin="0,0,16,0">
+
+                                            <TextBlock Text="Guests"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"/>
+
+                                            <TextBox x:Name="txtCapacity"
+                                                     Margin="0,8,0,0"
+                                                     Height="54"/>
+                                        </StackPanel>
+
+                                        <StackPanel Margin="0,0,16,0">
+
+                                            <TextBlock Text="Beds"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"/>
+
+                                            <TextBox x:Name="txtBeds"
+                                                     Margin="0,8,0,0"
+                                                     Height="54"/>
+                                        </StackPanel>
+
+                                        <StackPanel Margin="0,0,16,0">
+
+                                            <TextBlock Text="Bedrooms"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"/>
+
+                                            <TextBox x:Name="txtBedrooms"
+                                                     Margin="0,8,0,0"
+                                                     Height="54"/>
+                                        </StackPanel>
+
+                                        <StackPanel>
+
+                                            <TextBlock Text="Bathrooms"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"/>
+
+                                            <TextBox x:Name="txtBathrooms"
+                                                     Margin="0,8,0,0"
+                                                     Height="54"/>
+                                        </StackPanel>
+
+                                    </UniformGrid>
+
+                                </StackPanel>
+
+                            </Border>
+
+                            <!-- RULES -->
+
+                            <Border Margin="0,28,0,0"
+                                    Background="White"
+                                    BorderBrush="#EFE3DD"
+                                    BorderThickness="1"
+                                    CornerRadius="28"
+                                    Padding="30">
+
+                                <StackPanel>
+
+                                    <TextBlock Text="Rules &amp; Stay Policies"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               Foreground="#322825"/>
+
+                                    <Grid Margin="0,24,0,0">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="20"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel>
+
+                                            <TextBlock Text="Minimum Nights"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"/>
+
+                                            <TextBox x:Name="txtMinimumNights"
+                                                     Margin="0,8,0,0"
+                                                     Height="54"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="2">
+
+                                            <TextBlock Text="Maximum Nights"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"/>
+
+                                            <TextBox x:Name="txtMaximumNights"
+                                                     Margin="0,8,0,0"
+                                                     Height="54"/>
+                                        </StackPanel>
+
+                                    </Grid>
+
+                                    <TextBlock Margin="0,22,0,8"
+                                               Text="Host Rules"
+                                               FontSize="13"
+                                               FontWeight="SemiBold"/>
+
+                                    <TextBox x:Name="txtHostRules"
+                                             Height="140"
+                                             AcceptsReturn="True"
+                                             TextWrapping="Wrap"
+                                             VerticalScrollBarVisibility="Auto"/>
+
+                                </StackPanel>
+
+                            </Border>
+
+                        </StackPanel>
+
+                    </ScrollViewer>
+
+                    
+                    <!-- AMENITIES -->
+                    
+
+                    <Grid x:Name="AmenitiesPanel"
+                          Visibility="Collapsed">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel>
+
+                            <TextBlock Text="Amenities"
+                                       FontSize="28"
+                                       FontWeight="Bold"
+                                       Foreground="#322825"/>
+
+                            <TextBlock Margin="0,10,0,0"
+                                       Text="Select amenities available in this property."
+                                       FontSize="14"
+                                       Foreground="#8A7E78"/>
+                        </StackPanel>
+
+                        <ScrollViewer Grid.Row="1"
+                                      Margin="0,30,0,0"
+                                      VerticalScrollBarVisibility="Auto">
+
+                            <WrapPanel x:Name="wpAmenities"
+                                       ItemWidth="221"
+                                       ItemHeight="Auto"
+                                       Orientation="Horizontal"/>
+                        </ScrollViewer>
+
+                    </Grid>
+
+                    
+                    <!-- ATTRACTIONS -->
+                    
+
+                    <Grid x:Name="AttractionsPanel"
+                          Visibility="Collapsed">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel>
+
+                                <TextBlock Text="Nearby Attractions"
+                                           FontSize="28"
+                                           FontWeight="Bold"
+                                           Foreground="#322825"/>
+
+                                <TextBlock Margin="0,10,0,0"
+                                           Text="Add nearby destinations and travel distances."
+                                           FontSize="14"
+                                           Foreground="#8A7E78"/>
+                            </StackPanel>
+
+                            <Button x:Name="btnAddAttraction"
+                                    Grid.Column="1"
+                                    Width="180"
+                                    Height="54"
+                                    Content="+ Add Attraction"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    Click="btnAddAttraction_Click"/>
+
+                        </Grid>
+
+                        <!-- SEARCH -->
+
+                        <Border Grid.Row="1"
+                                Margin="0,28,0,0"
+                                Background="#F7F1ED"
+                                CornerRadius="22"
+                                Padding="18">
+
+                            <TextBox x:Name="txtSearchAttraction"
+                                     Height="44"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     FontSize="14"/>
+                        </Border>
+
+                        <!-- LIST -->
+
+                        <ScrollViewer Grid.Row="2"
+                                      Margin="0,24,0,0">
+
+                            <StackPanel x:Name="spAttractions"/>
+                        </ScrollViewer>
+
+                    </Grid>
+
+                    
+                    <!-- PICTURES -->
+                    
+
+                    <Grid x:Name="PicturesPanel"
+                          Visibility="Collapsed">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- HEADER -->
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel>
+
+                                <TextBlock Text="Listing Pictures"
+                                           FontSize="28"
+                                           FontWeight="Bold"
+                                           Foreground="#322825"/>
+
+                                <TextBlock Margin="0,10,0,0"
+                                           Text="Upload premium images to increase conversions."
+                                           FontSize="14"
+                                           Foreground="#8A7E78"/>
+                            </StackPanel>
+
+                            <Button x:Name="btnUploadPictures"
+                                    Grid.Column="1"
+                                    Width="180"
+                                    Height="54"
+                                    Content="+ Upload Images"
+                                    Foreground="White"
+                                    BorderThickness="0"
+                                    Click="btnUploadPictures_Click"/>
+
+                        </Grid>
+
+                        <!-- DROP ZONE -->
+
+                        <Border Grid.Row="1"
+                                Margin="0,28,0,0"
+                                Height="180"
+                                Background="#FBF7F5"
+                                BorderBrush="#E7DAD3"
+                                BorderThickness="2"
+                                CornerRadius="28"
+                                AllowDrop="True"
+                                DragOver="DropZone_DragOver"
+                                Drop="DropZone_Drop">
+
+                            <StackPanel VerticalAlignment="Center">
+
+                                <TextBlock Text="🖼"
+                                           FontSize="42"
+                                           HorizontalAlignment="Center"/>
+
+                                <TextBlock Margin="0,14,0,0"
+                                           Text="Drag &amp; drop listing images here"
+                                           FontSize="18"
+                                           FontWeight="SemiBold"
+                                           HorizontalAlignment="Center"/>
+
+                                <TextBlock Margin="0,10,0,0"
+                                           Text="or click Upload Images"
+                                           FontSize="13"
+                                           Foreground="#8A7D77"
+                                           HorizontalAlignment="Center"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- GALLERY -->
+
+                        <ScrollViewer Grid.Row="2"
+                                      Margin="0,28,0,0">
+
+                            <WrapPanel x:Name="wpPictures"
+                                       ItemWidth="250"
+                                       ItemHeight="270"/>
+                        </ScrollViewer>
+
+                    </Grid>
+
+                </Grid>
+
+            </Grid>
+
+        </Border>
+
+    </Grid>
+
+</UserControl>

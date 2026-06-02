@@ -1,0 +1,231 @@
+﻿ <UserControl x:Class="GUI_WPF.UserControls.Drawers.PropertyTypeDrawer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="420">
+
+    <!-- ===================================================== -->
+    <!-- ROOT -->
+    <!-- ===================================================== -->
+
+    <Border Background="#AAFFFFFF"
+            CornerRadius="32"
+            Padding="28">
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+            <Grid>
+
+                <!-- ================================================= -->
+                <!-- EMPTY -->
+                <!-- ================================================= -->
+
+                <StackPanel x:Name="pnlEmptyState"
+                            x:FieldModifier="public"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+
+                    <Border Width="100"
+                            Height="100"
+                            Background="#FFF0F0"
+                            CornerRadius="50">
+
+                        <TextBlock Text="🏠"
+                                   FontSize="42"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+
+                    </Border>
+
+                    <TextBlock Text="Select Property Type"
+                               Margin="0,24,0,0"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Foreground="#3A3131"/>
+
+                    <TextBlock Text="Choose a property type to edit or create a new one."
+                               Margin="0,12,0,0"
+                               Width="240"
+                               TextAlignment="Center"
+                               FontSize="14"
+                               Foreground="#8B7D7D"
+                               TextWrapping="Wrap"/>
+
+                </StackPanel>
+
+                <!-- ================================================= -->
+                <!-- INSPECTOR -->
+                <!-- ================================================= -->
+
+                <StackPanel x:Name="pnlInspector"
+                            x:FieldModifier="public"
+                            Visibility="Collapsed">
+
+                    <!-- HEADER -->
+                    <TextBlock x:Name="txtTitle"
+                               x:FieldModifier="public"
+                               Text="Edit Property Type"
+                               FontSize="28"
+                               FontWeight="Bold"
+                               Foreground="#3A3131"/>
+
+                    <TextBlock Text="Manage category details and guest presentation"
+                               Margin="0,8,0,30"
+                               FontSize="13"
+                               Foreground="#8B7D7D"/>
+
+                    <!-- ICON -->
+                    <Border Width="110"
+                            Height="110"
+                            Background="#FFF0F0"
+                            CornerRadius="55"
+                            HorizontalAlignment="Center">
+
+                        <Image x:Name="imgPreview"
+                               x:FieldModifier="public"
+                               Stretch="Uniform"
+                               Margin="18"/>
+
+                    </Border>
+
+                    <!-- CHOOSE -->
+                    <Button x:Name="btnChooseIcon"
+                            x:FieldModifier="public"
+                            Content="Choose Icon"
+                            Width="160"
+                            Height="44"
+                            Margin="0,18,0,34"
+                            HorizontalAlignment="Center"
+                            Click="btnChooseIcon_Click"
+                            Style="{StaticResource OutlineButtonStyle}"/>
+
+                    <!-- NAME -->
+                    <TextBlock Text="Property Type Name"
+                               FontWeight="SemiBold"
+                               Foreground="#3A3131"/>
+
+                    <TextBox x:Name="txtName"
+                             x:FieldModifier="public"
+                             Margin="0,10,0,24"
+                             Style="{StaticResource SoftTextBoxStyle}"/>
+
+                    <!-- DESCRIPTION -->
+                    <TextBlock Text="Description"
+                               FontWeight="SemiBold"
+                               Foreground="#3A3131"/>
+
+                    <TextBox x:Name="txtDescription"
+                             x:FieldModifier="public"
+                             Height="140"
+                             Margin="0,10,0,30"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Style="{StaticResource SoftTextAreaStyle}"/>
+
+                    <!-- ================================================= -->
+                    <!-- PREVIEW -->
+                    <!-- ================================================= -->
+
+                    <Border Background="#FFF8F4"
+                            CornerRadius="28"
+                            Padding="22"
+                            Margin="0,0,0,30">
+
+                        <StackPanel>
+
+                            <TextBlock Text="Guest Preview"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Foreground="#3A3131"/>
+
+                            <TextBlock Text="How guests will see this category"
+                                       Margin="0,6,0,24"
+                                       FontSize="12"
+                                       Foreground="#8B7D7D"/>
+
+                            <!-- CARD -->
+                            <Border Background="#AAFFFFFF"
+                                    CornerRadius="24"
+                                    Padding="22">
+
+                                <StackPanel HorizontalAlignment="Center">
+
+                                    <Border Width="74"
+                                            Height="74"
+                                            Background="#FFF0F0"
+                                            CornerRadius="37">
+
+                                        <TextBlock x:Name="txtPreviewEmoji"
+                                                   x:FieldModifier="public"
+                                                   Text="🏡"
+                                                   FontSize="30"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"/>
+
+                                    </Border>
+
+                                    <TextBlock x:Name="txtPreviewName"
+                                               x:FieldModifier="public"
+                                               Text="Apartment"
+                                               Margin="0,18,0,0"
+                                               FontSize="20"
+                                               FontWeight="Bold"
+                                               HorizontalAlignment="Center"
+                                               Foreground="#3A3131"/>
+
+                                    <TextBlock x:Name="txtPreviewDescription"
+                                               x:FieldModifier="public"
+                                               Text="Perfect for solo travelers and modern city stays."
+                                               Margin="0,12,0,0"
+                                               TextAlignment="Center"
+                                               FontSize="13"
+                                               Foreground="#8B7D7D"
+                                               TextWrapping="Wrap"/>
+
+                                </StackPanel>
+
+                            </Border>
+
+                        </StackPanel>
+
+                    </Border>
+
+                    <!-- ACTIONS -->
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- DELETE -->
+                        <Button x:Name="btnDelete"
+                                x:FieldModifier="public"
+                                Content="Delete"
+                                Height="52"
+                                Margin="0,0,10,0"
+                                Click="btnDelete_Click"
+                                Style="{StaticResource OutlineButtonStyle}"/>
+
+                        <!-- SAVE -->
+                        <Button x:Name="btnSave"
+                                x:FieldModifier="public"
+                                Grid.Column="1"
+                                Content="Save Changes"
+                                Height="52"
+                                Margin="10,0,0,0"
+                                Click="btnSave_Click"
+                                Style="{StaticResource PrimaryButtonStyle}"/>
+
+                    </Grid>
+
+                </StackPanel>
+
+            </Grid>
+
+        </ScrollViewer>
+
+    </Border>
+
+</UserControl>

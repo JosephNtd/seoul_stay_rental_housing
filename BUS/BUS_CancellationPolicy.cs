@@ -13,7 +13,7 @@ namespace BUS
         DAL_CancellationPolicy _dal = new DAL_CancellationPolicy();
         public List<ET_CancellationPolicies> GetAll()
         {
-            return _dal.GetAll()
+            return _dal.GetData()
                        .Select(p => new ET_CancellationPolicies
                        {
                            ID = p.ID,

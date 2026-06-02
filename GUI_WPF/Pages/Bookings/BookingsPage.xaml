@@ -1,0 +1,124 @@
+﻿<Page x:Class="GUI_WPF.Pages.Bookings.BookingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:cards="clr-namespace:GUI_WPF.UserControls.Cards"
+      xmlns:panels="clr-namespace:GUI_WPF.UserControls.Panels">
+
+    <Grid Background="#F8F6F4">
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+            <StackPanel Margin="24">
+
+                <!-- TITLE -->
+
+                <Grid Margin="0,0,0,20">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="Bookings"
+                               Style="{StaticResource PageTitleStyle}"
+                               VerticalAlignment="Center"/>
+
+                    <Button Grid.Column="1"
+                            Width="170"
+                            Height="46"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Click="btnNewBooking_Click">
+
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="+"
+                                       FontSize="18"
+                                       FontWeight="Bold"
+                                       Margin="0,0,8,0"/>
+
+                            <TextBlock Text="New Booking"/>
+
+                        </StackPanel>
+
+                    </Button>
+
+                </Grid>
+
+                <!-- STATS -->
+
+                <panels:BookingStatsPanel
+                    x:Name="bookingStatsPanel"
+                    Margin="0,0,0,20"/>
+
+                <!-- FILTER -->
+
+                <Border Style="{StaticResource SectionCardStyle}"
+                        Padding="20"
+                        Margin="0,0,0,20">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+
+                            <ColumnDefinition Width="3*"/>
+
+                            <ColumnDefinition Width="2*"/>
+
+                            <ColumnDefinition Width="Auto"/>
+
+                        </Grid.ColumnDefinitions>
+
+                        <TextBox x:Name="txtSearch"
+                                 Style="{StaticResource SearchTextBoxStyle}"
+                                 Height="40"
+                                 VerticalContentAlignment="Center"
+                                 TextChanged="txtSearch_TextChanged"/>
+
+                        <ComboBox x:Name="cbStatus"
+                                  Grid.Column="1"
+                                  Margin="12,0,0,0"
+                                  Style="{StaticResource ModernComboBoxStyle}"
+                                  Height="40"
+                                  SelectionChanged="cbStatus_SelectionChanged">
+
+                            <ComboBoxItem Content="All"/>
+                            <ComboBoxItem Content="Pending"/>
+                            <ComboBoxItem Content="Confirmed"/>
+                            <ComboBoxItem Content="CheckedIn"/>
+                            <ComboBoxItem Content="Completed"/>
+                            <ComboBoxItem Content="Cancelled"/>
+
+                        </ComboBox>
+
+                        <Button Grid.Column="2"
+                                Margin="0,0,0,0"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Width="50"
+                                Height="50"
+                                Click="btnRefresh_Click">
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../../Assests/Images/refresh_icon.png" 
+                                       Width="16" 
+                                       Height="16" 
+                                       Margin="0,0,8,0" 
+                                       RenderOptions.BitmapScalingMode="HighQuality"/>
+                            </StackPanel>
+
+                        </Button>
+
+                    </Grid>
+
+                </Border>
+
+                <!-- BOOKINGS -->
+
+                <WrapPanel x:Name="wpBookings"/>
+
+            </StackPanel>
+
+        </ScrollViewer>
+
+    </Grid>
+
+</Page>

@@ -8,7 +8,7 @@ namespace BUS
     {
         private DAL_Coupon _dal = new DAL_Coupon();
 
-        public List<ET_Coupons> GetAll() => _dal.GetAll();
+        public List<ET_Coupons> GetAll() => _dal.GetData();
 
         public bool IsCodeExists(string code, long idToIgnore = 0) => _dal.IsCodeExists(code, idToIgnore);
 

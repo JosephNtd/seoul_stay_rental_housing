@@ -37,6 +37,7 @@
     <Reference Include="DevExpress.Data.Desktop.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Drawing.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Images.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Printing.v24.1.Core, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Sparkline.v24.1.Core, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -77,6 +78,12 @@
     </Compile>
     <Compile Include="dlgBankAccount.Designer.cs">
       <DependentUpon>dlgBankAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="hu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="hu.Designer.cs">
+      <DependentUpon>hu.cs</DependentUpon>
     </Compile>
     <Compile Include="UC_LiveSearch.cs">
       <SubType>UserControl</SubType>
@@ -229,8 +236,23 @@
       <DependentUpon>UC_UserManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\PricingCalendarViewModel.cs" />
+    <Compile Include="XtraUserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="XtraUserControl1.Designer.cs">
+      <DependentUpon>XtraUserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ye.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ye.Designer.cs">
+      <DependentUpon>ye.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="dlgBankAccount.resx">
       <DependentUpon>dlgBankAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hu.resx">
+      <DependentUpon>hu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_LiveSearch.resx">
       <DependentUpon>UC_LiveSearch.cs</DependentUpon>
@@ -306,6 +328,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UC_UserManagement.resx">
       <DependentUpon>UC_UserManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraUserControl1.resx">
+      <DependentUpon>XtraUserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ye.resx">
+      <DependentUpon>ye.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

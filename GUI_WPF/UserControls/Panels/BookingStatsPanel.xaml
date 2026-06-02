@@ -1,0 +1,165 @@
+﻿<UserControl x:Class="GUI_WPF.UserControls.Panels.BookingStatsPanel"
+             x:Name="root"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+    <Border Style="{StaticResource SectionCardStyle}"
+            Padding="24">
+
+        <StackPanel>
+
+            <!-- HEADER -->
+
+            <Grid Margin="0,0,0,18">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Booking Overview"
+                           Style="{StaticResource CardTitleStyle}"/>
+
+                <TextBlock Grid.Column="1"
+                           Text="{Binding ElementName=root,
+                                          Path=LastUpdated}"
+                           Style="{StaticResource CaptionStyle}"
+                           VerticalAlignment="Center"/>
+            </Grid>
+
+            <!-- STATS -->
+
+            <UniformGrid Columns="3">
+
+                <!-- TOTAL -->
+
+                <Border Style="{StaticResource StatCardStyle}"
+                        Margin="0,0,12,12">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Total Bookings"
+                                   Style="{StaticResource CaptionStyle}"/>
+
+                        <TextBlock x:Name="txtTotalBookings"
+                                   Margin="0,8,0,0"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Text="0"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- PENDING -->
+
+                <Border Style="{StaticResource StatCardStyle}"
+                        Margin="0,0,12,12">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Pending"
+                                   Style="{StaticResource CaptionStyle}"/>
+
+                        <TextBlock x:Name="txtPending"
+                                   Margin="0,8,0,0"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="#D97706"
+                                   Text="0"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- REVENUE -->
+
+                <Border Style="{StaticResource StatCardStyle}"
+                        Margin="0,0,0,12">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Revenue"
+                                   Style="{StaticResource CaptionStyle}"/>
+
+                        <TextBlock x:Name="txtRevenue"
+                                   Margin="0,8,0,0"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="#059669"
+                                   Text="$0"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- CHECK IN -->
+
+                <Border Style="{StaticResource StatCardStyle}"
+                        Margin="0,0,12,0">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Today's Check-In"
+                                   Style="{StaticResource CaptionStyle}"/>
+
+                        <TextBlock x:Name="txtTodayCheckIn"
+                                   Margin="0,8,0,0"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Text="0"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- CHECK OUT -->
+
+                <Border Style="{StaticResource StatCardStyle}"
+                        Margin="0,0,12,0">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Today's Check-Out"
+                                   Style="{StaticResource CaptionStyle}"/>
+
+                        <TextBlock x:Name="txtTodayCheckOut"
+                                   Margin="0,8,0,0"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Text="0"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- ACTIVE -->
+
+                <Border Style="{StaticResource StatCardStyle}">
+
+                    <StackPanel>
+
+                        <TextBlock Text="Active Stays"
+                                   Style="{StaticResource CaptionStyle}"/>
+
+                        <TextBlock x:Name="txtActiveStays"
+                                   Margin="0,8,0,0"
+                                   FontSize="28"
+                                   FontWeight="Bold"
+                                   Foreground="#2563EB"
+                                   Text="0"/>
+
+                    </StackPanel>
+
+                </Border>
+
+            </UniformGrid>
+
+        </StackPanel>
+
+    </Border>
+
+</UserControl>

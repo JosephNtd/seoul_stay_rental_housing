@@ -25,7 +25,7 @@ public partial class BookingDetail
     [Column("isRefund")]
     public bool IsRefund { get; set; }
 
-    public DateOnly? RefundDate { get; set; }
+    public DateTime? RefundDate { get; set; }
 
     [Column("RefundCancellationPolicyID")]
     public long? RefundCancellationPolicyId { get; set; }

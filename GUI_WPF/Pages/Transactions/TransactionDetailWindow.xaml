@@ -1,0 +1,471 @@
+﻿<Window x:Class="GUI_WPF.Pages.Transactions.TransactionDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUI_WPF.Pages.Transactions"
+        mc:Ignorable="d"
+        Title="Transaction Detail"
+        Height="920"
+        Width="1320"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None">
+    
+    <Border Background="#FFF8F4"
+            CornerRadius="36">
+
+        <Border.Effect>
+
+            <DropShadowEffect BlurRadius="42"
+                              ShadowDepth="0"
+                              Opacity="0.14"/>
+
+        </Border.Effect>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- ============================================= -->
+            <!-- HEADER -->
+            <!-- ============================================= -->
+
+            <Border Background="#AAFFFFFF"
+                    CornerRadius="36,36,0,0"
+                    Padding="30">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT -->
+                    <StackPanel>
+
+                        <TextBlock x:Name="txtTransactionTitle"
+                                   Text="Transaction #TRX-2025"
+                                   FontSize="34"
+                                   FontWeight="Bold"
+                                   Foreground="#3A3131"/>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,12,0,0">
+
+                            <Border x:Name="bdStatus"
+                                    Background="#E9FFF2"
+                                    Padding="14,8"
+                                    CornerRadius="16">
+
+                                <TextBlock x:Name="txtStatus"
+                                           Text="Completed"
+                                           FontWeight="Bold"
+                                           Foreground="#1A9B5D"/>
+
+                            </Border>
+
+                            <TextBlock x:Name="txtDate"
+                                       Text="Oct 20, 2025"
+                                       Margin="16,0,0,0"
+                                       VerticalAlignment="Center"
+                                       Foreground="#8B7D7D"/>
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <!-- RIGHT -->
+                    <StackPanel Grid.Column="1"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+
+                        <Button x:Name="btnExport"
+                                Content="Export Receipt"
+                                Width="160"
+                                Height="50"
+                                Margin="0,0,14,0"
+                                Click="btnExport_Click"
+                                Style="{StaticResource OutlineButtonStyle}"/>
+
+                        <Button x:Name="btnPrint"
+                                Content="Print"
+                                Width="120"
+                                Height="50"
+                                Margin="0,0,14,0"
+                                Click="btnPrint_Click"
+                                Style="{StaticResource OutlineButtonStyle}"/>
+
+                        <Button x:Name="btnClose"
+                                Content="✕"
+                                Width="50"
+                                Height="50"
+                                Click="btnClose_Click"
+                                Style="{StaticResource OutlineButtonStyle}"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </Border>
+
+            <!-- ============================================= -->
+            <!-- BODY -->
+            <!-- ============================================= -->
+
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto">
+
+                <Grid Margin="28">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- ===================================== -->
+                    <!-- LEFT -->
+                    <!-- ===================================== -->
+
+                    <StackPanel>
+
+                        <!-- SUMMARY -->
+                        <Border Background="#AAFFFFFF"
+                                CornerRadius="30"
+                                Padding="28"
+                                Margin="0,0,0,24">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Transaction Summary"
+                                           FontSize="28"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <!-- AMOUNT -->
+                                <Border Background="#FFF6EE"
+                                        CornerRadius="26"
+                                        Padding="26"
+                                        Margin="0,28,0,0">
+
+                                    <StackPanel>
+
+                                        <TextBlock Text="Total Amount"
+                                                   Foreground="#8B7D7D"/>
+
+                                        <TextBlock x:Name="txtAmount"
+                                                   Text="$920"
+                                                   Margin="0,12,0,0"
+                                                   FontSize="42"
+                                                   FontWeight="Bold"
+                                                   Foreground="#D9730D"/>
+
+                                    </StackPanel>
+
+                                </Border>
+
+                                <!-- GRID -->
+                                <Grid Margin="0,28,0,0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- TYPE -->
+                                    <Border Background="#FFF8F4"
+                                            CornerRadius="24"
+                                            Padding="22"
+                                            Margin="0,0,12,0">
+
+                                        <StackPanel>
+
+                                            <TextBlock Text="Transaction Type"
+                                                       Foreground="#8B7D7D"/>
+
+                                            <TextBlock x:Name="txtType"
+                                                       Text="Booking Payment"
+                                                       Margin="0,10,0,0"
+                                                       FontSize="22"
+                                                       FontWeight="Bold"
+                                                       Foreground="#3A3131"/>
+
+                                        </StackPanel>
+
+                                    </Border>
+
+                                    <!-- METHOD -->
+                                    <Border Grid.Column="1"
+                                            Background="#FFF8F4"
+                                            CornerRadius="24"
+                                            Padding="22"
+                                            Margin="12,0,0,0">
+
+                                        <StackPanel>
+
+                                            <TextBlock Text="Payment Method"
+                                                       Foreground="#8B7D7D"/>
+
+                                            <TextBlock x:Name="txtMethod"
+                                                       Text="Visa **** 9921"
+                                                       Margin="0,10,0,0"
+                                                       FontSize="22"
+                                                       FontWeight="Bold"
+                                                       Foreground="#3A3131"/>
+
+                                        </StackPanel>
+
+                                    </Border>
+
+                                </Grid>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- BOOKING -->
+                        <Border Background="#AAFFFFFF"
+                                CornerRadius="30"
+                                Padding="28"
+                                Margin="0,0,0,24">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Related Booking"
+                                           FontSize="28"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <Border Background="#FFF8F4"
+                                        CornerRadius="24"
+                                        Padding="22"
+                                        Margin="0,28,0,0">
+
+                                    <Grid>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel>
+
+                                            <TextBlock x:Name="txtBookingName"
+                                                       Text="Luxury Han River Apartment"
+                                                       FontSize="22"
+                                                       FontWeight="Bold"
+                                                       Foreground="#3A3131"/>
+
+                                            <TextBlock x:Name="txtBookingDates"
+                                                       Text="10 Oct - 14 Oct"
+                                                       Margin="0,10,0,0"
+                                                       Foreground="#8B7D7D"/>
+
+                                        </StackPanel>
+
+                                        <Button x:Name="btnOpenBooking"
+                                                Grid.Column="1"
+                                                Content="View Booking"
+                                                Width="150"
+                                                Height="48"
+                                                Click="btnOpenBooking_Click"
+                                                Style="{StaticResource OutlineButtonStyle}"/>
+
+                                    </Grid>
+
+                                </Border>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- TIMELINE -->
+                        <Border Background="#AAFFFFFF"
+                                CornerRadius="30"
+                                Padding="28">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Transaction Timeline"
+                                           FontSize="28"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <StackPanel x:Name="spTimeline"
+                                            Margin="0,28,0,0">
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </StackPanel>
+
+                    <!-- ===================================== -->
+                    <!-- RIGHT -->
+                    <!-- ===================================== -->
+
+                    <StackPanel Grid.Column="1"
+                                Margin="24,0,0,0">
+
+                        <!-- USER -->
+                        <Border Background="#AAFFFFFF"
+                                CornerRadius="30"
+                                Padding="28"
+                                Margin="0,0,0,24">
+
+                            <StackPanel>
+
+                                <TextBlock Text="User"
+                                           FontSize="26"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <Ellipse Width="84"
+                                         Height="84"
+                                         Margin="0,24,0,0"
+                                         Fill="#FDECEC"/>
+
+                                <TextBlock x:Name="txtUserName"
+                                           Text="John Doe"
+                                           Margin="0,18,0,0"
+                                           FontSize="24"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <TextBlock x:Name="txtUserEmail"
+                                           Text="john@email.com"
+                                           Margin="0,8,0,0"
+                                           Foreground="#8B7D7D"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- PAYMENT INFO -->
+                        <Border Background="#AAFFFFFF"
+                                CornerRadius="30"
+                                Padding="28"
+                                Margin="0,0,0,24">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Gateway Information"
+                                           FontSize="26"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <!-- ID -->
+                                <StackPanel Margin="0,24,0,0">
+
+                                    <TextBlock Text="Gateway Return ID"
+                                               Foreground="#8B7D7D"/>
+
+                                    <TextBlock x:Name="txtGatewayID"
+                                               Text="PAY_83922021"
+                                               Margin="0,10,0,0"
+                                               FontWeight="Bold"
+                                               FontSize="18"
+                                               Foreground="#3A3131"/>
+
+                                </StackPanel>
+
+                                <!-- REF -->
+                                <StackPanel Margin="0,22,0,0">
+
+                                    <TextBlock Text="Reference Code"
+                                               Foreground="#8B7D7D"/>
+
+                                    <TextBlock x:Name="txtReference"
+                                               Text="REF-29292"
+                                               Margin="0,10,0,0"
+                                               FontWeight="Bold"
+                                               FontSize="18"
+                                               Foreground="#3A3131"/>
+
+                                </StackPanel>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- ACTIONS -->
+                        <Border Background="#AAFFFFFF"
+                                CornerRadius="30"
+                                Padding="28">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Actions"
+                                           FontSize="26"
+                                           FontWeight="Bold"
+                                           Foreground="#3A3131"/>
+
+                                <Button x:Name="btnRefund"
+                                        Content="Issue Refund"
+                                        Height="52"
+                                        Margin="0,28,0,0"
+                                        Click="btnRefund_Click"
+                                        Style="{StaticResource DangerButtonStyle}"/>
+
+                                <Button x:Name="btnFlag"
+                                        Content="Flag Transaction"
+                                        Height="52"
+                                        Margin="0,14,0,0"
+                                        Click="btnFlag_Click"
+                                        Style="{StaticResource OutlineButtonStyle}"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </ScrollViewer>
+
+            <!-- ============================================= -->
+            <!-- FOOTER -->
+            <!-- ============================================= -->
+
+            <Border Grid.Row="2"
+                    Background="#FFFFFF"
+                    CornerRadius="0,0,36,36"
+                    Padding="24">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="txtFooter"
+                               Text="Last synced 2 mins ago"
+                               VerticalAlignment="Center"
+                               Foreground="#8B7D7D"/>
+
+                    <Button x:Name="btnCloseFooter"
+                            Grid.Column="1"
+                            Content="Close"
+                            Width="140"
+                            Height="50"
+                            Click="btnClose_Click"
+                            Style="{StaticResource OutlineButtonStyle}"/>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
+
+    </Border>
+</Window>

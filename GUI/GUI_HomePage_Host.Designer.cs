@@ -38,6 +38,7 @@
             this.accordionControlSeparator2 = new DevExpress.XtraBars.Navigation.AccordionControlSeparator();
             this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.accordionControlElement2 = new DevExpress.XtraBars.Navigation.AccordionControlElement();
+            this.acc_MyBookings = new DevExpress.XtraBars.Navigation.AccordionControlElement();
             ((System.ComponentModel.ISupportInitialize)(this.accordionControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fluentDesignFormControl1)).BeginInit();
             this.SuspendLayout();
@@ -45,10 +46,9 @@
             // main
             // 
             this.main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.main.Location = new System.Drawing.Point(390, 46);
-            this.main.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.main.Location = new System.Drawing.Point(260, 31);
             this.main.Name = "main";
-            this.main.Size = new System.Drawing.Size(810, 612);
+            this.main.Size = new System.Drawing.Size(540, 419);
             this.main.TabIndex = 0;
             // 
             // accordionControl1
@@ -61,23 +61,23 @@
             this.accordionControl1.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
             this.acc_MyProfile,
             this.accordionControlSeparator1});
-            this.accordionControl1.Location = new System.Drawing.Point(0, 46);
+            this.accordionControl1.Location = new System.Drawing.Point(0, 31);
             this.accordionControl1.LookAndFeel.SkinMaskColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.accordionControl1.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.accordionControl1.LookAndFeel.UseDefaultLookAndFeel = false;
-            this.accordionControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.accordionControl1.Name = "accordionControl1";
             this.accordionControl1.RootDisplayMode = DevExpress.XtraBars.Navigation.AccordionControlRootDisplayMode.Footer;
             this.accordionControl1.ScrollBarMode = DevExpress.XtraBars.Navigation.ScrollBarMode.Touch;
             this.accordionControl1.ShowFilterControl = DevExpress.XtraBars.Navigation.ShowFilterControl.Always;
-            this.accordionControl1.Size = new System.Drawing.Size(390, 612);
+            this.accordionControl1.Size = new System.Drawing.Size(260, 419);
             this.accordionControl1.TabIndex = 1;
             this.accordionControl1.ViewType = DevExpress.XtraBars.Navigation.AccordionControlViewType.HamburgerMenu;
             // 
             // acc_MyProfile
             // 
             this.acc_MyProfile.Elements.AddRange(new DevExpress.XtraBars.Navigation.AccordionControlElement[] {
-            this.acc_MyList});
+            this.acc_MyList,
+            this.acc_MyBookings});
             this.acc_MyProfile.Expanded = true;
             this.acc_MyProfile.Name = "acc_MyProfile";
             this.acc_MyProfile.Text = "My Listing";
@@ -86,11 +86,11 @@
             // 
             this.acc_MyList.Appearance.Hovered.Font = new System.Drawing.Font("Open Sans", 12F, System.Drawing.FontStyle.Bold);
             this.acc_MyList.Appearance.Hovered.Options.UseFont = true;
-            this.acc_MyList.Appearance.Normal.Font = new System.Drawing.Font("Open Sans", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.acc_MyList.Appearance.Normal.Font = new System.Drawing.Font("Plus Jakarta Sans", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.acc_MyList.Appearance.Normal.ForeColor = System.Drawing.Color.White;
             this.acc_MyList.Appearance.Normal.Options.UseFont = true;
             this.acc_MyList.Appearance.Normal.Options.UseForeColor = true;
-            this.acc_MyList.Appearance.Pressed.Font = new System.Drawing.Font("Open Sans", 12F, System.Drawing.FontStyle.Bold);
+            this.acc_MyList.Appearance.Pressed.Font = new System.Drawing.Font("Plus Jakarta Sans", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.acc_MyList.Appearance.Pressed.Options.UseFont = true;
             this.acc_MyList.Name = "acc_MyList";
             this.acc_MyList.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
@@ -105,9 +105,8 @@
             // 
             this.fluentDesignFormControl1.FluentDesignForm = this;
             this.fluentDesignFormControl1.Location = new System.Drawing.Point(0, 0);
-            this.fluentDesignFormControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.fluentDesignFormControl1.Name = "fluentDesignFormControl1";
-            this.fluentDesignFormControl1.Size = new System.Drawing.Size(1200, 46);
+            this.fluentDesignFormControl1.Size = new System.Drawing.Size(800, 31);
             this.fluentDesignFormControl1.TabIndex = 2;
             this.fluentDesignFormControl1.TabStop = false;
             // 
@@ -127,17 +126,27 @@
             this.accordionControlElement2.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
             this.accordionControlElement2.Text = "Element2";
             // 
+            // acc_MyBookings
+            // 
+            this.acc_MyBookings.Appearance.Normal.Font = new System.Drawing.Font("Plus Jakarta Sans", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.acc_MyBookings.Appearance.Normal.Options.UseFont = true;
+            this.acc_MyBookings.Appearance.Pressed.Font = new System.Drawing.Font("Plus Jakarta Sans", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.acc_MyBookings.Appearance.Pressed.Options.UseFont = true;
+            this.acc_MyBookings.Name = "acc_MyBookings";
+            this.acc_MyBookings.Style = DevExpress.XtraBars.Navigation.ElementStyle.Item;
+            this.acc_MyBookings.Text = "My Bookings";
+            this.acc_MyBookings.Click += new System.EventHandler(this.acc_MyBookings_Click);
+            // 
             // GUI_HomePage_Host
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 658);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlContainer = this.main;
             this.Controls.Add(this.main);
             this.Controls.Add(this.accordionControl1);
             this.Controls.Add(this.fluentDesignFormControl1);
             this.FluentDesignFormControl = this.fluentDesignFormControl1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "GUI_HomePage_Host";
             this.NavigationControl = this.accordionControl1;
             this.Text = "Form1";
@@ -159,5 +168,6 @@
         private DevExpress.XtraBars.Navigation.AccordionControlSeparator accordionControlSeparator2;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private DevExpress.XtraBars.Navigation.AccordionControlElement accordionControlElement2;
+        private DevExpress.XtraBars.Navigation.AccordionControlElement acc_MyBookings;
     }
 }

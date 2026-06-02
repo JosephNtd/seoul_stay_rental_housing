@@ -15,5 +15,6 @@ namespace BUS
         public ET_Guest GetGuestProfile(long userID) => _dal.GetGuestProfile(userID);
         public bool UpdateGuestProfile(ET_Guest guest) => _dal.UpdateGuestProfile(guest);
         public List<DTO_RecentStay> GetRecentStays(long userId) => _dal.GetRecentStays(userId);
+        public List<DTO_GuestLookup> GetLookupData() => _dal.GetLookupData();
     }
 }

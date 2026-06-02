@@ -9,7 +9,7 @@ namespace DAL
 {
     public class DAL_Services
     {
-        public List<ET_Services> GetAll()
+        public List<ET_Services> GetData()
         {
             using (var db = new Seoul_StayDataContext())
             {
@@ -115,5 +115,46 @@ namespace DAL
             }
             catch { return false; }
         }
+        // GET BY ID
+
+        public ET_Services GetByID(long id)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                var data =
+                    (from s in db.Services
+                     join st in db.ServiceTypes
+                     on s.ServiceTypeID equals st.ID
+                     where s.ID == id
+                     select new ET_Services
+                     {
+                         ID = s.ID,
+                         GUID = s.GUID,
+                         ServiceTypeID = s.ServiceTypeID,
+                         ServiceTypeName = st.Name,
+                         Name = s.Name,
+                         Price = s.Price,
+                         Duration = s.Duration,
+                         Description = s.Description,
+                         DayOfWeek = s.DayOfWeek,
+                         DayOfMonth = s.DayOfMonth,
+                         DailyCap = s.DailyCap,
+                         BookingCap = s.BookingCap
+                     })
+                     .FirstOrDefault();
+
+                return data;
+            }
+        }
+
+        // GET BY TYPE
+
+        public List<ET_Services> GetByType(long typeId)
+        {
+            return GetData()
+                .Where(x => x.ServiceTypeID == typeId)
+                .ToList();
+        }
+
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DAL;
 using DTO;
 using ET;
+using Helper;
 
 namespace BUS
 {
@@ -36,10 +37,13 @@ namespace BUS
         public bool Register(string username, string password, string fullName,
                              byte gender, DateTime birthDate)
         {
+            if (_dal.CheckUsername(username))
+                return false;
+
             var user = new User()
             {
                 Username = username.Trim(),
-                Password = password,
+                Password = Helper_Security.Hash(password),
                 FullName = fullName.Trim(),
                 Email = $"{username.Trim()}@seoulstay.local",
                 Gender = gender,

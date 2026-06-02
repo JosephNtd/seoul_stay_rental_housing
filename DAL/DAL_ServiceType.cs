@@ -108,7 +108,7 @@ namespace DAL
                 using (var db = new Seoul_StayDataContext())
                 {
                     // KIỂM TRA KHÓA NGOẠI: Có Item nào đang dùng loại này không?
-                    if (db.Items.Any(i => i.ID == id))
+                    if (db.Services.Any(i => i.ServiceTypeID == id))
                     {
                         return false; // Trả về false để báo lỗi bên GUI
                     }
@@ -125,5 +125,36 @@ namespace DAL
             }
             catch { return false; }
         }
+        // =========================================
+        // GET BY ID
+        // =========================================
+
+        public ET_ServiceType GetByID(long id)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                var t = db.ServiceTypes
+                    .FirstOrDefault(x => x.ID == id);
+
+                if (t == null)
+                    return null;
+
+                return new ET_ServiceType
+                {
+                    ID = t.ID,
+                    GUID = t.GUID,
+                    Name = t.Name,
+                    Description = t.Description,
+
+                    IconPath = !string.IsNullOrEmpty(t.IconName)
+                        ? Path.Combine(
+                            AppDomain.CurrentDomain.BaseDirectory,
+                            "Images",
+                            t.IconName)
+                        : null
+                };
+            }
+        }
+
     }
 }

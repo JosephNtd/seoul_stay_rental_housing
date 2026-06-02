@@ -10,7 +10,7 @@ namespace DAL
     {
         Seoul_StayDataContext db = new Seoul_StayDataContext();
 
-        public List<CancellationPolicy> GetAll()
+        public List<CancellationPolicy> GetData()
         {
             return db.CancellationPolicies.ToList();
         }

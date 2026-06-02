@@ -125,8 +125,13 @@ namespace DAL
     partial void DeleteTransactionType(TransactionType instance);
     #endregion
 		
+		//public Seoul_StayDataContext() : 
+		//		base(global::DAL.Properties.Settings.Default.Seoul_StayConnectionString1, mappingSource)
+		//{
+		//	OnCreated();
+		//}
 		public Seoul_StayDataContext() : 
-				base(global::DAL.Properties.Settings.Default.Seoul_StayConnectionString1, mappingSource)
+				base(DAL_Settings.ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

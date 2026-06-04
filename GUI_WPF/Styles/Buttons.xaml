@@ -268,20 +268,76 @@
     <!-- SMALL BUTTON -->
 
     <!-- SUCCESS BUTTON -->
+    <!-- SUCCESS BUTTON -->
     <Style x:Key="SuccessButtonStyle"
-       TargetType="Button">
-
-        <Setter Property="Background"
-            Value="#EAF8F0"/>
+       TargetType="Button"
+       BasedOn="{StaticResource PrimaryButtonStyle}">
 
         <Setter Property="Foreground"
-            Value="#2E7D5A"/>
+            Value="White"/>
 
-        <Setter Property="BorderBrush"
-            Value="#CFEEDD"/>
+        <Setter Property="Template">
 
-        <Setter Property="BorderThickness"
-            Value="1"/>
+            <Setter.Value>
+
+                <ControlTemplate TargetType="Button">
+
+                    <Border x:Name="bd"
+                        CornerRadius="16">
+
+                        <Border.Background>
+
+                            <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,1">
+
+                                <GradientStop Color="#4CAF50"
+                                          Offset="0"/>
+
+                                <GradientStop Color="#2E7D32"
+                                          Offset="1"/>
+
+                            </LinearGradientBrush>
+
+                        </Border.Background>
+
+                        <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+
+                        <Trigger Property="IsMouseOver"
+                             Value="True">
+
+                            <Setter TargetName="bd"
+                                Property="Opacity"
+                                Value="0.92"/>
+
+                        </Trigger>
+
+                        <Trigger Property="IsPressed"
+                             Value="True">
+
+                            <Setter TargetName="bd"
+                                Property="RenderTransform">
+
+                                <Setter.Value>
+                                    <ScaleTransform ScaleX="0.98"
+                                                ScaleY="0.98"/>
+                                </Setter.Value>
+
+                            </Setter>
+
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
 
     </Style>
 

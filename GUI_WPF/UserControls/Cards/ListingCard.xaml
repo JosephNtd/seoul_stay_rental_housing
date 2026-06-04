@@ -390,43 +390,8 @@
                         Width="110"
                         Height="42"
                         Content="Open"
-                        FontSize="13"
-                        FontWeight="SemiBold"
-                        Foreground="White"
-                        Cursor="Hand"
-                        BorderThickness="0"
+                        Style="{StaticResource OutlineButtonStyle}"
                         Click="btnOpen_Click">
-
-                            <Button.Background>
-
-                                <LinearGradientBrush StartPoint="0,0"
-                                             EndPoint="1,1">
-
-                                    <GradientStop Color="#7B5455"
-                                          Offset="0"/>
-
-                                    <GradientStop Color="#9B7071"
-                                          Offset="1"/>
-
-                                </LinearGradientBrush>
-
-                            </Button.Background>
-
-                            <Button.Template>
-
-                                <ControlTemplate TargetType="Button">
-
-                                    <Border Background="{TemplateBinding Background}"
-                                    CornerRadius="18">
-
-                                        <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
-                                    </Border>
-
-                                </ControlTemplate>
-
-                            </Button.Template>
-
                         </Button>
 
                     </Grid>

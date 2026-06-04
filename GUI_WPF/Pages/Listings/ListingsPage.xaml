@@ -156,26 +156,9 @@
                                 Width="160"
                                 Height="46"
                                 Content="+ Add Listing"
-                                Cursor="Hand"
-                                Foreground="White"
-                                BorderThickness="0"
-                                FontWeight="SemiBold"
                                 Click="btnAddListing_Click">
 
-                            <Button.Background>
-
-                                <LinearGradientBrush StartPoint="0,0"
-                                                     EndPoint="1,1">
-
-                                    <GradientStop Color="#7C5A58"
-                                                  Offset="0"/>
-
-                                    <GradientStop Color="#9F7472"
-                                                  Offset="1"/>
-
-                                </LinearGradientBrush>
-
-                            </Button.Background>
+                            
 
                         </Button>
 

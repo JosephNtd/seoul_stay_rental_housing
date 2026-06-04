@@ -217,18 +217,14 @@
                     Height="54"
                     Margin="0,14,0,0"
                     Content="Delete Listing"
-                    Foreground="#C24141"
-                    Background="#FFF2F2"
-                    BorderBrush="#F2D2D2"
-                    BorderThickness="1"
+                    Style="{StaticResource DangerButtonStyle}"
                     Click="btnDeleteListing_Click"/>
 
                             <Button x:Name="btnClose"
                     Margin="0,14,0,0"
                     Height="54"
                     Content="Close"
-                    Background="#F3ECE8"
-                    BorderThickness="0"
+                    Style="{StaticResource OutlineButtonStyle}"
                     Click="btnClose_Click"/>
                         </StackPanel>
 

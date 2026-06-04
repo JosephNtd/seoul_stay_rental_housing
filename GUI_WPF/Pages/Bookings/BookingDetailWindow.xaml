@@ -548,7 +548,7 @@
                             Width="140"
                             Height="50"
                             Click="btnClose_Click"
-                            Style="{StaticResource OutlineButtonStyle}"/>
+                            Style="{StaticResource DangerButtonStyle}"/>
 
                 </Grid>
 

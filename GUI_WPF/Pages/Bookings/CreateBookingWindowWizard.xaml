@@ -119,10 +119,10 @@
                             </Grid.ColumnDefinitions>
 
                             <local:SearchBox
-                x:Name="sbGuest"
-                Width="320"
-                Placeholder="Search guest..."
-                TextChanged="sbGuest_TextChanged"/>
+                                    x:Name="sbGuest"
+                                    Width="320"
+                                    Placeholder="Search guest..."
+                                    TextChanged="sbGuest_TextChanged"/>
 
                             <Button Grid.Column="1"
                     Width="140"
@@ -737,12 +737,12 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button x:Name="btnCancel" Content="Cancel" Width="100" Height="40" HorizontalAlignment="Left" Background="Transparent" BorderBrush="#D9C8C1" Foreground="#8A7D77" Click="btnCancel_Click"/>
+            <Button x:Name="btnCancel" Content="Cancel" Width="100" Height="40" HorizontalAlignment="Left" Style="{StaticResource OutlineButtonStyle}" Click="btnCancel_Click"/>
 
             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button x:Name="btnBack" Content="Quay lại" Width="110" Height="40" Margin="0,0,12,0" Visibility="Collapsed" Background="#FAF4F1" BorderBrush="#D9C8C1" Foreground="#4E413D" Click="btnBack_Click"/>
+                <Button x:Name="btnBack" Content="Previous" Width="110" Height="40" Margin="0,0,12,0" Visibility="Collapsed" Background="#FAF4F1" BorderBrush="#D9C8C1" Foreground="#4E413D" Click="btnBack_Click"/>
 
-                <Button x:Name="btnNext" Content="Tiếp theo" Width="160" Height="40" Background="#7B5455" BorderBrush="Transparent" Foreground="White" FontWeight="Bold" Click="btnNext_Click">
+                <Button x:Name="btnNext" Content="Next" Width="160" Height="40" Background="#7B5455" BorderBrush="Transparent" Foreground="White" FontWeight="Bold" Click="btnNext_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}" CornerRadius="6">

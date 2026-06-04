@@ -51,7 +51,7 @@
 
                         <DataGrid x:Name="dgGuests"
                                   Height="240"
-                                  Style="{StaticResource SoftDataGridStyle}"
+                                  Style="{StaticResource ModernDataGridStyle}"
                                   RowStyle="{StaticResource SoftRowStyle}"
                                   ColumnHeaderStyle="{StaticResource SoftColumnHeaderStyle}"
                                   CellStyle="{StaticResource SoftCellStyle}"

@@ -51,14 +51,14 @@
                         <!-- HEADER -->
                         <StackPanel>
                             <TextBlock Text="Listing Editor"
-                       FontSize="28"
-                       FontWeight="Bold"
-                       Foreground="#322825"/>
+                                       Style="{StaticResource PageTitleStyle}"
+                                       />
                             <TextBlock x:Name="txtDrawerMode"
-                       Margin="0,10,0,0"
-                       Text="Create New Listing"
-                       FontSize="14"
-                       Foreground="#8D817C"/>
+                                       Style="{StaticResource SectionTitleStyle}"
+                                        Margin="0,10,0,0"
+                                        Text="Create New Listing"
+                                        FontSize="14"
+                                        Foreground="#8D817C"/>
                         </StackPanel>
 
                         <!-- NAV TABS -->
@@ -136,10 +136,10 @@
 
                             <!-- Attractions -->
                             <Button x:Name="btnTabAttractions"
-                    Height="58"
-                    Margin="0,0,0,14"
-                    Click="btnTabAttractions_Click"
-                    Tag="Attractions">
+                                    Height="58"
+                                    Margin="0,0,0,14"
+                                    Click="btnTabAttractions_Click"
+                                    Tag="Attractions">
 
                                 <Button.Style>
                                     <Style TargetType="Button">
@@ -147,19 +147,19 @@
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
                                                     <Border x:Name="bd"
-                                            Background="#FFFFFF"
-                                            BorderBrush="#EADFD8"
-                                            BorderThickness="1"
-                                            CornerRadius="20"
-                                            Padding="22,0">
+                                                            Background="#FFFFFF"
+                                                            BorderBrush="#EADFD8"
+                                                            BorderThickness="1"
+                                                            CornerRadius="20"
+                                                            Padding="22,0">
                                                         <StackPanel Orientation="Horizontal"
-                                                    VerticalAlignment="Center">
+                                                                    VerticalAlignment="Center">
                                                             <TextBlock Text="📍" FontSize="16"/>
                                                             <TextBlock Text="Attractions"
-                                                       Margin="14,0,0,0"
-                                                       FontSize="15"
-                                                       FontWeight="SemiBold"
-                                                       Foreground="#4E413D"/>
+                                                                       Margin="14,0,0,0"
+                                                                       FontSize="15"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="#4E413D"/>
                                                         </StackPanel>
                                                     </Border>
                                                 </ControlTemplate>
@@ -181,19 +181,19 @@
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="Button">
                                                     <Border x:Name="bd"
-                                            Background="#FFFFFF"
-                                            BorderBrush="#EADFD8"
-                                            BorderThickness="1"
-                                            CornerRadius="20"
-                                            Padding="22,0">
+                                                            Background="#FFFFFF"
+                                                            BorderBrush="#EADFD8"
+                                                            BorderThickness="1"
+                                                            CornerRadius="20"
+                                                            Padding="22,0">
                                                         <StackPanel Orientation="Horizontal"
-                                                    VerticalAlignment="Center">
+                                                                    VerticalAlignment="Center">
                                                             <TextBlock Text="🖼" FontSize="16"/>
                                                             <TextBlock Text="Pictures"
-                                                       Margin="14,0,0,0"
-                                                       FontSize="15"
-                                                       FontWeight="SemiBold"
-                                                       Foreground="#4E413D"/>
+                                                                       Margin="14,0,0,0"
+                                                                       FontSize="15"
+                                                                       FontWeight="SemiBold"
+                                                                       Foreground="#4E413D"/>
                                                         </StackPanel>
                                                     </Border>
                                                 </ControlTemplate>
@@ -321,6 +321,7 @@
                                                FontWeight="SemiBold"/>
 
                                     <TextBox x:Name="txtTitle"
+                                             Style="{StaticResource SoftTextBoxStyle}"
                                              Height="56"
                                              FontSize="15"/>
 
@@ -341,6 +342,7 @@
                                                        FontWeight="SemiBold"/>
 
                                             <ComboBox x:Name="cbPropertyTypes"
+                                                      Style="{StaticResource ModernComboBoxStyle}"
                                                       Margin="0,8,0,0"
                                                       Height="56"
                                                       DisplayMemberPath="Name"
@@ -354,6 +356,7 @@
                                                        FontWeight="SemiBold"/>
 
                                             <ComboBox x:Name="cbAreas"
+                                                      Style="{StaticResource ModernComboBoxStyle}"
                                                       Margin="0,8,0,0"
                                                       Height="56"
                                                       DisplayMemberPath="Name"
@@ -370,6 +373,7 @@
                                                FontWeight="SemiBold"/>
 
                                     <TextBox x:Name="txtApproximateAddress"
+                                             Style="{StaticResource SoftTextBoxStyle}"
                                              Height="56"
                                              FontSize="15"/>
 
@@ -379,6 +383,7 @@
                                                FontWeight="SemiBold"/>
 
                                     <TextBox x:Name="txtExactAddress"
+                                             Style="{StaticResource SoftTextBoxStyle}"
                                              Height="56"
                                              FontSize="15"/>
 
@@ -390,6 +395,7 @@
                                                FontWeight="SemiBold"/>
 
                                     <TextBox x:Name="txtDescription"
+                                             Style="{StaticResource SoftTextAreaStyle}"
                                              Height="160"
                                              AcceptsReturn="True"
                                              TextWrapping="Wrap"
@@ -426,6 +432,7 @@
                                                        FontWeight="SemiBold"/>
 
                                             <TextBox x:Name="txtCapacity"
+                                                     Style="{StaticResource SoftTextBoxStyle}"
                                                      Margin="0,8,0,0"
                                                      Height="54"/>
                                         </StackPanel>
@@ -437,6 +444,7 @@
                                                        FontWeight="SemiBold"/>
 
                                             <TextBox x:Name="txtBeds"
+                                                     Style="{StaticResource SoftTextBoxStyle}"
                                                      Margin="0,8,0,0"
                                                      Height="54"/>
                                         </StackPanel>
@@ -448,6 +456,7 @@
                                                        FontWeight="SemiBold"/>
 
                                             <TextBox x:Name="txtBedrooms"
+                                                     Style="{StaticResource SoftTextBoxStyle}"
                                                      Margin="0,8,0,0"
                                                      Height="54"/>
                                         </StackPanel>
@@ -459,6 +468,7 @@
                                                        FontWeight="SemiBold"/>
 
                                             <TextBox x:Name="txtBathrooms"
+                                                     Style="{StaticResource SoftTextBoxStyle}"
                                                      Margin="0,8,0,0"
                                                      Height="54"/>
                                         </StackPanel>
@@ -500,6 +510,7 @@
                                                        FontWeight="SemiBold"/>
 
                                             <TextBox x:Name="txtMinimumNights"
+                                                     Style="{StaticResource SoftTextBoxStyle}"
                                                      Margin="0,8,0,0"
                                                      Height="54"/>
                                         </StackPanel>
@@ -511,6 +522,7 @@
                                                        FontWeight="SemiBold"/>
 
                                             <TextBox x:Name="txtMaximumNights"
+                                                     Style="{StaticResource SoftTextBoxStyle}"
                                                      Margin="0,8,0,0"
                                                      Height="54"/>
                                         </StackPanel>
@@ -523,6 +535,7 @@
                                                FontWeight="SemiBold"/>
 
                                     <TextBox x:Name="txtHostRules"
+                                             Style="{StaticResource SoftTextAreaStyle}"
                                              Height="140"
                                              AcceptsReturn="True"
                                              TextWrapping="Wrap"

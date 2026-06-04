@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
+﻿using DAL;
 using DTO;
 using ET;
 using Helper;
+using System;
+using System.Collections.Generic;
 
 namespace BUS
 {
     public class BUS_User
     {
         private readonly DAL_User _dal = new DAL_User();
+
+        /// <summary>
+        /// Hash password trước khi gửi xuống DAL để so sánh đúng với dữ liệu trong DB.
+        /// DB lưu SHA256, nên phải hash cùng thuật toán mới match được.
+        /// </summary>
         public ET_Users Login(string username, string password)
         {
+            //string hashedPassword = Helper_Security.Hash(password);
+
             var u = _dal.Login(username.Trim(), password);
 
             if (u == null) return null;
@@ -40,7 +44,7 @@ namespace BUS
             if (_dal.CheckUsername(username))
                 return false;
 
-            var user = new User()
+            var user = new User
             {
                 Username = username.Trim(),
                 Password = Helper_Security.Hash(password),
@@ -56,15 +60,16 @@ namespace BUS
             return _dal.Register(user);
         }
 
-        public bool CheckUsername(string username)
-        {
-            return _dal.CheckUsername(username);
-        }
+        public bool CheckUsername(string username) => _dal.CheckUsername(username);
 
         public User GetByID(long id) => _dal.GetById(id);
+
         public List<DTO_UserDisplay> GetAllUsersDisplay() => _dal.GetAllUsersDisplay();
+
         public bool ToggleLock(long userId) => _dal.ToggleLock(userId);
+
         public bool DeleteUser(long userId) => _dal.DeleteUser(userId);
+
         public bool InsertUser(DTO_User dtoUser, string role)
         {
             User dalUser = new User
@@ -77,7 +82,6 @@ namespace BUS
             return _dal.InsertUser(dalUser, role);
         }
 
-        // Xử lý Sửa: Nhận DTO_User từ GUI -> Chuyển thành User của DAL
         public bool UpdateUser(DTO_User dtoUser, string role)
         {
             User dalUser = new User

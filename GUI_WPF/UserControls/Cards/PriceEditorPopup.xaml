@@ -313,33 +313,10 @@
                 <!-- DELETE -->
 
                 <Button x:Name="btnRemovePrice"
-                        Width="140"
-                        Height="54"
+                        Style="{StaticResource DangerButtonStyle}"
                         Content="Remove Price"
                         Cursor="Hand"
-                        Foreground="#C24141"
-                        BorderBrush="#F0CACA"
-                        Background="#FFF5F5"
-                        BorderThickness="1.2"
                         Click="btnRemovePrice_Click">
-
-                    <Button.Template>
-
-                        <ControlTemplate TargetType="Button">
-
-                            <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="18">
-
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-
-                        </ControlTemplate>
-
-                    </Button.Template>
-
                 </Button>
 
                 <!-- CANCEL -->
@@ -381,41 +358,10 @@
                         Width="150"
                         Height="54"
                         Margin="14,0,0,0"
+                        Style="{StaticResource PrimaryButtonStyle}"
                         Content="Save Price"
                         Cursor="Hand"
-                        Foreground="White"
-                        BorderThickness="0"
                         Click="btnSave_Click">
-
-                    <Button.Background>
-
-                        <LinearGradientBrush StartPoint="0,0"
-                                             EndPoint="1,1">
-
-                            <GradientStop Color="#7C5A58"
-                                          Offset="0"/>
-
-                            <GradientStop Color="#A27370"
-                                          Offset="1"/>
-
-                        </LinearGradientBrush>
-
-                    </Button.Background>
-
-                    <Button.Template>
-
-                        <ControlTemplate TargetType="Button">
-
-                            <Border Background="{TemplateBinding Background}"
-                                    CornerRadius="18">
-
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-
-                        </ControlTemplate>
-
-                    </Button.Template>
 
                 </Button>
 

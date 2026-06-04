@@ -1,12 +1,21 @@
-# Build
-bin/
-obj/
-git/
+# Build output
+[Bb]in/
+[Oo]bj/
 
 # Visual Studio
 .vs/
+.vscode/
 *.user
 *.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# ReSharper
+_ReSharper*/
+*.DotSettings.user
 
 # Logs
 *.log
@@ -14,9 +23,27 @@ git/
 # Cache
 *.cache
 
-# Database (optional)
+# Debug symbols
+*.pdb
+
+# Database files
 *.mdf
 *.ldf
 
-# Others
-*.pdb
+# Test results
+TestResults/
+
+# Publish output
+publish/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Backup
+Backup/
+UpgradeLog.htm
+
+# Windows
+Thumbs.db
+Desktop.ini

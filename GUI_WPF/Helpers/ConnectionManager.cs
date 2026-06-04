@@ -12,12 +12,9 @@ namespace GUI_WPF.Helpers
             }
         }
 
-        public static void SaveConnectionString(
-            string connectionString)
+        public static void SaveConnectionString(string connectionString)
         {
-            DAL_Settings
-                .SaveConnectionString(
-                    connectionString);
+            DAL_Settings.SaveConnectionString(connectionString);
         }
     }
 }

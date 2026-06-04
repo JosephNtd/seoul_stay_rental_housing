@@ -211,10 +211,11 @@
         Value="#FFFFFF"/>
 
     </Style>
-    
-    <!-- TEXTAREA -->
+
+    <!-- TEXT AREA -->
     <Style x:Key="SoftTextAreaStyle"
-       TargetType="TextBox">
+       TargetType="TextBox"
+       BasedOn="{StaticResource SoftTextBoxStyle}">
 
         <Setter Property="AcceptsReturn"
             Value="True"/>
@@ -225,11 +226,20 @@
         <Setter Property="VerticalScrollBarVisibility"
             Value="Auto"/>
 
+        <Setter Property="HorizontalScrollBarVisibility"
+            Value="Disabled"/>
+
         <Setter Property="MinHeight"
             Value="120"/>
 
+        <Setter Property="Height"
+            Value="Auto"/>
+
+        <Setter Property="VerticalContentAlignment"
+            Value="Top"/>
+
         <Setter Property="Padding"
-            Value="18"/>
+            Value="12"/>
 
     </Style>
 

@@ -19,13 +19,13 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            
+
             <!-- HERO -->
-            
+
 
             <Border Background="White"
-                    CornerRadius="34"
-                    Padding="34">
+                    CornerRadius="28"
+                    Padding="28,16">
 
                 <Border.Effect>
 
@@ -41,104 +41,110 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <!-- LEFT -->
+                    <!-- TITLE + SUBTITLE -->
 
-                    <StackPanel>
+                    <StackPanel VerticalAlignment="Center">
 
                         <TextBlock Text="Listings Management"
-                                   FontSize="36"
+                                   FontSize="28"
                                    FontWeight="Bold"
                                    Foreground="#2F2622"/>
 
-                        <TextBlock Margin="0,10,0,0"
+                        <TextBlock Margin="0,5,0,0"
                                    Text="Manage properties, availability, pricing and stay experience."
-                                   FontSize="15"
+                                   FontSize="13"
                                    Foreground="#8C7F79"/>
-
-                        <!-- STATS -->
-
-                        <StackPanel Margin="0,28,0,0"
-                                    Orientation="Horizontal">
-
-                            <Border Background="#EEF8F1"
-                                    CornerRadius="20"
-                                    Padding="18,12"
-                                    Margin="0,0,14,0">
-
-                                <StackPanel>
-
-                                    <TextBlock Text="Active Listings"
-                                               FontSize="12"
-                                               Foreground="#5B6D61"/>
-
-                                    <TextBlock x:Name="txtActiveListings"
-                                               Margin="0,6,0,0"
-                                               Text="18"
-                                               FontSize="24"
-                                               FontWeight="Bold"
-                                               Foreground="#1E7A45"/>
-                                </StackPanel>
-
-                            </Border>
-
-                            <Border Background="#FFF4EC"
-                                    CornerRadius="20"
-                                    Padding="18,12"
-                                    Margin="0,0,14,0">
-
-                                <StackPanel>
-
-                                    <TextBlock Text="Draft Listings"
-                                               FontSize="12"
-                                               Foreground="#7A6456"/>
-
-                                    <TextBlock x:Name="txtDraftListings"
-                                               Margin="0,6,0,0"
-                                               Text="4"
-                                               FontSize="24"
-                                               FontWeight="Bold"
-                                               Foreground="#D97706"/>
-                                </StackPanel>
-
-                            </Border>
-
-                            <Border Background="#F3F0FF"
-                                    CornerRadius="20"
-                                    Padding="18,12">
-
-                                <StackPanel>
-
-                                    <TextBlock Text="Total Properties"
-                                               FontSize="12"
-                                               Foreground="#665D8A"/>
-
-                                    <TextBlock x:Name="txtTotalListings"
-                                               Margin="0,6,0,0"
-                                               Text="22"
-                                               FontSize="24"
-                                               FontWeight="Bold"
-                                               Foreground="#5B4CC4"/>
-                                </StackPanel>
-
-                            </Border>
-
-                        </StackPanel>
 
                     </StackPanel>
 
-                    <!-- RIGHT -->
+                    <!-- STATS -->
 
                     <StackPanel Grid.Column="1"
                                 Orientation="Horizontal"
-                                VerticalAlignment="Top">
+                                VerticalAlignment="Center"
+                                Margin="0,0,20,0">
+
+                        <Border Background="#EEF8F1"
+                                CornerRadius="16"
+                                Padding="16,10"
+                                Margin="0,0,10,0">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Active"
+                                           FontSize="11"
+                                           Foreground="#5B6D61"/>
+
+                                <TextBlock x:Name="txtActiveListings"
+                                           Margin="0,4,0,0"
+                                           Text="18"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="#1E7A45"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <Border Background="#FFF4EC"
+                                CornerRadius="16"
+                                Padding="16,10"
+                                Margin="0,0,10,0">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Draft"
+                                           FontSize="11"
+                                           Foreground="#7A6456"/>
+
+                                <TextBlock x:Name="txtDraftListings"
+                                           Margin="0,4,0,0"
+                                           Text="4"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="#D97706"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <Border Background="#F3F0FF"
+                                CornerRadius="16"
+                                Padding="16,10">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Total"
+                                           FontSize="11"
+                                           Foreground="#665D8A"/>
+
+                                <TextBlock x:Name="txtTotalListings"
+                                           Margin="0,4,0,0"
+                                           Text="22"
+                                           FontSize="20"
+                                           FontWeight="Bold"
+                                           Foreground="#5B4CC4"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                    </StackPanel>
+
+                    <!-- BUTTONS -->
+
+                    <StackPanel Grid.Column="2"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
 
                         <Button x:Name="btnRefresh"
                                 Style="{StaticResource SuccessButtonStyle}"
-                                Width="120"
-                                Height="56"
-                                Margin="0,0,14,0"
+                                Width="110"
+                                Height="46"
+                                Margin="0,0,12,0"
                                 Content="Refresh"
                                 Cursor="Hand"
                                 Background="#F3ECE8"
@@ -147,8 +153,8 @@
 
                         <Button x:Name="btnAddListing"
                                 Style="{StaticResource OutlineButtonStyle}"
-                                Width="190"
-                                Height="56"
+                                Width="160"
+                                Height="46"
                                 Content="+ Add Listing"
                                 Cursor="Hand"
                                 Foreground="White"
@@ -179,9 +185,9 @@
 
             </Border>
 
-            
+
             <!-- FILTER BAR -->
-            
+
 
             <Border Grid.Row="1"
                     Margin="0,26,0,0"
@@ -263,9 +269,9 @@
 
             </Border>
 
-            
+
             <!-- LISTINGS -->
-            
+
 
             <ScrollViewer Grid.Row="2"
                           Margin="0,26,0,0"
@@ -274,16 +280,15 @@
                           Padding="8,4,8,8">
 
                 <WrapPanel x:Name="wpListings"
-                           ItemWidth="330"
                            Orientation="Horizontal"/>
 
             </ScrollViewer>
 
         </Grid>
 
-        
+
         <!-- OVERLAY -->
-        
+
 
         <Grid x:Name="OverlayPanel"
               Background="#66000000"

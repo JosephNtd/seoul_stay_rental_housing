@@ -118,6 +118,9 @@ namespace GUI_WPF.UserControls.Common
                 case "rejected":
                 case "failed":
                 case "refund":
+                case "inactive":
+                case "expired":
+                case "used up":
 
                     ChipBorder.Background =
                         new SolidColorBrush(

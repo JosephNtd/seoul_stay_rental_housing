@@ -560,7 +560,7 @@ namespace DAL
         }
         private void CreateBookingCoupon(Seoul_StayDataContext db, long bookingId, DTO_CreateBooking dto)
         {
-            var coupon = new BookingCoupon
+            var bookingCoupon = new BookingCoupon
             {
                 GUID = Guid.NewGuid(),
                 BookingID = bookingId,
@@ -569,7 +569,14 @@ namespace DAL
                 AppliedDate = DateTime.Now
             };
 
-            db.BookingCoupons.InsertOnSubmit(coupon);
+            db.BookingCoupons.InsertOnSubmit(bookingCoupon);
+
+            // Tăng số lần sử dụng coupon trong cùng transaction
+            var coupon = db.Coupons.FirstOrDefault(c => c.ID == dto.CouponID.Value);
+            if (coupon != null)
+            {
+                coupon.CurrentUsageCount += 1;
+            }
         }
         private void CreateBookingTimeline(Seoul_StayDataContext db, long bookingId, string oldStatus, string newStatus, long changedByUserId, string notes)
         {

@@ -110,5 +110,51 @@ namespace DAL
             }
             catch { return false; }
         }
+
+        // 6. LẤY COUPON THEO MÃ
+        public ET_Coupons GetByCode(string code)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                var c = db.Coupons.FirstOrDefault(x => x.CouponCode.ToLower() == code.Trim().ToLower());
+
+                if (c == null)
+                    return null;
+
+                return new ET_Coupons
+                {
+                    ID = c.ID,
+                    GUID = c.GUID,
+                    CouponCode = c.CouponCode,
+                    DiscountPercent = c.DiscountPercent,
+                    MaximumDiscountAmount = c.MaximumDiscountAmount,
+                    StartedDate = c.StartDate,
+                    ExpirationDate = c.ExpirationDate,
+                    MaxUsageCount = c.MaxUsageCount,
+                    CurrentUsageCount = c.CurrentUsageCount,
+                    IsActive = c.IsActive
+                };
+            }
+        }
+
+        // 7. TĂNG SỐ LẦN SỬ DỤNG
+        public bool IncrementUsage(long couponId)
+        {
+            try
+            {
+                using (var db = new Seoul_StayDataContext())
+                {
+                    var coupon = db.Coupons.FirstOrDefault(x => x.ID == couponId);
+
+                    if (coupon == null)
+                        return false;
+
+                    coupon.CurrentUsageCount += 1;
+                    db.SubmitChanges();
+                    return true;
+                }
+            }
+            catch { return false; }
+        }
     }
 }

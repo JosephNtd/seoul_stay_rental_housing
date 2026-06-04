@@ -176,6 +176,12 @@
     <Compile Include="Pages\Bookings\CreateGuestDialog.xaml.cs">
       <DependentUpon>CreateGuestDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Catalog\CouponEditDialog.xaml.cs">
+      <DependentUpon>CouponEditDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Catalog\CouponManagementPage.xaml.cs">
+      <DependentUpon>CouponManagementPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Catalog\LocationWorkspacePage.xaml.cs">
       <DependentUpon>LocationWorkspacePage.xaml</DependentUpon>
     </Compile>
@@ -227,6 +233,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Bookings\CreateGuestDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Catalog\CouponEditDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Catalog\CouponManagementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

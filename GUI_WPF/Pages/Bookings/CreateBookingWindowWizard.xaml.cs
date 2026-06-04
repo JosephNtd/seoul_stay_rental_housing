@@ -40,6 +40,8 @@ namespace GUI_WPF.Pages.Bookings
         private readonly BUS_ItemPrices _priceBus = new BUS_ItemPrices();
         private readonly BUS_CancellationPolicy _policyBus = new BUS_CancellationPolicy();
         private readonly BUS_Booking _bookingBus = new BUS_Booking();
+        private readonly BUS_TransactionType _transTypeBus = new BUS_TransactionType();
+        private readonly BUS_Coupon _couponBus = new BUS_Coupon();
         private List<DTO_CreateBookingNight> _nights = new List<DTO_CreateBookingNight>();
         private decimal _baseAmount;
         private decimal _discountAmount;
@@ -47,8 +49,7 @@ namespace GUI_WPF.Pages.Bookings
         private decimal _taxAmount;
         private decimal _finalAmount;
         private bool _isStayValidated;
-        private string _paymentStatus;
-        private decimal _depositAmount;
+        private ET_Coupons _appliedCoupon;
 
         public CreateBookingWindowWizard(ET_Users currentUser)
         {
@@ -62,13 +63,20 @@ namespace GUI_WPF.Pages.Bookings
 
             LoadListings();
             LoadPolicies();
+            LoadTransactionTypes();
         }
         private void LoadPolicies()
         {
             cbPolicy.ItemsSource = _policyBus.GetAll();
-            cbPolicy.DisplayMemberPath = "Name";
             cbPolicy.SelectedValuePath = "ID";
-
+        }
+        private void LoadTransactionTypes()
+        {
+            var types = _transTypeBus.GetData();
+            cbTransactionType.ItemsSource = types;
+            cbTransactionType.SelectedValuePath = "ID";
+            if (types.Count > 0)
+                cbTransactionType.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -277,10 +285,14 @@ namespace GUI_WPF.Pages.Bookings
             }
 
             txtBaseAmount.Text = $"{_baseAmount:N0} ₫";
-            txtDiscountAmount.Text = $"{_discountAmount:N0} ₫";
+            txtDiscountAmount.Text = _discountAmount > 0
+                ? $"-{_discountAmount:N0} ₫"
+                : "0 ₫";
             txtServiceFee.Text = $"{_serviceFee:N0} ₫";
             txtTaxAmount.Text = $"{_taxAmount:N0} ₫";
             txtFinalAmount.Text = $"{_finalAmount:N0} ₫";
+
+            RefreshCouponUI();
         }
         private void LoadStep5()
         {
@@ -293,6 +305,16 @@ namespace GUI_WPF.Pages.Bookings
             txtReviewGuests.Text = $"{txtGuests.Text} Guest(s)";
             txtReviewPolicy.Text = cbPolicy.Text;
             txtReviewFinalAmount.Text = $"{_finalAmount:N0} ₫";
+
+            if (_appliedCoupon != null)
+            {
+                ReviewCouponPanel.Visibility = Visibility.Visible;
+                txtReviewCoupon.Text = $"{_appliedCoupon.CouponCode}  (-{_discountAmount:N0} ₫)";
+            }
+            else
+            {
+                ReviewCouponPanel.Visibility = Visibility.Collapsed;
+            }
         }
         private void sbListing_TextChanged(object sender, TextChangedEventArgs e) => ApplyListingFilter();
         private void cbArea_SelectionChanged(object sender, SelectionChangedEventArgs e) => ApplyListingFilter();
@@ -348,10 +370,22 @@ namespace GUI_WPF.Pages.Bookings
                 _baseAmount += p.Price;
             }
 
-            _discountAmount = 0;
             _serviceFee = 0;
             _taxAmount = 0;
-            _finalAmount = _baseAmount;
+
+            RecalculatePricing();
+        }
+        private void RecalculatePricing()
+        {
+            if (_appliedCoupon != null)
+                _discountAmount = _couponBus.CalculateDiscount(_baseAmount, _appliedCoupon);
+            else
+                _discountAmount = 0;
+
+            _finalAmount = _baseAmount - _discountAmount + _serviceFee + _taxAmount;
+
+            if (_finalAmount < 0)
+                _finalAmount = 0;
         }
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
@@ -410,6 +444,19 @@ namespace GUI_WPF.Pages.Bookings
         }
         private DTO_CreateBooking BuildBookingDto()
         {
+            string status = (cbPaymentStatus.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Pending";
+
+            bool isPaid = status == "Paid";
+            bool isDeposit = status == "Deposit";
+
+            decimal depositAmount = 0;
+            if (isDeposit)
+                decimal.TryParse(txtDepositAmount.Text, out depositAmount);
+
+            long transactionTypeId = 0;
+            if ((isPaid || isDeposit) && cbTransactionType.SelectedValue != null)
+                transactionTypeId = (long)cbTransactionType.SelectedValue;
+
             return new DTO_CreateBooking
             {
                 GuestUserID = _selectedGuest.UserID,
@@ -429,9 +476,14 @@ namespace GUI_WPF.Pages.Bookings
                 ServiceFee = _serviceFee,
                 TaxAmount = _taxAmount,
                 FinalAmount = _finalAmount,
+                CouponID = _appliedCoupon?.ID,
+                CouponCode = _appliedCoupon?.CouponCode,
                 CreatedByUserID = _currentUser.ID,
-                PaymentStatus = _paymentStatus,
-                DepositAmount = _depositAmount
+                PaymentStatus = status,
+                IsPaid = isPaid,
+                IsDeposit = isDeposit,
+                DepositAmount = depositAmount,
+                TransactionTypeID = transactionTypeId
             };
         }
 
@@ -559,8 +611,33 @@ namespace GUI_WPF.Pages.Bookings
             if (cbPaymentStatus.SelectedItem == null)
             {
                 MessageBox.Show("Please select payment status.");
-
                 return false;
+            }
+
+            string status = (cbPaymentStatus.SelectedItem as ComboBoxItem)?.Content?.ToString();
+
+            if (status == "Paid" || status == "Deposit")
+            {
+                if (cbTransactionType.SelectedValue == null)
+                {
+                    MessageBox.Show("Please select a payment method.");
+                    return false;
+                }
+            }
+
+            if (status == "Deposit")
+            {
+                if (!decimal.TryParse(txtDepositAmount.Text, out decimal deposit) || deposit <= 0)
+                {
+                    MessageBox.Show("Please enter a valid deposit amount.");
+                    return false;
+                }
+
+                if (deposit >= _finalAmount)
+                {
+                    MessageBox.Show($"Deposit amount must be less than the total ({_finalAmount:N0} ₫).");
+                    return false;
+                }
             }
 
             return true;
@@ -577,6 +654,82 @@ namespace GUI_WPF.Pages.Bookings
             if (result == true)
             {
                 LoadGuests();
+            }
+        }
+        private void cbPaymentStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbPaymentStatus.SelectedItem == null)
+                return;
+
+            string status = (cbPaymentStatus.SelectedItem as ComboBoxItem)?.Content?.ToString();
+
+            bool needsTransaction = status == "Paid" || status == "Deposit";
+
+            if (TransactionTypePanel != null)
+                TransactionTypePanel.Visibility = needsTransaction
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+
+            if (DepositPanel != null)
+                DepositPanel.Visibility = status == "Deposit"
+                    ? Visibility.Visible
+                    : Visibility.Collapsed;
+        }
+        private void btnApplyCoupon_Click(object sender, RoutedEventArgs e)
+        {
+            string code = txtCouponCode.Text?.Trim();
+
+            string error = _couponBus.ValidateCoupon(code, out ET_Coupons coupon);
+
+            if (error != null)
+            {
+                MessageBox.Show(error, "Coupon", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            _appliedCoupon = coupon;
+
+            RecalculatePricing();
+
+            txtDiscountAmount.Text = _discountAmount > 0
+                ? $"-{_discountAmount:N0} ₫"
+                : "0 ₫";
+            txtFinalAmount.Text = $"{_finalAmount:N0} ₫";
+
+            RefreshCouponUI();
+        }
+        private void btnRemoveCoupon_Click(object sender, RoutedEventArgs e)
+        {
+            _appliedCoupon = null;
+
+            RecalculatePricing();
+
+            txtCouponCode.Text = "";
+            txtDiscountAmount.Text = "0 ₫";
+            txtFinalAmount.Text = $"{_finalAmount:N0} ₫";
+
+            RefreshCouponUI();
+        }
+        private void RefreshCouponUI()
+        {
+            if (_appliedCoupon != null)
+            {
+                CouponInputPanel.Visibility = Visibility.Collapsed;
+                CouponAppliedPanel.Visibility = Visibility.Visible;
+
+                txtCouponAppliedCode.Text = $"✓ {_appliedCoupon.CouponCode}";
+
+                string detail = $"-{_appliedCoupon.DiscountPercent}%";
+                if (_appliedCoupon.MaximumDiscountAmount > 0)
+                    detail += $", max {_appliedCoupon.MaximumDiscountAmount:N0} ₫";
+                detail += $" → saved {_discountAmount:N0} ₫";
+
+                txtCouponAppliedDetail.Text = detail;
+            }
+            else
+            {
+                CouponInputPanel.Visibility = Visibility.Visible;
+                CouponAppliedPanel.Visibility = Visibility.Collapsed;
             }
         }
     }

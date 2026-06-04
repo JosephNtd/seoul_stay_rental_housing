@@ -171,8 +171,13 @@
                                       Margin="0,18,0,0"
                                       Height="54"
                                       FontSize="14"
-                                      DisplayMemberPath="Name"
-                                      SelectedValuePath="ID"/>
+                                      SelectedValuePath="ID">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
 
                             <!-- POLICY DETAILS -->
 

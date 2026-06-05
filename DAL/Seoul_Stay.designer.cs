@@ -81,6 +81,9 @@ namespace DAL
     partial void InsertHost(Host instance);
     partial void UpdateHost(Host instance);
     partial void DeleteHost(Host instance);
+    partial void InsertInvoice(Invoice instance);
+    partial void UpdateInvoice(Invoice instance);
+    partial void DeleteInvoice(Invoice instance);
     partial void InsertItemAmenity(ItemAmenity instance);
     partial void UpdateItemAmenity(ItemAmenity instance);
     partial void DeleteItemAmenity(ItemAmenity instance);
@@ -125,13 +128,8 @@ namespace DAL
     partial void DeleteTransactionType(TransactionType instance);
     #endregion
 		
-		//public Seoul_StayDataContext() : 
-		//		base(global::DAL.Properties.Settings.Default.Seoul_StayConnectionString1, mappingSource)
-		//{
-		//	OnCreated();
-		//}
 		public Seoul_StayDataContext() : 
-				base(DAL_Settings.ConnectionString, mappingSource)
+				base(global::DAL.Properties.Settings.Default.Seoul_StayConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -293,6 +291,14 @@ namespace DAL
 			get
 			{
 				return this.GetTable<Host>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Invoice> Invoices
+		{
+			get
+			{
+				return this.GetTable<Invoice>();
 			}
 		}
 		
@@ -2854,6 +2860,8 @@ namespace DAL
 		
 		private EntitySet<BookingStatusHistory> _BookingStatusHistories;
 		
+		private EntitySet<Invoice> _Invoices;
+		
 		private EntitySet<Review> _Reviews;
 		
 		private EntityRef<CancellationPolicy> _CancellationPolicy;
@@ -2912,6 +2920,7 @@ namespace DAL
 			this._BookingCoupons = new EntitySet<BookingCoupon>(new Action<BookingCoupon>(this.attach_BookingCoupons), new Action<BookingCoupon>(this.detach_BookingCoupons));
 			this._BookingDetails = new EntitySet<BookingDetail>(new Action<BookingDetail>(this.attach_BookingDetails), new Action<BookingDetail>(this.detach_BookingDetails));
 			this._BookingStatusHistories = new EntitySet<BookingStatusHistory>(new Action<BookingStatusHistory>(this.attach_BookingStatusHistories), new Action<BookingStatusHistory>(this.detach_BookingStatusHistories));
+			this._Invoices = new EntitySet<Invoice>(new Action<Invoice>(this.attach_Invoices), new Action<Invoice>(this.detach_Invoices));
 			this._Reviews = new EntitySet<Review>(new Action<Review>(this.attach_Reviews), new Action<Review>(this.detach_Reviews));
 			this._CancellationPolicy = default(EntityRef<CancellationPolicy>);
 			this._DimDate = default(EntityRef<DimDate>);
@@ -3318,6 +3327,19 @@ namespace DAL
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Booking_Invoice", Storage="_Invoices", ThisKey="ID", OtherKey="BookingID")]
+		public EntitySet<Invoice> Invoices
+		{
+			get
+			{
+				return this._Invoices;
+			}
+			set
+			{
+				this._Invoices.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Booking_Review", Storage="_Reviews", ThisKey="ID", OtherKey="BookingID")]
 		public EntitySet<Review> Reviews
 		{
@@ -3598,6 +3620,18 @@ namespace DAL
 		}
 		
 		private void detach_BookingStatusHistories(BookingStatusHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Booking = null;
+		}
+		
+		private void attach_Invoices(Invoice entity)
+		{
+			this.SendPropertyChanging();
+			entity.Booking = this;
+		}
+		
+		private void detach_Invoices(Invoice entity)
 		{
 			this.SendPropertyChanging();
 			entity.Booking = null;
@@ -5995,6 +6029,325 @@ namespace DAL
 		{
 			this.SendPropertyChanging();
 			entity.Host = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Invoices")]
+	public partial class Invoice : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private long _ID;
+		
+		private System.Guid _GUID;
+		
+		private long _BookingID;
+		
+		private string _InvoiceCode;
+		
+		private System.DateTime _IssueDate;
+		
+		private System.Nullable<System.DateTime> _DueDate;
+		
+		private string _Status;
+		
+		private decimal _TotalAmount;
+		
+		private System.Nullable<System.DateTime> _PaidDate;
+		
+		private string _Notes;
+		
+		private EntityRef<Booking> _Booking;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(long value);
+    partial void OnIDChanged();
+    partial void OnGUIDChanging(System.Guid value);
+    partial void OnGUIDChanged();
+    partial void OnBookingIDChanging(long value);
+    partial void OnBookingIDChanged();
+    partial void OnInvoiceCodeChanging(string value);
+    partial void OnInvoiceCodeChanged();
+    partial void OnIssueDateChanging(System.DateTime value);
+    partial void OnIssueDateChanged();
+    partial void OnDueDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnDueDateChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
+    partial void OnTotalAmountChanging(decimal value);
+    partial void OnTotalAmountChanged();
+    partial void OnPaidDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnPaidDateChanged();
+    partial void OnNotesChanging(string value);
+    partial void OnNotesChanged();
+    #endregion
+		
+		public Invoice()
+		{
+			this._Booking = default(EntityRef<Booking>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GUID", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid GUID
+		{
+			get
+			{
+				return this._GUID;
+			}
+			set
+			{
+				if ((this._GUID != value))
+				{
+					this.OnGUIDChanging(value);
+					this.SendPropertyChanging();
+					this._GUID = value;
+					this.SendPropertyChanged("GUID");
+					this.OnGUIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_BookingID", DbType="BigInt NOT NULL")]
+		public long BookingID
+		{
+			get
+			{
+				return this._BookingID;
+			}
+			set
+			{
+				if ((this._BookingID != value))
+				{
+					if (this._Booking.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnBookingIDChanging(value);
+					this.SendPropertyChanging();
+					this._BookingID = value;
+					this.SendPropertyChanged("BookingID");
+					this.OnBookingIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_InvoiceCode", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string InvoiceCode
+		{
+			get
+			{
+				return this._InvoiceCode;
+			}
+			set
+			{
+				if ((this._InvoiceCode != value))
+				{
+					this.OnInvoiceCodeChanging(value);
+					this.SendPropertyChanging();
+					this._InvoiceCode = value;
+					this.SendPropertyChanged("InvoiceCode");
+					this.OnInvoiceCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IssueDate", DbType="DateTime NOT NULL")]
+		public System.DateTime IssueDate
+		{
+			get
+			{
+				return this._IssueDate;
+			}
+			set
+			{
+				if ((this._IssueDate != value))
+				{
+					this.OnIssueDateChanging(value);
+					this.SendPropertyChanging();
+					this._IssueDate = value;
+					this.SendPropertyChanged("IssueDate");
+					this.OnIssueDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DueDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DueDate
+		{
+			get
+			{
+				return this._DueDate;
+			}
+			set
+			{
+				if ((this._DueDate != value))
+				{
+					this.OnDueDateChanging(value);
+					this.SendPropertyChanging();
+					this._DueDate = value;
+					this.SendPropertyChanged("DueDate");
+					this.OnDueDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalAmount", DbType="Decimal(10,2) NOT NULL")]
+		public decimal TotalAmount
+		{
+			get
+			{
+				return this._TotalAmount;
+			}
+			set
+			{
+				if ((this._TotalAmount != value))
+				{
+					this.OnTotalAmountChanging(value);
+					this.SendPropertyChanging();
+					this._TotalAmount = value;
+					this.SendPropertyChanged("TotalAmount");
+					this.OnTotalAmountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PaidDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> PaidDate
+		{
+			get
+			{
+				return this._PaidDate;
+			}
+			set
+			{
+				if ((this._PaidDate != value))
+				{
+					this.OnPaidDateChanging(value);
+					this.SendPropertyChanging();
+					this._PaidDate = value;
+					this.SendPropertyChanged("PaidDate");
+					this.OnPaidDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="NVarChar(500)")]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this.OnNotesChanging(value);
+					this.SendPropertyChanging();
+					this._Notes = value;
+					this.SendPropertyChanged("Notes");
+					this.OnNotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Booking_Invoice", Storage="_Booking", ThisKey="BookingID", OtherKey="ID", IsForeignKey=true)]
+		public Booking Booking
+		{
+			get
+			{
+				return this._Booking.Entity;
+			}
+			set
+			{
+				Booking previousValue = this._Booking.Entity;
+				if (((previousValue != value) 
+							|| (this._Booking.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Booking.Entity = null;
+						previousValue.Invoices.Remove(this);
+					}
+					this._Booking.Entity = value;
+					if ((value != null))
+					{
+						value.Invoices.Add(this);
+						this._BookingID = value.ID;
+					}
+					else
+					{
+						this._BookingID = default(long);
+					}
+					this.SendPropertyChanged("Booking");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	

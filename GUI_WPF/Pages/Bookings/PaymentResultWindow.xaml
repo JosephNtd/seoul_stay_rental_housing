@@ -1,0 +1,161 @@
+﻿<Window x:Class="GUI_WPF.Pages.Bookings.PaymentResultWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Payment Result"
+        Height="380"
+        Width="420"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStyle="None"
+        AllowsTransparency="True">
+
+    <Window.Resources>
+
+        <!-- Bounce-in animation cho icon -->
+        <Storyboard x:Key="BounceIn">
+            <DoubleAnimation Storyboard.TargetName="IconScale"
+                             Storyboard.TargetProperty="ScaleX"
+                             From="0"
+                             To="1"
+                             Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut"
+                              Amplitude="0.4"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <DoubleAnimation Storyboard.TargetName="IconScale"
+                             Storyboard.TargetProperty="ScaleY"
+                             From="0"
+                             To="1"
+                             Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase EasingMode="EaseOut"
+                              Amplitude="0.4"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+
+            <!-- Fade in text -->
+            <DoubleAnimation Storyboard.TargetName="ContentPanel"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0"
+                             To="1"
+                             Duration="0:0:0.3"
+                             BeginTime="0:0:0.2"/>
+        </Storyboard>
+
+    </Window.Resources>
+
+    <Border CornerRadius="20"
+            Background="White"
+            BorderBrush="#F0DEDE"
+            BorderThickness="1">
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- ============================================ -->
+            <!-- CONTENT                                      -->
+            <!-- ============================================ -->
+            <StackPanel Grid.Row="0"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="40,30,40,10">
+
+                <!-- SUCCESS ICON -->
+                <Border x:Name="SuccessIcon"
+                        Width="80"
+                        Height="80"
+                        CornerRadius="40"
+                        HorizontalAlignment="Center"
+                        RenderTransformOrigin="0.5,0.5">
+
+                    <Border.RenderTransform>
+                        <ScaleTransform x:Name="IconScale"
+                                        ScaleX="1"
+                                        ScaleY="1"/>
+                    </Border.RenderTransform>
+
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0"
+                                             EndPoint="1,1">
+                            <GradientStop x:Name="IconGrad1"
+                                          Color="#4CAF50"
+                                          Offset="0"/>
+                            <GradientStop x:Name="IconGrad2"
+                                          Color="#2E7D32"
+                                          Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <Border.Effect>
+                        <DropShadowEffect BlurRadius="20"
+                                          ShadowDepth="0"
+                                          Opacity="0.25"
+                                          Color="#4CAF50"/>
+                    </Border.Effect>
+
+                    <TextBlock x:Name="txtIcon"
+                               Text="✓"
+                               FontSize="36"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+
+                </Border>
+
+                <!-- TEXT CONTENT -->
+                <StackPanel x:Name="ContentPanel"
+                            Opacity="1"
+                            Margin="0,24,0,0">
+
+                    <TextBlock x:Name="txtTitle"
+                               Text="Payment Successful"
+                               FontFamily="Plus Jakarta Sans"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               Foreground="#3A3131"
+                               HorizontalAlignment="Center"/>
+
+                    <TextBlock x:Name="txtMessage"
+                               Text="The guest has completed the QR payment. The booking is now confirmed."
+                               FontFamily="Be Vietnam Pro"
+                               FontSize="13"
+                               Foreground="#8B7D7D"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               Margin="0,10,0,0"
+                               LineHeight="20"/>
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <!-- ============================================ -->
+            <!-- FOOTER                                       -->
+            <!-- ============================================ -->
+            <Border Grid.Row="1"
+                    Background="#FAF7F2"
+                    CornerRadius="0,0,20,20"
+                    Padding="24,16">
+
+                <Button x:Name="btnOk"
+                        Style="{StaticResource SuccessButtonStyle}"
+                        Content="OK"
+                        Width="160"
+                        HorizontalAlignment="Center"
+                        Click="btnOk_Click"/>
+
+            </Border>
+
+        </Grid>
+
+    </Border>
+
+</Window>

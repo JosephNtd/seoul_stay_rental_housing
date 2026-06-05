@@ -16,6 +16,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Helper;              // Helper_QRCode, Helper_InvoicePDF
+using GUI_WPF.Helpers;     // SignalRService
 
 namespace GUI_WPF.Pages.Bookings
 {
@@ -67,11 +69,9 @@ namespace GUI_WPF.Pages.Bookings
 
         // STEP 6: PAYMENT
         private readonly BUS_TransactionType _transTypeBus = new BUS_TransactionType();
+        private readonly BUS_Invoice _invoiceBus = new BUS_Invoice();
 
-        
         // CONSTRUCTOR
-        
-
         public CreateBookingWindowWizard(ET_Users currentUser)
         {
             InitializeComponent();
@@ -87,9 +87,9 @@ namespace GUI_WPF.Pages.Bookings
             LoadTransactionTypes();
         }
 
-        
+
         // INIT LOADERS
-        
+
 
         private void LoadPolicies()
         {
@@ -105,9 +105,9 @@ namespace GUI_WPF.Pages.Bookings
                 cbTransactionType.SelectedIndex = 0;
         }
 
-        
+
         // WIZARD STATE CONTROLLER (6 STEPS)
-        
+
 
         /// <summary>
         /// Hàm "đầu não" điều khiển hiển thị của 6 bước
@@ -190,9 +190,9 @@ namespace GUI_WPF.Pages.Bookings
             }
         }
 
-        
+
         // STEP 1: GUEST
-        
+
 
         private void LoadGuests()
         {
@@ -252,9 +252,9 @@ namespace GUI_WPF.Pages.Bookings
             return true;
         }
 
-        
+
         // STEP 2: LISTING
-        
+
 
         private void LoadAreas()
         {
@@ -389,9 +389,9 @@ namespace GUI_WPF.Pages.Bookings
             return true;
         }
 
-        
+
         // STEP 3: STAY
-        
+
 
         private void btnCheckStay_Click(object sender, RoutedEventArgs e)
         {
@@ -502,9 +502,9 @@ namespace GUI_WPF.Pages.Bookings
             RecalculatePricing();
         }
 
-        
+
         // STEP 4: ADDON SERVICES (MỚI HOÀN TOÀN)
-        
+
 
         private void LoadStep4_Addon()
         {
@@ -903,9 +903,9 @@ namespace GUI_WPF.Pages.Bookings
             }
         }
 
-        
+
         // STEP 5: CHI PHÍ (CŨ LÀ STEP 4)
-        
+
 
         private void LoadStep5()
         {
@@ -946,9 +946,9 @@ namespace GUI_WPF.Pages.Bookings
             RefreshCouponUI();
         }
 
-        
+
         // STEP 6: THANH TOÁN
-        
+
 
         private void LoadStep6()
         {
@@ -991,9 +991,9 @@ namespace GUI_WPF.Pages.Bookings
             }
         }
 
-        
+
         // PRICING (CẬP NHẬT — CỘNG ADDON)
-        
+
 
         private void RecalculatePricing()
         {
@@ -1011,9 +1011,9 @@ namespace GUI_WPF.Pages.Bookings
                 _finalAmount = 0;
         }
 
-        
+
         // COUPON
-        
+
 
         private void btnApplyCoupon_Click(object sender, RoutedEventArgs e)
         {
@@ -1073,9 +1073,9 @@ namespace GUI_WPF.Pages.Bookings
             }
         }
 
-        
+
         // PAYMENT (STEP 6)
-        
+
 
         private void cbPaymentStatus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1133,9 +1133,9 @@ namespace GUI_WPF.Pages.Bookings
             return true;
         }
 
-        
+
         // NAVIGATION
-        
+
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
@@ -1179,21 +1179,90 @@ namespace GUI_WPF.Pages.Bookings
             {
                 DTO_CreateBooking dto = BuildBookingDto();
 
-                string error;
+                var result = _bookingBus.CreateManualBooking(dto);
 
-                bool success = _bookingBus.CreateManualBooking(dto, out error);
-
-                if (!success)
+                if (!result.Success)
                 {
-                    MessageBox.Show(error, "Create Booking", MessageBoxButton.OK, MessageBoxImage.Warning);
-
+                    MessageBox.Show(result.Error, "Create Booking", MessageBoxButton.OK, MessageBoxImage.Warning);
                     return;
                 }
 
-                MessageBox.Show("Booking created successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                // ─── INVOICE + QR + PDF + SIGNALR ───
+
+                bool invoiceShown = false;
+
+                if (_invoiceBus.CanGenerateInvoice(result.BookingId))
+                {
+                    string invoiceError;
+                    long invoiceId = _invoiceBus.GenerateInvoice(result.BookingId, out invoiceError);
+
+                    if (invoiceId > 0)
+                    {
+                        string baseUrl = SignalRService.Instance.PaymentBaseUrl;
+                        DTO_Invoice invoice = _invoiceBus.GetInvoiceFull(invoiceId, baseUrl);
+
+                        if (invoice != null)
+                        {
+                            try
+                            {
+                                // 1. Generate QR Code
+                                BitmapImage qrBitmap = Helper_QRCode.GenerateBitmapImage(invoice.PaymentUrl);
+                                byte[] qrPngBytes = Helper_QRCode.GeneratePngBytes(invoice.PaymentUrl);
+
+                                // 2. Export PDF ra Desktop
+                                string pdfFileName = $"Invoice_{invoice.InvoiceCode}.pdf";
+                                string pdfPath = System.IO.Path.Combine(
+                                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                                    pdfFileName);
+
+                                Helper_InvoicePDF.ExportPdf(invoice, qrPngBytes, pdfPath);
+
+                                // 3. Connect SignalR (fire-and-forget, không block UI)
+                                ConnectSignalRAsync();
+
+                                // 4. Show Invoice Dialog
+                                var dialog = new InvoiceGeneratedDialog(
+                                    qrBitmap,
+                                    pdfPath,
+                                    invoiceId,
+                                    invoice.InvoiceCode,
+                                    invoice.TotalAmountDisplay);
+
+                                dialog.Owner = this;
+                                dialog.ShowDialog();
+
+                                invoiceShown = true;
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(
+                                    $"Booking created but failed to generate invoice:\n{ex.Message}",
+                                    "Invoice Error",
+                                    MessageBoxButton.OK,
+                                    MessageBoxImage.Warning);
+                            }
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(invoiceError))
+                    {
+                        MessageBox.Show(
+                            $"Booking created, but invoice could not be generated:\n{invoiceError}",
+                            "Invoice Warning",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+                    }
+                }
+
+                if (!invoiceShown)
+                {
+                    MessageBox.Show(
+                        "Booking created successfully.",
+                        "Success",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
 
                 DialogResult = true;
-
                 Close();
             }
         }
@@ -1215,9 +1284,9 @@ namespace GUI_WPF.Pages.Bookings
             }
         }
 
-        
+
         // BUILD DTO (CẬP NHẬT — THÊM ADDON LIST)
-        
+
 
         private DTO_CreateBooking BuildBookingDto()
         {
@@ -1263,6 +1332,21 @@ namespace GUI_WPF.Pages.Bookings
                 DepositAmount = depositAmount,
                 TransactionTypeID = transactionTypeId
             };
+        }
+        /// <summary>
+        /// Kết nối SignalR (fire-and-forget).
+        /// Nếu fail → bỏ qua, user vẫn có QR + PDF.
+        /// </summary>
+        private async void ConnectSignalRAsync()
+        {
+            try
+            {
+                await SignalRService.Instance.ConnectAsync();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[SignalR] Connection failed: {ex.Message}");
+            }
         }
     }
 }

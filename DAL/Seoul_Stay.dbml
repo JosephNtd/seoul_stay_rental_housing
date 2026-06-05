@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Seoul_Stay" Class="Seoul_StayDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-F8TMCM4;Initial Catalog=Seoul_Stay;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="Seoul_StayConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=ShinPC;Initial Catalog=Seoul_Stay;Integrated Security=True;Encrypt=True;Trust Server Certificate=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="Seoul_StayConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.AddonServiceDetails" Member="AddonServiceDetails">
     <Type Name="AddonServiceDetail">
       <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -131,6 +131,7 @@
       <Association Name="Booking_BookingCoupon" Member="BookingCoupons" ThisKey="ID" OtherKey="BookingID" Type="BookingCoupon" />
       <Association Name="Booking_BookingDetail" Member="BookingDetails" ThisKey="ID" OtherKey="BookingID" Type="BookingDetail" />
       <Association Name="Booking_BookingStatusHistory" Member="BookingStatusHistories" ThisKey="ID" OtherKey="BookingID" Type="BookingStatusHistory" />
+      <Association Name="Booking_Invoice" Member="Invoices" ThisKey="ID" OtherKey="BookingID" Type="Invoice" />
       <Association Name="Booking_Review" Member="Reviews" ThisKey="ID" OtherKey="BookingID" Type="Review" />
       <Association Name="CancellationPolicy_Booking" Member="CancellationPolicy" ThisKey="CancellationPolicyID" OtherKey="ID" Type="CancellationPolicy" IsForeignKey="true" />
       <Association Name="DimDate_Booking" Member="DimDate" ThisKey="CheckInDate" OtherKey="Date" Type="DimDate" IsForeignKey="true" />
@@ -250,6 +251,21 @@
       <Association Name="Host_HostBankAccount" Member="HostBankAccounts" ThisKey="UserID" OtherKey="HostUserID" Type="HostBankAccount" />
       <Association Name="Host_Item" Member="Items" ThisKey="UserID" OtherKey="HostUserID" Type="Item" />
       <Association Name="User_Host" Member="User" ThisKey="UserID" OtherKey="ID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoices" Member="Invoices">
+    <Type Name="Invoice">
+      <Column Name="ID" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GUID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="BookingID" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceCode" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IssueDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="PaidDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Association Name="Booking_Invoice" Member="Booking" ThisKey="BookingID" OtherKey="ID" Type="Booking" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ItemAmenities" Member="ItemAmenities">

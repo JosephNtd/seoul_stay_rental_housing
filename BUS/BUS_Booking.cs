@@ -268,52 +268,50 @@ namespace BUS
                 .Where(x => x.BookingStatus != "Cancelled").Sum(x => x.FinalPrice);
         }
 
-        // =====================================================
-        // CREATE MANUAL BOOKING (CẬP NHẬT — THÊM ADDON VALIDATE)
-        // =====================================================
+        
+        /// <summary>
+        /// CREATE MANUAL BOOKING ( TRẢ VỀ bookingId)
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
 
-        public bool CreateManualBooking(DTO_CreateBooking dto, out string error)
+        public (bool Success, long BookingId, string Error) CreateManualBooking(DTO_CreateBooking dto)
         {
-            error = string.Empty;
-
             if (dto == null)
-            {
-                error = "Booking information is missing.";
-                return false;
-            }
+                return (false, 0, "Booking information is missing.");
+
+            string error;
+
             if (!ValidateGuest(dto, out error))
-                return false;
+                return (false, 0, error);
 
             if (!ValidateListing(dto, out error))
-                return false;
+                return (false, 0, error);
 
             if (!ValidateDates(dto, out error))
-                return false;
+                return (false, 0, error);
 
             if (!ValidateCapacity(dto, out error))
-                return false;
+                return (false, 0, error);
 
             if (!ValidatePricing_Manual(dto, out error))
-                return false;
+                return (false, 0, error);
 
             if (!ValidateNights(dto, out error))
-                return false;
+                return (false, 0, error);
 
             if (!ValidateOverlap(dto, out error))
-                return false;
+                return (false, 0, error);
 
-            // VALIDATE ADDON SERVICES (MỚI)
             if (!ValidateAddonServices(dto, out error))
-                return false;
+                return (false, 0, error);
 
             long bookingId = _booking.CreateManualBooking(dto);
 
             if (bookingId <= 0)
-            {
-                error = "Unable to create booking.";
-                return false;
-            }
-            return true;
+                return (false, 0, "Unable to create booking.");
+
+            return (true, bookingId, string.Empty);
         }
 
         // =====================================================

@@ -55,5 +55,16 @@ namespace DAL.Properties {
                 return ((string)(this["Seoul_StayConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ShinPC;Initial Catalog=Seoul_Stay;Integrated Security=True;Encrypt=Tr" +
+            "ue;TrustServerCertificate=True")]
+        public string Seoul_StayConnectionString2 {
+            get {
+                return ((string)(this["Seoul_StayConnectionString2"]));
+            }
+        }
     }
 }

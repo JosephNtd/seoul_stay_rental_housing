@@ -50,6 +50,7 @@
     <Compile Include="BUS_Coupon.cs" />
     <Compile Include="BUS_Guest.cs" />
     <Compile Include="BUS_Host.cs" />
+    <Compile Include="BUS_Invoice.cs" />
     <Compile Include="BUS_ItemAvailability.cs" />
     <Compile Include="BUS_ItemPictures.cs" />
     <Compile Include="BUS_ItemPrices.cs" />

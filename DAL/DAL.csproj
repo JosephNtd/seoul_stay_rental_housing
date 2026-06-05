@@ -54,6 +54,7 @@
     <Compile Include="DAL_Guest.cs" />
     <Compile Include="DAL_Host.cs" />
     <Compile Include="DAL_HostBankAccount.cs" />
+    <Compile Include="DAL_Invoice.cs" />
     <Compile Include="DAL_ItemAvailability.cs" />
     <Compile Include="DAL_ItemPictures.cs" />
     <Compile Include="DAL_Items.cs" />

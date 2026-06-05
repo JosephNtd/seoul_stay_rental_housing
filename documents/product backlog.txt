@@ -1,4 +1,0 @@
-product backlog
-user manual
-contract
-quality criteria

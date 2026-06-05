@@ -530,7 +530,29 @@
         CONSTRAINT [UQ_AddonServiceDetails_GUID] UNIQUE ([GUID])
     )
     GO
-
+    -- ============================================================
+    -- INVOICE TO GENERATE BILLING
+    -- ============================================================
+    CREATE TABLE [dbo].[Invoices] (
+    [ID]            BIGINT           IDENTITY(1,1) NOT NULL,
+    [GUID]          UNIQUEIDENTIFIER NOT NULL DEFAULT NEWID(),
+    [BookingID]     BIGINT           NOT NULL,
+    [InvoiceCode]   NVARCHAR(50)     NOT NULL,  -- INV-000001
+    [IssueDate]     DATETIME         NOT NULL DEFAULT GETDATE(),
+    [DueDate]       DATETIME         NULL,
+    [Status]        VARCHAR(20)      NOT NULL DEFAULT 'Pending',
+    -- CHECK: 'Pending', 'Paid', 'Cancelled', 'Expired'
+    [TotalAmount]   DECIMAL(10,2)    NOT NULL,
+    [PaidDate]      DATETIME         NULL,
+    [Notes]         NVARCHAR(500)    NULL,
+    CONSTRAINT [PK_Invoices]         PRIMARY KEY ([ID]),
+    CONSTRAINT [UQ_Invoices_GUID]    UNIQUE ([GUID]),
+    CONSTRAINT [UQ_Invoices_Code]    UNIQUE ([InvoiceCode]),
+    CONSTRAINT [UQ_Invoices_Booking] UNIQUE ([BookingID]),  -- 1 booking = 1 invoice
+    CONSTRAINT [FK_Invoices_Booking] FOREIGN KEY ([BookingID]) REFERENCES [Bookings]([ID]),
+    CONSTRAINT [CK_Invoices_Status]  CHECK ([Status] IN ('Pending','Paid','Cancelled','Expired'))
+    )
+    GO
     -- ============================================================
     -- FOREIGN KEY CONSTRAINTS
     -- ============================================================

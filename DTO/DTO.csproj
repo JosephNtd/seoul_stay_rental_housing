@@ -61,6 +61,8 @@
     <Compile Include="DTO_CreateBookingAddon.cs" />
     <Compile Include="DTO_CreateBookingNight.cs" />
     <Compile Include="DTO_GuestLookup.cs" />
+    <Compile Include="DTO_Invoice.cs" />
+    <Compile Include="DTO_InvoiceCreate.cs" />
     <Compile Include="DTO_ItemCard.cs" />
     <Compile Include="DTO_ItemsView.cs" />
     <Compile Include="DTO_ItemSearch.cs" />

@@ -47,3 +47,10 @@ UpgradeLog.htm
 # Windows
 Thumbs.db
 Desktop.ini
+
+# NuGet packages (restore từ packages.config)
+packages/
+
+# Documents không cần thiết
+documents/*.mp4
+documents/~$*

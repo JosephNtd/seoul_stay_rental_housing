@@ -322,19 +322,17 @@ namespace GUI_WPF.Pages.Bookings
                     DepositAmount = string.IsNullOrWhiteSpace(txtDeposit.Text) ? 0 : decimal.Parse(txtDeposit.Text),
                 };
 
-            string error;
-            bool success = _bookingBus.CreateManualBooking(dto, out error);
+            var result = _bookingBus.CreateManualBooking(dto);
 
-            if (!success)
+            if (!result.Success)
             {
-                MessageBox.Show(error);
+                MessageBox.Show(result.Error);
                 return;
             }
 
-            MessageBox.Show($"Booking created successfully.\n\n" + $"Total Amount: {_finalAmount:N0} ₫");
+            MessageBox.Show($"Booking created successfully.\n\nTotal Amount: {_finalAmount:N0} ₫");
 
             DialogResult = true;
-
             Close();
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)

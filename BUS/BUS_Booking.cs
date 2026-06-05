@@ -11,6 +11,8 @@ namespace BUS
         private readonly DAL_Booking _booking = new DAL_Booking();
         private readonly DAL_ItemPrices _prices = new DAL_ItemPrices();
         private readonly DAL_Items _dalItems = new DAL_Items();
+        private readonly DAL_AddonService _addonDal = new DAL_AddonService();
+        private readonly DAL_Services _serviceDal = new DAL_Services();
 
         public List<DTO_BookingCard> GetBookingCards()
         {
@@ -265,6 +267,11 @@ namespace BUS
             return GetBookingCards()
                 .Where(x => x.BookingStatus != "Cancelled").Sum(x => x.FinalPrice);
         }
+
+        // =====================================================
+        // CREATE MANUAL BOOKING (CẬP NHẬT — THÊM ADDON VALIDATE)
+        // =====================================================
+
         public bool CreateManualBooking(DTO_CreateBooking dto, out string error)
         {
             error = string.Empty;
@@ -295,6 +302,10 @@ namespace BUS
             if (!ValidateOverlap(dto, out error))
                 return false;
 
+            // VALIDATE ADDON SERVICES (MỚI)
+            if (!ValidateAddonServices(dto, out error))
+                return false;
+
             long bookingId = _booking.CreateManualBooking(dto);
 
             if (bookingId <= 0)
@@ -304,6 +315,237 @@ namespace BUS
             }
             return true;
         }
+
+        // =====================================================
+        // ADDON SERVICES VALIDATION (MỚI)
+        // =====================================================
+
+        private bool ValidateAddonServices(DTO_CreateBooking dto, out string error)
+        {
+            error = string.Empty;
+
+            // Không có addon thì bỏ qua — hoàn toàn hợp lệ
+            if (dto.AddonList == null || !dto.AddonList.Any())
+                return true;
+
+            foreach (var addon in dto.AddonList)
+            {
+                // Lấy thông tin service từ DB
+                var service = _serviceDal.GetByID(addon.ServiceID);
+
+                if (service == null)
+                {
+                    error = $"Service '{addon.ServiceName}' not found.";
+                    return false;
+                }
+
+                // VALIDATE: Số người phải >= 1
+                if (addon.NumberOfPeople < 1)
+                {
+                    error = $"'{service.Name}': Number of people must be at least 1.";
+                    return false;
+                }
+
+                // VALIDATE: Ngày áp dụng phải nằm trong khoảng lưu trú
+                if (addon.FromDate.Date < dto.CheckInDate.Date ||
+                    addon.FromDate.Date >= dto.CheckOutDate.Date)
+                {
+                    error = $"'{service.Name}': Service date ({addon.FromDate:dd/MM/yyyy}) " +
+                            $"must be within the stay period " +
+                            $"({dto.CheckInDate:dd/MM/yyyy} – {dto.CheckOutDate:dd/MM/yyyy}).";
+                    return false;
+                }
+
+                // VALIDATE: DayOfWeek
+                if (!ValidateDayOfWeek(service.DayOfWeek, addon.FromDate, out string dowError))
+                {
+                    error = $"'{service.Name}': {dowError}";
+                    return false;
+                }
+
+                // VALIDATE: DayOfMonth
+                if (!ValidateDayOfMonth(service.DayOfMonth, addon.FromDate, out string domError))
+                {
+                    error = $"'{service.Name}': {domError}";
+                    return false;
+                }
+
+                // VALIDATE: DailyCap
+                // Đếm số người đã đặt cùng service + cùng ngày trong DB
+                long currentDailyUsage = _addonDal.CountDailyUsage(addon.ServiceID, addon.FromDate);
+
+                // Cộng thêm số người trong cùng dto (trường hợp addon trùng nhau)
+                long sameAddonInDto = dto.AddonList
+                    .Where(x => x.ServiceID == addon.ServiceID
+                             && x.FromDate.Date == addon.FromDate.Date
+                             && !ReferenceEquals(x, addon))
+                    .Sum(x => x.NumberOfPeople);
+
+                long totalDailyUsage = currentDailyUsage + sameAddonInDto + addon.NumberOfPeople;
+
+                if (totalDailyUsage > service.DailyCap)
+                {
+                    error = $"'{service.Name}' on {addon.FromDate:dd/MM/yyyy}: " +
+                            $"Daily capacity exceeded. " +
+                            $"Limit: {service.DailyCap}, " +
+                            $"Already booked: {currentDailyUsage + sameAddonInDto}, " +
+                            $"Requesting: {addon.NumberOfPeople}.";
+                    return false;
+                }
+
+                // VALIDATE: BookingCap
+                // Đếm số lần service này xuất hiện trong cùng 1 booking (trong dto)
+                int sameServiceCount = dto.AddonList
+                    .Count(x => x.ServiceID == addon.ServiceID);
+
+                if (sameServiceCount > service.BookingCap)
+                {
+                    error = $"'{service.Name}': " +
+                            $"Booking capacity exceeded. " +
+                            $"Maximum {service.BookingCap} time(s) per booking, " +
+                            $"but {sameServiceCount} selected.";
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // =====================================================
+        // VALIDATE DAY OF WEEK
+        // Format DB: "1,3,5" (1=Sunday, 2=Monday, ..., 7=Saturday)
+        // Tương ứng SQL Server DATEPART(dw, ...)
+        // C# DayOfWeek: Sunday=0, Monday=1, ..., Saturday=6
+        // => Chuyển đổi: C# DayOfWeek + 1 = SQL DayOfWeek
+        // =====================================================
+
+        private bool ValidateDayOfWeek(string dayOfWeekRule, DateTime fromDate, out string error)
+        {
+            error = string.Empty;
+
+            // Nếu rule rỗng hoặc null → không giới hạn → hợp lệ
+            if (string.IsNullOrWhiteSpace(dayOfWeekRule))
+                return true;
+
+            string trimmed = dayOfWeekRule.Trim();
+
+            if (string.IsNullOrEmpty(trimmed))
+                return true;
+
+            // Parse danh sách ngày cho phép
+            HashSet<int> allowedDays = ParseNumberList(trimmed);
+
+            if (!allowedDays.Any())
+                return true;
+
+            // Chuyển C# DayOfWeek sang SQL Server convention (1-based, Sunday=1)
+            int sqlDayOfWeek = (int)fromDate.DayOfWeek + 1;
+
+            if (!allowedDays.Contains(sqlDayOfWeek))
+            {
+                error = $"This service is not available on {fromDate.DayOfWeek}s.";
+                return false;
+            }
+
+            return true;
+        }
+
+        // =====================================================
+        // VALIDATE DAY OF MONTH
+        // Format DB: "1,2,3,15-20" (hỗ trợ dấu phẩy và range)
+        // =====================================================
+
+        private bool ValidateDayOfMonth(string dayOfMonthRule, DateTime fromDate, out string error)
+        {
+            error = string.Empty;
+
+            // Nếu rule rỗng hoặc null → không giới hạn → hợp lệ
+            if (string.IsNullOrWhiteSpace(dayOfMonthRule))
+                return true;
+
+            string trimmed = dayOfMonthRule.Trim();
+
+            if (string.IsNullOrEmpty(trimmed))
+                return true;
+
+            // Parse danh sách ngày cho phép
+            HashSet<int> allowedDays = ParseNumberList(trimmed);
+
+            if (!allowedDays.Any())
+                return true;
+
+            int dayOfMonth = fromDate.Day;
+
+            if (!allowedDays.Contains(dayOfMonth))
+            {
+                error = $"This service is not available on day {dayOfMonth} of the month. " +
+                        $"Allowed days: {trimmed}.";
+                return false;
+            }
+
+            return true;
+        }
+
+        // =====================================================
+        // PARSE NUMBER LIST
+        // Hỗ trợ cả dấu phẩy và range (gạch ngang)
+        // Ví dụ: "1,2,3,15-20" → {1,2,3,15,16,17,18,19,20}
+        // =====================================================
+
+        private HashSet<int> ParseNumberList(string input)
+        {
+            HashSet<int> result = new HashSet<int>();
+
+            if (string.IsNullOrWhiteSpace(input))
+                return result;
+
+            string[] parts = input.Split(',');
+
+            foreach (string part in parts)
+            {
+                string trimmed = part.Trim();
+
+                if (string.IsNullOrEmpty(trimmed))
+                    continue;
+
+                // Kiểm tra range (có dấu gạch ngang)
+                if (trimmed.Contains("-"))
+                {
+                    string[] rangeParts = trimmed.Split('-');
+
+                    if (rangeParts.Length == 2)
+                    {
+                        int start;
+                        int end;
+
+                        if (int.TryParse(rangeParts[0].Trim(), out start) &&
+                            int.TryParse(rangeParts[1].Trim(), out end))
+                        {
+                            for (int i = start; i <= end; i++)
+                            {
+                                result.Add(i);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    int number;
+
+                    if (int.TryParse(trimmed, out number))
+                    {
+                        result.Add(number);
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        // =====================================================
+        // EXISTING VALIDATIONS (GIỮ NGUYÊN + CẬP NHẬT PRICING)
+        // =====================================================
+
         private bool ValidateOverlap(DTO_CreateBooking dto, out string error)
         {
             error = string.Empty;
@@ -343,6 +585,14 @@ namespace BUS
 
             return true;
         }
+
+        // =====================================================
+        // VALIDATE PRICING (CẬP NHẬT — CỘNG THÊM ADDON TOTAL)
+        // Công thức mới:
+        // FinalAmount = BaseAmount - Discount + CleaningFee
+        //             + ServiceFee + Tax + AddonServicesTotal
+        // =====================================================
+
         private bool ValidatePricing_Manual(DTO_CreateBooking dto, out string error)
         {
             error = string.Empty;
@@ -359,10 +609,17 @@ namespace BUS
                 return false;
             }
 
-            decimal expected = dto.BaseAmount - dto.DiscountAmount + dto.CleaningFee + dto.ServiceFee + dto.TaxAmount;
+            decimal expected = dto.BaseAmount
+                             - dto.DiscountAmount
+                             + dto.CleaningFee
+                             + dto.ServiceFee
+                             + dto.TaxAmount
+                             + dto.AddonServicesTotal;
+
             if (Math.Abs(dto.FinalAmount - expected) > 0.01m)
             {
-                error = "Final amount validation failed.";
+                error = $"Final amount validation failed. " +
+                        $"Expected: {expected:N0}, Actual: {dto.FinalAmount:N0}.";
                 return false;
             }
 

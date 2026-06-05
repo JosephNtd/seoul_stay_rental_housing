@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:GUI_WPF.UserControls.Common"
         Title="Tạo Đặt Phòng (Manual Booking)"
-        Width="900"
-        Height="900"
+        Width="1000"
+        Height="920"
         Background="#F8F6F4"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize">
@@ -15,6 +15,10 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+
+        <!-- ============================================= -->
+        <!-- HEADER + STEP INDICATOR -->
+        <!-- ============================================= -->
 
         <Border Background="#FFFDFC" BorderBrush="#EADFD8" BorderThickness="1" CornerRadius="16" Padding="20">
             <Border.Effect>
@@ -29,8 +33,10 @@
 
                 <StackPanel Margin="0,0,0,16">
                     <TextBlock Text="Tạo Đặt Phòng Trực Tiếp" FontSize="22" FontWeight="Bold" Foreground="#4E413D"/>
-                    <TextBlock Text="Quy trình đặt phòng 5 bước dành cho nhân viên hệ thống." FontSize="13" Foreground="#8A7D77" Margin="0,4,0,0"/>
+                    <TextBlock Text="Quy trình đặt phòng 6 bước dành cho nhân viên hệ thống." FontSize="13" Foreground="#8A7D77" Margin="0,4,0,0"/>
                 </StackPanel>
+
+                <!-- 6 STEP INDICATORS (11 columns: 6 circles + 5 lines) -->
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -43,49 +49,69 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
+                    <!-- STEP 1 -->
                     <StackPanel x:Name="IndicatorStep1" Grid.Column="0">
                         <Border Width="30" Height="30" CornerRadius="15" Background="#7B5455" HorizontalAlignment="Center">
                             <TextBlock Text="1" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Khách hàng" FontSize="11" FontWeight="SemiBold" Foreground="#7B5455" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Khách hàng" FontSize="10" FontWeight="SemiBold" Foreground="#7B5455" Margin="0,4,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
-                    <Line Grid.Column="1" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="8,0"/>
+                    <Line Grid.Column="1" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="6,0"/>
 
+                    <!-- STEP 2 -->
                     <StackPanel x:Name="IndicatorStep2" Grid.Column="2" Opacity="0.5">
                         <Border Width="30" Height="30" CornerRadius="15" Background="#8A7D77" HorizontalAlignment="Center">
                             <TextBlock Text="2" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Chọn phòng" FontSize="11" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Chọn phòng" FontSize="10" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
-                    <Line Grid.Column="3" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="8,0"/>
+                    <Line Grid.Column="3" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="6,0"/>
 
+                    <!-- STEP 3 -->
                     <StackPanel x:Name="IndicatorStep3" Grid.Column="4" Opacity="0.5">
                         <Border Width="30" Height="30" CornerRadius="15" Background="#8A7D77" HorizontalAlignment="Center">
                             <TextBlock Text="3" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Lịch lưu trú" FontSize="11" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Lịch lưu trú" FontSize="10" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
-                    <Line Grid.Column="5" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="8,0"/>
+                    <Line Grid.Column="5" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="6,0"/>
 
+                    <!-- STEP 4 (MỚI - Dịch vụ kèm) -->
                     <StackPanel x:Name="IndicatorStep4" Grid.Column="6" Opacity="0.5">
                         <Border Width="30" Height="30" CornerRadius="15" Background="#8A7D77" HorizontalAlignment="Center">
                             <TextBlock Text="4" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Chi phí" FontSize="11" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Dịch vụ kèm" FontSize="10" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
-                    <Line Grid.Column="7" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="8,0"/>
+                    <Line Grid.Column="7" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="6,0"/>
 
+                    <!-- STEP 5 (Cũ là Step 4 - Chi phí) -->
                     <StackPanel x:Name="IndicatorStep5" Grid.Column="8" Opacity="0.5">
                         <Border Width="30" Height="30" CornerRadius="15" Background="#8A7D77" HorizontalAlignment="Center">
                             <TextBlock Text="5" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <TextBlock Text="Thanh toán" FontSize="11" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Chi phí" FontSize="10" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <Line Grid.Column="9" X1="0" Y1="15" X2="200" Y2="15" Stroke="#F1E7E2" StrokeThickness="2" Stretch="Fill" Margin="6,0"/>
+
+                    <!-- STEP 6 (Cũ là Step 5 - Thanh toán) -->
+                    <StackPanel x:Name="IndicatorStep6" Grid.Column="10" Opacity="0.5">
+                        <Border Width="30" Height="30" CornerRadius="15" Background="#8A7D77" HorizontalAlignment="Center">
+                            <TextBlock Text="6" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Thanh toán" FontSize="10" Foreground="#8A7D77" Margin="0,4,0,0" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Grid>
             </Grid>
         </Border>
+
+        <!-- ============================================= -->
+        <!-- BODY (6 GRIDS) -->
+        <!-- ============================================= -->
 
         <Border Grid.Row="1" Background="#FFFDFC" BorderBrush="#EADFD8" BorderThickness="1" CornerRadius="16" Margin="0,16" Padding="20">
             <Border.Effect>
@@ -93,6 +119,11 @@
             </Border.Effect>
 
             <Grid>
+
+                <!-- ============================================= -->
+                <!-- STEP 1: KHÁCH HÀNG (GIỮ NGUYÊN) -->
+                <!-- ============================================= -->
+
                 <Grid x:Name="GridStep1">
 
                     <Grid.ColumnDefinitions>
@@ -217,6 +248,10 @@
                     </Border>
 
                 </Grid>
+
+                <!-- ============================================= -->
+                <!-- STEP 2: CHỌN PHÒNG (GIỮ NGUYÊN) -->
+                <!-- ============================================= -->
 
                 <Grid x:Name="GridStep2"
                         Visibility="Collapsed">
@@ -355,6 +390,10 @@
 
                 </Grid>
 
+                <!-- ============================================= -->
+                <!-- STEP 3: LỊCH LƯU TRÚ (GIỮ NGUYÊN) -->
+                <!-- ============================================= -->
+
                 <Grid x:Name="GridStep3"
       Visibility="Collapsed">
 
@@ -441,7 +480,144 @@
 
                 </Grid>
 
+                <!-- ============================================= -->
+                <!-- STEP 4: DỊCH VỤ KÈM (MỚI HOÀN TOÀN) -->
+                <!-- ============================================= -->
+
                 <Grid x:Name="GridStep4"
+                      Visibility="Collapsed">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="1.2*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- LEFT: SERVICE BROWSER -->
+
+                    <Grid>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="12"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- TITLE -->
+                        <TextBlock Text="Addon Services"
+                                   FontSize="22"
+                                   FontWeight="Bold"/>
+
+                        <!-- FILTER BY SERVICE TYPE -->
+                        <StackPanel Grid.Row="2"
+                                    Orientation="Horizontal">
+
+                            <TextBlock Text="Service Type:"
+                                       VerticalAlignment="Center"
+                                       Margin="0,0,10,0"
+                                       FontWeight="SemiBold"
+                                       Foreground="#4E413D"/>
+
+                            <ComboBox x:Name="cbServiceType"
+                                      Style="{StaticResource ModernComboBoxStyle}"
+                                      Width="260"
+                                      Height="40"
+                                      SelectionChanged="cbServiceType_SelectionChanged"/>
+
+                        </StackPanel>
+
+                        <!-- SERVICE LIST -->
+                        <Border Grid.Row="4"
+                                Style="{StaticResource SectionCardStyle}"
+                                Padding="12">
+
+                            <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+                                <StackPanel x:Name="spServiceCards"/>
+
+                            </ScrollViewer>
+
+                        </Border>
+
+                    </Grid>
+
+                    <!-- RIGHT: SELECTED ADDONS -->
+
+                    <Border Grid.Column="2"
+                            Style="{StaticResource SectionCardStyle}"
+                            Padding="20">
+
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="12"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- HEADER -->
+                            <StackPanel>
+                                <TextBlock Text="Selected Services"
+                                           FontWeight="Bold"
+                                           FontSize="18"/>
+                                <TextBlock x:Name="txtAddonCount"
+                                           Text="0 services"
+                                           FontSize="12"
+                                           Foreground="#8A7D77"
+                                           Margin="0,4,0,0"/>
+                            </StackPanel>
+
+                            <!-- ADDON LIST -->
+                            <ScrollViewer Grid.Row="2"
+                                          VerticalScrollBarVisibility="Auto">
+
+                                <StackPanel x:Name="spSelectedAddons"/>
+
+                            </ScrollViewer>
+
+                            <!-- TOTAL -->
+                            <Border Grid.Row="3"
+                                    BorderBrush="#F1E7E2"
+                                    BorderThickness="0,1,0,0"
+                                    Padding="0,14,0,0"
+                                    Margin="0,8,0,0">
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="Addon Total"
+                                               FontWeight="Bold"
+                                               FontSize="16"
+                                               VerticalAlignment="Center"/>
+
+                                    <TextBlock x:Name="txtAddonTotalAmount"
+                                               Grid.Column="1"
+                                               Text="0 ₫"
+                                               FontWeight="Bold"
+                                               FontSize="16"
+                                               Foreground="#2AA876"
+                                               VerticalAlignment="Center"/>
+                                </Grid>
+
+                            </Border>
+
+                        </Grid>
+
+                    </Border>
+
+                </Grid>
+
+                <!-- ============================================= -->
+                <!-- STEP 5: CHI PHÍ (CŨ LÀ STEP 4) -->
+                <!-- ============================================= -->
+
+                <Grid x:Name="GridStep5"
       Visibility="Collapsed">
 
                     <Grid.ColumnDefinitions>
@@ -472,8 +648,8 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Text="Night Breakdown"
-                       FontSize="22"
-                       FontWeight="Bold"/>
+                                        FontSize="22"
+                                        FontWeight="Bold"/>
 
                             <ScrollViewer Grid.Row="2">
 
@@ -488,14 +664,14 @@
                     <!-- SUMMARY -->
 
                     <Border Grid.Column="2"
-            Style="{StaticResource SectionCardStyle}"
-            Padding="20">
+                            Style="{StaticResource SectionCardStyle}"
+                            Padding="20">
 
                         <StackPanel>
 
                             <TextBlock Text="Pricing Summary"
-                       FontSize="20"
-                       FontWeight="Bold"/>
+                                       FontSize="20"
+                                       FontWeight="Bold"/>
 
                             <!-- COUPON INPUT -->
                             <StackPanel x:Name="CouponInputPanel"
@@ -576,96 +752,68 @@
 
                             <Separator Margin="0,12,0,0"/>
 
+                            <!-- BASE AMOUNT -->
                             <Grid Margin="0,20,0,0">
-
                                 <Grid.ColumnDefinitions>
-
                                     <ColumnDefinition/>
-
                                     <ColumnDefinition Width="Auto"/>
-
                                 </Grid.ColumnDefinitions>
-
                                 <TextBlock Text="Base Amount"/>
-
-                                <TextBlock Grid.Column="1"
-                           x:Name="txtBaseAmount"/>
-
+                                <TextBlock Grid.Column="1" x:Name="txtBaseAmount"/>
                             </Grid>
 
+                            <!-- DISCOUNT -->
                             <Grid Margin="0,10,0,0">
-
                                 <Grid.ColumnDefinitions>
-
                                     <ColumnDefinition/>
-
                                     <ColumnDefinition Width="Auto"/>
-
                                 </Grid.ColumnDefinitions>
-
-                                <TextBlock Text="Discount"/>
-
-                                <TextBlock Grid.Column="1"
-                           x:Name="txtDiscountAmount"/>
-
+                                <TextBlock Text="Coupon Discount" Foreground="#16A34A"/>
+                                <TextBlock Grid.Column="1" x:Name="txtDiscountAmount" Foreground="#16A34A"/>
                             </Grid>
 
+                            <!-- SERVICE FEE -->
                             <Grid Margin="0,10,0,0">
-
                                 <Grid.ColumnDefinitions>
-
                                     <ColumnDefinition/>
-
                                     <ColumnDefinition Width="Auto"/>
-
                                 </Grid.ColumnDefinitions>
-
                                 <TextBlock Text="Service Fee"/>
-
-                                <TextBlock Grid.Column="1"
-                           x:Name="txtServiceFee"/>
-
+                                <TextBlock Grid.Column="1" x:Name="txtServiceFee"/>
                             </Grid>
 
+                            <!-- TAX -->
                             <Grid Margin="0,10,0,0">
-
                                 <Grid.ColumnDefinitions>
-
                                     <ColumnDefinition/>
-
                                     <ColumnDefinition Width="Auto"/>
-
                                 </Grid.ColumnDefinitions>
-
                                 <TextBlock Text="Tax"/>
+                                <TextBlock Grid.Column="1" x:Name="txtTaxAmount"/>
+                            </Grid>
 
-                                <TextBlock Grid.Column="1"
-                           x:Name="txtTaxAmount"/>
-
+                            <!-- ADDON SERVICES (MỚI) -->
+                            <Grid x:Name="AddonTotalRow"
+                                  Margin="0,10,0,0"
+                                  Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Addon Services" FontWeight="SemiBold" Foreground="#7B5455"/>
+                                <TextBlock Grid.Column="1" x:Name="txtAddonServicesLine" FontWeight="SemiBold" Foreground="#7B5455"/>
                             </Grid>
 
                             <Separator Margin="0,16"/>
 
+                            <!-- TOTAL -->
                             <Grid>
-
                                 <Grid.ColumnDefinitions>
-
                                     <ColumnDefinition/>
-
                                     <ColumnDefinition Width="Auto"/>
-
                                 </Grid.ColumnDefinitions>
-
-                                <TextBlock Text="TOTAL"
-                           FontWeight="Bold"
-                           FontSize="18"/>
-
-                                <TextBlock Grid.Column="1"
-                           x:Name="txtFinalAmount"
-                           FontWeight="Bold"
-                           FontSize="18"
-                           Foreground="#2AA876"/>
-
+                                <TextBlock Text="TOTAL" FontWeight="Bold" FontSize="18"/>
+                                <TextBlock Grid.Column="1" x:Name="txtFinalAmount" FontWeight="Bold" FontSize="18" Foreground="#2AA876"/>
                             </Grid>
 
                         </StackPanel>
@@ -674,7 +822,11 @@
 
                 </Grid>
 
-                <Grid x:Name="GridStep5"
+                <!-- ============================================= -->
+                <!-- STEP 6: THANH TOÁN (CŨ LÀ STEP 5) -->
+                <!-- ============================================= -->
+
+                <Grid x:Name="GridStep6"
       Visibility="Collapsed">
 
                     <Grid.ColumnDefinitions>
@@ -741,7 +893,8 @@
                         <!-- STAY -->
 
                         <Border Style="{StaticResource SectionCardStyle}"
-                                Padding="16">
+                                Padding="16"
+                                Margin="0,0,0,12">
 
                             <StackPanel>
 
@@ -757,6 +910,32 @@
 
                                 <TextBlock x:Name="txtReviewPolicy"
                                             Margin="0,4,0,0"/>
+
+                            </StackPanel>
+
+                        </Border>
+
+                        <!-- ADDON SERVICES REVIEW (MỚI) -->
+
+                        <Border x:Name="ReviewAddonPanel"
+                                Style="{StaticResource SectionCardStyle}"
+                                Padding="16"
+                                Visibility="Collapsed">
+
+                            <StackPanel>
+
+                                <TextBlock Text="Addon Services"
+                                           FontSize="18"
+                                           FontWeight="Bold"/>
+
+                                <TextBlock x:Name="txtReviewAddonSummary"
+                                           Margin="0,12,0,0"
+                                           TextWrapping="Wrap"/>
+
+                                <TextBlock x:Name="txtReviewAddonTotal"
+                                           Margin="0,6,0,0"
+                                           FontWeight="SemiBold"
+                                           Foreground="#7B5455"/>
 
                             </StackPanel>
 
@@ -853,6 +1032,10 @@
             </Grid>
         </Border>
 
+        <!-- ============================================= -->
+        <!-- FOOTER BUTTONS -->
+        <!-- ============================================= -->
+
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -864,7 +1047,7 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button x:Name="btnBack" Content="Previous" Width="110" Height="40" Margin="0,0,12,0" Visibility="Collapsed" Background="#FAF4F1" BorderBrush="#D9C8C1" Foreground="#4E413D" Click="btnBack_Click"/>
 
-                <Button x:Name="btnNext" Content="Nex" Width="160" Height="40" Background="#7B5455" BorderBrush="Transparent" Foreground="White" FontWeight="Bold" Click="btnNext_Click">
+                <Button x:Name="btnNext" Content="Tiếp theo" Width="160" Height="40" Background="#7B5455" BorderBrush="Transparent" Foreground="White" FontWeight="Bold" Click="btnNext_Click">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border Background="{TemplateBinding Background}" CornerRadius="6">

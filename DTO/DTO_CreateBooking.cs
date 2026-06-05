@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DTO
 {
@@ -51,6 +52,38 @@ namespace DTO
         public decimal TaxAmount { get; set; }
 
         public decimal FinalAmount { get; set; }
+
+        // =====================================================
+        // ADDON SERVICES (MỚI)
+        // =====================================================
+
+        public List<DTO_CreateBookingAddon> AddonList { get; set; } = new List<DTO_CreateBookingAddon>();
+
+        public decimal AddonServicesTotal
+        {
+            get
+            {
+                if (AddonList == null || !AddonList.Any())
+                    return 0;
+
+                return AddonList.Sum(x => x.TotalPrice);
+            }
+        }
+
+        public string AddonServicesTotalDisplay
+        {
+            get => $"{AddonServicesTotal:N0} ₫";
+        }
+
+        public bool HasAddons
+        {
+            get
+            {
+                return AddonList != null && AddonList.Any();
+            }
+        }
+
+        // =====================================================
 
         // COUPON
         public long? CouponID { get; set; }

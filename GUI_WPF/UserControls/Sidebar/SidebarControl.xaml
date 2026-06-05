@@ -73,13 +73,13 @@
                                         </StackPanel>
                                     </Button>
                                     <Button 
-                                        x:Name="btnTransactions"
-                                        Click="btnTransactions_Click"
+                                        x:Name="btnCoupons"
+                                        Click="btnCoupons_Click"
                                         Style="{StaticResource SidebarButtonStyle}" 
                                         Margin="0,4">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="💳" FontSize="15"/>
-                                            <TextBlock Text="Transactions" Margin="12,0,0,0" Style="{StaticResource SidebarTextStyle}"/>
+                                            <TextBlock Text="Coupons" Margin="12,0,0,0" Style="{StaticResource SidebarTextStyle}"/>
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>

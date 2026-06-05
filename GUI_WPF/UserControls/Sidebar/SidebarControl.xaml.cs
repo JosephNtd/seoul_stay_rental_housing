@@ -25,7 +25,7 @@ namespace GUI_WPF.UserControls.Sidebar
         public event RoutedEventHandler LocationCatalogClicked;
         public event RoutedEventHandler PropertyTypesClicked;
         public event RoutedEventHandler ServicesClicked;
-        public event RoutedEventHandler TransactionsClicked;
+        public event RoutedEventHandler CouponsClicked;
         public event RoutedEventHandler UsersClicked;
         public event RoutedEventHandler ListingsClicked;
         public event RoutedEventHandler BookingsClicked;
@@ -125,9 +125,9 @@ namespace GUI_WPF.UserControls.Sidebar
             ServicesClicked?.Invoke(this, e);
         }
 
-        private void btnTransactions_Click(object sender, RoutedEventArgs e)
+        private void btnCoupons_Click(object sender, RoutedEventArgs e)
         {
-            TransactionsClicked?.Invoke(this, e);
+            CouponsClicked?.Invoke(this, e);
         }
 
         private void btnUsers_Click(object sender, RoutedEventArgs e)

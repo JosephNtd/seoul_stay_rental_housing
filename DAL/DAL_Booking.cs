@@ -10,6 +10,12 @@ namespace DAL
     public class DAL_Booking
     {
 
+        // =====================================================
+        // ADDON SERVICE DAL (dùng cho CreateManualBooking)
+        // =====================================================
+
+        private readonly DAL_AddonService _addonDal = new DAL_AddonService();
+
         // GET BOOKING CARDS
         public List<DTO_BookingCard> GetBookingCards()
         {
@@ -243,141 +249,97 @@ namespace DAL
 
                 // AMENITIES
 
-                data.Amenities = (from ia in db.ItemAmenities
-                                  join am in db.Amenities
-                                     on ia.AmenityID
-                                     equals am.ID
-                                  where ia.ItemID ==
-                                        data.ItemID
-                                  select am.Name)
-                    .ToList();
-
-                // ATTRACTIONS
-
-                data.Attractions = (from iad in db.ItemAttractions join at in db.Attractions on iad.AttractionID equals at.ID where iad.ItemID == data.ItemID select at.Name).ToList();
-
-                // PICTURES
-
-                data.Pictures = db.ItemPictures.Where(x => x.ItemID == data.ItemID).OrderBy(x => x.DisplayOrder).Select(x => x.PictureFileName).ToList();
+                data.Amenities = GetBookingAmenities(data.ItemID);
 
                 return data;
             }
         }
 
-
-        // GET TIMELINE
+        // GET BOOKING TIMELINE
         public List<DTO_BookingTimeline> GetBookingTimeline(long bookingId)
         {
             using (var db = new Seoul_StayDataContext())
             {
-                var query = from h in db.BookingStatusHistories
-
-                            join u in db.Users
-                                on h.ChangedByUserID
-                                equals u.ID
-                                into userJoin
-
-                            from usr in userJoin.DefaultIfEmpty()
-
-                            where h.BookingID == bookingId
-
-                            orderby h.ChangedDate descending
-
-                            select new DTO_BookingTimeline
-                            {
-                                ID = h.ID,
-                                GUID = h.GUID,
-                                BookingID = h.BookingID,
-                                OldStatus = h.OldStatus,
-                                NewStatus = h.NewStatus,
-                                ChangedDate = h.ChangedDate,
-                                ChangedByUserID = h.ChangedByUserID,
-                                ChangedByName = usr != null ? usr.FullName : "System",
-                                ChangedByAvatar = usr != null ? usr.ProfilePicture : null,
-                                Notes = h.Notes
-                            };
-
-                return query.ToList();
+                return (from h in db.BookingStatusHistories
+                        join u in db.Users
+                            on h.ChangedByUserID equals u.ID
+                            into userJoin
+                        from user in userJoin.DefaultIfEmpty()
+                        where h.BookingID == bookingId
+                        orderby h.ChangedDate descending
+                        select new DTO_BookingTimeline
+                        {
+                            ID = h.ID,
+                            BookingID = h.BookingID,
+                            OldStatus = h.OldStatus,
+                            NewStatus = h.NewStatus,
+                            ChangedDate = h.ChangedDate,
+                            ChangedByUserID = h.ChangedByUserID,
+                            ChangedByName = user != null ? user.FullName : "System",
+                            Notes = h.Notes
+                        }).ToList();
             }
         }
 
-
         // GET BOOKING NIGHTS
-        public List<DTO_BookingNight>
-    GetBookingNights(long bookingId)
+        public List<DTO_BookingNight> GetBookingNights(long bookingId)
         {
             using (var db = new Seoul_StayDataContext())
             {
-                var query = from d in db.BookingDetails
-
-                            join ip in db.ItemPrices
-                                on d.ItemPriceID
-                                equals ip.ID
-
-                            join cp in
-                                db.CancellationPolicies
-                                on d.RefundCancellationPolicyID
-                                equals cp.ID
-                                into policyJoin
-
-                            from policy in policyJoin.DefaultIfEmpty()
-
-                            where d.BookingID == bookingId
-                            orderby ip.Date
-
-                            select new DTO_BookingNight
-                            {
-                                BookingDetailID = d.ID,
-                                BookingDetailGUID = d.GUID,
-                                BookingID = d.BookingID,
-                                ItemPriceID = d.ItemPriceID,
-                                Date = ip.Date,
-                                BasePrice = ip.Price,
-                                IsRefund = d.isRefund,
-                                RefundDate = d.RefundDate,
-                                RefundCancellationPolicyID = d.RefundCancellationPolicyID,
-                                RefundPolicyName = policy != null ? policy.Name : null
-                            };
-
-                return query.ToList();
+                return (from bd in db.BookingDetails
+                        join ip in db.ItemPrices
+                            on bd.ItemPriceID equals ip.ID
+                        join cp in db.CancellationPolicies
+                            on ip.CancellationPolicyID equals cp.ID
+                        where bd.BookingID == bookingId
+                        orderby ip.Date
+                        select new DTO_BookingNight
+                        {
+                            BookingDetailID = bd.ID,
+                            ItemPriceID = ip.ID,
+                            Date = ip.Date,
+                            BasePrice = ip.Price,
+                            RefundCancellationPolicyID = cp.ID,
+                            IsRefund = bd.isRefund,
+                            RefundDate = bd.RefundDate
+                        }).ToList();
             }
         }
 
+        // GET BOOKING AMENITIES
+        public List<string> GetBookingAmenities(long itemId)
+        {
+            using (var db = new Seoul_StayDataContext())
+            {
+                return (from ia in db.ItemAmenities
+                        join am in db.Amenities
+                            on ia.AmenityID equals am.ID
+                        where ia.ItemID == itemId
+                        select am.Name).ToList();
+            }
+        }
 
-        // GET STATS
+        // GET BOOKING STATS
         public DTO_BookingStats GetBookingStats()
         {
             using (var db = new Seoul_StayDataContext())
             {
-                DateTime today = DateTime.Today;
                 var bookings = db.Bookings.ToList();
-                DTO_BookingStats stats = new DTO_BookingStats();
-                stats.TotalBookings = bookings.Count;
-                stats.PendingBookings = bookings.Count(x => x.BookingStatus == "Pending");
-                stats.ConfirmedBookings = bookings.Count(x => x.BookingStatus == "Confirmed");
-                stats.CheckedInBookings = bookings.Count(x => x.BookingStatus == "CheckedIn");
-                stats.CompletedBookings = bookings.Count(x => x.BookingStatus == "Completed");
-                stats.CancelledBookings = bookings.Count(x => x.BookingStatus == "Cancelled");
-                stats.TodayCheckIns = bookings.Count(x => x.CheckInDate.Date == today);
-                stats.TodayCheckOuts = bookings.Count(x => x.CheckOutDate.Date == today);
-                stats.ActiveStays = bookings.Count(x => x.CheckInDate.Date <= today && x.CheckOutDate.Date >= today && x.BookingStatus != "Cancelled");
-                stats.TotalRevenue = bookings.Where(x => x.BookingStatus != "Cancelled").Sum(x => x.FinalPrice);
-                stats.TodayRevenue = bookings.Where(x => x.BookingDate.Date == today).Sum(x => x.FinalPrice);
-                stats.MonthlyRevenue = bookings.Where(x => x.BookingDate.Month == today.Month && x.BookingDate.Year == today.Year).Sum(x => x.FinalPrice);
-                int totalListings = db.Items.Count();
-                stats.TotalAvailableListings = totalListings;
-                stats.OccupiedListings = bookings.Where(x => x.CheckInDate.Date <= today && x.CheckOutDate.Date >= today && x.BookingStatus != "Cancelled").Select(x => x.ItemID).Distinct().Count();
-                stats.RefundedBookings = bookings.Count(x => x.BookingStatus == "Refunded");
-                if (totalListings > 0)
-                {
-                    stats.OccupancyRate = ((decimal)stats.OccupiedListings / totalListings) * 100;
-                }
 
-                return stats;
+                return new DTO_BookingStats
+                {
+                    TotalBookings = bookings.Count,
+                    PendingBookings = bookings.Count(x => x.BookingStatus == "Pending"),
+                    ConfirmedBookings = bookings.Count(x => x.BookingStatus == "Confirmed"),
+                    CheckedInBookings = bookings.Count(x => x.BookingStatus == "CheckedIn"),
+                    CompletedBookings = bookings.Count(x => x.BookingStatus == "Completed"),
+                    CancelledBookings = bookings.Count(x => x.BookingStatus == "Cancelled"),
+                    TotalRevenue = bookings.Where(x => x.BookingStatus != "Cancelled" && x.BookingStatus != "Refunded").Sum(x => x.FinalPrice)
+                };
             }
         }
 
-        // SEARCH
+        // SEARCH BOOKINGS
         public List<DTO_BookingCard> SearchBookings(string keyword)
         {
             var data = GetBookingCards();
@@ -385,17 +347,15 @@ namespace DAL
             if (string.IsNullOrWhiteSpace(keyword))
                 return data;
 
-            keyword = keyword.ToLower().Trim();
+            keyword = keyword.ToLower();
 
-            return data.FindAll(x => x.BookingCode.ToLower().Contains(keyword)
-                            || x.GuestFullName.ToLower().Contains(keyword)
-                            || x.GuestEmail.ToLower().Contains(keyword)
-                            || x.GuestPhone.ToLower().Contains(keyword)
-                            || x.ListingTitle.ToLower().Contains(keyword));
+            return data.FindAll(x =>
+                (x.GuestFullName ?? "").ToLower().Contains(keyword) ||
+                (x.ListingTitle ?? "").ToLower().Contains(keyword) ||
+                (x.BookingStatus ?? "").ToLower().Contains(keyword));
         }
 
-
-        // FILTER
+        // FILTER BOOKINGS
         public List<DTO_BookingCard> FilterBookings(string status)
         {
             var data = GetBookingCards();
@@ -472,6 +432,11 @@ namespace DAL
                                         checkOut > x.CheckInDate);
             }
         }
+
+        // =====================================================
+        // CREATE MANUAL BOOKING (CẬP NHẬT - THÊM ADDON)
+        // =====================================================
+
         public long CreateManualBooking(DTO_CreateBooking dto)
         {
             using (var scope = new TransactionScope())
@@ -483,12 +448,16 @@ namespace DAL
                         return 0;
                     }
 
+                    // 1. TẠO TRANSACTION (nếu thanh toán)
+
                     long? transactionId = null;
 
                     if (dto.IsPaid || dto.IsDeposit)
                     {
                         transactionId = CreateTransaction(db, dto);
                     }
+
+                    // 2. TẠO BOOKING
 
                     var booking = new Booking
                     {
@@ -513,16 +482,38 @@ namespace DAL
 
                     db.SubmitChanges();
 
+                    // 3. TẠO BOOKING DETAILS (từng đêm)
+
                     CreateBookingDetails(db, booking.ID, dto);
+
+                    // 4. TẠO BOOKING COUPON (nếu có)
 
                     if (dto.CouponID.HasValue)
                     {
                         CreateBookingCoupon(db, booking.ID, dto);
                     }
 
+                    // 5. TẠO ADDON SERVICES (MỚI)
+
+                    if (dto.AddonList != null && dto.AddonList.Any())
+                    {
+                        _addonDal.CreateAddonWithDetails(
+                            db,
+                            booking.ID,
+                            dto.CreatedByUserID,
+                            null,
+                            dto.AddonList
+                        );
+                    }
+
+                    // 6. TẠO TIMELINE
+
                     CreateBookingTimeline(db, booking.ID, null, booking.BookingStatus, dto.CreatedByUserID, "Walk-in booking created");
+
                     db.SubmitChanges();
+
                     scope.Complete();
+
                     return booking.ID;
                 }
             }

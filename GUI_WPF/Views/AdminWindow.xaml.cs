@@ -37,7 +37,7 @@ namespace GUI_WPF.Views
             Sidebar.LocationCatalogClicked += btnLocationCatalog_Click;
             Sidebar.PropertyTypesClicked += btnPropertyTypes_Click;
             Sidebar.ServicesClicked += btnServices_Click;
-            Sidebar.TransactionsClicked += btnTransactions_Click;
+            Sidebar.CouponsClicked += btnCoupons_Click;
             Sidebar.UsersClicked += btnUsers_Click;
             Sidebar.ListingsClicked += btnListings_Click;
             Sidebar.BookingsClicked += btnBookings_Click;
@@ -72,9 +72,9 @@ namespace GUI_WPF.Views
             Navigate(new ServicesWorkspacePage());
         } 
         // TRANSACTIONS
-        private void btnTransactions_Click(object sender, RoutedEventArgs e) 
-        { 
-            MessageBox.Show("Transactions page coming soon."); 
+        private void btnCoupons_Click(object sender, RoutedEventArgs e) 
+        {
+            Navigate(new CouponManagementPage());
         } 
         // USERS
         private void btnUsers_Click(object sender, RoutedEventArgs e) 

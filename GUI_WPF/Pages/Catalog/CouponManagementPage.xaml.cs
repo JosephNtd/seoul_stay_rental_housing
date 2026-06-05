@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace GUI_WPF.Pages.Catalog
 {
-    public partial class CouponManagementPage : UserControl
+    public partial class CouponManagementPage : Page
     {
         private readonly BUS_Coupon _bus = new BUS_Coupon();
 

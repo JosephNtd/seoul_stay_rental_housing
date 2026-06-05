@@ -58,6 +58,7 @@
     <Compile Include="DTO_BookingStatusReport.cs" />
     <Compile Include="DTO_BookingTimeline.cs" />
     <Compile Include="DTO_CreateBooking.cs" />
+    <Compile Include="DTO_CreateBookingAddon.cs" />
     <Compile Include="DTO_CreateBookingNight.cs" />
     <Compile Include="DTO_GuestLookup.cs" />
     <Compile Include="DTO_ItemCard.cs" />

@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL_AddonService.cs" />
     <Compile Include="DAL_Amenity.cs" />
     <Compile Include="DAL_Area.cs" />
     <Compile Include="DAL_Attraction.cs" />

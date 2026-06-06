@@ -1,63 +1,73 @@
 @echo off
-setlocal Enabledelayedexpansion
+setlocal
 
 echo ============================================
-echo   Seoul Stay - Kiểm tra & Cấu hình IIS Express
+echo      Seoul Stay - IIS Express Installer
 echo ============================================
 echo.
 
-:: 1. Xác định đường dẫn file iisexpress.exe mặc định của Windows để check xem cài chưa
-set "IIS_PATH_64=%ProgramFiles%\IIS Express\iisexpress.exe"
-set "IIS_PATH_32=%ProgramFiles(x86)%\IIS Express\iisexpress.exe"
+:: =====================================================
+:: 1. Kiem tra IIS Express da ton tai trong Registry chua
+:: =====================================================
 
-echo [1/2] Đang kiểm tra hệ thống...
+reg query "HKLM\SOFTWARE\Microsoft\IISExpress" >nul 2>&1
+if %errorlevel%==0 goto INSTALLED
 
-if exist "%IIS_PATH_64%" (
-    echo [OK] Đã tìm thấy IIS Express (64-bit).
-    goto :SUCCESS
-)
-if exist "%IIS_PATH_32%" (
-    echo [OK] Đã tìm thấy IIS Express (32-bit).
-    goto :SUCCESS
-)
+reg query "HKLM\SOFTWARE\WOW6432Node\Microsoft\IISExpress" >nul 2>&1
+if %errorlevel%==0 goto INSTALLED
 
-:: 2. Nếu chưa cài -> Tự động nhận diện cấu trúc Windows (x86 hay x64) để chọn file cài
-echo [ALERT] Máy chưa cài đặt IIS Express^^!
-echo [2/2] Đang kiểm tra cấu trúc hệ điều hành...
+echo [INFO] Chua tim thay IIS Express trên Registry.
+echo.
 
-:: Kiểm tra biến PROCESSOR_ARCHITECTURE hoặc ProgramFiles(x86) để nhận diện Win 64-bit
-if "%PROCESSOR_ARCHITECTURE%"=="AMD64" (
+:: =====================================================
+:: 2. Chon dung file MSI phu hop voi cau truc Windows
+:: =====================================================
+
+if defined ProgramFiles(x86) (
     set "MSI_FILE=%~dp0iisexpress_x64.msi"
-    echo [INFO] Phát hiện Windows 64-bit. Sử dụng bản cài x64.
-) else if "%PROCESSOR_ARCHITEW6432%"=="AMD64" (
-    set "MSI_FILE=%~dp0iisexpress_x64.msi"
-    echo [INFO] Phát hiện Windows 64-bit. Sử dụng bản cài x64.) 
-else (
-    set "MSI_FILE=%~dp0iisexpress_x86.msi"
-    echo [INFO] Phát hiện Windows 32-bit (x86). Sử dụng bản cài x86.
-)
-
-if not exist "!MSI_FILE!" (
-    echo [ERROR] Không tìm thấy file cấu hình cài đặt IIS Express (!MSI_FILE!) ^^!
-    exit /b 1
-)
-
-echo Đang tiến hành cài đặt tự động ngầm...
-:: Chạy lệnh cài đặt msi tương ứng ngầm (/qn)
-msiexec /i "!MSI_FILE!" /qn /norestart
-
-if !errorlevel! equ 0 (
-    echo [OK] Đã cài đặt thành công IIS Express!
-    goto :SUCCESS
+    echo [INFO] Phat hien Windows 64-bit.
 ) else (
-    echo [ERROR] Quá trình cài đặt IIS Express gặp lỗi. Mã lỗi: !errorlevel!
+    set "MSI_FILE=%~dp0iisexpress_x86.msi"
+    echo [INFO] Phat hien Windows 32-bit.
+)
+
+:: Neu thieu file msi, thoat ra va tra ma loi 1 de Inno Setup biet ma xu ly, ko xai pause
+if not exist "%MSI_FILE%" (
+    echo [ERROR] Khong tim thay file msi dat tai: %MSI_FILE%
     exit /b 1
 )
 
-:SUCCESS
+echo.
+echo [INFO] Dang cai dat am tham IIS Express...
+echo.
+
+:: =====================================================
+:: 3. Thuc thi lenh cai dat ngam hoan toan (/qn)
+:: =====================================================
+start "" /wait msiexec /i "%MSI_FILE%" /qn /norestart /L*v "%TEMP%\iisexpress_install.log"
+
+:: Bat truc tiep ma loi cua thuc thi gan nhat
+if %errorlevel%==0 goto VERIFY
+if %errorlevel%==3010 goto VERIFY
+
+echo [ERROR] Cai dat that bai. MSI Exit Code = %errorlevel%
+echo Chi tiet log ghi tai: %TEMP%\iisexpress_install.log
+exit /b 1
+
+:: =====================================================
+:: 4. Xac minh lai su ton tai cua file sau khi cai
+:: =====================================================
+:VERIFY
+if exist "%ProgramFiles%\IIS Express\iisexpress.exe" goto INSTALLED
+if exist "%ProgramFiles(x86)%\IIS Express\iisexpress.exe" goto INSTALLED
+
+echo [ERROR] Trinh cai dat bao thanh cong nhung khong tim thay file iisexpress.exe
+exit /b 1
+
+:INSTALLED
 echo.
 echo ============================================
-echo   Hệ thống IIS Express đã sẵn sàng hoạt động!
+echo    IIS Express da san sang hoat dong!
 echo ============================================
 echo.
 exit /b 0

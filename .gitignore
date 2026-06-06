@@ -54,3 +54,6 @@ packages/
 # Documents không cần thiết
 documents/*.mp4
 documents/~$*
+
+GUI/
+Web_Payment/

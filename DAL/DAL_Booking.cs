@@ -320,22 +320,75 @@ namespace DAL
         }
 
         // GET BOOKING STATS
+        // GET BOOKING STATS
         public DTO_BookingStats GetBookingStats()
         {
             using (var db = new Seoul_StayDataContext())
             {
+                DateTime today = DateTime.Today;
                 var bookings = db.Bookings.ToList();
 
-                return new DTO_BookingStats
+                var stats = new DTO_BookingStats
                 {
+                    // TỔNG THEO STATUS
                     TotalBookings = bookings.Count,
                     PendingBookings = bookings.Count(x => x.BookingStatus == "Pending"),
                     ConfirmedBookings = bookings.Count(x => x.BookingStatus == "Confirmed"),
                     CheckedInBookings = bookings.Count(x => x.BookingStatus == "CheckedIn"),
                     CompletedBookings = bookings.Count(x => x.BookingStatus == "Completed"),
                     CancelledBookings = bookings.Count(x => x.BookingStatus == "Cancelled"),
-                    TotalRevenue = bookings.Where(x => x.BookingStatus != "Cancelled" && x.BookingStatus != "Refunded").Sum(x => x.FinalPrice)
+                    RefundedBookings = bookings.Count(x => x.BookingStatus == "Refunded"),
+
+                    // TODAY — lọc theo status để phản ánh đúng thực tế
+                    TodayCheckIns = bookings.Count(x =>
+                        x.CheckInDate.Date == today &&
+                        x.BookingStatus == "Confirmed"),
+
+                    TodayCheckOuts = bookings.Count(x =>
+                        x.CheckOutDate.Date == today &&
+                        x.BookingStatus == "CheckedIn"),
+
+                    TodayNewBookings = bookings.Count(x =>
+                        x.BookingDate.Date == today),
+
+                    // ACTIVE STAYS — chỉ đếm đang ở thực sự
+                    ActiveStays = bookings.Count(x =>
+                        x.BookingStatus == "CheckedIn"),
+
+                    UpcomingBookings = bookings.Count(x =>
+                        x.CheckInDate.Date > today &&
+                        x.BookingStatus != "Cancelled" &&
+                        x.BookingStatus != "Refunded"),
+
+                    // REVENUE
+                    TotalRevenue = bookings
+                        .Where(x => x.BookingStatus != "Cancelled" && x.BookingStatus != "Refunded")
+                        .Sum(x => x.FinalPrice),
+
+                    TodayRevenue = bookings
+                        .Where(x => x.BookingDate.Date == today && x.BookingStatus != "Cancelled")
+                        .Sum(x => x.FinalPrice),
+
+                    MonthlyRevenue = bookings
+                        .Where(x => x.BookingDate.Month == today.Month &&
+                                    x.BookingDate.Year == today.Year &&
+                                    x.BookingStatus != "Cancelled")
+                        .Sum(x => x.FinalPrice)
                 };
+
+                // OCCUPANCY
+                int totalListings = db.Items.Count(x => x.IsActive);
+                stats.TotalAvailableListings = totalListings;
+                stats.OccupiedListings = bookings
+                    .Where(x => x.BookingStatus == "CheckedIn")
+                    .Select(x => x.ItemID)
+                    .Distinct()
+                    .Count();
+
+                if (totalListings > 0)
+                    stats.OccupancyRate = ((decimal)stats.OccupiedListings / totalListings) * 100;
+
+                return stats;
             }
         }
 
@@ -428,10 +481,12 @@ namespace DAL
                 return !db.Bookings.Any(x => x.ItemID == itemId &&
                                         x.BookingStatus != "Cancelled" &&
                                         x.BookingStatus != "Refunded" &&
+                                        x.BookingStatus != "Completed" &&
                                         checkIn < x.CheckOutDate &&
                                         checkOut > x.CheckInDate);
             }
         }
+
 
         // =====================================================
         // CREATE MANUAL BOOKING (CẬP NHẬT - THÊM ADDON)
@@ -583,6 +638,165 @@ namespace DAL
             };
 
             db.BookingStatusHistories.InsertOnSubmit(timeline);
+        }
+        //public int AutoCheckIn()
+        //{
+        //    try
+        //    {
+        //        using (var db = new Seoul_StayDataContext())
+        //        {
+        //            var overdue = db.Bookings
+        //                .Where(b => b.BookingStatus == "Confirmed" &&
+        //                            b.CheckInDate < DateTime.Today)
+        //                .ToList();
+
+        //            foreach (var b in overdue)
+        //            {
+        //                string oldStatus = b.BookingStatus;
+        //                b.BookingStatus = "CheckedIn";
+
+        //                db.BookingStatusHistories.InsertOnSubmit(new BookingStatusHistory
+        //                {
+        //                    GUID = Guid.NewGuid(),
+        //                    BookingID = b.ID,
+        //                    OldStatus = oldStatus,
+        //                    NewStatus = "CheckedIn",
+        //                    ChangedDate = DateTime.Now,
+        //                    ChangedByUserID = null,
+        //                    Notes = "Auto check-in (overdue)"
+        //                });
+        //            }
+
+        //            db.SubmitChanges();
+        //            return overdue.Count;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return 0;
+        //    }
+        //}
+
+        //public int AutoCheckOut()
+        //{
+        //    try
+        //    {
+        //        using (var db = new Seoul_StayDataContext())
+        //        {
+        //            var overdue = db.Bookings
+        //                .Where(b => b.BookingStatus == "CheckedIn" &&
+        //                            b.CheckOutDate < DateTime.Today)
+        //                .ToList();
+
+        //            foreach (var b in overdue)
+        //            {
+        //                string oldStatus = b.BookingStatus;
+        //                b.BookingStatus = "Completed";
+
+        //                db.BookingStatusHistories.InsertOnSubmit(new BookingStatusHistory
+        //                {
+        //                    GUID = Guid.NewGuid(),
+        //                    BookingID = b.ID,
+        //                    OldStatus = oldStatus,
+        //                    NewStatus = "Completed",
+        //                    ChangedDate = DateTime.Now,
+        //                    ChangedByUserID = null,
+        //                    Notes = "Auto check-out (overdue)"
+        //                });
+        //            }
+
+        //            db.SubmitChanges();
+        //            return overdue.Count;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return 0;
+        //    }
+        //}
+        public int AutoCheckIn()
+        {
+            try
+            {
+                using (var db = new Seoul_StayDataContext())
+                {
+                    DateTime today = DateTime.Today;
+
+                    // Tìm các booking hôm qua trở về trước phải check-in nhưng vẫn đang ở trạng thái Confirmed
+                    var overdue = db.Bookings
+                        .Where(b => b.BookingStatus == "Confirmed" && b.CheckInDate < today)
+                        .ToList();
+
+                    foreach (var b in overdue)
+                    {
+                        string oldStatus = b.BookingStatus;
+
+                        // có thể đổi thành "NoShow" hoặc "Cancelled" thì sẽ đúng thực tế hơn.
+                        string targetStatus = "CheckedIn";
+                        b.BookingStatus = targetStatus;
+
+                        db.BookingStatusHistories.InsertOnSubmit(new BookingStatusHistory
+                        {
+                            GUID = Guid.NewGuid(),
+                            BookingID = b.ID,
+                            OldStatus = oldStatus,
+                            NewStatus = targetStatus,
+                            ChangedDate = DateTime.Now,
+                            ChangedByUserID = null,
+                            Notes = "Auto check-in (overdue)"
+                        });
+                    }
+
+                    db.SubmitChanges();
+                    return overdue.Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                // In lỗi ra cửa sổ Output để dễ debug khi có sự cố DB
+                System.Diagnostics.Debug.WriteLine("Lỗi AutoCheckIn: " + ex.Message);
+                return 0;
+            }
+        }
+
+        public int AutoCheckOut()
+        {
+            try
+            {
+                using (var db = new Seoul_StayDataContext())
+                {
+                    DateTime today = DateTime.Today;
+
+                    var overdue = db.Bookings
+                        .Where(b => b.BookingStatus == "CheckedIn" && b.CheckOutDate <= today)
+                        .ToList();
+
+                    foreach (var b in overdue)
+                    {
+                        string oldStatus = b.BookingStatus;
+                        b.BookingStatus = "Completed";
+
+                        db.BookingStatusHistories.InsertOnSubmit(new BookingStatusHistory
+                        {
+                            GUID = Guid.NewGuid(),
+                            BookingID = b.ID,
+                            OldStatus = oldStatus,
+                            NewStatus = "Completed",
+                            ChangedDate = DateTime.Now,
+                            ChangedByUserID = null,
+                            Notes = "Auto check-out (overdue)"
+                        });
+                    }
+
+                    db.SubmitChanges();
+                    return overdue.Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Lỗi AutoCheckOut: " + ex.Message);
+                return 0;
+            }
         }
     }
 }

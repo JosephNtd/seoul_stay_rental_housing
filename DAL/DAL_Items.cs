@@ -45,22 +45,40 @@ namespace DAL
         {
             using (var db = new Seoul_StayDataContext())
             {
-                var query = from i in db.Items
+                // Khai báo ngày hôm nay ra một biến riêng trước câu lệnh LINQ.
+                // Ép LINQ to SQL truyền vào DB một tham số ngày cố định (00:00:00), không bị dính giờ phút giây của GETDATE().
+                DateTime today = DateTime.Today;
+
+                // Lọc Items theo Host ngay từ đầu (nếu có) để câu lệnh SQL gọn nhẹ hơn
+                var itemsQuery = db.Items.AsQueryable();
+                if (hostUserId.HasValue)
+                {
+                    itemsQuery = itemsQuery.Where(i => i.HostUserID == hostUserId.Value);
+                }
+
+                var query = from i in itemsQuery
                             join t in db.ItemTypes on i.ItemTypeID equals t.ID
                             where i.IsActive
+
                             let minPrice = db.ItemPrices
-                                .Where(p => p.ItemID == i.ID && p.Date >= DateTime.Today)
+                                .Where(p => p.ItemID == i.ID && p.Date >= today)
                                 .Min(p => (decimal?)p.Price)
+
                             let firstPic = db.ItemPictures
                                 .Where(pic => pic.ItemID == i.ID)
                                 .OrderBy(pic => pic.DisplayOrder)
                                 .Select(pic => pic.PictureFileName)
                                 .FirstOrDefault()
-                            let hasActiveBooking = db.Bookings
+
+                            // logic kiểm tra phòng có đang bị chiếm dụng/đang ở HÔM NAY hay không
+                            let isOccupiedToday = db.Bookings
                                 .Any(b => b.ItemID == i.ID &&
-                                          b.CheckInDate <= DateTime.Today &&
-                                          b.CheckOutDate >= DateTime.Today &&
-                                          b.BookingStatus != "Cancelled" && b.BookingStatus != "Refunded")
+                                          today >= b.CheckInDate &&   // Hôm nay phải bằng hoặc sau ngày Check-in
+                                          today < b.CheckOutDate &&   // Hôm nay phải trước ngày Check-out (vì ngày checkout phòng trống từ trưa)
+                                          (b.BookingStatus == "Pending"
+                                          || b.BookingStatus == "Confirmed"
+                                          || b.BookingStatus == "CheckedIn"))
+
                             select new DTO_ItemCard
                             {
                                 ID = i.ID,
@@ -72,13 +90,10 @@ namespace DAL
                                 NumberOfBathrooms = i.NumberOfBathrooms,
                                 MinPrice = minPrice,
                                 ThumbnailPath = firstPic,
-                                Status = hasActiveBooking ? "Occupied" :
+                                Status = isOccupiedToday ? "Occupied" :
                                          (minPrice == null ? "Draft" : "Active")
                             };
-                // Nếu user đăng nhập vào là host => trả và các home thuộc host đó
-                // Ngược lại trả về tất cả homestay có trong database
-                if (hostUserId.HasValue)
-                    query = query.Where(x => db.Items.Any(i => i.HostUserID == hostUserId.Value && i.ID == x.ID));
+
                 return query.ToList();
             }
         }

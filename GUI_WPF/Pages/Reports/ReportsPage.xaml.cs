@@ -103,12 +103,6 @@ namespace GUI_WPF.Pages.Reports
                 _areaRevenue = _reportBus.GetRevenueByArea();
                 _topListings = _reportBus.GetTopListings();
 
-                MessageBox.Show(
-                                $"RevenueTrend={_revenueTrend?.Count}\n" +
-                                $"BookingStatus={_bookingStatus?.Count}\n" +
-                                $"AreaRevenue={_areaRevenue?.Count}\n" +
-                                $"TopListings={_topListings?.Count}");
-
                 LoadKpiCards();
                 LoadRevenueTrendChart();
                 LoadBookingStatusChart();

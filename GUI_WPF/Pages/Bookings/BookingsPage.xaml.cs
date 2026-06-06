@@ -29,6 +29,8 @@ namespace GUI_WPF.Pages.Bookings
 
         private void LoadPage()
         {
+            _bookingBus.ProcessOverdueBookings();
+
             LoadStats();
 
             LoadBookings();

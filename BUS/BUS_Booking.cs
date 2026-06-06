@@ -70,7 +70,11 @@ namespace BUS
 
         public bool ValidateDateOverlap(long itemId, DateTime checkIn, DateTime checkOut, long? ignoreBookingId = null)
         {
-            var bookings = GetBookingCards().Where(x => x.ItemID == itemId && x.BookingStatus != "Cancelled" && x.BookingStatus != "Refunded");
+            var bookings = GetBookingCards().Where(x =>
+                x.ItemID == itemId &&
+                x.BookingStatus != "Cancelled" &&
+                x.BookingStatus != "Refunded" &&
+                x.BookingStatus != "Completed");
 
             if (ignoreBookingId != null)
             {
@@ -268,7 +272,7 @@ namespace BUS
                 .Where(x => x.BookingStatus != "Cancelled").Sum(x => x.FinalPrice);
         }
 
-        
+
         /// <summary>
         /// CREATE MANUAL BOOKING ( TRẢ VỀ bookingId)
         /// </summary>
@@ -686,6 +690,11 @@ namespace BUS
             }
 
             return true;
+        }
+        public void ProcessOverdueBookings()
+        {
+            _booking.AutoCheckIn();
+            _booking.AutoCheckOut();
         }
     }
 }

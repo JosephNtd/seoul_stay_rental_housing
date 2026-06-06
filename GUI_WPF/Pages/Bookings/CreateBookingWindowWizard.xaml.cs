@@ -490,7 +490,7 @@ namespace GUI_WPF.Pages.Bookings
                     ItemPriceID = p.ID,
                     Price = p.Price,
                     CancellationPolicyID = p.CancellationPolicyID,
-                    PolicyName = cbPolicy.Text
+                    PolicyName = (cbPolicy.SelectedItem as ET_CancellationPolicies)?.Name ?? ""
                 });
 
                 _baseAmount += p.Price;
@@ -959,7 +959,7 @@ namespace GUI_WPF.Pages.Bookings
             txtReviewListingArea.Text = _selectedListing.ApproximateAddress;
             txtReviewDates.Text = $"{dpCheckIn.SelectedDate:dd/MM/yyyy} - {dpCheckOut.SelectedDate:dd/MM/yyyy}";
             txtReviewGuests.Text = $"{txtGuests.Text} Guest(s)";
-            txtReviewPolicy.Text = cbPolicy.Text;
+            txtReviewPolicy.Text = (cbPolicy.SelectedItem as ET_CancellationPolicies)?.Name ?? "";
             txtReviewFinalAmount.Text = $"{_finalAmount:N0} ₫";
 
             if (_appliedCoupon != null)

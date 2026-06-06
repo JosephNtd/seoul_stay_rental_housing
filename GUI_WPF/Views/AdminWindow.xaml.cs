@@ -43,7 +43,7 @@ namespace GUI_WPF.Views
             Sidebar.BookingsClicked += btnBookings_Click;
             Sidebar.ReportsClicked += btnReports_Click;
 
-            MainFrame.Navigate(new Pages.Dashboard.DashboardPage());
+            MainFrame.Navigate(new Pages.Reports.ReportsPage());
         }
         // LOAD USER INFO
         
@@ -54,7 +54,7 @@ namespace GUI_WPF.Views
         // DASHBOARD 
         private void btnDashboard_Click(object sender, RoutedEventArgs e) 
         { 
-            Navigate(new DashboardPage()); 
+            Navigate(new Pages.Reports.ReportsPage()); 
         } 
         // LOCATION WORKSPACE
         private void btnLocationCatalog_Click(object sender, RoutedEventArgs e) 

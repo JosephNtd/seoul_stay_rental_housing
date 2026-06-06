@@ -1,16 +1,201 @@
 ﻿<Page x:Class="GUI_WPF.Pages.Reports.ReportsPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF">
+
+    <Page.Resources>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!--  CHART EXPORT BUTTON (small, per-section)  -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <Style x:Key="ChartExportButtonStyle"
+               TargetType="Button">
+
+            <Setter Property="Background"
+                    Value="#FFF4F4"/>
+
+            <Setter Property="Foreground"
+                    Value="#D89C9D"/>
+
+            <Setter Property="BorderBrush"
+                    Value="#F2D6D6"/>
+
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+
+            <Setter Property="FontSize"
+                    Value="12"/>
+
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+
+            <Setter Property="FontFamily"
+                    Value="Be Vietnam Pro"/>
+
+            <Setter Property="Height"
+                    Value="34"/>
+
+            <Setter Property="Padding"
+                    Value="14,0"/>
+
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+
+                        <Border x:Name="bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+
+                                <Setter TargetName="bd"
+                                        Property="Background"
+                                        Value="#FFE8E8"/>
+
+                                <Setter Property="Foreground"
+                                        Value="#C47E7F"/>
+
+                            </Trigger>
+
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+
+                                <Setter TargetName="bd"
+                                        Property="Opacity"
+                                        Value="0.85"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+        <!-- ═══════════════════════════════════════════ -->
+        <!--  REFRESH ICON BUTTON                       -->
+        <!-- ═══════════════════════════════════════════ -->
+
+        <Style x:Key="RefreshButtonStyle"
+               TargetType="Button">
+
+            <Setter Property="Background"
+                    Value="#AAFFFFFF"/>
+
+            <Setter Property="BorderBrush"
+                    Value="#F0DEDE"/>
+
+            <Setter Property="BorderThickness"
+                    Value="1"/>
+
+            <Setter Property="FontSize"
+                    Value="14"/>
+
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+
+            <Setter Property="FontFamily"
+                    Value="Be Vietnam Pro"/>
+
+            <Setter Property="Foreground"
+                    Value="#6B5D5D"/>
+
+            <Setter Property="Height"
+                    Value="42"/>
+
+            <Setter Property="Padding"
+                    Value="18,0"/>
+
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+
+                        <Border x:Name="bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="14"
+                                Padding="{TemplateBinding Padding}">
+
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+
+                                <Setter TargetName="bd"
+                                        Property="Background"
+                                        Value="#FFF0F0"/>
+
+                            </Trigger>
+
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+
+                                <Setter TargetName="bd"
+                                        Property="Opacity"
+                                        Value="0.85"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+    </Page.Resources>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!--  MAIN LAYOUT                                   -->
+    <!-- ═══════════════════════════════════════════════ -->
 
     <Grid Background="#F8F6F4">
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
 
-            <StackPanel Margin="24">
+            <StackPanel Margin="32,28,32,40">
 
-                <!-- TITLE -->
+                <!-- ════════════════════════════════════ -->
+                <!--  HEADER                             -->
+                <!-- ════════════════════════════════════ -->
 
-                <Grid Margin="0,0,0,20">
+                <Grid Margin="0,0,0,24">
 
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -18,170 +203,406 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Reports Dashboard"
-               Style="{StaticResource PageTitleStyle}"/>
+                    <StackPanel VerticalAlignment="Center">
+
+                        <TextBlock Text="Reports Dashboard"
+                                   Style="{StaticResource PageTitleStyle}"/>
+
+                        <TextBlock Text="Overview of your property performance and analytics"
+                                   Style="{StaticResource CaptionStyle}"
+                                   FontSize="14"
+                                   Margin="0,4,0,0"/>
+
+                    </StackPanel>
+
+                    <!-- REFRESH -->
 
                     <Button Grid.Column="1"
-                            Content="Refresh"
-                            Width="120"
-                            Height="40"
-                            Margin="0,0,10,0"
+                            Style="{StaticResource RefreshButtonStyle}"
                             Click="btnRefresh_Click"
-                            Style="{StaticResource PrimaryButtonStyle}"/>
+                            Margin="0,0,12,0">
+
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="🔄"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Refresh"
+                                       Margin="8,0,0,0"
+                                       VerticalAlignment="Center"/>
+
+                        </StackPanel>
+
+                    </Button>
+
+                    <!-- EXPORT ALL PDF -->
 
                     <Button Grid.Column="2"
-            Content="Export PDF"
-            Width="140"
-            Height="40"
-            Click="btnExportPdf_Click"
-            Style="{StaticResource PrimaryButtonStyle}"/>
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Click="btnExportPdf_Click"
+                            Height="42"
+                            Padding="20,0">
+
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="📄"
+                                       FontSize="14"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Text="Export Full Report"
+                                       Margin="8,0,0,0"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       VerticalAlignment="Center"/>
+
+                        </StackPanel>
+
+                    </Button>
 
                 </Grid>
 
-                <!-- KPI CARDS -->
+                <!-- ════════════════════════════════════ -->
+                <!--  KPI ROW 1 — PRIMARY METRICS        -->
+                <!-- ════════════════════════════════════ -->
 
                 <UniformGrid Columns="4"
-             Margin="0,0,0,20">
+                             Margin="0,0,0,8">
 
-                    <!-- Revenue -->
+                    <!-- TOTAL REVENUE -->
 
-                    <Border Style="{StaticResource SectionCardStyle}"
-            Margin="6">
+                    <Border Style="{StaticResource GlassCardStyle}"
+                            Margin="6"
+                            Padding="22">
 
-                        <StackPanel Margin="18">
+                        <Grid>
 
-                            <TextBlock Text="Total Revenue"
-                       Style="{StaticResource CardTitleStyle}"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- ICON + LABEL -->
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <Border Background="#E8F8F0"
+                                        CornerRadius="12"
+                                        Width="40" Height="40">
+
+                                    <TextBlock Text="💰"
+                                               FontSize="18"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                                <TextBlock Text="Total Revenue"
+                                           Style="{StaticResource CardTitleStyle}"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"/>
+
+                            </StackPanel>
+
+                            <!-- VALUE -->
 
                             <TextBlock x:Name="txtTotalRevenue"
-                       FontSize="32"
-                       FontWeight="Bold"
-                       Foreground="#2AA876"/>
+                                       Grid.Row="1"
+                                       FontSize="28"
+                                       FontWeight="Bold"
+                                       FontFamily="Plus Jakarta Sans"
+                                       Foreground="#2AA876"
+                                       Margin="0,12,0,0"/>
 
-                        </StackPanel>
+                            <!-- SUBTITLE -->
+
+                            <TextBlock Text="All-time revenue"
+                                       Grid.Row="2"
+                                       Style="{StaticResource CaptionStyle}"
+                                       Margin="0,4,0,0"/>
+
+                        </Grid>
 
                     </Border>
 
-                    <!-- Bookings -->
+                    <!-- TOTAL BOOKINGS -->
 
-                    <Border Style="{StaticResource SectionCardStyle}"
-            Margin="6">
+                    <Border Style="{StaticResource GlassCardStyle}"
+                            Margin="6"
+                            Padding="22">
 
-                        <StackPanel Margin="18">
+                        <Grid>
 
-                            <TextBlock Text="Total Bookings"
-                       Style="{StaticResource CardTitleStyle}"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <Border Background="#E6F1FB"
+                                        CornerRadius="12"
+                                        Width="40" Height="40">
+
+                                    <TextBlock Text="📅"
+                                               FontSize="18"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                                <TextBlock Text="Total Bookings"
+                                           Style="{StaticResource CardTitleStyle}"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"/>
+
+                            </StackPanel>
 
                             <TextBlock x:Name="txtTotalBookings"
-                       FontSize="32"
-                       FontWeight="Bold"
-                       Foreground="#3A86E9"/>
+                                       Grid.Row="1"
+                                       FontSize="28"
+                                       FontWeight="Bold"
+                                       FontFamily="Plus Jakarta Sans"
+                                       Foreground="#3A86E9"
+                                       Margin="0,12,0,0"/>
 
-                        </StackPanel>
+                            <TextBlock Text="All reservations"
+                                       Grid.Row="2"
+                                       Style="{StaticResource CaptionStyle}"
+                                       Margin="0,4,0,0"/>
+
+                        </Grid>
 
                     </Border>
 
-                    <!-- Occupancy -->
+                    <!-- OCCUPANCY RATE -->
 
-                    <Border Style="{StaticResource SectionCardStyle}"
-            Margin="6">
+                    <Border Style="{StaticResource GlassCardStyle}"
+                            Margin="6"
+                            Padding="22">
 
-                        <StackPanel Margin="18">
+                        <Grid>
 
-                            <TextBlock Text="Occupancy Rate"
-                       Style="{StaticResource CardTitleStyle}"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <Border Background="#FFF3E0"
+                                        CornerRadius="12"
+                                        Width="40" Height="40">
+
+                                    <TextBlock Text="🏡"
+                                               FontSize="18"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                                <TextBlock Text="Occupancy Rate"
+                                           Style="{StaticResource CardTitleStyle}"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"/>
+
+                            </StackPanel>
 
                             <TextBlock x:Name="txtOccupancy"
-                       FontSize="32"
-                       FontWeight="Bold"
-                       Foreground="#F4A261"/>
+                                       Grid.Row="1"
+                                       FontSize="28"
+                                       FontWeight="Bold"
+                                       FontFamily="Plus Jakarta Sans"
+                                       Foreground="#F4A261"
+                                       Margin="0,12,0,0"/>
 
-                        </StackPanel>
+                            <TextBlock x:Name="txtOccupancyLevel"
+                                       Grid.Row="2"
+                                       Style="{StaticResource CaptionStyle}"
+                                       Margin="0,4,0,0"/>
+
+                        </Grid>
 
                     </Border>
 
-                    <!-- Avg Booking -->
+                    <!-- AVERAGE BOOKING -->
 
-                    <Border Style="{StaticResource SectionCardStyle}"
-            Margin="6">
+                    <Border Style="{StaticResource GlassCardStyle}"
+                            Margin="6"
+                            Padding="22">
 
-                        <StackPanel Margin="18">
+                        <Grid>
 
-                            <TextBlock Text="Average Booking"
-                       Style="{StaticResource CardTitleStyle}"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <Border Background="#EEEDFE"
+                                        CornerRadius="12"
+                                        Width="40" Height="40">
+
+                                    <TextBlock Text="💳"
+                                               FontSize="18"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+
+                                </Border>
+
+                                <TextBlock Text="Average Booking"
+                                           Style="{StaticResource CardTitleStyle}"
+                                           VerticalAlignment="Center"
+                                           Margin="12,0,0,0"/>
+
+                            </StackPanel>
 
                             <TextBlock x:Name="txtAverageBooking"
-                       FontSize="32"
-                       FontWeight="Bold"
-                       Foreground="#6C63FF"/>
+                                       Grid.Row="1"
+                                       FontSize="28"
+                                       FontWeight="Bold"
+                                       FontFamily="Plus Jakarta Sans"
+                                       Foreground="#6C63FF"
+                                       Margin="0,12,0,0"/>
 
-                        </StackPanel>
+                            <TextBlock Text="Per reservation value"
+                                       Grid.Row="2"
+                                       Style="{StaticResource CaptionStyle}"
+                                       Margin="0,4,0,0"/>
+
+                        </Grid>
 
                     </Border>
 
                 </UniformGrid>
+
+                <!-- ════════════════════════════════════ -->
+                <!--  KPI ROW 2 — SECONDARY METRICS      -->
+                <!-- ════════════════════════════════════ -->
+
                 <UniformGrid Columns="4"
-             Margin="0,0,0,20">
+                             Margin="0,0,0,20">
+
+                    <!-- TODAY REVENUE -->
 
                     <Border Style="{StaticResource SectionCardStyle}"
-            Margin="6">
+                            Margin="6"
+                            Padding="18">
 
-                        <StackPanel Margin="18">
+                        <StackPanel>
 
-                            <TextBlock Text="Today's Revenue"
-                       Style="{StaticResource CardTitleStyle}"/>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="📈"
+                                           FontSize="14"/>
+
+                                <TextBlock Text="Today's Revenue"
+                                           Style="{StaticResource CardTitleStyle}"
+                                           Margin="8,0,0,0"/>
+
+                            </StackPanel>
 
                             <TextBlock x:Name="txtTodayRevenue"
-                       FontSize="24"
-                       FontWeight="Bold"/>
+                                       FontSize="22"
+                                       FontWeight="Bold"
+                                       FontFamily="Plus Jakarta Sans"
+                                       Foreground="#3A3131"
+                                       Margin="0,8,0,0"/>
 
                         </StackPanel>
 
                     </Border>
 
+                    <!-- MONTHLY REVENUE -->
+
                     <Border Style="{StaticResource SectionCardStyle}"
-            Margin="6">
+                            Margin="6"
+                            Padding="18">
 
-                        <StackPanel Margin="18">
+                        <StackPanel>
 
-                            <TextBlock Text="Monthly Revenue"
-                       Style="{StaticResource CardTitleStyle}"/>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="📊"
+                                           FontSize="14"/>
+
+                                <TextBlock Text="Monthly Revenue"
+                                           Style="{StaticResource CardTitleStyle}"
+                                           Margin="8,0,0,0"/>
+
+                            </StackPanel>
 
                             <TextBlock x:Name="txtMonthlyRevenue"
-                       FontSize="24"
-                       FontWeight="Bold"/>
+                                       FontSize="22"
+                                       FontWeight="Bold"
+                                       FontFamily="Plus Jakarta Sans"
+                                       Foreground="#3A3131"
+                                       Margin="0,8,0,0"/>
 
                         </StackPanel>
 
                     </Border>
 
+                    <!-- ACTIVE STAYS -->
+
                     <Border Style="{StaticResource SectionCardStyle}"
-            Margin="6">
+                            Margin="6"
+                            Padding="18">
 
-                        <StackPanel Margin="18">
+                        <StackPanel>
 
-                            <TextBlock Text="Active Stays"
-                       Style="{StaticResource CardTitleStyle}"/>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="🛏️"
+                                           FontSize="14"/>
+
+                                <TextBlock Text="Active Stays"
+                                           Style="{StaticResource CardTitleStyle}"
+                                           Margin="8,0,0,0"/>
+
+                            </StackPanel>
 
                             <TextBlock x:Name="txtActiveStays"
-                       FontSize="24"
-                       FontWeight="Bold"/>
+                                       FontSize="22"
+                                       FontWeight="Bold"
+                                       FontFamily="Plus Jakarta Sans"
+                                       Foreground="#3A3131"
+                                       Margin="0,8,0,0"/>
 
                         </StackPanel>
 
                     </Border>
 
+                    <!-- RETURNING GUESTS -->
+
                     <Border Style="{StaticResource SectionCardStyle}"
-            Margin="6">
+                            Margin="6"
+                            Padding="18">
 
-                        <StackPanel Margin="18">
+                        <StackPanel>
 
-                            <TextBlock Text="Returning Guests"
-                       Style="{StaticResource CardTitleStyle}"/>
+                            <StackPanel Orientation="Horizontal">
+
+                                <TextBlock Text="🔁"
+                                           FontSize="14"/>
+
+                                <TextBlock Text="Returning Guests"
+                                           Style="{StaticResource CardTitleStyle}"
+                                           Margin="8,0,0,0"/>
+
+                            </StackPanel>
 
                             <TextBlock x:Name="txtReturningGuests"
-                       FontSize="24"
-                       FontWeight="Bold"/>
+                                       FontSize="22"
+                                       FontWeight="Bold"
+                                       FontFamily="Plus Jakarta Sans"
+                                       Foreground="#3A3131"
+                                       Margin="0,8,0,0"/>
 
                         </StackPanel>
 
@@ -189,36 +610,436 @@
 
                 </UniformGrid>
 
-                <!-- REVENUE TREND -->
+                <!-- ════════════════════════════════════ -->
+                <!--  REVENUE TREND — LINE + AREA CHART  -->
+                <!-- ════════════════════════════════════ -->
 
-                <Border Style="{StaticResource SectionCardStyle}"
-                        Padding="20"
-                        Margin="0,0,0,20">
+                <Border Style="{StaticResource GlassCardStyle}"
+                        Margin="0,0,0,16"
+                        Padding="24">
 
                     <StackPanel>
 
-                        <TextBlock Text="Revenue Trend"
-                                   Style="{StaticResource CaptionStyle}"
-                                   FontSize="20"
-                                   FontWeight="Bold"
-                                   Margin="0,0,0,12"/>
+                        <!-- SECTION HEADER -->
 
-                        <DataGrid x:Name="dgRevenueTrend"
+                        <Grid Margin="0,0,0,16">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel>
+
+                                <TextBlock Text="Revenue Trend"
+                                           Style="{StaticResource SectionTitleStyle}"/>
+
+                                <TextBlock Text="Monthly revenue over time"
+                                           Style="{StaticResource CaptionStyle}"
+                                           Margin="0,2,0,0"/>
+
+                            </StackPanel>
+
+                            <Button Grid.Column="2"
+                                    Style="{StaticResource ChartExportButtonStyle}"
+                                    Click="btnExportRevenueTrend_Click">
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBlock Text="📄"
+                                               FontSize="11"
+                                               VerticalAlignment="Center"/>
+
+                                    <TextBlock Text="Export PDF"
+                                               Margin="6,0,0,0"
+                                               VerticalAlignment="Center"/>
+
+                                </StackPanel>
+
+                            </Button>
+
+                        </Grid>
+
+                        <!-- CHART -->
+
+                        <lvc:CartesianChart x:Name="chartRevenueTrend"
+                                            Height="320"
+                                            ZoomMode="X"
+                                            TooltipPosition="Top"
+                                            AnimationsSpeed="0:0:0.4"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- ════════════════════════════════════ -->
+                <!--  BOOKING STATUS + REVENUE BY AREA   -->
+                <!-- ════════════════════════════════════ -->
+
+                <Grid Margin="0,0,0,16">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="16"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- ─── BOOKING STATUS — DONUT ─── -->
+
+                    <Border Grid.Column="0"
+                            Style="{StaticResource GlassCardStyle}"
+                            Margin="0"
+                            Padding="24">
+
+                        <StackPanel>
+
+                            <!-- SECTION HEADER -->
+
+                            <Grid Margin="0,0,0,16">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel>
+
+                                    <TextBlock Text="Booking Status"
+                                               Style="{StaticResource SectionTitleStyle}"/>
+
+                                    <TextBlock Text="Distribution by status"
+                                               Style="{StaticResource CaptionStyle}"
+                                               Margin="0,2,0,0"/>
+
+                                </StackPanel>
+
+                                <Button Grid.Column="1"
+                                        Style="{StaticResource ChartExportButtonStyle}"
+                                        Click="btnExportBookingStatus_Click">
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBlock Text="📄"
+                                                   FontSize="11"
+                                                   VerticalAlignment="Center"/>
+
+                                        <TextBlock Text="Export"
+                                                   Margin="6,0,0,0"
+                                                   VerticalAlignment="Center"/>
+
+                                    </StackPanel>
+
+                                </Button>
+
+                            </Grid>
+
+                            <!-- DONUT CHART -->
+
+                            <lvc:PieChart x:Name="chartBookingStatus"
+                                          Height="280"
+                                          InitialRotation="-90"
+                                          AnimationsSpeed="0:0:0.5"
+                                          TooltipPosition="Center"/>
+
+                            <!-- LEGEND (populated in code-behind) -->
+
+                            <ItemsControl x:Name="icStatusLegend"
+                                          Margin="0,12,0,0"
+                                          HorizontalAlignment="Center">
+
+                                <ItemsControl.ItemsPanel>
+
+                                    <ItemsPanelTemplate>
+
+                                        <WrapPanel Orientation="Horizontal"
+                                                   HorizontalAlignment="Center"/>
+
+                                    </ItemsPanelTemplate>
+
+                                </ItemsControl.ItemsPanel>
+
+                                <ItemsControl.ItemTemplate>
+
+                                    <DataTemplate>
+
+                                        <StackPanel Orientation="Horizontal"
+                                                    Margin="8,4">
+
+                                            <Border Width="10" Height="10"
+                                                    CornerRadius="3"
+                                                    Background="{Binding Color}"
+                                                    VerticalAlignment="Center"/>
+
+                                            <TextBlock Text="{Binding Label}"
+                                                       FontFamily="Be Vietnam Pro"
+                                                       FontSize="12"
+                                                       Foreground="#6B5D5D"
+                                                       Margin="6,0,0,0"
+                                                       VerticalAlignment="Center"/>
+
+                                        </StackPanel>
+
+                                    </DataTemplate>
+
+                                </ItemsControl.ItemTemplate>
+
+                            </ItemsControl>
+
+                        </StackPanel>
+
+                    </Border>
+
+                    <!-- ─── REVENUE BY AREA — HORIZONTAL BAR ─── -->
+
+                    <Border Grid.Column="2"
+                            Style="{StaticResource GlassCardStyle}"
+                            Margin="0"
+                            Padding="24">
+
+                        <StackPanel>
+
+                            <!-- SECTION HEADER -->
+
+                            <Grid Margin="0,0,0,16">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel>
+
+                                    <TextBlock Text="Revenue by Area"
+                                               Style="{StaticResource SectionTitleStyle}"/>
+
+                                    <TextBlock Text="Top performing locations"
+                                               Style="{StaticResource CaptionStyle}"
+                                               Margin="0,2,0,0"/>
+
+                                </StackPanel>
+
+                                <Button Grid.Column="1"
+                                        Style="{StaticResource ChartExportButtonStyle}"
+                                        Click="btnExportAreaRevenue_Click">
+
+                                    <StackPanel Orientation="Horizontal">
+
+                                        <TextBlock Text="📄"
+                                                   FontSize="11"
+                                                   VerticalAlignment="Center"/>
+
+                                        <TextBlock Text="Export"
+                                                   Margin="6,0,0,0"
+                                                   VerticalAlignment="Center"/>
+
+                                    </StackPanel>
+
+                                </Button>
+
+                            </Grid>
+
+                            <!-- HORIZONTAL BAR CHART -->
+
+                            <lvc:CartesianChart x:Name="chartAreaRevenue"
+                                                Height="280"
+                                                TooltipPosition="Right"
+                                                AnimationsSpeed="0:0:0.4"/>
+
+                        </StackPanel>
+
+                    </Border>
+
+                </Grid>
+
+                <!-- ════════════════════════════════════ -->
+                <!--  TOP LISTINGS — COLUMN + LINE COMBO -->
+                <!-- ════════════════════════════════════ -->
+
+                <Border Style="{StaticResource GlassCardStyle}"
+                        Margin="0,0,0,16"
+                        Padding="24">
+
+                    <StackPanel>
+
+                        <!-- SECTION HEADER -->
+
+                        <Grid Margin="0,0,0,16">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel>
+
+                                <TextBlock Text="Top 10 Listings"
+                                           Style="{StaticResource SectionTitleStyle}"/>
+
+                                <TextBlock Text="Best performing properties by revenue"
+                                           Style="{StaticResource CaptionStyle}"
+                                           Margin="0,2,0,0"/>
+
+                            </StackPanel>
+
+                            <!-- LEGEND -->
+
+                            <StackPanel Grid.Column="1"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Margin="20,0">
+
+                                <Border Width="10" Height="10"
+                                        CornerRadius="3"
+                                        Background="#6C63FF"
+                                        VerticalAlignment="Center"/>
+
+                                <TextBlock Text="Revenue"
+                                           FontFamily="Be Vietnam Pro"
+                                           FontSize="12"
+                                           Foreground="#6B5D5D"
+                                           Margin="6,0,16,0"
+                                           VerticalAlignment="Center"/>
+
+                                <Border Width="10" Height="10"
+                                        CornerRadius="3"
+                                        Background="#F4A261"
+                                        VerticalAlignment="Center"/>
+
+                                <TextBlock Text="Bookings"
+                                           FontFamily="Be Vietnam Pro"
+                                           FontSize="12"
+                                           Foreground="#6B5D5D"
+                                           Margin="6,0,0,0"
+                                           VerticalAlignment="Center"/>
+
+                            </StackPanel>
+
+                            <Button Grid.Column="2"
+                                    Style="{StaticResource ChartExportButtonStyle}"
+                                    Click="btnExportTopListings_Click">
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBlock Text="📄"
+                                               FontSize="11"
+                                               VerticalAlignment="Center"/>
+
+                                    <TextBlock Text="Export PDF"
+                                               Margin="6,0,0,0"
+                                               VerticalAlignment="Center"/>
+
+                                </StackPanel>
+
+                            </Button>
+
+                        </Grid>
+
+                        <!-- COMBO CHART -->
+
+                        <lvc:CartesianChart x:Name="chartTopListings"
+                                            Height="360"
+                                            ZoomMode="X"
+                                            TooltipPosition="Top"
+                                            AnimationsSpeed="0:0:0.4"/>
+
+                    </StackPanel>
+
+                </Border>
+
+                <!-- ════════════════════════════════════ -->
+                <!--  TOP LISTINGS — DATA TABLE          -->
+                <!-- ════════════════════════════════════ -->
+
+                <Border Style="{StaticResource SectionCardStyle}"
+                        Padding="20"
+                        Margin="0,0,0,16">
+
+                    <StackPanel>
+
+                        <Grid Margin="0,0,0,12">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel>
+
+                                <TextBlock Text="Listing Details"
+                                           Style="{StaticResource SectionTitleStyle}"
+                                           FontSize="18"/>
+
+                                <TextBlock Text="Detailed table view"
+                                           Style="{StaticResource CaptionStyle}"
+                                           Margin="0,2,0,0"/>
+
+                            </StackPanel>
+
+                            <Button Grid.Column="1"
+                                    Style="{StaticResource ChartExportButtonStyle}"
+                                    Click="btnExportTablePdf_Click">
+
+                                <StackPanel Orientation="Horizontal">
+
+                                    <TextBlock Text="📄"
+                                               FontSize="11"
+                                               VerticalAlignment="Center"/>
+
+                                    <TextBlock Text="Export Table"
+                                               Margin="6,0,0,0"
+                                               VerticalAlignment="Center"/>
+
+                                </StackPanel>
+
+                            </Button>
+
+                        </Grid>
+
+                        <DataGrid x:Name="dgTopListings"
                                   Style="{StaticResource ModernDataGridStyle}"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
                                   IsReadOnly="True"
-                                  Height="320">
+                                  MaxHeight="380">
 
                             <DataGrid.Columns>
 
-                                <DataGridTextColumn
-                                    Header="Month"
-                                    Binding="{Binding Label}"/>
+                                <DataGridTextColumn Header="#"
+                                                    Width="50">
 
-                                <DataGridTextColumn
-                                    Header="Revenue"
-                                    Binding="{Binding Revenue,StringFormat=N0}"/>
+                                    <DataGridTextColumn.CellStyle>
+
+                                        <Style TargetType="DataGridCell">
+
+                                            <Setter Property="FontWeight"
+                                                    Value="SemiBold"/>
+
+                                            <Setter Property="Foreground"
+                                                    Value="#B9A9A9"/>
+
+                                            <Setter Property="BorderThickness"
+                                                    Value="0"/>
+
+                                        </Style>
+
+                                    </DataGridTextColumn.CellStyle>
+
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Header="Listing"
+                                                    Binding="{Binding Title}"
+                                                    Width="*"/>
+
+                                <DataGridTextColumn Header="Revenue (₫)"
+                                                    Binding="{Binding Revenue, StringFormat=N0}"
+                                                    Width="160"/>
+
+                                <DataGridTextColumn Header="Bookings"
+                                                    Binding="{Binding BookingCount}"
+                                                    Width="120"/>
 
                             </DataGrid.Columns>
 
@@ -228,48 +1049,48 @@
 
                 </Border>
 
-                <!-- STATUS + AREA -->
+                <!-- ════════════════════════════════════ -->
+                <!--  REVENUE TREND — DATA TABLE         -->
+                <!-- ════════════════════════════════════ -->
 
-                <Grid Margin="0,0,0,20">
+                <Grid Margin="0,0,0,16">
 
                     <Grid.ColumnDefinitions>
-
                         <ColumnDefinition Width="*"/>
-
-                        <ColumnDefinition Width="12"/>
-
+                        <ColumnDefinition Width="16"/>
                         <ColumnDefinition Width="*"/>
-
                     </Grid.ColumnDefinitions>
 
-                    <!-- STATUS -->
+                    <!-- REVENUE TABLE -->
 
                     <Border Grid.Column="0"
                             Style="{StaticResource SectionCardStyle}"
+                            Margin="0"
                             Padding="20">
 
                         <StackPanel>
 
-                            <TextBlock Text="Booking Status"
-                                       Style="{StaticResource CaptionStyle}"
-                                       FontSize="20"
-                                       FontWeight="Bold"
+                            <TextBlock Text="Revenue by Month"
+                                       Style="{StaticResource SectionTitleStyle}"
+                                       FontSize="18"
                                        Margin="0,0,0,12"/>
 
-                            <DataGrid x:Name="dgBookingStatus"
+                            <DataGrid x:Name="dgRevenueTrend"
                                       Style="{StaticResource ModernDataGridStyle}"
                                       AutoGenerateColumns="False"
-                                      Height="250">
+                                      CanUserAddRows="False"
+                                      IsReadOnly="True"
+                                      MaxHeight="280">
 
                                 <DataGrid.Columns>
 
-                                    <DataGridTextColumn
-                                        Header="Status"
-                                        Binding="{Binding Status}"/>
+                                    <DataGridTextColumn Header="Month"
+                                                        Binding="{Binding Label}"
+                                                        Width="*"/>
 
-                                    <DataGridTextColumn
-                                        Header="Count"
-                                        Binding="{Binding Count}"/>
+                                    <DataGridTextColumn Header="Revenue (₫)"
+                                                        Binding="{Binding Revenue, StringFormat=N0}"
+                                                        Width="*"/>
 
                                 </DataGrid.Columns>
 
@@ -279,34 +1100,36 @@
 
                     </Border>
 
-                    <!-- AREA -->
+                    <!-- BOOKING STATUS TABLE -->
 
                     <Border Grid.Column="2"
                             Style="{StaticResource SectionCardStyle}"
+                            Margin="0"
                             Padding="20">
 
                         <StackPanel>
 
-                            <TextBlock Text="Revenue By Area"
-                                       Style="{StaticResource CaptionStyle}"
-                                       FontSize="20"
-                                       FontWeight="Bold"
+                            <TextBlock Text="Status Breakdown"
+                                       Style="{StaticResource SectionTitleStyle}"
+                                       FontSize="18"
                                        Margin="0,0,0,12"/>
 
-                            <DataGrid x:Name="dgAreaRevenue"
+                            <DataGrid x:Name="dgBookingStatus"
                                       Style="{StaticResource ModernDataGridStyle}"
                                       AutoGenerateColumns="False"
-                                      Height="250">
+                                      CanUserAddRows="False"
+                                      IsReadOnly="True"
+                                      MaxHeight="280">
 
                                 <DataGrid.Columns>
 
-                                    <DataGridTextColumn
-                                        Header="Area"
-                                        Binding="{Binding AreaName}"/>
+                                    <DataGridTextColumn Header="Status"
+                                                        Binding="{Binding Status}"
+                                                        Width="*"/>
 
-                                    <DataGridTextColumn
-                                        Header="Revenue"
-                                        Binding="{Binding Revenue,StringFormat=N0}"/>
+                                    <DataGridTextColumn Header="Count"
+                                                        Binding="{Binding Count}"
+                                                        Width="100"/>
 
                                 </DataGrid.Columns>
 
@@ -318,40 +1141,37 @@
 
                 </Grid>
 
-                <!-- TOP LISTINGS -->
+                <!-- ════════════════════════════════════ -->
+                <!--  AREA REVENUE — DATA TABLE          -->
+                <!-- ════════════════════════════════════ -->
 
                 <Border Style="{StaticResource SectionCardStyle}"
-                        Padding="20">
+                        Padding="20"
+                        Margin="0,0,0,0">
 
                     <StackPanel>
 
-                        <TextBlock Text="Top Listings"
-                                   Style="{StaticResource CaptionStyle}"
-                                   FontSize="20"
-                                   FontWeight="Bold"
+                        <TextBlock Text="Revenue by Area — Details"
+                                   Style="{StaticResource SectionTitleStyle}"
+                                   FontSize="18"
                                    Margin="0,0,0,12"/>
 
-                        <DataGrid x:Name="dgTopListings"
+                        <DataGrid x:Name="dgAreaRevenue"
                                   Style="{StaticResource ModernDataGridStyle}"
                                   AutoGenerateColumns="False"
-                                  Height="320">
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True"
+                                  MaxHeight="280">
 
                             <DataGrid.Columns>
 
-                                <DataGridTextColumn
-                                    Header="Listing"
-                                    Binding="{Binding Title}"
-                                    Width="*"/>
+                                <DataGridTextColumn Header="Area"
+                                                    Binding="{Binding AreaName}"
+                                                    Width="*"/>
 
-                                <DataGridTextColumn
-                                    Header="Revenue"
-                                    Binding="{Binding Revenue,StringFormat=N0}"
-                                    Width="150"/>
-
-                                <DataGridTextColumn
-                                    Header="Bookings"
-                                    Binding="{Binding BookingCount}"
-                                    Width="120"/>
+                                <DataGridTextColumn Header="Revenue (₫)"
+                                                    Binding="{Binding Revenue, StringFormat=N0}"
+                                                    Width="*"/>
 
                             </DataGrid.Columns>
 

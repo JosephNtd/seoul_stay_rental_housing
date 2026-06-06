@@ -129,7 +129,7 @@ namespace DAL
     #endregion
 		
 		public Seoul_StayDataContext() : 
-				base(global::DAL.Properties.Settings.Default.Seoul_StayConnectionString2, mappingSource)
+				base(global::DAL.Properties.Settings.Default.Seoul_StayConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}

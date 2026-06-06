@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.4.11620.152
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36908.2 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ET", "ET\ET.csproj", "{10BB812D-C235-4A9B-AC77-43F75DED240C}"
 EndProject
@@ -14,8 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTO", "DTO\DTO.csproj", "{8BFB4439-B8D2-4AC1-998D-B72958D8977C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI_WPF", "GUI_WPF\GUI_WPF.csproj", "{676B584F-17E2-4600-A6BE-5DA4CC04BC1D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_Payment", "Web_Payment\Web_Payment.csproj", "{CA1A0B2C-2224-47F3-85C9-BD6B58DEF8F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI_Web_Payment", "GUI_Web_Payment\GUI_Web_Payment.csproj", "{DC6402E8-DF17-432B-9D10-049A9B2B4E69}"
 EndProject
@@ -49,10 +47,6 @@ Global
 		{676B584F-17E2-4600-A6BE-5DA4CC04BC1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{676B584F-17E2-4600-A6BE-5DA4CC04BC1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{676B584F-17E2-4600-A6BE-5DA4CC04BC1D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA1A0B2C-2224-47F3-85C9-BD6B58DEF8F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA1A0B2C-2224-47F3-85C9-BD6B58DEF8F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA1A0B2C-2224-47F3-85C9-BD6B58DEF8F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA1A0B2C-2224-47F3-85C9-BD6B58DEF8F0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DC6402E8-DF17-432B-9D10-049A9B2B4E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DC6402E8-DF17-432B-9D10-049A9B2B4E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC6402E8-DF17-432B-9D10-049A9B2B4E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
